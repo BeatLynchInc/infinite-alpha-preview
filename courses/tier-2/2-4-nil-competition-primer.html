@@ -886,5 +886,8 @@ function answer(qi,oi){var q=Q[qi],bl=document.getElementById('qb-'+qi),fb=docum
 function showResult(){var r=document.getElementById('exam-result');r.style.display='block';var pct=Math.round(correct/20*100);document.getElementById('result-pct').textContent=pct+'%';var s=document.getElementById('result-status');var m=document.getElementById('result-msg');if(correct>=16){s.innerHTML='<span class="result-pass">PASSED — '+correct+'/20</span>';m.textContent='Congratulations. You\'ve earned 125 Mastery Points and completed Course 2.4: NIL Competition Primer. You now hold all 500 MP for Tier 2: Competitive Readiness — the Infinite Alpha Competitor Ready credential is yours.';}else{s.innerHTML='<span class="result-fail">NOT YET — '+correct+'/20</span>';m.textContent='You need 16/20 (80%) to pass. Review the lessons, focus on areas where you missed questions, and retake when ready.';} r.scrollIntoView({behavior:'smooth'});}
 function retakeExam(){answered=0;correct=0;document.getElementById('score-display').textContent='0';document.getElementById('progress-label').textContent='0 / 20';document.getElementById('progress-bar').style.width='0%';document.getElementById('exam-result').style.display='none';renderQuestions();document.getElementById('exam-live').scrollIntoView({behavior:'smooth'});}
 </script>
+
+<link rel="stylesheet" href="../../feedback-drawer.css">
+<script src="../../feedback-drawer.js" defer></script>
 </body>
 </html>

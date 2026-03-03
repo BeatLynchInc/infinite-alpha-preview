@@ -1041,5 +1041,8 @@ function answer(qi,oi){var q=Q[qi],bl=document.getElementById('qb-'+qi),fb=docum
 function showResult(){var r=document.getElementById('exam-result');r.style.display='block';var pct=Math.round(correct/TOTAL*100);document.getElementById('result-pct').textContent=pct+'%';var s=document.getElementById('result-status');var m=document.getElementById('result-msg');if(correct>=23){s.innerHTML='<span class="result-pass">PASSED — '+correct+'/'+TOTAL+'</span>';m.textContent='Congratulations. You\'ve earned 250 Mastery Points and completed Pillar V: Professional Craft & System Integration. You have now completed all five Pillars of Infinite Alpha — 1,250 total Mastery Points. The complete Beat Lynch framework is yours. Go compound.';}else{s.innerHTML='<span class="result-fail">NOT YET — '+correct+'/'+TOTAL+'</span>';m.textContent='You need 23/30 (75%) to pass. Review the lessons where you struggled and retake when ready. Professional craft rewards deep understanding, not surface familiarity.';}r.scrollIntoView({behavior:'smooth'});}
 function retakeExam(){answered=0;correct=0;document.getElementById('score-display').textContent='0';document.getElementById('progress-label').textContent='0 / '+TOTAL;document.getElementById('progress-bar').style.width='0%';document.getElementById('exam-result').style.display='none';prepareQuestions();renderQuestions();document.getElementById('exam-live').scrollIntoView({behavior:'smooth'});}
 </script>
+
+<link rel="stylesheet" href="../../feedback-drawer.css">
+<script src="../../feedback-drawer.js" defer></script>
 </body>
 </html>

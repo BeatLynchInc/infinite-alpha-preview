@@ -963,5 +963,8 @@ function updateScore(){document.getElementById('scoreBig').textContent=correct+'
 function showResult(){var r=document.getElementById('examResult'),pct=Math.round(correct/total*100),pass=pct>=80;r.style.display='block';r.innerHTML='<div class="result-score">'+pct+'%</div><div style="font-family:Arial;font-size:18px;font-weight:700;margin-bottom:8px" class="'+(pass?'result-pass':'result-fail')+'">'+(pass?'PASSED — 100 Mastery Points Earned':'NOT YET — Review and Retake')+'</div><div class="result-msg">You answered '+correct+' of '+total+' questions correctly.'+(pass?' You have completed Masters 101 and earned the foundation to understand Beat Lynch\'s ten scoring dimensions. Proceed to Course 1.2: The Investor\'s Mindset.':' You need 80% (20 correct) to pass. Review the lesson explanations above and try again.')+'</div><button class="exam-btn'+(pass?'':' secondary')+'" onclick="retakeExam()">'+(pass?'Retake for Practice':'Retake Exam')+'</button>';r.scrollIntoView({behavior:'smooth'});}
 function retakeExam(){answered=0;correct=0;document.getElementById('examResult').style.display='none';startExam();}
 </script>
+
+<link rel="stylesheet" href="../../feedback-drawer.css">
+<script src="../../feedback-drawer.js" defer></script>
 </body>
 </html>

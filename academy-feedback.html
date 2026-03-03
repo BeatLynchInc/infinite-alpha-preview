@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Infinite Alpha Feedback Includes</title>
+</head>
+<body>
+<h1>Infinite Alpha Feedback Drawer</h1>
+<p>Add the shared assets before <code>&lt;/body&gt;</code> on any page.</p>
+
+<h2>Root-Level Page</h2>
+<pre><code>&lt;link rel="stylesheet" href="feedback-drawer.css"&gt;
+&lt;script src="feedback-drawer.js" defer&gt;&lt;/script&gt;</code></pre>
+
+<h2>Nested Course Page</h2>
+<pre><code>&lt;link rel="stylesheet" href="../../feedback-drawer.css"&gt;
+&lt;script src="../../feedback-drawer.js" defer&gt;&lt;/script&gt;</code></pre>
+
+<p>The script detects the current filename and pre-fills the ClickUp Course / Module field when a match is found.</p>
+</body>
+</html>
