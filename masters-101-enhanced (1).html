@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Course 1.1 — Masters 101</title>
+<style>
+:root{--gold:#C9A84C;--gold2:#E8C96A;--dark:#0D0F14;--panel:#13161E;--border:#1E2330;--text:#E8EAF0;--muted:#7A8099;--accent:#3B82F6;--green:#22C55E;--red:#EF4444;--purple:#a855f7;--orange:#f59e0b;--cyan:#06b6d4;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--dark);color:var(--text);font-family:'Georgia',serif;font-size:16px;line-height:1.75;}
+::selection{background:rgba(201,168,76,.3);color:#fff;}
+.top-bar{background:rgba(19,22,30,.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:12px 32px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:100;flex-wrap:wrap;}
+.logo{font-family:Arial,sans-serif;font-weight:900;font-size:18px;color:var(--gold);letter-spacing:2px;text-shadow:0 0 20px rgba(201,168,76,.3);}
+.pill{background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--dark);font-family:Arial,sans-serif;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:1px;}
+.pill-tier{background:linear-gradient(135deg,var(--accent),#6366f1);color:#fff;}
+.tab-nav{display:flex;gap:4px;margin-left:auto;}
+.tab-btn{background:none;border:1px solid var(--border);color:var(--muted);font-family:Arial,sans-serif;font-size:12px;font-weight:700;padding:6px 16px;border-radius:6px;cursor:pointer;transition:all .25s;letter-spacing:.5px;}
+.tab-btn.active{background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--dark);border-color:var(--gold);box-shadow:0 2px 12px rgba(201,168,76,.25);}
+.tab-btn:hover:not(.active){border-color:var(--gold);color:var(--gold);}
+.hero{background:linear-gradient(135deg,#0D0F14 0%,#13161E 40%,#0f1219 70%,#0D0F14 100%);border-bottom:1px solid var(--border);padding:56px 32px 40px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:700px;height:700px;background:radial-gradient(circle,rgba(201,168,76,.08) 0%,rgba(201,168,76,.03) 30%,transparent 70%);pointer-events:none;animation:heroPulse 6s ease-in-out infinite;}
+.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.3;}
+@keyframes heroPulse{0%,100%{opacity:.7;transform:translateX(-50%) scale(1)}50%{opacity:1;transform:translateX(-50%) scale(1.05)}}
+.course-label{font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:12px;}
+.hero h1{font-size:clamp(26px,4vw,44px);font-weight:400;color:#fff;margin-bottom:12px;line-height:1.2;}
+.hero-sub{font-size:17px;color:var(--muted);max-width:680px;margin:0 auto 28px;}
+.meta-row{display:flex;justify-content:center;gap:28px;flex-wrap:wrap;}
+.meta-item{text-align:center;position:relative;background:rgba(201,168,76,.04);border:1px solid rgba(201,168,76,.1);border-radius:12px;padding:14px 22px;min-width:90px;transition:transform .2s,box-shadow .2s;}
+.meta-item:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(201,168,76,.1);}
+.meta-num{font-family:Arial,sans-serif;font-size:26px;font-weight:700;background:linear-gradient(135deg,var(--gold),var(--gold2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.meta-label{font-family:Arial,sans-serif;font-size:10px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-top:2px;}
+.container{max-width:960px;margin:0 auto;padding:40px 24px;}
+.section{margin-bottom:52px;}
+.section-title{font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:20px;padding-bottom:10px;border-bottom:1px solid var(--border);position:relative;}
+.section-title::after{content:'';position:absolute;bottom:-1px;left:0;width:60px;height:2px;background:linear-gradient(90deg,var(--gold),transparent);}
+h2{font-size:22px;color:#fff;font-weight:400;margin-bottom:10px;}
+h3{font-family:Arial,sans-serif;font-size:12px;font-weight:700;color:var(--gold);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;margin-top:22px;}
+p{color:#BEC3D4;margin-bottom:14px;}
+strong.hl{color:#fff;}
+.tab-content{display:none;}.tab-content.active{display:block;}
+.lesson-grid{display:flex;flex-direction:column;border:1px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.3);}
+.lesson-card{background:var(--panel);border-bottom:1px solid var(--border);padding:18px 22px;display:grid;grid-template-columns:46px 1fr auto;gap:14px;align-items:start;cursor:pointer;transition:all .25s;position:relative;}
+.lesson-card:last-of-type{border-bottom:none;}
+.lesson-card:hover{background:#1a1e2a;}
+.lesson-card.active-card{background:linear-gradient(90deg,rgba(201,168,76,.08),transparent);border-left:3px solid var(--gold);}
+.lesson-num{font-family:Arial,sans-serif;font-size:20px;font-weight:700;background:linear-gradient(135deg,var(--gold),var(--gold2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;}
+.lesson-title{font-size:16px;color:#fff;margin-bottom:3px;}
+.lesson-desc{font-family:Arial,sans-serif;font-size:12px;color:var(--muted);line-height:1.5;}
+.lesson-mp{font-family:Arial,sans-serif;font-size:12px;font-weight:700;color:var(--gold);background:rgba(201,168,76,.1);padding:3px 10px;border-radius:20px;white-space:nowrap;align-self:center;border:1px solid rgba(201,168,76,.15);}
+.lesson-detail{background:linear-gradient(180deg,#0e1018,#0d0f14);border-top:1px solid var(--border);padding:28px;display:none;animation:slideDown .3s ease;}
+.lesson-detail.open{display:block;}
+@keyframes slideDown{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+.fw-table{width:100%;border-collapse:separate;border-spacing:0;margin:12px 0 20px;border-radius:10px;overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,.25);}
+.fw-table th{background:linear-gradient(135deg,rgba(201,168,76,.14),rgba(201,168,76,.06));font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--gold);padding:14px 16px;text-align:left;border-bottom:2px solid rgba(201,168,76,.2);}
+.fw-table td{padding:13px 16px;border-bottom:1px solid rgba(30,35,48,.8);font-family:Arial,sans-serif;font-size:13px;color:#BEC3D4;vertical-align:top;transition:all .25s;}
+.fw-table tr:last-child td{border-bottom:none;}
+.fw-table tbody tr{transition:all .25s;}
+.fw-table tbody tr:hover{background:rgba(201,168,76,.04);}
+.fw-table tbody tr:hover td{color:#E8EAF0;}
+.fw-table td:first-child{color:#fff;font-weight:600;}
+.callout{background:rgba(201,168,76,.05);border-left:3px solid var(--gold);padding:18px 22px;border-radius:0 12px 12px 0;margin:18px 0;position:relative;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.15);transition:transform .2s;}
+.callout:hover{transform:translateX(2px);}
+.callout::before{content:'';position:absolute;top:0;left:0;bottom:0;width:100px;background:linear-gradient(90deg,rgba(201,168,76,.06),transparent);pointer-events:none;}
+.callout-label{font-family:Arial,sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;display:flex;align-items:center;gap:6px;}
+.callout-label::before{content:'⟡';font-size:10px;opacity:.7;}
+.callout p{color:var(--text);margin:0;font-size:14px;line-height:1.7;}
+.callout-blue{border-left-color:var(--accent);background:rgba(59,130,246,.05);}.callout-blue .callout-label{color:var(--accent);}
+.callout-red{border-left-color:var(--red);background:rgba(239,68,68,.05);}.callout-red .callout-label{color:var(--red);}
+.callout-green{border-left-color:var(--green);background:rgba(34,197,94,.05);}.callout-green .callout-label{color:var(--green);}
+.callout-purple{border-left-color:var(--purple);background:rgba(168,85,247,.05);}.callout-purple .callout-label{color:var(--purple);}
+.callout-cyan{border-left-color:var(--cyan);background:rgba(6,182,212,.05);}.callout-cyan .callout-label{color:var(--cyan);}
+.callout-orange{border-left-color:var(--orange);background:rgba(245,158,11,.05);}.callout-orange .callout-label{color:var(--orange);}
+.exhibit{background:linear-gradient(145deg,var(--panel),rgba(19,22,30,.6));border:1px solid var(--border);border-radius:14px;padding:24px;margin:20px 0;position:relative;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.25);}
+.exhibit::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.4),transparent);}
+.exhibit-label{font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+.exhibit-label::before{content:'';display:inline-block;width:18px;height:2px;background:linear-gradient(90deg,var(--gold),transparent);border-radius:1px;}
+.exhibit-label::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(201,168,76,.15),transparent);margin-left:4px;}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0;}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:16px 0;}
+.four-col{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:14px;margin:16px 0;}
+@media(max-width:640px){.two-col,.three-col,.four-col{grid-template-columns:1fr;}.top-bar{padding:10px 16px;gap:8px;}}
+.stat-card{background:linear-gradient(145deg,rgba(201,168,76,.1),rgba(201,168,76,.02));border:1px solid rgba(201,168,76,.2);border-radius:14px;padding:22px 18px;text-align:center;position:relative;overflow:hidden;transition:all .3s cubic-bezier(.4,0,.2,1);}
+.stat-card:hover{transform:translateY(-4px);box-shadow:0 8px 28px rgba(201,168,76,.12);border-color:rgba(201,168,76,.35);}
+.stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.6;}
+.stat-num{font-family:Arial,sans-serif;font-size:28px;font-weight:900;background:linear-gradient(135deg,var(--gold),var(--gold2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:6px;}
+.stat-label{font-family:Arial,sans-serif;font-size:11px;color:var(--muted);line-height:1.4;}
+.tag-row{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 14px;}
+.ctag{font-family:Arial,sans-serif;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;letter-spacing:.5px;background:rgba(201,168,76,.1);color:var(--gold);border:1px solid rgba(201,168,76,.2);transition:all .25s;cursor:default;}
+.ctag:hover{background:rgba(201,168,76,.18);border-color:rgba(201,168,76,.4);}
+.legend-card{background:linear-gradient(145deg,var(--panel),rgba(19,22,30,.7));border:1px solid var(--border);border-radius:16px;padding:24px;margin:14px 0;position:relative;overflow:hidden;}
+.legend-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.25),transparent);}
+.legend-header{display:flex;align-items:center;gap:16px;margin-bottom:4px;}
+.legend-icon{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;font-family:Arial,sans-serif;box-shadow:0 6px 20px rgba(0,0,0,.35);position:relative;transition:transform .3s;}
+.legend-icon:hover{transform:scale(1.08);}
+.legend-name{font-family:Arial,sans-serif;font-size:17px;font-weight:700;color:#fff;}
+.legend-subtitle{font-family:Arial,sans-serif;font-size:11px;color:var(--muted);letter-spacing:.5px;margin-top:2px;}
+
+/* CASE STUDY BOX */
+.case-study{background:linear-gradient(145deg,rgba(201,168,76,.04),rgba(201,168,76,.01));border:1px solid rgba(201,168,76,.15);border-radius:14px;padding:22px;margin:20px 0;position:relative;overflow:hidden;}
+.case-study::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:linear-gradient(180deg,var(--gold),transparent);border-radius:2px;}
+.case-study-header{font-family:Arial,sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.case-study-header::before{content:'📊';font-size:14px;}
+.case-study-title{font-family:Arial,sans-serif;font-size:15px;font-weight:700;color:#fff;margin-bottom:8px;}
+.case-study p{font-size:13px;font-family:Arial,sans-serif;color:#BEC3D4;margin-bottom:8px;line-height:1.65;}
+.case-study .cs-highlight{background:rgba(201,168,76,.08);border-radius:8px;padding:10px 14px;margin:10px 0;font-size:13px;font-family:Arial,sans-serif;color:var(--gold);border:1px solid rgba(201,168,76,.12);}
+
+/* MATH BOX */
+.math-box{background:rgba(59,130,246,.04);border:1px solid rgba(59,130,246,.15);border-radius:12px;padding:18px 22px;margin:16px 0;font-family:'Courier New',monospace;}
+.math-box .math-label{font-family:Arial,sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;color:var(--accent);text-transform:uppercase;margin-bottom:10px;}
+.math-box .math-line{font-size:15px;color:#E8EAF0;line-height:2;letter-spacing:.5px;}
+.math-box .math-result{font-size:17px;color:var(--gold);font-weight:700;margin-top:4px;padding-top:8px;border-top:1px solid rgba(59,130,246,.15);}
+
+/* THINKING BOXES */
+.think-box{border-radius:12px;padding:20px;position:relative;overflow:hidden;}
+.think-label{font-family:Arial;font-size:12px;font-weight:700;margin-bottom:10px;letter-spacing:1.5px;display:flex;align-items:center;gap:6px;}
+.think-item{font-family:Arial;font-size:12px;color:#BEC3D4;line-height:2.2;padding-left:14px;position:relative;}
+.think-item::before{content:'›';position:absolute;left:0;color:inherit;opacity:.5;font-weight:700;}
+
+/* QUOTE */
+.quote-block{border-left:3px solid var(--gold);padding:16px 22px;margin:18px 0;background:rgba(201,168,76,.03);border-radius:0 10px 10px 0;}
+.quote-text{font-style:italic;font-size:16px;color:#fff;line-height:1.6;margin-bottom:6px;}
+.quote-attr{font-family:Arial,sans-serif;font-size:11px;color:var(--muted);letter-spacing:.5px;}
+
+.completion-badge{background:linear-gradient(135deg,rgba(201,168,76,.08),rgba(59,130,246,.04),rgba(201,168,76,.06));border:1px solid rgba(201,168,76,.3);border-radius:18px;padding:40px;text-align:center;margin:24px 0;position:relative;overflow:hidden;}
+.completion-badge::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.5;}
+
+/* EXAM STYLES */
+.exam-wrap{max-width:800px;margin:0 auto;}
+.start-exam-wrap{text-align:center;padding:40px 20px;}
+.start-exam-wrap h2{color:#fff;margin-bottom:12px;}
+.start-exam-wrap p{color:var(--muted);max-width:500px;margin:0 auto 24px;}
+.exam-rules{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin:24px 0;text-align:left;}
+.rule-card{background:linear-gradient(145deg,var(--panel),rgba(19,22,30,.7));border:1px solid var(--border);border-radius:12px;padding:16px;position:relative;overflow:hidden;transition:transform .2s;}
+.rule-card:hover{transform:translateY(-2px);}
+.rule-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),transparent);opacity:.5;}
+.rule-card .r-num{font-family:Arial,sans-serif;font-size:22px;font-weight:900;background:linear-gradient(135deg,var(--gold),var(--gold2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.rule-card .r-label{font-family:Arial,sans-serif;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;}
+.score-bar-wrap{background:linear-gradient(145deg,var(--panel),rgba(19,22,30,.7));border:1px solid var(--border);border-radius:14px;padding:22px 28px;margin-bottom:28px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;position:relative;overflow:hidden;}
+.score-bar-wrap::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.3),transparent);}
+.score-big{font-size:42px;font-weight:900;background:linear-gradient(135deg,var(--gold),var(--gold2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;font-family:Arial,sans-serif;}
+.score-sub{font-size:12px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;font-family:Arial,sans-serif;}
+.progress-track{flex:1;min-width:200px;background:rgba(255,255,255,.06);border-radius:8px;height:14px;overflow:hidden;box-shadow:inset 0 2px 4px rgba(0,0,0,.4);}
+.progress-fill{height:100%;background:linear-gradient(90deg,rgba(201,168,76,.4),var(--gold),var(--gold2));border-radius:8px;transition:width .5s ease;position:relative;}
+.progress-fill::after{content:'';position:absolute;top:0;left:0;right:0;height:50%;background:linear-gradient(180deg,rgba(255,255,255,.2),transparent);border-radius:8px 8px 0 0;}
+.q-block{background:linear-gradient(145deg,var(--panel),rgba(19,22,30,.7));border:1px solid var(--border);border-radius:14px;padding:24px;margin-bottom:14px;transition:all .3s;position:relative;overflow:hidden;}
+.q-block.answered-correct{border-color:var(--green);box-shadow:0 0 24px rgba(34,197,94,.08);}
+.q-block.answered-wrong{border-color:var(--red);box-shadow:0 0 24px rgba(239,68,68,.08);}
+.q-num{font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:8px;}
+.q-text{font-size:15px;color:#fff;margin-bottom:16px;line-height:1.6;}
+.q-options{display:flex;flex-direction:column;gap:8px;}
+.q-opt{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:10px;padding:12px 16px;font-family:Arial,sans-serif;font-size:14px;color:#BEC3D4;cursor:pointer;transition:all .25s;text-align:left;display:flex;gap:12px;align-items:flex-start;}
+.q-opt:hover:not(:disabled){background:rgba(201,168,76,.06);border-color:rgba(201,168,76,.4);color:#fff;transform:translateX(3px);}
+.q-opt:disabled{cursor:default;}
+.q-opt.correct{background:rgba(34,197,94,.1);border-color:var(--green);color:var(--green);}
+.q-opt.wrong{background:rgba(239,68,68,.1);border-color:var(--red);color:var(--red);}
+.q-opt.reveal-correct{background:rgba(34,197,94,.07);border-color:rgba(34,197,94,.4);color:var(--green);}
+.opt-letter{font-weight:700;flex-shrink:0;width:18px;}
+.q-feedback{margin-top:10px;padding:13px 16px;border-radius:10px;font-family:Arial,sans-serif;font-size:13px;line-height:1.5;display:none;}
+.q-feedback.correct{background:rgba(34,197,94,.08);color:var(--green);border:1px solid rgba(34,197,94,.2);}
+.q-feedback.wrong{background:rgba(239,68,68,.08);color:#f87171;border:1px solid rgba(239,68,68,.2);}
+.exam-result{background:linear-gradient(135deg,rgba(201,168,76,.07),rgba(59,130,246,.04));border:1px solid rgba(201,168,76,.3);border-radius:18px;padding:44px;text-align:center;margin-top:32px;display:none;position:relative;overflow:hidden;}
+.result-score{font-family:Arial,sans-serif;font-size:64px;font-weight:900;background:linear-gradient(135deg,var(--gold),var(--gold2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:8px;}
+.exam-btn{background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--dark);font-family:Arial,sans-serif;font-weight:700;font-size:14px;letter-spacing:1px;padding:14px 32px;border-radius:10px;border:none;cursor:pointer;margin:4px;transition:all .25s;box-shadow:0 4px 16px rgba(201,168,76,.25);}
+.exam-btn:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(201,168,76,.35);}
+.exam-btn.secondary{background:transparent;color:var(--gold);border:1px solid var(--gold);box-shadow:none;}
+.result-pass{color:var(--green);}.result-fail{color:var(--red);}
+.result-msg{color:var(--muted);max-width:520px;margin:0 auto 24px;font-size:15px;}
+
+/* LOSS MATH TABLE */
+.loss-math{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin:14px 0;border-radius:10px;overflow:hidden;}
+.loss-math div{font-family:Arial,sans-serif;font-size:13px;padding:10px 16px;background:var(--panel);}
+.loss-math .lm-head{background:rgba(201,168,76,.1);color:var(--gold);font-weight:700;font-size:11px;letter-spacing:1px;text-transform:uppercase;}
+.loss-math .lm-bad{color:var(--red);}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+<span class="logo">BEAT LYNCH</span>
+<span class="pill">INFINITE ALPHA</span>
+<span class="pill pill-tier">TIER 1</span>
+<span style="font-family:Arial;font-size:13px;color:var(--muted);margin-left:4px">Masters 101</span>
+<div class="tab-nav">
+<button class="tab-btn active" onclick="switchTab('curriculum',this)">Curriculum</button>
+<button class="tab-btn" onclick="switchTab('exam',this)">Final Exam</button>
+</div>
+</div>
+
+<div id="tab-curriculum" class="tab-content active">
+<div class="hero">
+<div class="course-label">Infinite Alpha · Tier 1: Investor Foundations · Course 1 of 4</div>
+<h1>Masters 101: Ten Legends Who Define How Professionals Think</h1>
+<p class="hero-sub">Meet the ten investors whose frameworks power professional decision-making — and Beat Lynch's scoring engine. Each legend offers a distinct lens on markets. Together, they form the most complete operating system for investing ever assembled.</p>
+<div class="meta-row">
+<div class="meta-item"><div class="meta-num">10</div><div class="meta-label">Lessons</div></div>
+<div class="meta-item"><div class="meta-num">100</div><div class="meta-label">Mastery Points</div></div>
+<div class="meta-item"><div class="meta-num">80%</div><div class="meta-label">Pass Threshold</div></div>
+<div class="meta-item"><div class="meta-num">~3 hrs</div><div class="meta-label">Study Time</div></div>
+</div>
+</div>
+
+<div class="container">
+<div class="section">
+<div class="section-title">Course Curriculum</div>
+<div class="lesson-grid">
+
+<!-- ═══════════════ LESSON 1 ═══════════════ -->
+<div class="lesson-card" onclick="toggleLesson('d1',this)">
+<div class="lesson-num">1</div>
+<div><div class="lesson-title">Benjamin Graham — The Father of Value Investing</div>
+<div class="lesson-desc">Margin of safety, Mr. Market, intrinsic value, and the birth of disciplined investing.</div></div>
+<div class="lesson-mp">+10 MP</div>
+</div>
+<div class="lesson-detail" id="d1">
+<div class="tag-row">
+<span class="ctag">Margin of Safety</span><span class="ctag">Mr. Market</span><span class="ctag">Intrinsic Value</span><span class="ctag">Investor vs. Speculator</span>
+</div>
+<div class="legend-card">
+<div class="legend-header">
+<div class="legend-icon" style="background:linear-gradient(135deg,rgba(201,168,76,.3),rgba(201,168,76,.15));color:var(--gold);">BG</div>
+<div><div class="legend-name">Benjamin Graham</div>
+<div class="legend-subtitle">"The Dean of Wall Street" · Author of <em>The Intelligent Investor</em> (1949) & <em>Security Analysis</em> (1934)</div></div>
+</div>
+</div>
+
+<h3>The Revolution: Stocks Are Businesses</h3>
+<p>Before Benjamin Graham, buying stocks was barely distinguishable from betting on horses. People chased tips, followed crowds, and treated Wall Street as a casino. Graham, a Columbia University professor and fund manager, single-handedly transformed this chaos into a discipline by insisting on one radical idea: <strong class="hl">a stock is not a ticker symbol — it is a fractional ownership stake in a real business with a measurable value.</strong></p>
+<p>If you can estimate what a business is worth — its <strong class="hl">intrinsic value</strong>, meaning the actual economic value based on the company's assets, earnings, and growth prospects — and you buy only when the market price sits significantly below that value, you have built a cushion of protection against being wrong. That cushion is what Graham called the <strong class="hl">margin of safety</strong>: the gap between what you pay and what the business is worth. It is the single most important concept in all of investing.</p>
+
+<div class="case-study">
+<div class="case-study-header">Real-World Example</div>
+<div class="case-study-title">Graham's Northern Pipeline Play (1926)</div>
+<p>Graham discovered that Northern Pipeline, an oil transportation company, held bonds and other liquid assets worth $95 per share — yet the stock traded at just $65. The market was literally pricing the entire operating business at negative $30. Graham bought shares, pressured management to distribute the excess assets, and eventually realized a substantial profit. This is margin of safety in its purest form: paying $65 for $95 of provable asset value.</p>
+<div class="cs-highlight">Key takeaway: Intrinsic value is not a guess — Graham grounded it in measurable assets, earnings, and cash flows that he could verify on the balance sheet.</div>
+</div>
+
+<h3>Investor vs. Speculator</h3>
+<p>Graham drew a sharp line. An <strong class="hl">investor</strong> conducts thorough analysis, demands a margin of safety, and expects returns justified by business fundamentals. A <strong class="hl">speculator</strong> buys primarily because they believe the price will rise — their thesis depends on someone else paying more later, not on the asset's underlying worth. The most dangerous position, Graham warned, is <strong class="hl">the person who speculates while believing they are investing</strong> — because they take risks they do not understand while assuming they have an investor's margin of safety.</p>
+
+<div class="exhibit">
+<div class="exhibit-label">Exhibit 1.1 — Investor vs. Speculator</div>
+<table class="fw-table">
+<thead><tr><th>Dimension</th><th>Investor</th><th>Speculator</th></tr></thead>
+<tbody>
+<tr><td><strong class="hl">Basis for buying</strong></td><td>Business value exceeds price</td><td>Price will go up</td></tr>
+<tr><td><strong class="hl">Time horizon</strong></td><td>Years to decades</td><td>Days to months</td></tr>
+<tr><td><strong class="hl">Risk management</strong></td><td>Margin of safety</td><td>Stop-loss orders / hope</td></tr>
+<tr><td><strong class="hl">Information used</strong></td><td>Financials, business quality</td><td>Price momentum, tips, narratives</td></tr>
+<tr><td><strong class="hl">Worst enemy</strong></td><td>Overpaying for quality</td><td>Believing speculation is investing</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>Mr. Market: The Most Powerful Allegory in Finance</h3>
+<p>Graham invented a character called <strong class="hl">Mr. Market</strong> — an imaginary business partner who shows up every day offering to buy your shares or sell you his, at a price that changes based on his mood. Some days he is euphoric and offers absurdly high prices. Other days he is depressed and offers you bargains. The critical insight: <strong class="hl">you are never obligated to trade with Mr. Market.</strong> His job is to serve you, not to guide you. If his price is attractive, act. If not, ignore him. The moment you let his mood dictate your decisions, you have become a speculator.</p>
+
+<div class="case-study">
+<div class="case-study-header">Real-World Example</div>
+<div class="case-study-title">COVID-19 Crash — Mr. Market in Panic Mode (March 2020)</div>
+<p>In five weeks, the S&P 500 fell 34% as COVID-19 spread globally. Mr. Market was terrified. But the intrinsic value of companies like Apple, Costco, and Johnson & Johnson had not fallen by a third. Apple's installed base of 1.5 billion devices didn't disappear. Costco's 100+ million members didn't cancel. J&J's pharmaceutical pipeline didn't evaporate.</p>
+<p>Investors who understood Graham's framework recognized the panic as a gift — Mr. Market offering a larger margin of safety with no change in underlying business value. By August 2020, just five months later, the S&P 500 had fully recovered to new all-time highs.</p>
+<div class="cs-highlight">Beat Lynch test: When a stock drops 30% with no change in revenue, earnings, or competitive position, that's Mr. Market offering a potentially larger margin of safety — not a signal that intrinsic value declined.</div>
+</div>
+
+<div class="two-col">
+<div class="stat-card"><div class="stat-num">34%</div><div class="stat-label">S&P 500 decline, Feb–Mar 2020</div></div>
+<div class="stat-card"><div class="stat-num">5 months</div><div class="stat-label">Time to full recovery (Aug 2020)</div></div>
+</div>
+
+<div class="callout callout-red">
+<div class="callout-label">Critical Warning — The Speculation Trap</div>
+<p>In 2021, millions of retail investors piled into meme stocks like GameStop and AMC — many with no understanding of the companies' intrinsic value. They were speculating (hoping the price would rise) while believing they were investing (telling themselves they liked the business). This is exactly the "most dangerous position" Graham warned about. When prices collapsed, those who sized their bets like investors — but had only a speculator's thesis — suffered devastating losses.</p>
+</div>
+
+<div class="callout">
+<div class="callout-label">Beat Lynch Connection — Risk Vector</div>
+<p>Graham's framework is the foundation of Beat Lynch's <strong class="hl">Risk Vector</strong> scoring dimension. When the system evaluates whether a stock offers adequate protection against downside, it is operationalizing Graham's margin of safety — asking not "will this go up?" but "how much room for error exists if things go wrong?" A wide margin of safety means a higher Risk Vector score.</p>
+</div>
+</div>
+
+<!-- ═══════════════ LESSON 2 ═══════════════ -->
+<div class="lesson-card" onclick="toggleLesson('d2',this)">
+<div class="lesson-num">2</div>
+<div><div class="lesson-title">Warren Buffett — Quality, Moats, and Compounding</div>
+<div class="lesson-desc">From cheap stocks to wonderful businesses held forever.</div></div>
+<div class="lesson-mp">+10 MP</div>
+</div>
+<div class="lesson-detail" id="d2">
+<div class="tag-row">
+<span class="ctag">Economic Moats</span><span class="ctag">Owner Earnings</span><span class="ctag">Circle of Competence</span><span class="ctag">Compounding</span>
+</div>
+<div class="legend-card">
+<div class="legend-header">
+<div class="legend-icon" style="background:linear-gradient(135deg,rgba(201,168,76,.3),rgba(201,168,76,.15));color:var(--gold);">WB</div>
+<div><div class="legend-name">Warren Buffett</div>
+<div class="legend-subtitle">"The Oracle of Omaha" · Chairman of Berkshire Hathaway</div></div>
+</div>
+</div>
+
+<h3>The Evolution: From Cheap to Wonderful</h3>
+<p>Warren Buffett began as Graham's most devoted student — buying statistically cheap stocks, often mediocre businesses trading below the value of their assets. It worked, but it had limits. Influenced by his partner Charlie Munger and by Phil Fisher's qualitative approach, Buffett evolved to what he later described as the most important shift in his career:</p>
+<div class="quote-block">
+<div class="quote-text">"It's far better to buy a wonderful company at a fair price than a fair company at a wonderful price."</div>
+<div class="quote-attr">— Warren Buffett</div>
+</div>
+<p>The difference is profound. Graham's approach focused on price — buying a dollar for fifty cents. Buffett's evolution added a focus on <strong class="hl">business quality</strong>. A wonderful business compounds value year after year, meaning the margin of safety rebuilds itself over time. A mediocre business, even if cheap, often stays mediocre.</p>
+
+<div class="case-study">
+<div class="case-study-header">Real-World Example</div>
+<div class="case-study-title">See's Candies — The Investment That Changed Buffett's Mind (1972)</div>
+<p>Buffett paid $25 million for See's Candies, which at the time had about $8 million in tangible assets. A strict Graham-style investor would never have paid 3× asset value. But See's had something special: extraordinary brand loyalty that let it raise prices every year without losing customers. By 2019, See's had generated over $2 billion in cumulative pre-tax profits — from that initial $25 million investment.</p>
+<div class="cs-highlight">See's taught Buffett that a business with a durable competitive advantage — a moat — can compound value so powerfully that the initial "overpayment" becomes irrelevant within a few years.</div>
+</div>
+
+<h3>Economic Moats</h3>
+<p>Buffett popularized the concept of an <strong class="hl">economic moat</strong> — a durable competitive advantage that protects a business from rivals, the way a castle's moat protects it from invaders. Companies with wide moats can sustain high profitability for decades because competitors cannot easily replicate their advantage.</p>
+
+<div class="exhibit">
+<div class="exhibit-label">Exhibit 1.2 — Buffett's Four Sources of Economic Moats</div>
+<table class="fw-table">
+<thead><tr><th>Moat Type</th><th>What It Means</th><th>Real Examples</th></tr></thead>
+<tbody>
+<tr><td><strong class="hl">Brand power</strong></td><td>Customers pay a premium for the name</td><td>Coca-Cola, Apple, Nike, Hermès</td></tr>
+<tr><td><strong class="hl">Switching costs</strong></td><td>Painful or expensive to leave</td><td>Salesforce (months of data migration + retraining), Microsoft Office, Oracle</td></tr>
+<tr><td><strong class="hl">Network effects</strong></td><td>Product improves as more people use it</td><td>Visa/Mastercard (more merchants → more users → more merchants), Meta</td></tr>
+<tr><td><strong class="hl">Cost advantage</strong></td><td>Produces at lower cost than competitors</td><td>Costco, Amazon, GEICO</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="case-study">
+<div class="case-study-header">Real-World Example</div>
+<div class="case-study-title">Switching Costs in Action — Salesforce's Enterprise Moat</div>
+<p>A Fortune 500 company using Salesforce has years of customer data, custom workflows, integrations with dozens of other systems, and hundreds of employees trained on the platform. To switch CRMs, they would need months of data migration, retraining, and system rebuilding — at a cost that could exceed the entire annual Salesforce subscription. This is why Salesforce retains over 90% of its enterprise clients year after year. The switching cost IS the moat.</p>
+<div class="cs-highlight">Beat Lynch test: When evaluating switching costs, ask — how much would it cost a customer in time, money, and disruption to replace this product? If the answer is "a lot," the moat is real.</div>
+</div>
+
+<h3>Circle of Competence</h3>
+<p>Buffett insists that investors operate within their <strong class="hl">circle of competence</strong> — the set of businesses they can genuinely understand. It is not about being smart enough to analyze everything; it is about <strong class="hl">knowing where the boundary of your understanding lies and refusing to cross it.</strong> Buffett famously avoided technology stocks for decades — not because they were bad investments, but because they fell outside what he could evaluate with confidence.</p>
+
+<div class="callout callout-red">
+<div class="callout-label">Case Study — When Investors Leave Their Circle</div>
+<p>In the late 1990s, value fund managers who had never analyzed technology companies began buying dot-com stocks because they were afraid of missing out. Most lost heavily. Buffett was mocked for "not getting it" — until the NASDAQ crashed 78% and Berkshire Hathaway was vindicated. The edge wasn't intelligence; it was discipline.</p>
+</div>
+
+<h3>Owner Earnings and Compounding</h3>
+<p>When Buffett does evaluate a business, he focuses on <strong class="hl">owner earnings</strong>: the cash a business generates for its owners after all necessary reinvestment to maintain its competitive position. This separates real economic profitability from accounting illusions. Buffett then asks: can these owner earnings compound for decades?</p>
+
+<div class="two-col">
+<div class="stat-card"><div class="stat-num">19.8%</div><div class="stat-label">Berkshire annualized return (1965–2023)</div></div>
+<div class="stat-card"><div class="stat-num">4,384,748%</div><div class="stat-label">Total return vs. S&P 500's 31,223%</div></div>
+</div>
+
+<div class="callout callout-green">
+<div class="callout-label">Beat Lynch Connection — Moat Strength</div>
+<p>Beat Lynch's <strong class="hl">Moat Strength</strong> dimension directly operationalizes Buffett's framework. The scoring engine evaluates competitive advantages — brand pricing power, switching costs, network effects, cost structure — to assess whether a company's current profitability is durable or fleeting. A high Moat Strength score means the system sees structural protection against competitive erosion.</p>
+</div>
+</div>
+
+<!-- ═══════════════ LESSON 3 ═══════════════ -->
+<div class="lesson-card" onclick="toggleLesson('d3',this)">
+<div class="lesson-num">3</div>
+<div><div class="lesson-title">Peter Lynch — Growth at a Reasonable Price</div>
+<div class="lesson-desc">The PEG ratio, six stock categories, and the power of everyday observation.</div></div>
+<div class="lesson-mp">+10 MP</div>
+</div>
+<div class="lesson-detail" id="d3">
+<div class="tag-row">
+<span class="ctag">GARP</span><span class="ctag">PEG Ratio</span><span class="ctag">Six Stock Categories</span><span class="ctag">Invest in What You Know</span>
+</div>
+<div class="legend-card">
+<div class="legend-header">
+<div class="legend-icon" style="background:linear-gradient(135deg,rgba(34,197,94,.3),rgba(34,197,94,.12));color:var(--green);">PL</div>
+<div><div class="legend-name">Peter Lynch</div>
+<div class="legend-subtitle">Fidelity Magellan Fund (1977–1990) · Author of <em>One Up on Wall Street</em></div></div>
+</div>
+</div>
+
+<h3>The Core Insight: Growth, But Not At Any Price</h3>
+<p>Peter Lynch ran Fidelity's Magellan Fund for 13 years and delivered one of the greatest track records in mutual fund history. His philosophy bridges the gap between value investing and growth investing with a deceptively simple idea: <strong class="hl">buy growing companies, but only when the price fairly reflects — and does not wildly exceed — the growth rate.</strong> This approach is called <strong class="hl">GARP</strong>: Growth at a Reasonable Price.</p>
+<p>Lynch's signature tool is the <strong class="hl">PEG ratio</strong> — the Price-to-Earnings ratio divided by the company's earnings growth rate. A P/E ratio tells you how much investors pay per dollar of earnings. A PEG ratio adjusts this for growth. A PEG of 1.0 means the price is in line with growth. Below 1.0 suggests the stock may be undervalued relative to its growth; above 2.0 suggests you may be overpaying.</p>
+
+<div class="math-box">
+<div class="math-label">PEG Ratio — Worked Example</div>
+<div class="math-line">Company A: P/E = 15, Earnings Growth = 20%</div>
+<div class="math-line">PEG = 15 ÷ 20 = <strong>0.75</strong> → Potentially undervalued ✓</div>
+<div class="math-line" style="margin-top:8px">Company B: P/E = 40, Earnings Growth = 20%</div>
+<div class="math-line">PEG = 40 ÷ 20 = <strong>2.0</strong> → Potentially overpriced ✗</div>
+<div class="math-result">Same 20% growth rate — but Company B costs nearly 3× more per unit of growth</div>
+</div>
+
+<div class="exhibit">
+<div class="exhibit-label">Exhibit 1.3 — Lynch's Six Stock Categories</div>
+<table class="fw-table">
+<thead><tr><th>Category</th><th>Profile</th><th>Real Examples</th></tr></thead>
+<tbody>
+<tr><td><strong class="hl">Slow growers</strong></td><td>Large, mature. Revenue growing 2–4%/year. Often pay dividends.</td><td>Duke Energy, AT&T, Con Edison</td></tr>
+<tr><td><strong class="hl">Stalwarts</strong></td><td>Large, reliable. Revenue growing 10–12%. Good in downturns.</td><td>Procter & Gamble, Johnson & Johnson, Coca-Cola</td></tr>
+<tr><td><strong class="hl">Fast growers</strong></td><td>Small or mid-sized. Revenue growing 20–25%+. Lynch's favorites.</td><td>Early Starbucks, Chipotle in 2010, Dunkin' Donuts</td></tr>
+<tr><td><strong class="hl">Cyclicals</strong></td><td>Profits swing with economic cycles. Timing matters.</td><td>Ford, U.S. Steel, Caterpillar, Alcoa</td></tr>
+<tr><td><strong class="hl">Turnarounds</strong></td><td>Troubled companies on the brink of recovery or bankruptcy.</td><td>Apple in 1997, Marvel in 1996, Chrysler in 1980</td></tr>
+<tr><td><strong class="hl">Asset plays</strong></td><td>Own valuable assets the market is underpricing or ignoring.</td><td>Companies with hidden real estate, patents, or cash hoards</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="case-study">
+<div class="case-study-header">Real-World Example</div>
+<div class="case-study-title">Lynch's Dunkin' Donuts — Observing What Others Missed</div>
+<p>Lynch noticed that Dunkin' Donuts shops in New England were always packed — lines out the door at 6 AM. That was his everyday observation. He then verified the financials: same-store sales growing double digits, franchisees highly profitable, massive runway for national expansion. He bought the stock early and rode it for a multi-bagger return.</p>
+<p>But here's the key distinction: Lynch didn't buy because he liked the donuts. He bought because <strong>the financial analysis confirmed what his eyes told him</strong> — the business was a fast grower with a reasonable price tag.</p>
+<div class="cs-highlight">Beat Lynch test: "Invest in what you know" means everyday observation gives you an information edge — but only when you then verify the financials support the thesis. Observation without analysis is just shopping.</div>
+</div>
+
+<h3>Invest in What You Understand</h3>
+<p>Lynch's most famous advice — "invest in what you know" — is widely misunderstood. He did not mean buy stock in your favorite restaurant. He meant that <strong class="hl">everyday observation gives you an information edge</strong> when you combine it with financial analysis. If you notice every teenager wearing a particular brand, you have identified a potential fast grower before Wall Street catches on — but only if you then verify the financials support the thesis.</p>
+
+<div class="two-col">
+<div class="stat-card"><div class="stat-num">29.2%</div><div class="stat-label">Annualized return, Magellan Fund (1977–1990)</div></div>
+<div class="stat-card"><div class="stat-num">$10K → $280K</div><div class="stat-label">$10,000 invested in 1977, value by 1990</div></div>
+</div>
+
+<div class="callout callout-green">
+<div class="callout-label">Beat Lynch Connection — Growth Quality</div>
+<p>Beat Lynch's <strong class="hl">Growth Quality</strong> dimension applies Lynch's GARP philosophy systematically. Instead of chasing headline revenue growth, the scoring engine asks: is this growth sustainable, profitable, and priced reasonably? A company growing 40% per year but trading at 100× earnings may score lower than one growing 15% at a much more reasonable price — exactly as Lynch would evaluate it.</p>
+</div>
+</div>
+
+<!-- ═══════════════ LESSON 4 ═══════════════ -->
+<div class="lesson-card" onclick="toggleLesson('d4',this)">
+<div class="lesson-num">4</div>
+<div><div class="lesson-title">Phil Fisher — Innovation, Scuttlebutt, and Long Horizons</div>
+<div class="lesson-desc">Qualitative due diligence, R&D quality, and the case for holding decades.</div></div>
+<div class="lesson-mp">+10 MP</div>
+</div>
+<div class="lesson-detail" id="d4">
+<div class="tag-row">
+<span class="ctag">Scuttlebutt Method</span><span class="ctag">R&D Productivity</span><span class="ctag">Management Quality</span><span class="ctag">Ultra-Long Holding</span>
+</div>
+<div class="legend-card">
+<div class="legend-header">
+<div class="legend-icon" style="background:linear-gradient(135deg,rgba(6,182,212,.3),rgba(6,182,212,.12));color:var(--cyan);">PF</div>
+<div><div class="legend-name">Phil Fisher</div>
+<div class="legend-subtitle">Author of <em>Common Stocks and Uncommon Profits</em> (1958)</div></div>
+</div>
+</div>
+
+<h3>Beyond the Numbers</h3>
+<p>If Graham taught investors to read financial statements and Buffett taught them to identify moats, Phil Fisher taught them to <strong class="hl">investigate the qualities that numbers alone cannot capture</strong>: the caliber of management, the effectiveness of research and development, the company's ability to innovate ahead of competitors.</p>
+<p>Fisher's method, which he called <strong class="hl">scuttlebutt</strong>, involved talking to everyone connected to a business — customers, suppliers, competitors, former employees — to build a mosaic of understanding that no spreadsheet could provide. He was looking for answers to questions like: does this company have products with sufficient market potential for years of above-average growth? Is management honest with shareholders when things go wrong, or only when things go right?</p>
+
+<div class="case-study">
+<div class="case-study-header">Real-World Example</div>
+<div class="case-study-title">Fisher's Motorola — 50+ Years of Holding</div>
+<p>Fisher first bought Motorola in the 1950s when it was primarily a maker of car radios and televisions. Through scuttlebutt research — talking to engineers, suppliers, and industry insiders — Fisher identified that Motorola's management had a rare combination: deep commitment to R&D and the ability to reinvent the company across technology cycles. He watched Motorola evolve from consumer electronics to semiconductors to cellular technology.</p>
+<p>Fisher held Motorola for over 50 years, through multiple industry transformations, temporary setbacks, and market crashes. His reasoning: if the company continued to invest productively in R&D and management remained excellent, temporary price declines were noise, not signal.</p>
+<div class="cs-highlight">Key insight: Fisher believed that the transaction costs, taxes, and reinvestment risk of selling almost always destroy more value than holding through temporary setbacks.</div>
+</div>
+
+<h3>R&D as a Competitive Weapon</h3>
+<p>Fisher was among the first to recognize that <strong class="hl">research and development spending is not an expense to be minimized — it is an investment in future competitive advantage.</strong> He evaluated not just how much a company spent on R&D, but how productively those dollars translated into new products and revenue.</p>
+
+<div class="callout callout-red">
+<div class="callout-label">Warning — When Companies Cut R&D to Boost Earnings</div>
+<p>A company that cuts R&D spending can immediately boost its reported earnings — making the stock look more attractive to first-level thinkers. Fisher saw this as a <strong class="hl">major red flag</strong>: management sacrificing long-term competitive advantage for short-term numbers. It signals that leadership is prioritizing this quarter's earnings over the company's future. IBM in the 2010s pursued aggressive share buybacks while reducing R&D investment — and watched its competitive position erode over the following decade.</p>
+</div>
+
+<div class="exhibit">
+<div class="exhibit-label">Exhibit 1.4 — Fisher's Key Qualitative Questions</div>
+<table class="fw-table">
+<thead><tr><th>Question</th><th>What It Reveals</th><th>Modern Example</th></tr></thead>
+<tbody>
+<tr><td><strong class="hl">Does the company have above-average growth potential?</strong></td><td>Whether the market opportunity justifies a long-term commitment</td><td>NVIDIA's GPU opportunity in AI (identified years before mainstream adoption)</td></tr>
+<tr><td><strong class="hl">Is management committed to R&D?</strong></td><td>Whether competitive advantage is being actively extended</td><td>Amazon spending $73B+ on R&D annually (2022)</td></tr>
+<tr><td><strong class="hl">How effective is the sales organization?</strong></td><td>Whether products reach customers efficiently</td><td>Salesforce's land-and-expand model</td></tr>
+<tr><td><strong class="hl">Is management candid about problems?</strong></td><td>Whether you can trust what you are told</td><td>Satya Nadella openly acknowledging Microsoft's mobile failures before pivoting to cloud</td></tr>
+<tr><td><strong class="hl">Short-range or long-range profit outlook?</strong></td><td>Whether management sacrifices the future for this quarter</td><td>Amazon accepting years of low profits to build AWS infrastructure</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="quote-block">
+<div class="quote-text">"I am 85% Benjamin Graham and 15% Phil Fisher."</div>
+<div class="quote-attr">— Warren Buffett (that 15% profoundly shaped his holding philosophy)</div>
+</div>
+
+<div class="callout callout-cyan">
+<div class="callout-label">Beat Lynch Connection — Innovation Signals</div>
+<p>Beat Lynch's <strong class="hl">Innovation Signals</strong> dimension captures Fisher's qualitative lens in a systematic framework. The scoring engine evaluates R&D productivity, product pipeline strength, and management quality indicators — the very questions Fisher asked through scuttlebutt, now structured into repeatable, explainable scoring criteria.</p>
+</div>
+</div>
+
+<!-- ═══════════════ LESSON 5 ═══════════════ -->
+<div class="lesson-card" onclick="toggleLesson('d5',this)">
+<div class="lesson-num">5</div>
+<div><div class="lesson-title">William O'Neill — CAN SLIM and Technical Durability</div>
+<div class="lesson-desc">Dual confirmation, relative strength, and disciplined loss-cutting.</div></div>
+<div class="lesson-mp">+10 MP</div>
+</div>
+<div class="lesson-detail" id="d5">
+<div class="tag-row">
+<span class="ctag">CAN SLIM</span><span class="ctag">Relative Strength</span><span class="ctag">Dual Confirmation</span><span class="ctag">Loss Discipline</span>
+</div>
+<div class="legend-card">
+<div class="legend-header">
+<div class="legend-icon" style="background:linear-gradient(135deg,rgba(59,130,246,.3),rgba(59,130,246,.12));color:var(--accent);">WO</div>
+<div><div class="legend-name">William O'Neill</div>
+<div class="legend-subtitle">Founder of Investor's Business Daily · Creator of CAN SLIM</div></div>
+</div>
+</div>
+
+<h3>The Breakthrough: Fundamentals AND Technicals</h3>
+<p>Every legend we have studied so far focuses exclusively on fundamentals — the business itself. William O'Neill broke from this tradition with a radical insight: <strong class="hl">the best investments have both strong fundamentals and strong price action, and demanding both dramatically improves your odds.</strong> He called this <strong class="hl">dual confirmation</strong>: the business must be excellent, and the market must be recognizing it through price behavior.</p>
+<p>O'Neill studied every top-performing stock from 1880 to 2009 and found common traits. He distilled these into the <strong class="hl">CAN SLIM</strong> system — seven characteristics that winning stocks share before their biggest moves.</p>
+
+<div class="exhibit">
+<div class="exhibit-label">Exhibit 1.5 — The CAN SLIM Framework</div>
+<table class="fw-table">
+<thead><tr><th>Letter</th><th>Factor</th><th>What O'Neill Looked For</th></tr></thead>
+<tbody>
+<tr><td><strong class="hl">C</strong></td><td>Current quarterly earnings</td><td>Up 25%+ year-over-year</td></tr>
+<tr><td><strong class="hl">A</strong></td><td>Annual earnings growth</td><td>Consistent growth over 3–5 years</td></tr>
+<tr><td><strong class="hl">N</strong></td><td>New products, management, or price highs</td><td>Catalyst for the next leg up</td></tr>
+<tr><td><strong class="hl">S</strong></td><td>Supply and demand</td><td>Lower share count, high volume on up days</td></tr>
+<tr><td><strong class="hl">L</strong></td><td>Leader or laggard?</td><td>Relative strength rating above 80</td></tr>
+<tr><td><strong class="hl">I</strong></td><td>Institutional sponsorship</td><td>Owned by top-performing mutual funds</td></tr>
+<tr><td><strong class="hl">M</strong></td><td>Market direction</td><td>Confirming uptrend — don't fight the market</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>Relative Strength: The Market's Report Card</h3>
+<p><strong class="hl">Relative strength</strong> measures how a stock's price performance compares to all other stocks over a given period. O'Neill insisted on buying only stocks with relative strength in the top 20% (rating above 80), reasoning that strong stocks tend to get stronger. A stock outperforming 80% of all other stocks has the market's confirmation that something is working.</p>
+
+<div class="case-study">
+<div class="case-study-header">Real-World Example</div>
+<div class="case-study-title">NVIDIA 2023 — CAN SLIM in Action</div>
+<p>In early 2023, NVIDIA checked nearly every CAN SLIM box: quarterly earnings accelerating (C), annual earnings in a strong growth trend (A), a revolutionary new product catalyst in AI chips (N), institutional investors accumulating shares on high volume (S, I), relative strength in the top 5% of all stocks (L), and a confirming market uptrend (M). The stock rose over 200% that year.</p>
+<div class="cs-highlight">Dual confirmation meant both the business fundamentals (explosive AI demand) and the price action (relative strength above 95) agreed. O'Neill would never buy a stock where only one side confirmed.</div>
+</div>
+
+<h3>The 7–8% Rule: Non-Negotiable Loss Discipline</h3>
+<p>O'Neill's iron rule: <strong class="hl">sell any position that drops 7–8% below your purchase price, no exceptions.</strong> No hoping, no averaging down, no waiting for a comeback. The math is devastating:</p>
+
+<div class="loss-math">
+<div class="lm-head">Loss Taken</div><div class="lm-head">Gain Needed to Recover</div>
+<div>7% loss</div><div>8% gain to break even</div>
+<div>25% loss</div><div class="lm-bad">33% gain needed</div>
+<div>50% loss</div><div class="lm-bad">100% gain needed</div>
+<div>75% loss</div><div class="lm-bad">300% gain needed</div>
+</div>
+
+<p>A 7% loss is manageable. A 50% loss requires a 100% gain just to get back to zero. O'Neill's rule prevents small losses from becoming catastrophic ones.</p>
+
+<div class="callout callout-blue">
+<div class="callout-label">Beat Lynch Connection — Technical Durability</div>
+<p>Beat Lynch's <strong class="hl">Technical Durability</strong> dimension captures O'Neill's dual-confirmation approach. The scoring engine evaluates whether price behavior confirms the fundamental thesis, using relative strength and momentum signals to separate stocks the market is recognizing from those still falling on deaf ears.</p>
+</div>
+</div>
+
+<!-- ═══════════════ LESSON 6 ═══════════════ -->
+<div class="lesson-card" onclick="toggleLesson('d6',this)">
+<div class="lesson-num">6</div>
+<div><div class="lesson-title">Joel Greenblatt — The Magic Formula and Systematic Value</div>
+<div class="lesson-desc">ROIC, earnings yield, and the discipline of sticking to the system.</div></div>
+<div class="lesson-mp">+10 MP</div>
+</div>
+<div class="lesson-detail" id="d6">
+<div class="tag-row">
+<span class="ctag">Magic Formula</span><span class="ctag">ROIC</span><span class="ctag">Earnings Yield</span><span class="ctag">Behavioral Patience</span>
+</div>
+<div class="legend-card">
+<div class="legend-header">
+<div class="legend-icon" style="background:linear-gradient(135deg,rgba(245,158,11,.3),rgba(245,158,11,.12));color:var(--orange);">JG</div>
+<div><div class="legend-name">Joel Greenblatt</div>
+<div class="legend-subtitle">Founder of Gotham Capital · Author of <em>The Little Book That Beats the Market</em></div></div>
+</div>
+</div>
+
+<h3>Systematizing Buffett</h3>
+<p>Joel Greenblatt asked a question no one else had bothered to formalize: <strong class="hl">what if you could turn Buffett's philosophy into a simple, mechanical system that anyone could follow?</strong> The result was the <strong class="hl">Magic Formula</strong> — a two-factor ranking that screens every stock on just two criteria: how good the business is (measured by return on invested capital) and how cheap it is (measured by earnings yield).</p>
+<p><strong class="hl">Return on invested capital (ROIC)</strong> measures how much profit a company generates for every dollar of capital invested in the business. A company with 25% ROIC generates $0.25 of profit per $1.00 of invested capital. <strong class="hl">Earnings yield</strong> is the inverse of the P/E ratio — it tells you what percentage return you are getting on the price you pay. A stock with a P/E of 10 has an earnings yield of 10%.</p>
+
+<div class="exhibit">
+<div class="exhibit-label">Exhibit 1.6 — The Magic Formula Logic</div>
+<table class="fw-table">
+<thead><tr><th>Factor</th><th>What It Measures</th><th>Buffett Parallel</th></tr></thead>
+<tbody>
+<tr><td><strong class="hl">High ROIC</strong></td><td>Business quality — how efficiently capital generates profits</td><td>"Wonderful company"</td></tr>
+<tr><td><strong class="hl">High Earnings Yield</strong></td><td>Price cheapness — how much earnings you get per dollar paid</td><td>"Fair price"</td></tr>
+<tr><td><strong class="hl">Combined Rank</strong></td><td>Best intersection of quality and cheapness</td><td>"Wonderful company at a fair price"</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="case-study">
+<div class="case-study-header">Real-World Example</div>
+<div class="case-study-title">High ROIC + Low Earnings Yield = Wonderful But Expensive</div>
+<p>Consider a company like Visa: ROIC above 40% (wonderful business) but often trading at a P/E of 30+ (earnings yield of only ~3%). The Magic Formula would rank Visa high on quality but low on cheapness. This tells you Visa is a wonderful company — but at today's price, you may not be getting a fair deal.</p>
+<p>Contrast with a company like AutoZone in a down year: ROIC of 35%+ and trading at a P/E of 15 (earnings yield of ~7%). High quality AND reasonable price — the Magic Formula's sweet spot.</p>
+<div class="cs-highlight">When ROIC is high but earnings yield is low, you've found the wonderful company but not the fair price. The formula demands both.</div>
+</div>
+
+<h3>The Behavioral Trap</h3>
+<p>Greenblatt's most important insight may not be the formula itself, but what happened when people tried to use it. In backtesting from 1988 to 2004, the Magic Formula returned roughly 30.8% annually versus 12.4% for the S&P 500. Yet Greenblatt discovered that <strong class="hl">most investors who tried the strategy in real time abandoned it</strong> — because the formula underperformed the market in about one out of every four years.</p>
+<p>The lesson is universal: <strong class="hl">a great system that you cannot stick to is worse than a mediocre system that you follow with discipline.</strong> This is one of the most important principles in all of investing, and it applies directly to how you should use Beat Lynch's scores.</p>
+
+<div class="two-col">
+<div class="stat-card"><div class="stat-num">30.8%</div><div class="stat-label">Magic Formula annual return (1988–2004 backtest)</div></div>
+<div class="stat-card"><div class="stat-num">~1 in 4</div><div class="stat-label">Years the formula underperformed S&P 500</div></div>
+</div>
+
+<div class="callout callout-orange">
+<div class="callout-label">Beat Lynch Connection — ROIC Screening Logic</div>
+<p>Beat Lynch's <strong class="hl">ROIC Screening Logic</strong> directly descends from Greenblatt's Magic Formula. The system ranks companies on capital efficiency and valuation together, ensuring that the scoring engine identifies businesses that are both high-quality and reasonably priced — not just one or the other.</p>
+</div>
+</div>
+
+<!-- ═══════════════ LESSON 7 ═══════════════ -->
+<div class="lesson-card" onclick="toggleLesson('d7',this)">
+<div class="lesson-num">7</div>
+<div><div class="lesson-title">George Soros — Reflexivity and the Narrative Machine</div>
+<div class="lesson-desc">Feedback loops, boom-bust cycles, and markets as participants.</div></div>
+<div class="lesson-mp">+10 MP</div>
+</div>
+<div class="lesson-detail" id="d7">
+<div class="tag-row">
+<span class="ctag">Reflexivity</span><span class="ctag">Boom-Bust Cycles</span><span class="ctag">Radical Fallibility</span><span class="ctag">Narrative Feedback</span>
+</div>
+<div class="legend-card">
+<div class="legend-header">
+<div class="legend-icon" style="background:linear-gradient(135deg,rgba(239,68,68,.3),rgba(239,68,68,.12));color:var(--red);">GS</div>
+<div><div class="legend-name">George Soros</div>
+<div class="legend-subtitle">Founder of Quantum Fund · "The Man Who Broke the Bank of England"</div></div>
+</div>
+</div>
+
+<h3>Markets Are Not Mirrors — They Are Participants</h3>
+<p>Every legend we have studied so far assumes, to varying degrees, that markets eventually reflect reality. George Soros challenged this assumption at its root. His theory of <strong class="hl">reflexivity</strong> holds that <strong class="hl">market prices do not merely reflect fundamentals — they actively influence them.</strong> Markets are not passive mirrors. They are participants in the story they claim to observe.</p>
+<p>Here is how it works: when a stock price rises, it can improve the company's actual fundamentals — the company can raise capital more cheaply, attract better talent, negotiate better supplier terms, and acquire competitors. The rising price creates the improved reality that appears to justify the rising price. This is a <strong class="hl">positive feedback loop</strong>, and it can push prices far beyond any reasonable estimate of intrinsic value.</p>
+
+<div class="case-study">
+<div class="case-study-header">Real-World Example</div>
+<div class="case-study-title">Tesla's Reflexive Loop (2020–2021)</div>
+<p>Tesla's stock rose over 700% in 2020. As the price soared, Tesla used its inflated stock to raise billions in cheap capital, fund new Gigafactories, attract top engineering talent (with stock compensation), and gain negotiating leverage with suppliers. The rising stock price literally improved Tesla's competitive position, which appeared to justify the rising stock price.</p>
+<p>This is textbook reflexivity: prices influencing the fundamentals they're supposed to reflect. The question Soros would ask isn't "is Tesla a good company?" but "how much of the current price depends on the feedback loop continuing?"</p>
+<div class="cs-highlight">When a company uses its inflated stock to acquire businesses, raise capital, and attract talent — which then improves its fundamentals — that's a Soros reflexive feedback loop in action.</div>
+</div>
+
+<h3>Boom-Bust: The Shape of Reflexive Cycles</h3>
+
+<div class="exhibit">
+<div class="exhibit-label">Exhibit 1.7 — Soros's Boom-Bust Anatomy</div>
+<table class="fw-table">
+<thead><tr><th>Phase</th><th>What Happens</th><th>Dot-Com Example</th></tr></thead>
+<tbody>
+<tr><td><strong class="hl">Inception</strong></td><td>New trend emerges, not yet widely recognized</td><td>Early internet adoption (1994–1996)</td></tr>
+<tr><td><strong class="hl">Acceleration</strong></td><td>Narrative catches on, prices rise, fundamentals improve via reflexivity</td><td>Netscape IPO, tech mania builds (1997–1998)</td></tr>
+<tr><td><strong class="hl">Climax</strong></td><td>Belief becomes universal, valuations completely detach from reality</td><td>NASDAQ doubles in 1999; Pets.com IPOs at $300M valuation</td></tr>
+<tr><td><strong class="hl">Twilight</strong></td><td>Cracks appear but believers explain them away</td><td>Early 2000 warnings ignored: "this time is different"</td></tr>
+<tr><td><strong class="hl">Crash</strong></td><td>Feedback reverses — falling prices worsen fundamentals</td><td>NASDAQ falls 78% from peak (2000–2002)</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>Radical Fallibility</h3>
+<p>Soros operates from what he calls <strong class="hl">radical fallibility</strong> — the premise that all participants, including himself, have flawed perceptions of reality. Instead of pretending to see the truth, Soros builds investment theses as hypotheses to be tested and abandoned when proven wrong. He does not claim certainty — he identifies imbalances and sizes bets to capture the inevitable correction.</p>
+
+<div class="case-study">
+<div class="case-study-header">Real-World Example</div>
+<div class="case-study-title">Breaking the Bank of England (1992)</div>
+<p>Soros identified that Britain's commitment to the European Exchange Rate Mechanism was unsustainable — the pound was overvalued and the Bank of England was burning through reserves to defend it. This was a reflexive imbalance: the more the Bank defended the pound, the more speculators attacked it, draining reserves faster.</p>
+<p>Soros's Quantum Fund built a $10 billion short position against the pound. When Britain was forced to exit the ERM on "Black Wednesday," the trade earned over $1 billion in a single day. Crucially, this was not about certainty — it was about recognizing a reflexive imbalance where the downside was limited and the upside was enormous.</p>
+</div>
+
+<div class="callout callout-red">
+<div class="callout-label">Beat Lynch Connection — Narrative Elasticity</div>
+<p>Beat Lynch's <strong class="hl">Narrative Elasticity</strong> dimension operationalizes Soros's reflexivity. The system measures how far market expectations have stretched from fundamental reality — how much "narrative premium" is embedded in a stock's price. When Narrative Elasticity is high, it signals that a reflexive feedback loop may be inflating (or deflating) the price beyond what fundamentals support.</p>
+</div>
+</div>
+
+<!-- ═══════════════ LESSON 8 ═══════════════ -->
+<div class="lesson-card" onclick="toggleLesson('d8',this)">
+<div class="lesson-num">8</div>
+<div><div class="lesson-title">Howard Marks — Cycles, Risk, and Second-Level Thinking</div>
+<div class="lesson-desc">The pendulum model, risk as uncertainty, and thinking beyond the obvious.</div></div>
+<div class="lesson-mp">+10 MP</div>
+</div>
+<div class="lesson-detail" id="d8">
+<div class="tag-row">
+<span class="ctag">Second-Level Thinking</span><span class="ctag">Pendulum Model</span><span class="ctag">Risk ≠ Volatility</span><span class="ctag">Contrarian Discipline</span>
+</div>
+<div class="legend-card">
+<div class="legend-header">
+<div class="legend-icon" style="background:linear-gradient(135deg,rgba(168,85,247,.3),rgba(168,85,247,.12));color:var(--purple);">HM</div>
+<div><div class="legend-name">Howard Marks</div>
+<div class="legend-subtitle">Co-chairman of Oaktree Capital · Author of <em>The Most Important Thing</em></div></div>
+</div>
+</div>
+
+<h3>Second-Level Thinking</h3>
+<p>Howard Marks begins with a question that sounds simple but changes everything: <strong class="hl">if everyone can see the same information, how does anyone gain an edge?</strong> The answer is that most investors engage in <strong class="hl">first-level thinking</strong> — "this is a good company, therefore I should buy the stock." Second-level thinking goes deeper: "this is a good company, everyone knows it, the stock is priced for perfection, and the risk-reward at this price is actually poor."</p>
+
+<div class="two-col">
+<div class="think-box" style="background:rgba(168,85,247,.06);border:1px solid rgba(168,85,247,.2);">
+<div class="think-label" style="color:var(--purple);">FIRST-LEVEL THINKING</div>
+<div class="think-item">"This company has great earnings growth. Buy."</div>
+<div class="think-item">"The economy is slowing. Sell."</div>
+<div class="think-item">"This stock dropped 40%. It's cheap."</div>
+</div>
+<div class="think-box" style="background:rgba(34,197,94,.06);border:1px solid rgba(34,197,94,.2);">
+<div class="think-label" style="color:var(--green);">SECOND-LEVEL THINKING</div>
+<div class="think-item">"Great growth, but priced for 30% growth forever. Risky."</div>
+<div class="think-item">"Economy slowing, but everyone already sold. Opportunity."</div>
+<div class="think-item">"Down 40%, but fundamentals deteriorated 60%. Still expensive."</div>
+</div>
+</div>
+
+<div class="case-study">
+<div class="case-study-header">Real-World Example</div>
+<div class="case-study-title">Second-Level Thinking: Netflix at 80× Earnings (Late 2021)</div>
+<p><strong>First-level thinker:</strong> "Netflix is the dominant streaming platform with 220 million subscribers. It's a great company — buy it."</p>
+<p><strong>Second-level thinker:</strong> "Netflix is a great company, but at 80× earnings, the market is pricing in decades of uninterrupted growth. What happens if subscriber growth merely slows? At this valuation, even mild disappointment could trigger a massive correction."</p>
+<p>In 2022, Netflix reported its first subscriber decline. The stock fell over 70% from its peak. The second-level thinker's question — <em>"what's already priced in?"</em> — was worth hundreds of billions of dollars.</p>
+<div class="cs-highlight">Second-level thinking doesn't mean being a contrarian for its own sake. It means asking: what does the current price assume, and what happens if reality disappoints even slightly?</div>
+</div>
+
+<h3>The Pendulum and Risk Reimagined</h3>
+<p>Marks models market psychology as a <strong class="hl">pendulum</strong> that swings endlessly between euphoria and panic, between greed and fear. It passes through the rational midpoint but rarely stays there. The greatest investment opportunities arise at the extremes — when the pendulum has swung so far that prices no longer reflect reality.</p>
+<p>Marks also redefined risk. The finance industry measures risk as <strong class="hl">volatility</strong> — how much a price fluctuates. Marks argued this is dangerously misleading. Real risk is <strong class="hl">the probability of permanent loss and the uncertainty of outcomes.</strong> A stock that drops 30% and recovers is volatile but not risky. A stock that drops 30% because the company is failing is both volatile and risky.</p>
+
+<div class="case-study">
+<div class="case-study-header">Real-World Example</div>
+<div class="case-study-title">Oaktree in the 2008 Crisis — Buying When the Pendulum Hit Extreme Fear</div>
+<p>In late 2008, with the financial system in freefall, Marks deployed billions into distressed corporate bonds trading at 50–60 cents on the dollar. First-level thinkers said "the economy is collapsing, sell everything." Marks's second-level thinking: "everyone is terrified, prices reflect worst-case scenarios, and the risk of permanent loss at these prices is actually LOW because so much fear is already embedded."</p>
+<p>Oaktree's 2008 distressed debt fund returned over 30% annually in the years that followed. The opportunity existed precisely because the pendulum had swung to maximum fear.</p>
+</div>
+
+<div class="callout callout-purple">
+<div class="callout-label">Beat Lynch Connection — Cycle Overlay</div>
+<p>Beat Lynch's <strong class="hl">Cycle Overlay</strong> embeds Marks's pendulum model directly into the scoring engine. When markets are euphoric and valuations are stretched, the Cycle Overlay adjusts risk assessments upward — signaling caution even on "good" stocks. When fear is dominant and prices are depressed, it adjusts downward — identifying potential opportunities. This prevents the system from being blindly bullish at tops or blindly bearish at bottoms.</p>
+</div>
+</div>
+
+<!-- ═══════════════ LESSON 9 ═══════════════ -->
+<div class="lesson-card" onclick="toggleLesson('d9',this)">
+<div class="lesson-num">9</div>
+<div><div class="lesson-title">Ray Dalio — The Economic Machine and Portfolio Architecture</div>
+<div class="lesson-desc">Four environments, All-Weather, and thinking in regimes.</div></div>
+<div class="lesson-mp">+10 MP</div>
+</div>
+<div class="lesson-detail" id="d9">
+<div class="tag-row">
+<span class="ctag">Economic Machine</span><span class="ctag">Four Environments</span><span class="ctag">All-Weather</span><span class="ctag">Risk Parity</span>
+</div>
+<div class="legend-card">
+<div class="legend-header">
+<div class="legend-icon" style="background:linear-gradient(135deg,rgba(59,130,246,.3),rgba(59,130,246,.12));color:var(--accent);">RD</div>
+<div><div class="legend-name">Ray Dalio</div>
+<div class="legend-subtitle">Founder of Bridgewater Associates · Creator of All-Weather Portfolio</div></div>
+</div>
+</div>
+
+<h3>The Machine Behind the Markets</h3>
+<p>Every other legend in this course focuses primarily on individual companies. Ray Dalio operates at a different altitude entirely: he studies the <strong class="hl">economic machine</strong> — the system of credit, spending, productivity, and policy that determines the environment in which all companies operate. Dalio's core insight: <strong class="hl">there are only four economic environments, and different asset classes perform differently in each one.</strong></p>
+
+<div class="exhibit">
+<div class="exhibit-label">Exhibit 1.9 — Dalio's Four Economic Environments</div>
+<table class="fw-table">
+<thead><tr><th>Environment</th><th>What's Happening</th><th>What Tends to Perform</th><th>Real Example</th></tr></thead>
+<tbody>
+<tr><td><strong class="hl">Rising growth</strong></td><td>Economy expanding, profits growing</td><td>Stocks, corporate bonds, commodities</td><td>2017: Tax cuts + strong employment → S&P 500 +22%</td></tr>
+<tr><td><strong class="hl">Falling growth</strong></td><td>Economy contracting, recession risk</td><td>Government bonds, defensive stocks</td><td>2008: Financial crisis → Treasury bonds +20%, stocks −37%</td></tr>
+<tr><td><strong class="hl">Rising inflation</strong></td><td>Prices accelerating, purchasing power eroding</td><td>Commodities, TIPS, gold</td><td>2022: Inflation hit 9% → energy stocks +65%, bonds −13%</td></tr>
+<tr><td><strong class="hl">Falling inflation</strong></td><td>Prices stable or declining</td><td>Stocks, long-term bonds</td><td>2014: Low inflation → bonds and stocks both positive</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="case-study">
+<div class="case-study-header">Real-World Example</div>
+<div class="case-study-title">2022 — Why Regime Classification Matters</div>
+<p>In 2022, the regime shifted sharply to "rising inflation + falling growth." Investors who understood Dalio's framework knew immediately: stocks and bonds would both suffer (they did — the 60/40 portfolio had its worst year in decades), while commodities and energy would outperform (they did — energy was the best-performing sector by a wide margin).</p>
+<p>A stock that scored perfectly on every other Beat Lynch dimension could still lose money if the economic regime was hostile to its sector. Regime awareness is the context that makes all other analysis meaningful.</p>
+<div class="cs-highlight">This is why Beat Lynch scores stocks within the context of the current economic regime — because the environment matters as much as the individual company.</div>
+</div>
+
+<h3>All-Weather and Risk Parity</h3>
+<p>Dalio's <strong class="hl">All-Weather portfolio</strong> was designed to perform adequately in every environment without needing to predict which one is coming. The principle behind it is <strong class="hl">risk parity</strong>: instead of allocating equal dollars to different asset classes, you allocate equal risk. This means holding more bonds than stocks by dollar amount, because bonds are less volatile, so that each asset class contributes equally to the portfolio's total risk.</p>
+<p>For Dalio, <strong class="hl">the ability to survive every environment is more important than the ability to thrive in one.</strong> A portfolio that earns 15% in good years but loses 40% in bad years will compound worse than one that steadily earns 8% in all environments.</p>
+
+<div class="two-col">
+<div class="stat-card"><div class="stat-num">$150B+</div><div class="stat-label">Bridgewater AUM at peak (largest hedge fund)</div></div>
+<div class="stat-card"><div class="stat-num">4</div><div class="stat-label">Economic environments in Dalio's framework</div></div>
+</div>
+
+<div class="callout callout-blue">
+<div class="callout-label">Beat Lynch Connection — Regime Framework</div>
+<p>Beat Lynch's <strong class="hl">Regime Framework</strong> is built directly on Dalio's four-environment model. The system classifies the current economic regime and adjusts scoring context accordingly. A stock that scores well in a rising-growth environment may not score well if the regime shifts to falling growth — just as government bonds outperform in falling growth but lag in rising growth.</p>
+</div>
+</div>
+
+<!-- ═══════════════ LESSON 10 ═══════════════ -->
+<div class="lesson-card" onclick="toggleLesson('d10',this)">
+<div class="lesson-num">10</div>
+<div><div class="lesson-title">Stanley Druckenmiller — Macro, Flows, and the Integration of Everything</div>
+<div class="lesson-desc">The decision hierarchy, conviction sizing, and synthesizing all nine legends.</div></div>
+<div class="lesson-mp">+10 MP</div>
+</div>
+<div class="lesson-detail" id="d10">
+<div class="tag-row">
+<span class="ctag">Decision Hierarchy</span><span class="ctag">Conviction Sizing</span><span class="ctag">Macro Integration</span><span class="ctag">Liquidity First</span>
+</div>
+<div class="legend-card">
+<div class="legend-header">
+<div class="legend-icon" style="background:linear-gradient(135deg,rgba(239,68,68,.3),rgba(239,68,68,.12));color:var(--red);">SD</div>
+<div><div class="legend-name">Stanley Druckenmiller</div>
+<div class="legend-subtitle">Former lead portfolio manager, Quantum Fund · 30+ years, no losing year</div></div>
+</div>
+</div>
+
+<h3>The Integrator</h3>
+<p>Stanley Druckenmiller is the only legend in this course whose framework is not a single lens — it is the integration of every lens. Working alongside George Soros at Quantum Fund and later running his own Duquesne Capital, Druckenmiller compiled one of the most extraordinary track records in investing history: <strong class="hl">over 30 years of managing money with no single losing year, generating roughly 30% annualized returns.</strong></p>
+
+<h3>The Decision Hierarchy</h3>
+<p>Druckenmiller's most distinctive contribution is his <strong class="hl">decision hierarchy</strong> — a structured sequence of questions that determines where and how to invest before any individual stock is ever analyzed.</p>
+
+<div class="exhibit">
+<div class="exhibit-label">Exhibit 1.10 — Druckenmiller's Decision Hierarchy</div>
+<table class="fw-table">
+<thead><tr><th>Priority</th><th>Question</th><th>What It Determines</th></tr></thead>
+<tbody>
+<tr><td><strong class="hl">1. Liquidity</strong></td><td>Is money flowing into or out of markets?</td><td>Whether to be aggressive or defensive overall</td></tr>
+<tr><td><strong class="hl">2. Regime</strong></td><td>What is the economic environment?</td><td>Which asset classes and sectors have tailwinds</td></tr>
+<tr><td><strong class="hl">3. Leadership</strong></td><td>Which sectors and themes are leading?</td><td>Where to concentrate research and capital</td></tr>
+<tr><td><strong class="hl">4. Selection</strong></td><td>Which specific investments within leading areas?</td><td>Individual stock or asset selection</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>Notice the order. Most individual investors start at step 4 — they pick a stock and then hope the environment is favorable. Druckenmiller starts at step 1 — <strong class="hl">liquidity</strong>, meaning whether money is flowing into or out of markets overall — and only reaches stock selection at the very end. <strong class="hl">The environment matters more than the stock.</strong></p>
+
+<div class="case-study">
+<div class="case-study-header">Real-World Example</div>
+<div class="case-study-title">Druckenmiller's Hierarchy in Action — The 2020 COVID Recovery Trade</div>
+<p><strong>Step 1 — Liquidity:</strong> The Federal Reserve announced unlimited quantitative easing in March 2020, flooding markets with liquidity. Druckenmiller's first filter said: be aggressive.</p>
+<p><strong>Step 2 — Regime:</strong> The economy was in "falling growth" but with massive fiscal and monetary stimulus pointing toward recovery. Regime shifting from contraction to expansion.</p>
+<p><strong>Step 3 — Leadership:</strong> Technology and e-commerce were clearly leading — the pandemic had accelerated digital adoption by years. Druckenmiller concentrated his research here.</p>
+<p><strong>Step 4 — Selection:</strong> Only now did he select specific stocks, reportedly taking large positions in Amazon, Microsoft, and other tech leaders.</p>
+<div class="cs-highlight">Most retail investors in March 2020 went straight to Step 4 ("should I buy Amazon?") without first asking the more important questions. Druckenmiller's hierarchy ensures the macro environment supports the micro bet.</div>
+</div>
+
+<h3>Conviction Sizing</h3>
+<p>Druckenmiller's other critical principle: <strong class="hl">when you have high conviction and the macro environment supports it, size the position to matter.</strong> A 1% position in your best idea is a waste of insight. Position size should scale with conviction level and macro alignment.</p>
+
+<div class="quote-block">
+<div class="quote-text">"The way to build long-term returns is through preservation of capital and home runs. When you have tremendous conviction on a trade, you have to go for the jugular."</div>
+<div class="quote-attr">— Stanley Druckenmiller</div>
+</div>
+
+<div class="two-col">
+<div class="stat-card"><div class="stat-num">~30%</div><div class="stat-label">Annualized returns over 30+ years</div></div>
+<div class="stat-card"><div class="stat-num">0</div><div class="stat-label">Losing years in his career</div></div>
+</div>
+
+<div class="exhibit">
+<div class="exhibit-label">Exhibit 1.10b — How All Ten Legends Connect in Beat Lynch</div>
+<table class="fw-table">
+<thead><tr><th>Legend</th><th>Primary Contribution</th><th>BL Dimension</th></tr></thead>
+<tbody>
+<tr><td><strong class="hl">Graham</strong></td><td>Margin of safety, price vs. value</td><td>Risk Vector</td></tr>
+<tr><td><strong class="hl">Buffett</strong></td><td>Moats, quality, compounding</td><td>Moat Strength</td></tr>
+<tr><td><strong class="hl">Lynch</strong></td><td>GARP, growth validation</td><td>Growth Quality</td></tr>
+<tr><td><strong class="hl">Fisher</strong></td><td>Qualitative edge, R&D, management</td><td>Innovation Signals</td></tr>
+<tr><td><strong class="hl">O'Neill</strong></td><td>Dual confirmation, momentum</td><td>Technical Durability</td></tr>
+<tr><td><strong class="hl">Greenblatt</strong></td><td>ROIC + valuation screen</td><td>ROIC Screening Logic</td></tr>
+<tr><td><strong class="hl">Soros</strong></td><td>Reflexive loops, narrative risk</td><td>Narrative Elasticity</td></tr>
+<tr><td><strong class="hl">Marks</strong></td><td>Cycles, second-level thinking</td><td>Cycle Overlay</td></tr>
+<tr><td><strong class="hl">Dalio</strong></td><td>Regime classification, macro</td><td>Regime Framework</td></tr>
+<tr><td><strong class="hl">Druckenmiller</strong></td><td>Integration, hierarchy, conviction</td><td>Market Brain</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout">
+<div class="callout-label">Beat Lynch Connection — Market Brain</div>
+<p>Beat Lynch's <strong class="hl">Market Brain</strong> is the system's answer to Druckenmiller's decision hierarchy. It starts with liquidity and regime classification (drawing on Dalio), layers in narrative and cycle positioning (from Soros and Marks), identifies sector leadership, and only then assesses individual stocks. Market Brain is why Beat Lynch is an <strong class="hl">operating system</strong>, not a stock screener — it integrates all ten legendary frameworks into a single, coherent decision engine.</p>
+</div>
+
+<div class="completion-badge">
+<div style="font-size:32px;margin-bottom:10px">🏛️</div>
+<div style="font-family:Arial;font-size:12px;font-weight:700;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:6px">Masters 101 — Curriculum Complete</div>
+<div style="font-family:Arial;font-size:22px;font-weight:900;color:#fff;margin-bottom:8px">Ready for the Final Exam</div>
+<div style="font-family:Arial;font-size:13px;color:var(--muted);max-width:520px;margin:0 auto;">You have met the ten legendary investors whose frameworks power Beat Lynch's scoring engine. Each legend contributed a distinct lens — from Graham's margin of safety to Druckenmiller's macro integration. Now prove your understanding. Switch to the Final Exam tab to begin.</div>
+</div>
+</div>
+
+</div></div></div></div>
+
+<!-- ═══════════════ EXAM TAB ═══════════════ -->
+<div id="tab-exam" class="tab-content">
+<div class="container"><div class="exam-wrap">
+<div id="exam-start">
+<div class="start-exam-wrap">
+<div class="course-label">Tier 1 · Masters 101 · Final Exam</div>
+<h2>Masters 101 Final Exam</h2>
+<p>25 questions across all 10 lessons. Score 80% or higher to earn 100 Mastery Points and complete Course 1.1.</p>
+<div class="exam-rules">
+<div class="rule-card"><div class="r-num">25</div><div class="r-label">Questions</div></div>
+<div class="rule-card"><div class="r-num">80%</div><div class="r-label">Pass Threshold</div></div>
+<div class="rule-card"><div class="r-num">100</div><div class="r-label">MP on Pass</div></div>
+<div class="rule-card"><div class="r-num">10</div><div class="r-label">Lessons Covered</div></div>
+</div>
+<button class="exam-btn" onclick="startExam()">Begin Exam</button>
+</div>
+</div>
+<div id="exam-body" style="display:none">
+<div class="score-bar-wrap">
+<div><div class="score-big" id="scoreBig">0/0</div><div class="score-sub">Correct</div></div>
+<div style="flex:1;min-width:140px"><div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div><div style="font-family:Arial;font-size:11px;color:var(--muted);margin-top:4px;display:flex;justify-content:space-between"><span id="progressText">0 of 25</span><span id="accuracyText">—</span></div></div>
+</div>
+<div id="qContainer"></div>
+<div class="exam-result" id="examResult"></div>
+</div>
+</div></div>
+</div>
+
+<script>
+var Q=[
+{lesson:"Lesson 1 — Benjamin Graham",q:"A stock drops 30% in a week with no change in the company's revenue, earnings, or competitive position. Benjamin Graham would most likely describe this situation as:",opts:["A sign that the company's intrinsic value has declined and the stock should be sold","An example of Mr. Market offering a potentially larger margin of safety","Proof that the stock was overvalued before the decline","Evidence that technical analysis should override fundamental analysis"],ans:1,exp:"Graham's Mr. Market allegory teaches that price fluctuations reflect market mood, not necessarily changes in intrinsic value. If fundamentals are unchanged, a lower price means a wider gap between price and value — a larger margin of safety. As we saw in the COVID crash example, Apple's installed base didn't disappear because the stock price fell."},
+{lesson:"Lesson 1 — Benjamin Graham",q:"Graham's concept of 'margin of safety' is best described as:",opts:["Buying only stocks that pay dividends as a buffer against loss","The difference between a stock's market price and its estimated intrinsic value","A stop-loss order placed 10% below the purchase price","Diversifying across at least 20 stocks to reduce risk"],ans:1,exp:"Margin of safety is specifically the gap between what you pay (market price) and what you estimate the business is worth (intrinsic value). Graham's Northern Pipeline trade is a textbook example — paying $65 for $95 in provable asset value created a $30 margin of safety."},
+{lesson:"Lesson 1 — Benjamin Graham",q:"According to Graham, the most dangerous investor is one who:",opts:["Buys stocks without doing any research at all","Knowingly speculates with money they can afford to lose","Speculates while believing they are investing — taking risks they don't understand","Uses leverage to amplify returns on value investments"],ans:2,exp:"Graham's sharpest warning was for people who speculate while thinking they are investing. They take speculative risks sized as if they had an investor's margin of safety. The 2021 meme stock episode — where millions bought GameStop with no understanding of intrinsic value while believing they were 'investing' — is exactly this danger."},
+{lesson:"Lesson 2 — Warren Buffett",q:"Buffett's most important evolution from Graham's approach was the shift toward:",opts:["Using technical analysis alongside fundamentals","Buying wonderful businesses at fair prices rather than fair businesses at wonderful prices","Focusing exclusively on small-cap stocks with low P/E ratios","Trading more frequently to capture short-term price movements"],ans:1,exp:"Buffett's key evolution was prioritizing business quality (wonderful companies) over price cheapness alone. The See's Candies purchase in 1972 — paying 3× asset value for a business with extraordinary brand loyalty — exemplified this shift. Graham would never have paid that premium, but See's generated over $2 billion in cumulative profits."},
+{lesson:"Lesson 2 — Warren Buffett",q:"Which of the following best illustrates an economic moat based on switching costs?",opts:["Coca-Cola charges a premium because consumers trust the brand","Amazon delivers products at lower cost than competitors","Visa's network becomes more valuable as more merchants accept it","Salesforce's enterprise clients would need months to migrate data and retrain employees to switch CRMs"],ans:3,exp:"Switching costs create a moat when it is painful, expensive, or time-consuming for customers to change to a competitor. As the lesson explains, a Fortune 500 company on Salesforce has years of data, custom workflows, and hundreds of trained employees — making migration costs higher than the subscription itself. Coca-Cola is brand power, Amazon is cost advantage, and Visa is network effects."},
+{lesson:"Lesson 2 — Warren Buffett",q:"Buffett's 'circle of competence' principle means an investor should:",opts:["Only invest in technology companies they personally use every day","Invest across all sectors to maximize diversification","Recognize the boundaries of what they truly understand and refuse to invest beyond them","Gradually expand into every industry by reading analyst reports"],ans:2,exp:"Circle of competence is about knowing the limits of your understanding and refusing to cross them. Buffett avoided tech stocks for decades — not because they were bad, but because they fell outside his circle. When value fund managers abandoned their circles to chase dot-com stocks in the late 1990s, most lost heavily."},
+{lesson:"Lesson 3 — Peter Lynch",q:"A company is growing earnings at 20% per year and trades at a P/E ratio of 40. Its PEG ratio is:",opts:["0.5 — suggesting the stock is undervalued relative to growth","2.0 — suggesting the stock may be overpriced relative to growth","20 — suggesting extremely high valuation","Cannot be determined without knowing revenue"],ans:1,exp:"PEG = P/E ÷ Earnings Growth Rate = 40 ÷ 20 = 2.0. As shown in the lesson's worked math example, Lynch considered a PEG above 2.0 as potentially overpriced relative to growth. Compare: a company with P/E of 15 and 20% growth has PEG of 0.75 — same growth rate, but much cheaper."},
+{lesson:"Lesson 3 — Peter Lynch",q:"Peter Lynch would classify a large, reliable company growing revenue at 10–12% per year with consistent earnings as a:",opts:["Fast grower","Stalwart","Cyclical","Turnaround"],ans:1,exp:"Stalwarts are large, dependable companies growing at moderate but steady rates (10–12%). Companies like Procter & Gamble and Johnson & Johnson are classic stalwarts — they provide reliable returns and hold up well in downturns."},
+{lesson:"Lesson 4 — Phil Fisher",q:"Fisher's 'scuttlebutt' method primarily involves:",opts:["Analyzing financial statements to identify undervalued stocks","Talking to customers, suppliers, competitors, and employees to assess qualitative business strengths","Using price charts to identify entry and exit points","Screening for stocks with the highest dividend yields"],ans:1,exp:"Scuttlebutt is Fisher's term for qualitative research gathered by speaking with people connected to the business — building a mosaic of understanding that financial statements alone cannot provide. Fisher used this method to discover Motorola's exceptional R&D culture, which led to his 50+ year holding."},
+{lesson:"Lesson 4 — Phil Fisher",q:"Fisher would most likely view a company that cuts R&D spending to boost short-term earnings as:",opts:["A smart capital allocation decision that improves margins","A warning sign that management is sacrificing long-term competitive advantage","Evidence of strong cost discipline that Buffett would admire","A bullish signal because higher near-term earnings justify a higher stock price"],ans:1,exp:"Fisher viewed R&D as an investment in future competitive advantage, not an expense to minimize. Cutting R&D to boost near-term earnings is precisely the kind of short-term thinking Fisher warned against. As noted in the lesson, IBM pursued this strategy in the 2010s and watched its competitive position erode over the following decade."},
+{lesson:"Lesson 5 — William O'Neill",q:"O'Neill's 'dual confirmation' principle requires that a stock have:",opts:["Both value and growth characteristics simultaneously","Strong fundamentals confirmed by strong price action","Positive analyst ratings and increasing insider buying","Low P/E ratio and high dividend yield"],ans:1,exp:"O'Neill's key insight was demanding both fundamental strength AND technical strength. The NVIDIA 2023 example shows this perfectly: explosive AI demand (fundamentals) confirmed by relative strength in the top 5% of all stocks (price action). O'Neill would never buy when only one side confirmed."},
+{lesson:"Lesson 5 — William O'Neill",q:"A stock you purchased last week has declined 8% from your purchase price, but you believe the company's fundamentals remain strong. Under O'Neill's system, you should:",opts:["Buy more shares to average down your cost basis","Hold the position because the fundamentals justify it","Sell the position immediately — the 7–8% rule is absolute","Wait another week to see if the price recovers before deciding"],ans:2,exp:"O'Neill's 7–8% stop-loss rule is non-negotiable — sell any position that drops 7–8% below your purchase price, no exceptions. As the lesson's loss math table shows: a 7% loss requires only an 8% gain to recover, but a 50% loss requires a 100% gain. The rule prevents small losses from becoming catastrophic."},
+{lesson:"Lesson 6 — Joel Greenblatt",q:"Greenblatt's Magic Formula ranks stocks based on the combination of:",opts:["P/E ratio and dividend yield","Return on invested capital (ROIC) and earnings yield","Revenue growth rate and market capitalization","Price-to-book ratio and debt-to-equity ratio"],ans:1,exp:"The Magic Formula combines ROIC (business quality — how efficiently capital generates profits) with earnings yield (price cheapness — how much earnings per dollar paid). Together they capture Buffett's 'wonderful company at a fair price' in a systematic, repeatable screen."},
+{lesson:"Lesson 6 — Joel Greenblatt",q:"Greenblatt's most important behavioral insight was that:",opts:["Investors who use quantitative screens always outperform discretionary investors","Most investors abandon winning systems during inevitable periods of underperformance","The Magic Formula works because markets are perfectly efficient","Concentrated portfolios always outperform diversified ones"],ans:1,exp:"Greenblatt discovered that most users abandoned the Magic Formula during the roughly one-in-four years it underperformed the S&P 500. A great system you can't stick to is worse than a mediocre system you follow with discipline — this applies directly to using Beat Lynch's scores."},
+{lesson:"Lesson 6 — Joel Greenblatt",q:"A company with high ROIC but low earnings yield would indicate:",opts:["A wonderful business trading at an expensive price","A mediocre business that is deeply undervalued","A turnaround story with improving fundamentals","A cyclical company at the bottom of its earnings cycle"],ans:0,exp:"High ROIC = wonderful business (capital efficiency). Low earnings yield = expensive price (low earnings per dollar paid). The Visa example from the lesson illustrates this perfectly: ROIC above 40% but P/E of 30+ means you've found the wonderful company but not the fair price."},
+{lesson:"Lesson 7 — George Soros",q:"Soros's theory of reflexivity argues that market prices:",opts:["Always reflect the true intrinsic value of assets over time","Are random and unpredictable due to efficient markets","Can actively influence the fundamentals they are supposed to reflect","Only diverge from intrinsic value due to irrational behavior by retail investors"],ans:2,exp:"Reflexivity means prices are not passive mirrors of fundamentals — they actively shape them. Tesla's 2020–2021 rise illustrates this: the soaring stock price allowed Tesla to raise cheap capital, fund new factories, and attract talent, which improved its actual fundamentals."},
+{lesson:"Lesson 7 — George Soros",q:"During the dot-com bubble, internet companies used their inflated stock prices to acquire real businesses and attract top talent, which temporarily improved their actual fundamentals. This is an example of:",opts:["Graham's margin of safety working in reverse","Soros's reflexive feedback loop — prices influencing fundamentals","Buffett's economic moat expanding through brand power","O'Neill's relative strength confirming fundamental strength"],ans:1,exp:"This is textbook reflexivity: inflated prices improved the companies' real economic position (cheaper capital, acquisitions, talent), which appeared to justify the high prices, creating a self-reinforcing feedback loop — exactly as we saw with Tesla in the modern case study."},
+{lesson:"Lesson 7 — George Soros",q:"Soros's principle of 'radical fallibility' means:",opts:["Markets are always wrong and should be bet against","All participants, including Soros himself, have flawed perceptions of reality, so positions should be treated as hypotheses","Technical analysis is the only reliable way to understand markets","Central banks control all market outcomes"],ans:1,exp:"Radical fallibility is about acknowledging that every participant operates with incomplete and distorted perceptions. Soros treated his investment theses as hypotheses to be tested and abandoned when evidence turned against them — as demonstrated in his pound trade, where he identified an imbalance rather than claiming certainty."},
+{lesson:"Lesson 8 — Howard Marks",q:"A popular tech stock trades at 80× earnings. An analyst says 'this is a great company, buy it.' A second-level thinker would respond:",opts:["'Agreed — great companies are always good investments at any price'","'The market is wrong and this stock will crash soon'","'It may be a great company, but at 80× earnings, is the greatness already priced in? What happens if growth merely disappoints rather than collapses?'","'Technical indicators confirm the uptrend, so the valuation doesn't matter'"],ans:2,exp:"Second-level thinking asks what is already priced in. The Netflix case study illustrates this exactly: at 80× earnings in late 2021, the market priced in decades of growth. When subscribers merely declined, the stock fell 70%. The second-level question — 'what happens if reality disappoints even slightly?' — was worth hundreds of billions."},
+{lesson:"Lesson 8 — Howard Marks",q:"Marks argues that the true definition of risk is:",opts:["How much a stock's price fluctuates on a daily basis","The beta of a stock relative to the overall market","The probability of permanent loss and the uncertainty of outcomes","The maximum historical drawdown of a stock"],ans:2,exp:"Marks explicitly rejected the finance industry's definition of risk as volatility or beta. Real risk is the probability of permanent capital loss and the range of uncertain outcomes. A stock that drops 30% and recovers is volatile but not risky. A stock that drops 30% because the business is failing is both."},
+{lesson:"Lesson 9 — Ray Dalio",q:"In Dalio's four-environment framework, which economic environment would most benefit government bonds?",opts:["Rising growth with rising inflation","Falling growth with falling inflation","Rising growth with falling inflation","Rising inflation regardless of growth"],ans:1,exp:"Government bonds perform best when growth is falling (increasing demand for safety) and inflation is falling (preserving the value of bonds' fixed payments). The lesson's 2008 example shows this clearly: during the financial crisis (falling growth), Treasury bonds returned +20% while stocks fell 37%."},
+{lesson:"Lesson 9 — Ray Dalio",q:"Dalio's risk parity approach differs from traditional portfolio allocation because it:",opts:["Invests only in stocks to maximize long-term returns","Allocates equal dollar amounts to each asset class","Allocates equal risk contribution from each asset class, regardless of dollar amounts","Avoids bonds entirely during periods of low interest rates"],ans:2,exp:"Risk parity equalizes risk contribution — often meaning more dollars in bonds than stocks by dollar amount — so no single economic environment can devastate the portfolio. The key insight: equal dollars ≠ equal risk, because stocks are more volatile than bonds."},
+{lesson:"Lesson 9 — Ray Dalio",q:"Dalio's All-Weather portfolio was specifically designed to:",opts:["Maximize returns in rising equity markets","Outperform in every single economic environment","Perform adequately across all economic environments without requiring prediction of which one is coming","Eliminate all portfolio volatility through perfect hedging"],ans:2,exp:"All-Weather is about structural resilience — performing adequately in every environment, not maximizing in any single one. As Dalio argues, survival across all environments compounds better than thriving in one and being devastated in another."},
+{lesson:"Lesson 10 — Stanley Druckenmiller",q:"In Druckenmiller's decision hierarchy, the FIRST question an investor should ask is:",opts:["Which individual stocks have the best fundamentals?","Which sectors are showing the strongest earnings growth?","Is liquidity flowing into or out of markets overall?","What is the current P/E ratio of the S&P 500?"],ans:2,exp:"Druckenmiller's hierarchy starts with liquidity — is money flowing into or out of markets? Then regime, then sector leadership, and only then individual stock selection. The 2020 COVID recovery case study shows this: the Fed's unlimited QE (liquidity) was the first and most important signal."},
+{lesson:"Lesson 10 — Stanley Druckenmiller",q:"Druckenmiller's principle of conviction sizing means:",opts:["Spreading capital equally across 50+ positions to minimize risk","Allocating larger positions to your highest-conviction ideas when the environment supports them","Never putting more than 2% of your portfolio in a single stock","Sizing positions based solely on the stock's market capitalization"],ans:1,exp:"Druckenmiller argued that concentrating capital on your best ideas — when supported by favorable macro conditions — is how great returns are built. As he said: 'When you have tremendous conviction on a trade, you have to go for the jugular.' A 1% position in your best idea wastes insight."}
+];
+var answered=0,correct=0,total=Q.length;
+function switchTab(id,btn){document.querySelectorAll('.tab-content').forEach(function(t){t.classList.remove('active')});document.getElementById('tab-'+id).classList.add('active');document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active')});btn.classList.add('active');}
+function toggleLesson(id,card){var d=document.getElementById(id);var isOpen=d.classList.contains('open');document.querySelectorAll('.lesson-detail').forEach(function(el){el.classList.remove('open')});document.querySelectorAll('.lesson-card').forEach(function(c){c.classList.remove('active-card')});if(!isOpen){d.classList.add('open');card.classList.add('active-card');}}
+function startExam(){document.getElementById('exam-start').style.display='none';document.getElementById('exam-body').style.display='block';var c=document.getElementById('qContainer');c.innerHTML='';Q.forEach(function(q,i){var h='<div class="q-block" id="qb'+i+'"><div class="q-num">Question '+(i+1)+' · '+q.lesson+'</div><div class="q-text">'+q.q+'</div><div class="q-options">';var letters=['A','B','C','D'];q.opts.forEach(function(o,j){h+='<button class="q-opt" id="qo'+i+'_'+j+'" onclick="answer('+i+','+j+')"><span class="opt-letter">'+letters[j]+'.</span><span>'+o+'</span></button>';});h+='</div><div class="q-feedback" id="qf'+i+'"></div></div>';c.innerHTML+=h;});updateScore();}
+function answer(qi,oi){var q=Q[qi],bl=document.getElementById('qb'+qi),fb=document.getElementById('qf'+qi);if(bl.classList.contains('answered-correct')||bl.classList.contains('answered-wrong'))return;var opts=bl.querySelectorAll('.q-opt');opts.forEach(function(o){o.disabled=true;});if(oi===q.ans){opts[oi].classList.add('correct');bl.classList.add('answered-correct');fb.className='q-feedback correct';fb.innerHTML='<strong>Correct.</strong> '+q.exp;correct++;}else{opts[oi].classList.add('wrong');opts[q.ans].classList.add('reveal-correct');bl.classList.add('answered-wrong');fb.className='q-feedback wrong';fb.innerHTML='<strong>Incorrect.</strong> '+q.exp;}fb.style.display='block';answered++;updateScore();if(answered===total)showResult();}
+function updateScore(){document.getElementById('scoreBig').textContent=correct+'/'+answered;document.getElementById('progressFill').style.width=(answered/total*100)+'%';document.getElementById('progressText').textContent=answered+' of '+total;document.getElementById('accuracyText').textContent=answered>0?Math.round(correct/answered*100)+'% accuracy':'—';}
+function showResult(){var r=document.getElementById('examResult'),pct=Math.round(correct/total*100),pass=pct>=80;r.style.display='block';r.innerHTML='<div class="result-score">'+pct+'%</div><div style="font-family:Arial;font-size:18px;font-weight:700;margin-bottom:8px" class="'+(pass?'result-pass':'result-fail')+'">'+(pass?'PASSED — 100 Mastery Points Earned':'NOT YET — Review and Retake')+'</div><div class="result-msg">You answered '+correct+' of '+total+' questions correctly.'+(pass?' You have completed Masters 101 and earned the foundation to understand Beat Lynch\'s ten scoring dimensions. Proceed to Course 1.2: The Investor\'s Mindset.':' You need 80% (20 correct) to pass. Review the lesson explanations above and try again.')+'</div><button class="exam-btn'+(pass?'':' secondary')+'" onclick="retakeExam()">'+(pass?'Retake for Practice':'Retake Exam')+'</button>';r.scrollIntoView({behavior:'smooth'});}
+function retakeExam(){answered=0;correct=0;document.getElementById('examResult').style.display='none';startExam();}
+</script>
+</body>
+</html>

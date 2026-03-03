@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pillar I — Market & Finance Foundations</title>
+<style>
+:root{--gold:#C9A84C;--dark:#0D0F14;--panel:#13161E;--border:#1E2330;--text:#E8EAF0;--muted:#7A8099;--accent:#3B82F6;--green:#22C55E;--red:#EF4444;--purple:#a855f7;--orange:#f59e0b;--cyan:#06b6d4;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--dark);color:var(--text);font-family:'Georgia',serif;font-size:16px;line-height:1.75;}
+.top-bar{background:var(--panel);border-bottom:1px solid var(--border);padding:12px 32px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:100;flex-wrap:wrap;}
+.logo{font-family:Arial,sans-serif;font-weight:900;font-size:18px;color:var(--gold);letter-spacing:2px;}
+.pill{background:var(--gold);color:var(--dark);font-family:Arial,sans-serif;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:1px;}
+.pill-tier{background:var(--accent);color:#fff;}
+.pill-pillar{background:var(--purple);color:#fff;}
+.tab-nav{display:flex;gap:4px;margin-left:auto;}
+.tab-btn{background:none;border:1px solid var(--border);color:var(--muted);font-family:Arial,sans-serif;font-size:12px;font-weight:700;padding:6px 16px;border-radius:6px;cursor:pointer;transition:all .2s;letter-spacing:.5px;}
+.tab-btn.active{background:var(--gold);color:var(--dark);border-color:var(--gold);}
+.tab-btn:hover:not(.active){border-color:var(--gold);color:var(--gold);}
+.hero{background:linear-gradient(135deg,#0D0F14,#13161E,#0a0c10);border-bottom:1px solid var(--border);padding:56px 32px 40px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:500px;height:500px;background:radial-gradient(circle,rgba(201,168,76,.06) 0%,transparent 70%);pointer-events:none;}
+.course-label{font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:12px;}
+.hero h1{font-size:clamp(26px,4vw,44px);font-weight:400;color:#fff;margin-bottom:12px;line-height:1.2;}
+.hero-sub{font-size:17px;color:var(--muted);max-width:720px;margin:0 auto 28px;}
+.meta-row{display:flex;justify-content:center;gap:28px;flex-wrap:wrap;}
+.meta-item{text-align:center;}
+.meta-num{font-family:Arial,sans-serif;font-size:26px;font-weight:700;color:var(--gold);}
+.meta-label{font-family:Arial,sans-serif;font-size:10px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-top:2px;}
+.container{max-width:960px;margin:0 auto;padding:40px 24px;}
+.section{margin-bottom:52px;}
+.section-title{font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:20px;padding-bottom:10px;border-bottom:1px solid var(--border);}
+h2{font-size:22px;color:#fff;font-weight:400;margin-bottom:10px;}
+h3{font-family:Arial,sans-serif;font-size:12px;font-weight:700;color:var(--gold);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;margin-top:22px;}
+p{color:#BEC3D4;margin-bottom:14px;}
+strong.hl{color:#fff;}
+.tab-content{display:none;}.tab-content.active{display:block;}
+.principle-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0 32px;}
+@media(max-width:640px){.principle-grid{grid-template-columns:1fr;}}
+.principle-card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:20px;border-top:3px solid var(--gold);}
+.principle-num{font-family:Arial,sans-serif;font-size:11px;font-weight:700;color:var(--gold);letter-spacing:2px;margin-bottom:6px;}
+.principle-title{font-size:16px;color:#fff;margin-bottom:6px;}
+.principle-desc{font-family:Arial,sans-serif;font-size:13px;color:var(--muted);line-height:1.5;}
+.lesson-grid{display:flex;flex-direction:column;border:1px solid var(--border);border-radius:12px;overflow:hidden;}
+.lesson-card{background:var(--panel);border-bottom:1px solid var(--border);padding:18px 22px;display:grid;grid-template-columns:46px 1fr auto;gap:14px;align-items:start;cursor:pointer;transition:background .2s;}
+.lesson-card:last-child{border-bottom:none;}
+.lesson-card:hover,.lesson-card.active-card{background:#1a1e2a;}
+.lesson-card.active-card{border-left:3px solid var(--gold);}
+.lesson-num{font-family:Arial,sans-serif;font-size:20px;font-weight:700;color:var(--gold);line-height:1;}
+.lesson-title{font-size:16px;color:#fff;margin-bottom:3px;}
+.lesson-desc{font-family:Arial,sans-serif;font-size:12px;color:var(--muted);line-height:1.5;}
+.lesson-mp{font-family:Arial,sans-serif;font-size:12px;font-weight:700;color:var(--gold);background:rgba(201,168,76,.1);padding:3px 10px;border-radius:20px;white-space:nowrap;align-self:center;}
+.lesson-detail{background:#0e1018;border-top:1px solid var(--border);padding:28px;display:none;}
+.lesson-detail.open{display:block;}
+.fw-table{width:100%;border-collapse:collapse;margin:12px 0 20px;}
+.fw-table th{background:rgba(201,168,76,.08);font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);padding:10px 14px;text-align:left;border-bottom:1px solid var(--border);}
+.fw-table td{padding:12px 14px;border-bottom:1px solid var(--border);font-family:Arial,sans-serif;font-size:13px;color:#BEC3D4;vertical-align:top;}
+.fw-table tr:last-child td{border-bottom:none;}
+.fw-table tr:hover td{background:rgba(255,255,255,.02);}
+.callout{background:rgba(201,168,76,.05);border-left:3px solid var(--gold);padding:16px 20px;border-radius:0 8px 8px 0;margin:18px 0;}
+.callout-label{font-family:Arial,sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;}
+.callout p{color:var(--text);margin:0;font-size:14px;}
+.callout p+p{margin-top:8px;}
+.callout-blue{border-left-color:var(--accent);background:rgba(59,130,246,.05);}.callout-blue .callout-label{color:var(--accent);}
+.callout-red{border-left-color:var(--red);background:rgba(239,68,68,.05);}.callout-red .callout-label{color:var(--red);}
+.callout-green{border-left-color:var(--green);background:rgba(34,197,94,.05);}.callout-green .callout-label{color:var(--green);}
+.callout-purple{border-left-color:var(--purple);background:rgba(168,85,247,.05);}.callout-purple .callout-label{color:var(--purple);}
+.callout-cyan{border-left-color:var(--cyan);background:rgba(6,182,212,.05);}.callout-cyan .callout-label{color:var(--cyan);}
+.callout-orange{border-left-color:var(--orange);background:rgba(245,158,11,.05);}.callout-orange .callout-label{color:var(--orange);}
+.exhibit{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:22px;margin:18px 0;}
+.exhibit-label{font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:14px;}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0;}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:16px 0;}
+@media(max-width:640px){.two-col,.three-col{grid-template-columns:1fr;}}
+.stat-card{background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.2);border-radius:10px;padding:18px;text-align:center;}
+.stat-num{font-family:Arial,sans-serif;font-size:28px;font-weight:900;color:var(--gold);line-height:1;margin-bottom:4px;}
+.stat-label{font-family:Arial,sans-serif;font-size:11px;color:var(--muted);line-height:1.4;}
+.tag-row{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 14px;}
+.ctag{font-family:Arial,sans-serif;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;letter-spacing:.5px;background:rgba(201,168,76,.15);color:var(--gold);border:1px solid rgba(201,168,76,.3);}
+.divider{border:none;border-top:1px solid var(--border);margin:36px 0;}
+.formula-box{background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.25);border-radius:10px;padding:20px 24px;text-align:center;margin:16px 0;font-family:Arial,sans-serif;}
+.formula-main{font-size:20px;font-weight:900;color:var(--gold);letter-spacing:1px;margin-bottom:6px;}
+.formula-sub{font-size:12px;color:var(--muted);letter-spacing:.5px;}
+.bar-chart-row{display:flex;align-items:center;gap:10px;margin:6px 0;}
+.bar-chart-label{font-family:Arial,sans-serif;font-size:12px;color:var(--muted);width:140px;text-align:right;flex-shrink:0;}
+.bar-chart-track{flex:1;background:rgba(255,255,255,.04);border-radius:4px;height:22px;position:relative;overflow:hidden;}
+.bar-chart-fill{height:100%;border-radius:4px;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;font-family:Arial,sans-serif;font-size:11px;font-weight:700;color:#fff;min-width:30px;}
+.sensitivity-grid{display:grid;grid-template-columns:auto repeat(5,1fr);gap:1px;background:var(--border);border-radius:8px;overflow:hidden;margin:12px 0;}
+.sensitivity-grid div{background:var(--panel);padding:8px 6px;font-family:Arial,sans-serif;font-size:11px;text-align:center;color:#BEC3D4;}
+.sensitivity-grid .sg-header{background:rgba(201,168,76,.08);color:var(--gold);font-weight:700;font-size:10px;letter-spacing:.5px;}
+.sensitivity-grid .sg-row-header{background:rgba(59,130,246,.06);color:var(--accent);font-weight:700;text-align:right;padding-right:10px;}
+.sensitivity-grid .sg-highlight{background:rgba(34,197,94,.08);color:var(--green);font-weight:700;}
+.sensitivity-grid .sg-danger{background:rgba(239,68,68,.06);color:var(--red);}
+.svg-wrap{display:flex;justify-content:center;margin:18px 0;}
+.svg-wrap svg{max-width:100%;height:auto;}
+.exam-wrap{max-width:800px;margin:0 auto;}
+.start-exam-wrap{text-align:center;padding:40px 20px;}
+.start-exam-wrap h2{color:#fff;margin-bottom:12px;}
+.start-exam-wrap p{color:var(--muted);max-width:500px;margin:0 auto 24px;}
+.exam-rules{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin:24px 0;text-align:left;}
+.rule-card{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:14px;}
+.rule-card .r-num{font-family:Arial,sans-serif;font-size:22px;font-weight:900;color:var(--gold);}
+.rule-card .r-label{font-family:Arial,sans-serif;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;}
+.score-bar-wrap{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:20px 28px;margin-bottom:28px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;}
+.score-big{font-size:42px;font-weight:900;color:var(--gold);line-height:1;}
+.score-sub{font-size:12px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;}
+.progress-track{flex:1;min-width:200px;background:rgba(255,255,255,.06);border-radius:8px;height:12px;overflow:hidden;}
+.progress-fill{height:100%;background:linear-gradient(90deg,rgba(201,168,76,.5),var(--gold));border-radius:8px;transition:width .5s ease;}
+.q-block{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:22px;margin-bottom:14px;transition:border-color .3s;}
+.q-block.answered-correct{border-color:var(--green);}
+.q-block.answered-wrong{border-color:var(--red);}
+.q-num{font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:8px;}
+.q-text{font-size:15px;color:#fff;margin-bottom:16px;line-height:1.6;}
+.q-options{display:flex;flex-direction:column;gap:8px;}
+.q-opt{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:8px;padding:11px 15px;font-family:Arial,sans-serif;font-size:14px;color:#BEC3D4;cursor:pointer;transition:all .2s;text-align:left;display:flex;gap:12px;align-items:flex-start;}
+.q-opt:hover:not(:disabled){background:rgba(201,168,76,.06);border-color:rgba(201,168,76,.4);color:#fff;}
+.q-opt:disabled{cursor:default;}
+.q-opt.correct{background:rgba(34,197,94,.1);border-color:var(--green);color:var(--green);}
+.q-opt.wrong{background:rgba(239,68,68,.1);border-color:var(--red);color:var(--red);}
+.q-opt.reveal-correct{background:rgba(34,197,94,.07);border-color:rgba(34,197,94,.4);color:var(--green);}
+.opt-letter{font-weight:700;flex-shrink:0;width:18px;}
+.q-feedback{margin-top:10px;padding:11px 15px;border-radius:8px;font-family:Arial,sans-serif;font-size:13px;line-height:1.5;display:none;}
+.q-feedback.correct{background:rgba(34,197,94,.08);color:var(--green);border:1px solid rgba(34,197,94,.2);}
+.q-feedback.wrong{background:rgba(239,68,68,.08);color:#f87171;border:1px solid rgba(239,68,68,.2);}
+.exam-result{background:linear-gradient(135deg,rgba(201,168,76,.07),rgba(59,130,246,.04));border:1px solid rgba(201,168,76,.3);border-radius:16px;padding:40px;text-align:center;margin-top:32px;display:none;}
+.result-score{font-family:Arial,sans-serif;font-size:64px;font-weight:900;color:var(--gold);line-height:1;margin-bottom:8px;}
+.exam-btn{background:var(--gold);color:var(--dark);font-family:Arial,sans-serif;font-weight:700;font-size:14px;letter-spacing:1px;padding:12px 28px;border-radius:8px;border:none;cursor:pointer;margin:4px;}
+.exam-btn:hover{opacity:.9;}
+.result-pass{color:var(--green);}.result-fail{color:var(--red);}
+.result-msg{color:var(--muted);max-width:520px;margin:0 auto 24px;font-size:15px;}
+.anti-game-notice{background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.2);border-radius:8px;padding:14px 18px;margin:18px 0;font-family:Arial,sans-serif;font-size:12px;color:var(--red);line-height:1.5;text-align:center;}
+.kv-row{display:flex;gap:6px;margin:4px 0;font-family:Arial,sans-serif;font-size:13px;}
+.kv-key{color:var(--gold);font-weight:700;min-width:120px;flex-shrink:0;}
+.kv-val{color:#BEC3D4;}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+<div class="logo">BEAT LYNCH</div>
+<span class="pill">INFINITE ALPHA</span>
+<span class="pill pill-tier">TIER 3</span>
+<span class="pill pill-pillar">PILLAR I OF V</span>
+<div class="tab-nav">
+<button class="tab-btn active" onclick="showTab('curriculum')">CURRICULUM</button>
+<button class="tab-btn" onclick="showTab('exam')">FINAL EXAM</button>
+</div>
+</div>
+
+<div class="hero">
+<div class="course-label">Infinite Alpha · Pillar I of V</div>
+<h1>Market & Finance Foundations</h1>
+<p class="hero-sub">How financial markets actually work — the mechanics, forces, and structural realities that determine where capital flows, how prices form, and why understanding the machine is prerequisite to everything that follows.</p>
+<div class="meta-row">
+<div class="meta-item"><div class="meta-num">10</div><div class="meta-label">Lessons</div></div>
+<div class="meta-item"><div class="meta-num">250</div><div class="meta-label">Mastery Points</div></div>
+<div class="meta-item"><div class="meta-num">75%</div><div class="meta-label">Pass Threshold</div></div>
+<div class="meta-item"><div class="meta-num">30</div><div class="meta-label">Exam Questions</div></div>
+<div class="meta-item"><div class="meta-num">~9</div><div class="meta-label">Hours Study</div></div>
+</div>
+</div>
+
+<!-- ===== CURRICULUM TAB ===== -->
+<div class="tab-content active" id="tab-curriculum">
+<div class="container">
+
+<div class="section">
+<div class="section-title">Pillar Overview</div>
+<p>Pillar I is the <strong class="hl">"how the machine works"</strong> pillar. In Tier 1–2 you learned the vocabulary of markets, the basics of what moves prices, and introductory concepts around interest rates and the business cycle. Now we go inside the engine. You will emerge understanding market microstructure, how professional money creates patterns, how interest rates transmit through every asset price, how the credit cycle amplifies and destroys wealth, and how currencies, commodities, and bonds form one interconnected system. This is the foundation for everything that follows in Pillars II through V.</p>
+
+<div class="exhibit">
+<div class="exhibit-label">System Integration — Pillar I in the Infinite Alpha Architecture</div>
+<div class="svg-wrap">
+<svg viewBox="0 0 720 200" xmlns="http://www.w3.org/2000/svg" style="max-width:700px;">
+<rect x="10" y="70" width="120" height="60" rx="8" fill="rgba(201,168,76,.1)" stroke="#C9A84C" stroke-width="1.2"/>
+<text x="70" y="95" text-anchor="middle" font-family="Arial" font-size="11" font-weight="700" fill="#C9A84C">PILLAR I</text>
+<text x="70" y="112" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">Market Machine</text>
+<line x1="130" y1="100" x2="155" y2="100" stroke="#C9A84C" stroke-width="1.2" marker-end="url(#ag)"/>
+<rect x="155" y="70" width="100" height="60" rx="8" fill="rgba(59,130,246,.08)" stroke="#3B82F6" stroke-width="1"/>
+<text x="205" y="95" text-anchor="middle" font-family="Arial" font-size="10" font-weight="700" fill="#3B82F6">PILLAR II</text>
+<text x="205" y="110" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">Valuation</text>
+<line x1="255" y1="100" x2="280" y2="100" stroke="#C9A84C" stroke-width="1.2" marker-end="url(#ag)"/>
+<rect x="280" y="70" width="100" height="60" rx="8" fill="rgba(168,85,247,.08)" stroke="#a855f7" stroke-width="1"/>
+<text x="330" y="95" text-anchor="middle" font-family="Arial" font-size="10" font-weight="700" fill="#a855f7">PILLAR III</text>
+<text x="330" y="110" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">Structure</text>
+<line x1="380" y1="100" x2="405" y2="100" stroke="#C9A84C" stroke-width="1.2" marker-end="url(#ag)"/>
+<rect x="405" y="70" width="100" height="60" rx="8" fill="rgba(239,68,68,.08)" stroke="#EF4444" stroke-width="1"/>
+<text x="455" y="95" text-anchor="middle" font-family="Arial" font-size="10" font-weight="700" fill="#EF4444">PILLAR IV</text>
+<text x="455" y="110" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">Risk</text>
+<line x1="505" y1="100" x2="530" y2="100" stroke="#C9A84C" stroke-width="1.2" marker-end="url(#ag)"/>
+<rect x="530" y="70" width="100" height="60" rx="8" fill="rgba(34,197,94,.08)" stroke="#22C55E" stroke-width="1"/>
+<text x="580" y="95" text-anchor="middle" font-family="Arial" font-size="10" font-weight="700" fill="#22C55E">PILLAR V</text>
+<text x="580" y="110" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">Craft</text>
+<line x1="580" y1="130" x2="580" y2="155" stroke="#22C55E" stroke-width="1.2" marker-end="url(#ag2)"/>
+<rect x="640" y="70" width="70" height="60" rx="8" fill="rgba(201,168,76,.15)" stroke="#C9A84C" stroke-width="1.5"/>
+<text x="675" y="92" text-anchor="middle" font-family="Arial" font-size="9" font-weight="700" fill="#C9A84C">BEAT</text>
+<text x="675" y="104" text-anchor="middle" font-family="Arial" font-size="9" font-weight="700" fill="#C9A84C">LYNCH</text>
+<text x="675" y="118" text-anchor="middle" font-family="Arial" font-size="8" fill="#7A8099">+ NIL</text>
+<line x1="630" y1="100" x2="640" y2="100" stroke="#C9A84C" stroke-width="1.2" marker-end="url(#ag)"/>
+<rect x="490" y="155" width="180" height="34" rx="6" fill="rgba(201,168,76,.06)" stroke="rgba(201,168,76,.3)" stroke-width="1"/>
+<text x="580" y="176" text-anchor="middle" font-family="Arial" font-size="10" font-weight="700" fill="#C9A84C">Market Brain Daily Regime Output</text>
+<text x="360" y="28" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">Pillar I feeds the regime intelligence that powers every downstream decision</text>
+<rect x="10" y="15" width="700" height="40" rx="6" fill="none" stroke="rgba(201,168,76,.15)" stroke-width="1" stroke-dasharray="4,4"/>
+<defs>
+<marker id="ag" markerWidth="8" markerHeight="6" refX="4" refY="3" orient="auto"><path d="M0,6 L4,0 L8,6" fill="none" stroke="#C9A84C" stroke-width="1"/></marker>
+<marker id="ag2" markerWidth="8" markerHeight="6" refX="4" refY="3" orient="auto"><path d="M0,6 L4,0 L8,6" fill="none" stroke="#22C55E" stroke-width="1"/></marker>
+</defs>
+</svg>
+</div>
+</div>
+</div>
+
+<div class="section">
+<div class="section-title">Core Principles</div>
+<div class="principle-grid">
+<div class="principle-card">
+<div class="principle-num">PRINCIPLE I</div>
+<div class="principle-title">Price Formation</div>
+<div class="principle-desc">How prices are actually set: order flow, market microstructure, the gap between retail perception and institutional reality.</div>
+</div>
+<div class="principle-card">
+<div class="principle-num">PRINCIPLE II</div>
+<div class="principle-title">The Credit Cycle</div>
+<div class="principle-desc">The single most important force in markets: how credit expands and contracts, and why it drives asset prices more than earnings.</div>
+</div>
+<div class="principle-card">
+<div class="principle-num">PRINCIPLE III</div>
+<div class="principle-title">Monetary Architecture</div>
+<div class="principle-desc">How central banks, interest rates, and liquidity conditions create the environment in which all investing occurs.</div>
+</div>
+<div class="principle-card">
+<div class="principle-num">PRINCIPLE IV</div>
+<div class="principle-title">Cross-Asset Intelligence</div>
+<div class="principle-desc">Why bonds, currencies, commodities, and equities are one interconnected system — not four separate markets.</div>
+</div>
+</div>
+</div>
+
+<div class="section">
+<div class="section-title">Pillar I Lessons</div>
+<div class="lesson-grid">
+
+<!-- ===== LESSON 1 ===== -->
+<div class="lesson-card" onclick="toggleLesson(0)">
+<div class="lesson-num">01</div>
+<div><div class="lesson-title">How Prices Are Really Set — Market Microstructure</div>
+<div class="lesson-desc">The limit order book, market makers, price vs. value, institutional order flow, and what retail investors never see.</div></div>
+<div class="lesson-mp">25 MP</div>
+</div>
+<div class="lesson-detail" id="ld-0">
+<div class="tag-row"><span class="ctag">Microstructure</span><span class="ctag">Order Book</span><span class="ctag">Market Makers</span><span class="ctag">Price ≠ Value</span><span class="ctag">Dark Pools</span></div>
+
+<h3>The Auction You Never See</h3>
+<p>In Tier 1 you learned that stock prices change based on supply and demand. That's true — but it's like saying a car moves because the wheels turn. Pillar I goes inside the engine. The price you see on your screen is the output of a <strong class="hl">continuous double auction</strong> — a real-time process driven by order flow, market maker positioning, and institutional behavior that most retail investors never observe.</p>
+<p>Every stock has a <strong class="hl">limit order book</strong>: a ranked list of all pending buy orders (bids) and all pending sell orders (asks). The highest bid and lowest ask define the <strong class="hl">National Best Bid and Offer (NBBO)</strong>. The gap between them is the <strong class="hl">spread</strong>, and that spread is the cost of immediacy — what you pay for the privilege of executing right now.</p>
+
+<div class="exhibit">
+<div class="exhibit-label">Anatomy of a Limit Order Book</div>
+<table class="fw-table">
+<thead><tr><th>Bid (Buy Orders)</th><th>Price</th><th>Ask (Sell Orders)</th></tr></thead>
+<tbody>
+<tr><td></td><td style="color:var(--red);">$152.05</td><td>800 shares</td></tr>
+<tr><td></td><td style="color:var(--red);">$152.03</td><td>1,200 shares</td></tr>
+<tr><td></td><td style="color:var(--red);">$152.01</td><td>500 shares ← Best Ask</td></tr>
+<tr><td>700 shares ← Best Bid</td><td style="color:var(--green);">$152.00</td><td></td></tr>
+<tr><td>1,500 shares</td><td style="color:var(--green);">$151.98</td><td></td></tr>
+<tr><td>2,000 shares</td><td style="color:var(--green);">$151.95</td><td></td></tr>
+</tbody>
+</table>
+<p style="font-family:Arial,sans-serif;font-size:12px;color:var(--muted);margin:0;">Spread = $152.01 − $152.00 = $0.01 (1 cent). A market buy order takes the 500 shares at $152.01. If you need more, you pay $152.03, then $152.05 — this is <strong class="hl">slippage</strong>.</p>
+</div>
+
+<h3>Market Makers: The Invisible Counterparty</h3>
+<p><strong class="hl">Market makers</strong> are firms that continuously post buy and sell orders on both sides of the book. They profit from the spread: buying at the bid and selling at the ask thousands of times per second. They don't care whether the stock goes up or down — they provide <strong class="hl">liquidity</strong> and capture the tiny margin between bid and ask on massive volume.</p>
+<p>But when order flow becomes <strong class="hl">toxic</strong> — meaning informed traders are systematically trading against them — market makers widen spreads or pull quotes entirely. On May 6, 2010 (the Flash Crash), automated market makers detected overwhelming sell-side flow, withdrew from the book, and liquidity evaporated. Procter & Gamble dropped 35% in seconds — not because its business changed, but because <strong class="hl">there were no buyers left in the order book at reasonable prices</strong>.</p>
+
+<div class="exhibit">
+<div class="exhibit-label">Where Trades Actually Execute</div>
+<div class="bar-chart-row"><div class="bar-chart-label">Lit Exchanges (NYSE, Nasdaq)</div><div class="bar-chart-track"><div class="bar-chart-fill" style="width:52%;background:var(--accent);">52%</div></div></div>
+<div class="bar-chart-row"><div class="bar-chart-label">Dark Pools</div><div class="bar-chart-track"><div class="bar-chart-fill" style="width:16%;background:var(--purple);">16%</div></div></div>
+<div class="bar-chart-row"><div class="bar-chart-label">Wholesalers (PFOF)</div><div class="bar-chart-track"><div class="bar-chart-fill" style="width:27%;background:var(--orange);">27%</div></div></div>
+<div class="bar-chart-row"><div class="bar-chart-label">Other (ATS, etc.)</div><div class="bar-chart-track"><div class="bar-chart-fill" style="width:5%;background:var(--muted);">5%</div></div></div>
+<p style="font-family:Arial,sans-serif;font-size:11px;color:var(--muted);margin-top:8px;">Most retail orders never reach the exchange. They're routed to wholesalers like Citadel Securities via payment for order flow (PFOF). You get price improvement vs. the NBBO; the wholesaler profits from the information in your order flow.</p>
+</div>
+
+<h3>Price vs. Value: The Gap Where Investing Lives</h3>
+<p>Price is the last number the auction process produced. Value is what the underlying business is actually worth based on its future cash flows, competitive position, and growth trajectory. These two numbers are almost never the same — and the gap between them is where every investment return originates.</p>
+<p>Sometimes the gap is small and efficient (large-cap, well-followed stocks in calm markets). Sometimes it's enormous (panic selling, forced liquidation, neglected small-caps). Your job as an investor is to estimate value independently and act when price diverges significantly from it.</p>
+
+<div class="callout"><div class="callout-label">Core Principle</div><p>Price is a fact. Value is an opinion. The persistent gap between them is where investing lives.</p></div>
+
+<h3>Key Takeaways for Beat Lynch</h3>
+<p>Market microstructure matters because it reveals when prices are being set by informed, voluntary participants versus forced, mechanical flows. Understanding the difference between a price move driven by fundamental reassessment and one driven by microstructure events (index rebalancing, margin calls, liquidity withdrawal) is the first skill of a professional investor. The Mean Magic score assesses value independently of price — this lesson explains why that independence is necessary.</p>
+</div>
+
+<!-- ===== LESSON 2 ===== -->
+<div class="lesson-card" onclick="toggleLesson(1)">
+<div class="lesson-num">02</div>
+<div><div class="lesson-title">Institutional Money — How the Professionals Move</div>
+<div class="lesson-desc">Who owns the market, institutional mandates, forced flows, accumulation patterns, and smart money dynamics.</div></div>
+<div class="lesson-mp">25 MP</div>
+</div>
+<div class="lesson-detail" id="ld-1">
+<div class="tag-row"><span class="ctag">Institutional Flows</span><span class="ctag">Index Rebalancing</span><span class="ctag">Forced Selling</span><span class="ctag">Smart Money</span><span class="ctag">Accumulation</span></div>
+
+<h3>Who Actually Owns the Market</h3>
+<p>Institutions — mutual funds, pension funds, hedge funds, sovereign wealth funds, insurance companies, and ETFs — own roughly <strong class="hl">80% of the U.S. equity market</strong>. Their decisions dominate price action. Understanding their mandates (the rules they must follow) is more predictive than understanding their opinions.</p>
+
+<div class="three-col">
+<div class="stat-card"><div class="stat-num">~80%</div><div class="stat-label">U.S. equities owned by institutions</div></div>
+<div class="stat-card"><div class="stat-num">$7.5T+</div><div class="stat-label">Assets tracking S&P 500 alone</div></div>
+<div class="stat-card"><div class="stat-num">$11T+</div><div class="stat-label">Total passive index fund assets</div></div>
+</div>
+
+<h3>How Mandates Create Predictable, Forced Behavior</h3>
+<p>Much institutional money is <strong class="hl">price-insensitive</strong> — forced to buy or sell regardless of valuation because their mandate requires it. This creates recurring, exploitable patterns for informed individual investors.</p>
+
+<table class="fw-table">
+<thead><tr><th>Forced Flow Event</th><th>Mechanism</th><th>Example</th></tr></thead>
+<tbody>
+<tr><td><strong class="hl">Index Addition</strong></td><td>All tracking funds must buy the added stock at market-cap weight, regardless of price</td><td>Tesla S&P 500 add (Dec 2020): ~$80B forced buying, stock surged 60%+</td></tr>
+<tr><td><strong class="hl">Index Deletion</strong></td><td>All tracking funds must sell the removed stock entirely</td><td>Stocks removed from S&P 500 typically decline 5-15% on the event</td></tr>
+<tr><td><strong class="hl">Russell Reconstitution</strong></td><td>Annual Russell index rebalance forces mass buying/selling on one day in June</td><td>One of the highest-volume trading days of the year</td></tr>
+<tr><td><strong class="hl">Quarter-End Window Dressing</strong></td><td>Fund managers buy winners and sell losers before quarterly disclosure</td><td>Creates temporary momentum in both directions around quarter-end</td></tr>
+<tr><td><strong class="hl">Tax-Loss Harvesting</strong></td><td>Taxable investors sell year-to-date losers in Q4 for tax benefits</td><td>Already-beaten-down stocks get pushed lower; often rebound in January</td></tr>
+<tr><td><strong class="hl">Margin Call Liquidation</strong></td><td>Leveraged funds forced to sell their best assets to raise cash</td><td>March 2020: even gold and Treasuries sold as funds liquidated everything</td></tr>
+</tbody>
+</table>
+
+<h3>Accumulation and Distribution Signatures</h3>
+<p>Large institutions can't buy or sell their full position at once without moving the market. A pension fund acquiring a $500M position in a mid-cap stock must spread purchases across weeks using algorithms, <strong class="hl">iceberg orders</strong> (showing only a fraction of the total), and <strong class="hl">dark pools</strong>. The signature: volume rises gradually over weeks while price creeps higher on no news. The reverse — distribution — shows rising volume with price stalling or slowly declining.</p>
+
+<div class="callout callout-green"><div class="callout-label">Individual Investor Edge</div><p>You can buy or sell your entire position in seconds with zero market impact. This is an enormous structural advantage over institutions. Combine it with understanding of their forced flows, and you gain a timing edge — knowing when mandated selling creates temporary mispricings in fundamentally sound businesses.</p></div>
+</div>
+
+<!-- ===== LESSON 3 ===== -->
+<div class="lesson-card" onclick="toggleLesson(2)">
+<div class="lesson-num">03</div>
+<div><div class="lesson-title">Interest Rates — The Most Important Price in the World</div>
+<div class="lesson-desc">The yield curve, the discount rate mechanism, short vs. long rates, real vs. nominal, and why rates affect everything.</div></div>
+<div class="lesson-mp">25 MP</div>
+</div>
+<div class="lesson-detail" id="ld-2">
+<div class="tag-row"><span class="ctag">Yield Curve</span><span class="ctag">Discount Rate</span><span class="ctag">Duration</span><span class="ctag">Real vs. Nominal</span><span class="ctag">Risk-Free Rate</span></div>
+
+<h3>The One Variable That Rules Them All</h3>
+<p>Every asset on the planet is priced relative to the prevailing interest rate. The <strong class="hl">risk-free rate</strong> — typically the yield on U.S. Treasury securities — is the foundation of all valuation. It represents the return you can earn with zero credit risk. Every other investment must offer a higher expected return to justify the additional risk. When the risk-free rate rises, the hurdle that every investment must clear jumps with it.</p>
+
+<div class="formula-box"><div class="formula-main">PV = CF ÷ (1 + r)<sup>n</sup></div><div class="formula-sub">PV = Present Value | CF = Future Cash Flow | r = Discount Rate | n = Years</div></div>
+
+<p>The present value formula is the most important equation in finance. It says: a dollar received in the future is worth less than a dollar today, and the higher the discount rate (r) or the further out the cash flow (n), the less it's worth. This single equation explains why rising rates are devastating for high-growth stocks.</p>
+
+<div class="exhibit">
+<div class="exhibit-label">Rate Sensitivity — Present Value of $100 Received in the Future</div>
+<div class="sensitivity-grid">
+<div class="sg-header"></div><div class="sg-header">1% Rate</div><div class="sg-header">3% Rate</div><div class="sg-header">5% Rate</div><div class="sg-header">7% Rate</div><div class="sg-header">10% Rate</div>
+<div class="sg-row-header">Year 1</div><div class="sg-highlight">$99.01</div><div>$97.09</div><div>$95.24</div><div>$93.46</div><div>$90.91</div>
+<div class="sg-row-header">Year 5</div><div class="sg-highlight">$95.15</div><div>$86.26</div><div>$78.35</div><div>$71.30</div><div>$62.09</div>
+<div class="sg-row-header">Year 10</div><div>$90.53</div><div>$74.41</div><div>$61.39</div><div>$50.83</div><div class="sg-danger">$38.55</div>
+<div class="sg-row-header">Year 20</div><div>$81.95</div><div>$55.37</div><div>$37.69</div><div class="sg-danger">$25.84</div><div class="sg-danger">$14.86</div>
+<div class="sg-row-header">Year 30</div><div>$74.19</div><div>$41.20</div><div class="sg-danger">$23.14</div><div class="sg-danger">$13.14</div><div class="sg-danger">$5.73</div>
+</div>
+<p style="font-family:Arial,sans-serif;font-size:11px;color:var(--muted);margin-top:6px;">At 1%, $100 in 20 years is worth $81.95 today. At 5%, it's worth only $37.69. Cash flows far in the future are devastated by rate increases — this is why high-growth stocks are "long duration" assets.</p>
+</div>
+
+<h3>The Yield Curve</h3>
+<p>The <strong class="hl">yield curve</strong> plots interest rates across maturities (1-month to 30-year). Normally it slopes upward — longer maturities pay more because of time risk. When it <strong class="hl">inverts</strong> (short-term rates exceed long-term), the bond market is signaling that future growth will be weak enough to force rate cuts. An inverted yield curve has preceded every U.S. recession since 1970.</p>
+
+<h3>Real vs. Nominal Rates</h3>
+<p><strong class="hl">Nominal rate</strong> = what you see quoted. <strong class="hl">Real rate</strong> = nominal rate minus inflation. If you earn 5% on a bond but inflation is 4%, your real return is only 1%. Real rates are what actually matter for economic decisions. When real rates go deeply negative (as in 2020-2021), capital floods into risk assets, real estate, and speculative investments because holding cash guarantees a loss of purchasing power.</p>
+
+<div class="callout callout-red"><div class="callout-label">2022 Case Study</div><p>The 2022 rate shock demonstrated this lesson with brutal clarity. The Fed raised rates from near 0% to over 5% in the fastest tightening cycle in 40 years. The ARK Innovation ETF — filled with long-duration growth stocks whose value depended on distant future cash flows — fell approximately 75% from its peak. The math of discounting made the decline inevitable.</p></div>
+</div>
+
+<!-- ===== LESSON 4 ===== -->
+<div class="lesson-card" onclick="toggleLesson(3)">
+<div class="lesson-num">04</div>
+<div><div class="lesson-title">The Business Cycle — Expansion, Peak, Contraction, Trough</div>
+<div class="lesson-desc">Four phases, leading vs. lagging indicators, sector rotation, and why knowing where you are matters more than predicting what's next.</div></div>
+<div class="lesson-mp">25 MP</div>
+</div>
+<div class="lesson-detail" id="ld-3">
+<div class="tag-row"><span class="ctag">Business Cycle</span><span class="ctag">Leading Indicators</span><span class="ctag">Sector Rotation</span><span class="ctag">Cyclical vs. Structural</span></div>
+
+<h3>The Economy Moves in Patterns</h3>
+<p>The economy alternates between expansion and contraction in a pattern called the <strong class="hl">business cycle</strong>. There are four phases: early expansion, mid-cycle, late-cycle, and contraction. Each phase creates different winners and losers. The professional skill is <strong class="hl">knowing where you are in the cycle right now</strong> and positioning accordingly — not predicting exactly when it turns.</p>
+
+<table class="fw-table">
+<thead><tr><th>Phase</th><th>Characteristics</th><th>Leading Sectors</th><th>Typical Duration</th></tr></thead>
+<tbody>
+<tr><td><strong class="hl">Early Expansion</strong></td><td>Rate cuts, steep yield curve, pent-up demand, rising confidence</td><td>Financials, Consumer Discretionary</td><td>~1-2 years</td></tr>
+<tr><td><strong class="hl">Mid-Cycle</strong></td><td>Strongest growth, rising profits, moderate inflation, healthy credit</td><td>Technology, Industrials, Communication Services</td><td>~2-4 years</td></tr>
+<tr><td><strong class="hl">Late-Cycle</strong></td><td>Tightening policy, rising wages, peak profit margins, overconfidence</td><td>Energy, Materials, Healthcare</td><td>~1-2 years</td></tr>
+<tr><td><strong class="hl">Contraction</strong></td><td>Falling profits, rising unemployment, credit stress, fear</td><td>Utilities, Consumer Staples, Healthcare</td><td>~6-18 months</td></tr>
+</tbody>
+</table>
+
+<h3>Leading vs. Lagging Indicators — The Critical Distinction</h3>
+<p>This is one of the most important analytical skills in investing. <strong class="hl">Leading indicators</strong> tell you where the economy is GOING. <strong class="hl">Lagging indicators</strong> tell you where it WAS. Confusing them is how investors get caught at the exact wrong moment.</p>
+
+<div class="two-col">
+<div class="exhibit" style="margin:0;">
+<div class="exhibit-label" style="color:var(--green);">Leading Indicators (Forward-Looking)</div>
+<p style="font-size:13px;font-family:Arial,sans-serif;">Yield curve shape, ISM New Orders, building permits, initial jobless claims, consumer expectations, stock market, credit spreads</p>
+</div>
+<div class="exhibit" style="margin:0;">
+<div class="exhibit-label" style="color:var(--red);">Lagging Indicators (Backward-Looking)</div>
+<p style="font-size:13px;font-family:Arial,sans-serif;">Unemployment rate, corporate profits (reported), CPI, prime rate, consumer credit, average duration of unemployment</p>
+</div>
+</div>
+
+<div class="callout callout-orange"><div class="callout-label">The Late-Cycle Trap</div><p>The most dangerous moment: leading indicators are deteriorating, but lagging indicators still look healthy. Unemployment is low, corporate profits are strong, and sentiment is "everything is fine." This is Howard Marks' pendulum at its extreme. October 2007: unemployment 4.7%, S&P 500 at all-time highs — but the yield curve had inverted, housing starts had collapsed, and the Great Recession was weeks away.</p></div>
+</div>
+
+<!-- ===== LESSON 5 ===== -->
+<div class="lesson-card" onclick="toggleLesson(4)">
+<div class="lesson-num">05</div>
+<div><div class="lesson-title">The Credit Cycle — The Engine That Drives Everything</div>
+<div class="lesson-desc">Credit creation, reflexivity in lending, credit spreads, and why every major crisis starts with credit.</div></div>
+<div class="lesson-mp">25 MP</div>
+</div>
+<div class="lesson-detail" id="ld-4">
+<div class="tag-row"><span class="ctag">Credit Cycle</span><span class="ctag">Reflexivity</span><span class="ctag">Credit Spreads</span><span class="ctag">Soros Framework</span></div>
+
+<h3>The Amplifier</h3>
+<p>Credit is the mechanism through which interest rate policy translates into economic activity. When a bank makes a loan, it literally creates new money — the borrower gets spending power that didn't exist before. The credit cycle is therefore the <strong class="hl">amplifier</strong> of the business cycle. It's arguably the single most important force in markets.</p>
+
+<h3>Soros' Reflexivity: The Self-Reinforcing Loop</h3>
+<p>George Soros' concept of <strong class="hl">reflexivity</strong> is most visible in credit. The cycle is inherently self-reinforcing in both directions:</p>
+
+<div class="exhibit">
+<div class="exhibit-label">The Reflexive Credit Loop</div>
+<div class="svg-wrap">
+<svg viewBox="0 0 600 160" xmlns="http://www.w3.org/2000/svg" style="max-width:580px;">
+<rect x="10" y="20" width="280" height="55" rx="8" fill="rgba(34,197,94,.08)" stroke="var(--green)" stroke-width="1"/>
+<text x="150" y="38" text-anchor="middle" font-family="Arial" font-size="10" font-weight="700" fill="var(--green)">EXPANSION (Slow, Gradual)</text>
+<text x="150" y="55" text-anchor="middle" font-family="Arial" font-size="9" fill="#BEC3D4">More lending → higher prices → more collateral</text>
+<text x="150" y="67" text-anchor="middle" font-family="Arial" font-size="9" fill="#BEC3D4">→ even more lending → higher prices...</text>
+<rect x="310" y="20" width="280" height="55" rx="8" fill="rgba(239,68,68,.08)" stroke="var(--red)" stroke-width="1"/>
+<text x="450" y="38" text-anchor="middle" font-family="Arial" font-size="10" font-weight="700" fill="var(--red)">CONTRACTION (Fast, Violent)</text>
+<text x="450" y="55" text-anchor="middle" font-family="Arial" font-size="9" fill="#BEC3D4">Less lending → falling prices → less collateral</text>
+<text x="450" y="67" text-anchor="middle" font-family="Arial" font-size="9" fill="#BEC3D4">→ margin calls → forced selling → lower prices...</text>
+<text x="300" y="110" text-anchor="middle" font-family="Arial" font-size="11" font-weight="700" fill="var(--gold)">CRITICAL ASYMMETRY</text>
+<text x="300" y="128" text-anchor="middle" font-family="Arial" font-size="10" fill="#BEC3D4">Contraction is ALWAYS faster than expansion.</text>
+<text x="300" y="145" text-anchor="middle" font-family="Arial" font-size="10" fill="#BEC3D4">Markets take the stairs up and the elevator down.</text>
+</svg>
+</div>
+</div>
+
+<h3>Credit Spreads: The Market's Fear Gauge</h3>
+<p><strong class="hl">Credit spreads</strong> measure the extra yield investors demand to hold risky bonds (corporate, high-yield) over safe government bonds. They are one of the most important signals in all of finance.</p>
+
+<div class="callout callout-red"><div class="callout-label">The Paradox of Tight Spreads</div><p>Credit spreads were at their tightest in June 2007 — literally weeks before the worst financial crisis in 80 years. Tight spreads reflected <strong>perceived</strong> safety, not <strong>actual</strong> safety. When everyone believes risk is low, lending standards drop, leverage rises, and the conditions for crisis are created. Perceived risk is lowest when actual risk is highest.</p></div>
+
+<p>When credit spreads diverge from equity prices — bonds widening (more fear) while stocks rally (more optimism) — credit is usually right. The bond market has historically signaled danger 3-6 months before equities price it in. This is because the bond market is larger (~$130T global), more institutional, and priced with more mathematical precision.</p>
+</div>
+
+<!-- ===== LESSON 6 ===== -->
+<div class="lesson-card" onclick="toggleLesson(5)">
+<div class="lesson-num">06</div>
+<div><div class="lesson-title">Central Banks — The Most Powerful Players in Markets</div>
+<div class="lesson-desc">The Federal Reserve, the dual mandate, QE vs. QT, forward guidance, and the monetary policy transmission mechanism.</div></div>
+<div class="lesson-mp">25 MP</div>
+</div>
+<div class="lesson-detail" id="ld-5">
+<div class="tag-row"><span class="ctag">Federal Reserve</span><span class="ctag">QE / QT</span><span class="ctag">Forward Guidance</span><span class="ctag">Dual Mandate</span></div>
+
+<h3>The Regime Setter</h3>
+<p>Central banks set the baseline conditions for all financial markets. The Federal Reserve operates under a <strong class="hl">dual mandate</strong>: maximum employment and stable prices (targeting ~2% inflation). These two goals often create tension — low rates boost employment but risk inflation; high rates tame inflation but slow growth. This tension moves trillions.</p>
+
+<h3>The Fed's Toolkit</h3>
+<table class="fw-table">
+<thead><tr><th>Tool</th><th>Mechanism</th><th>Market Impact</th></tr></thead>
+<tbody>
+<tr><td><strong class="hl">Fed Funds Rate</strong></td><td>Sets overnight borrowing rate between banks — the baseline for all short-term rates</td><td>Directly affects all floating-rate debt, savings yields, and bank profitability</td></tr>
+<tr><td><strong class="hl">QE (Quantitative Easing)</strong></td><td>Fed buys Treasuries and MBS, injecting cash into the banking system</td><td>Pushes bond yields down, forces investors into riskier assets, inflates asset prices</td></tr>
+<tr><td><strong class="hl">QT (Quantitative Tightening)</strong></td><td>Fed lets bonds mature without reinvesting, draining cash from the system</td><td>Pressures yields up, reduces liquidity, headwind for risk assets</td></tr>
+<tr><td><strong class="hl">Forward Guidance</strong></td><td>Communications about future policy intentions (speeches, dot plot, press conferences)</td><td>Markets price expectations — guidance moves markets as powerfully as actual policy changes</td></tr>
+</tbody>
+</table>
+
+<h3>Forward Guidance: Words as Policy</h3>
+<p>The 2013 <strong class="hl">Taper Tantrum</strong> proved that what the Fed says matters as much as what it does. In May 2013, Bernanke merely suggested that QE tapering might begin — no actual policy change occurred. Yet 10-year Treasury yields surged from 1.6% to 3.0% in four months. Markets price <strong class="hl">expectations of future liquidity</strong>, not just current conditions.</p>
+
+<div class="callout callout-purple"><div class="callout-label">Druckenmiller's Law</div><p>"Liquidity is the most important variable in the short and intermediate term." The Fed's liquidity regime — easing or tightening — determines whether asset prices generally rise or fall. When the Fed eases, even mediocre businesses rise. When it tightens, even great businesses struggle. The liquidity regime is the essential context variable for all shorter-term positioning.</p></div>
+
+<p>In March 2020, the Fed announced unlimited QE. The S&P 500, which had fallen 34%, bottomed within days. Not because the economy improved, but because the most powerful financial institution in the world guaranteed liquidity. This is the power of the regime setter.</p>
+</div>
+
+<!-- ===== LESSON 7 ===== -->
+<div class="lesson-card" onclick="toggleLesson(6)">
+<div class="lesson-num">07</div>
+<div><div class="lesson-title">Currencies and Global Capital Flows</div>
+<div class="lesson-desc">The dollar smile, reserve currency dynamics, the carry trade, and why currency is a hidden exposure in every portfolio.</div></div>
+<div class="lesson-mp">25 MP</div>
+</div>
+<div class="lesson-detail" id="ld-6">
+<div class="tag-row"><span class="ctag">U.S. Dollar</span><span class="ctag">Dollar Smile</span><span class="ctag">Carry Trade</span><span class="ctag">Capital Flows</span></div>
+
+<h3>The World's Reserve Currency</h3>
+<p>The U.S. dollar is the currency in which approximately 60% of global reserves are held, ~88% of all foreign exchange transactions involve, and the majority of global commodities are priced. Its movements affect every portfolio on Earth, whether the investor realizes it or not.</p>
+
+<h3>The Dollar Smile</h3>
+<p>The dollar's behavior follows a distinctive pattern called the <strong class="hl">Dollar Smile</strong>: it strengthens in two opposite scenarios and weakens in between.</p>
+
+<div class="exhibit">
+<div class="exhibit-label">The Dollar Smile Framework</div>
+<div class="svg-wrap">
+<svg viewBox="0 0 500 180" xmlns="http://www.w3.org/2000/svg" style="max-width:480px;">
+<path d="M60,50 Q250,150 440,50" fill="none" stroke="var(--gold)" stroke-width="2.5"/>
+<circle cx="60" cy="50" r="5" fill="var(--gold)"/>
+<circle cx="250" cy="140" r="5" fill="var(--gold)"/>
+<circle cx="440" cy="50" r="5" fill="var(--gold)"/>
+<text x="60" y="35" text-anchor="middle" font-family="Arial" font-size="10" font-weight="700" fill="var(--green)">STRONG $</text>
+<text x="60" y="75" text-anchor="middle" font-family="Arial" font-size="9" fill="#BEC3D4">Crisis / Risk-Off</text>
+<text x="60" y="87" text-anchor="middle" font-family="Arial" font-size="9" fill="#BEC3D4">Flight to safety</text>
+<text x="60" y="99" text-anchor="middle" font-family="Arial" font-size="8" fill="var(--muted)">(2008, Mar 2020)</text>
+<text x="250" y="165" text-anchor="middle" font-family="Arial" font-size="10" font-weight="700" fill="var(--red)">WEAK $</text>
+<text x="250" y="120" text-anchor="middle" font-family="Arial" font-size="9" fill="#BEC3D4">Global growth / Risk-On</text>
+<text x="250" y="108" text-anchor="middle" font-family="Arial" font-size="8" fill="var(--muted)">(2003-07, 2020-21)</text>
+<text x="440" y="35" text-anchor="middle" font-family="Arial" font-size="10" font-weight="700" fill="var(--green)">STRONG $</text>
+<text x="440" y="75" text-anchor="middle" font-family="Arial" font-size="9" fill="#BEC3D4">U.S. Outperformance</text>
+<text x="440" y="87" text-anchor="middle" font-family="Arial" font-size="9" fill="#BEC3D4">Capital inflows to U.S.</text>
+<text x="440" y="99" text-anchor="middle" font-family="Arial" font-size="8" fill="var(--muted)">(2014-15, 2022)</text>
+</svg>
+</div>
+</div>
+
+<h3>Currency as Hidden Portfolio Exposure</h3>
+<p>If you own a U.S. company that earns 55% of revenue internationally, a <strong class="hl">10% dollar appreciation</strong> creates a 3-5% drag on reported earnings. European revenue in euros translates to fewer dollars. This currency headwind is invisible on a company's income statement unless you're looking for it, but it directly impacts EPS and stock performance.</p>
+
+<h3>The Carry Trade</h3>
+<p>The <strong class="hl">carry trade</strong> involves borrowing in a low-interest-rate currency (like JPY) and investing in a high-interest-rate currency (like USD or AUD) to capture the rate differential. This trade works beautifully — until it doesn't. When carry trades unwind, the forced simultaneous selling of high-rate assets and buying of low-rate currencies creates violent cross-asset moves, cascading through equities via margin calls and leveraged position liquidation.</p>
+
+<div class="callout callout-cyan"><div class="callout-label">Currency Reality</div><p>Every stock you own has implicit currency exposure. A portfolio of U.S. multinationals during a strong-dollar period is fighting a hidden headwind. Understanding dollar direction is not optional — it's a factor exposure embedded in every position.</p></div>
+</div>
+
+<!-- ===== LESSON 8 ===== -->
+<div class="lesson-card" onclick="toggleLesson(7)">
+<div class="lesson-num">08</div>
+<div><div class="lesson-title">Commodities and Real Assets — The Inflation Dimension</div>
+<div class="lesson-desc">Oil, copper, gold, agricultural commodities — supply-demand dynamics, supercycles, and what they signal.</div></div>
+<div class="lesson-mp">25 MP</div>
+</div>
+<div class="lesson-detail" id="ld-7">
+<div class="tag-row"><span class="ctag">Commodities</span><span class="ctag">Oil</span><span class="ctag">Copper</span><span class="ctag">Gold</span><span class="ctag">Supercycle</span></div>
+
+<h3>The Physical Foundation</h3>
+<p>Commodities operate on fundamentally different dynamics than financial assets. A share of Visa represents a business whose competitive moat widens over time — value compounds. A barrel of oil doesn't grow, innovate, or reinvest. Commodities are <strong class="hl">physical assets with fixed supply-demand dynamics</strong>, and they cycle rather than compound.</p>
+
+<div class="exhibit">
+<div class="exhibit-label">The Commodity Cycle</div>
+<div class="svg-wrap">
+<svg viewBox="0 0 560 100" xmlns="http://www.w3.org/2000/svg" style="max-width:540px;">
+<rect x="10" y="25" width="110" height="50" rx="6" fill="rgba(239,68,68,.08)" stroke="var(--red)" stroke-width="1"/>
+<text x="65" y="48" text-anchor="middle" font-family="Arial" font-size="9" font-weight="700" fill="var(--red)">UNDERINVEST</text>
+<text x="65" y="62" text-anchor="middle" font-family="Arial" font-size="8" fill="var(--muted)">Supply shrinks</text>
+<text x="133" y="50" font-family="Arial" font-size="14" fill="var(--gold)">→</text>
+<rect x="150" y="25" width="110" height="50" rx="6" fill="rgba(245,158,11,.08)" stroke="var(--orange)" stroke-width="1"/>
+<text x="205" y="48" text-anchor="middle" font-family="Arial" font-size="9" font-weight="700" fill="var(--orange)">SCARCITY</text>
+<text x="205" y="62" text-anchor="middle" font-family="Arial" font-size="8" fill="var(--muted)">Prices spike</text>
+<text x="273" y="50" font-family="Arial" font-size="14" fill="var(--gold)">→</text>
+<rect x="290" y="25" width="110" height="50" rx="6" fill="rgba(34,197,94,.08)" stroke="var(--green)" stroke-width="1"/>
+<text x="345" y="48" text-anchor="middle" font-family="Arial" font-size="9" font-weight="700" fill="var(--green)">OVERINVEST</text>
+<text x="345" y="62" text-anchor="middle" font-family="Arial" font-size="8" fill="var(--muted)">New supply floods in</text>
+<text x="413" y="50" font-family="Arial" font-size="14" fill="var(--gold)">→</text>
+<rect x="430" y="25" width="110" height="50" rx="6" fill="rgba(59,130,246,.08)" stroke="var(--accent)" stroke-width="1"/>
+<text x="485" y="48" text-anchor="middle" font-family="Arial" font-size="9" font-weight="700" fill="var(--accent)">GLUT</text>
+<text x="485" y="62" text-anchor="middle" font-family="Arial" font-size="8" fill="var(--muted)">Prices collapse</text>
+<text x="280" y="92" text-anchor="middle" font-family="Arial" font-size="9" fill="var(--muted)">Physical supply takes years to build and destroy — creating violent, slow-turning cycles</text>
+</svg>
+</div>
+</div>
+
+<h3>Commodity Signals</h3>
+<table class="fw-table">
+<thead><tr><th>Commodity</th><th>Signal</th><th>Why It Matters</th></tr></thead>
+<tbody>
+<tr><td><strong class="hl">Copper ("Dr. Copper")</strong></td><td>Industrial demand tracker</td><td>Used across construction, manufacturing, electronics — rising copper = economic expansion; falling = slowdown warning. Turned down ~4 months before the 2008 recession was recognized.</td></tr>
+<tr><td><strong class="hl">Oil</strong></td><td>Inflation input + growth signal</td><td>Rising oil acts as a tax on consumers and corporations. Rising oil + falling equities = stagflation risk. H1 2022 was a textbook example.</td></tr>
+<tr><td><strong class="hl">Gold</strong></td><td>Real rate indicator + fear gauge</td><td>Rises when real rates fall (negative real rates = gold bull). Also rises on geopolitical risk and loss of confidence in fiat currencies.</td></tr>
+</tbody>
+</table>
+
+<div class="callout"><div class="callout-label">Portfolio Implication</div><p>Because commodities cycle rather than compound, exposure should be <strong>tactical, not structural</strong>. Use commodities as a regime signal (inflation/growth indicators) and for temporary portfolio hedges — not as a permanent allocation. Buffett avoided commodity businesses for this exact reason.</p></div>
+</div>
+
+<!-- ===== LESSON 9 ===== -->
+<div class="lesson-card" onclick="toggleLesson(8)">
+<div class="lesson-num">09</div>
+<div><div class="lesson-title">The Bond Market — The Smart Money's Market</div>
+<div class="lesson-desc">Bond pricing, duration, credit spreads at depth, bond-equity correlation regimes, and why bonds are often right when equities are wrong.</div></div>
+<div class="lesson-mp">25 MP</div>
+</div>
+<div class="lesson-detail" id="ld-8">
+<div class="tag-row"><span class="ctag">Bonds</span><span class="ctag">Duration</span><span class="ctag">Credit Spreads</span><span class="ctag">Bond-Equity Correlation</span></div>
+
+<h3>The Bigger, Smarter Market</h3>
+<p>The global bond market is approximately <strong class="hl">$130 trillion</strong> — roughly twice the size of global equities. It is dominated by the most sophisticated institutional participants: central banks, sovereign wealth funds, pension funds, and insurance companies. When the bond market and the equity market disagree, the bond market is usually right.</p>
+
+<h3>Duration: The Rate Sensitivity Measure</h3>
+<p><strong class="hl">Duration</strong> measures a bond's sensitivity to interest rate changes. As a rule of thumb: for every 1% change in interest rates, a bond's price moves approximately by its duration in percentage terms.</p>
+
+<div class="exhibit">
+<div class="exhibit-label">Duration Rule of Thumb</div>
+<div class="formula-box"><div class="formula-main">% Price Change ≈ −Duration × Δ Rate</div><div class="formula-sub">A bond with 8.5 years duration loses ~8.5% if rates rise 1%</div></div>
+<p style="font-family:Arial,sans-serif;font-size:12px;color:var(--muted);margin:6px 0 0;">In 2022, 10-year yields rose ~2.7%. Long-duration bonds lost 15-20% — the worst bond market in 40+ years. Duration is not just a bond concept; high-P/E growth stocks are also "long duration" assets.</p>
+</div>
+
+<h3>Bond-Equity Correlation Regimes</h3>
+<p>The relationship between stocks and bonds is not fixed — it depends on the dominant macroeconomic force:</p>
+
+<div class="two-col">
+<div class="exhibit" style="margin:0;">
+<div class="exhibit-label" style="color:var(--green);">Negative Correlation (Normal)</div>
+<p style="font-size:13px;font-family:Arial,sans-serif;">When <strong class="hl">growth fears</strong> dominate: stocks fall, investors flee to bonds, bond prices rise. Bonds hedge equities. This was the regime for most of 1998-2021. The 60/40 portfolio works beautifully.</p>
+</div>
+<div class="exhibit" style="margin:0;">
+<div class="exhibit-label" style="color:var(--red);">Positive Correlation (Dangerous)</div>
+<p style="font-size:13px;font-family:Arial,sans-serif;">When <strong class="hl">inflation</strong> dominates: rising rates hurt both bonds AND stocks simultaneously. No diversification benefit. This was 2022 — both stocks and bonds fell together. The 60/40 portfolio broke.</p>
+</div>
+</div>
+
+<div class="callout callout-blue"><div class="callout-label">Cross-Market Intelligence</div><p>When credit spreads widen while the S&P 500 makes new highs, the bond market is signaling danger that equities haven't priced in. In 2006, credit spreads began widening 12-15 months before the S&P 500 peaked. The bond market saw it first.</p></div>
+</div>
+
+<!-- ===== LESSON 10 ===== -->
+<div class="lesson-card" onclick="toggleLesson(9)">
+<div class="lesson-num">10</div>
+<div><div class="lesson-title">Putting the Machine Together — Cross-Asset Synthesis</div>
+<div class="lesson-desc">The four-quadrant macro framework, risk-on/risk-off, intermarket confirmation, and reading the machine as one system.</div></div>
+<div class="lesson-mp">25 MP</div>
+</div>
+<div class="lesson-detail" id="ld-9">
+<div class="tag-row"><span class="ctag">Cross-Asset</span><span class="ctag">Macro Framework</span><span class="ctag">Risk-On / Risk-Off</span><span class="ctag">Intermarket Signals</span></div>
+
+<h3>One Machine, Not Four Markets</h3>
+<p>The previous nine lessons examined individual components. This lesson connects them into a single, readable system. Markets are not four separate worlds (stocks, bonds, currencies, commodities) — they are <strong class="hl">one interconnected machine</strong> driven by four macro forces: growth, inflation, liquidity, and risk appetite.</p>
+
+<h3>The Growth × Inflation Framework</h3>
+<p>Every macro environment maps to one of four quadrants based on whether growth and inflation are rising or falling:</p>
+
+<div class="exhibit">
+<div class="exhibit-label">The Four Regime Quadrants</div>
+<div class="sensitivity-grid" style="grid-template-columns:auto 1fr 1fr;">
+<div class="sg-header"></div><div class="sg-header">RISING GROWTH</div><div class="sg-header">FALLING GROWTH</div>
+<div class="sg-row-header" style="text-align:center;">FALLING INFLATION</div>
+<div class="sg-highlight" style="text-align:left;padding:12px;"><strong>GOLDILOCKS</strong><br><span style="font-size:10px;color:var(--muted);">Best: Growth stocks, long-duration bonds<br>Worst: Cash, gold<br>Example: 2017, 2019</span></div>
+<div style="text-align:left;padding:12px;background:rgba(59,130,246,.06);"><strong style="color:var(--accent);">DEFLATION SCARE</strong><br><span style="font-size:10px;color:var(--muted);">Best: Treasuries, cash, defensive equities<br>Worst: Cyclicals, commodities, high-yield<br>Example: Mar 2020, 2008</span></div>
+<div class="sg-row-header" style="text-align:center;">RISING INFLATION</div>
+<div style="text-align:left;padding:12px;background:rgba(245,158,11,.06);"><strong style="color:var(--orange);">REFLATION</strong><br><span style="font-size:10px;color:var(--muted);">Best: Commodities, value, financials, TIPS<br>Worst: Long-duration bonds<br>Example: H2 2020-2021</span></div>
+<div class="sg-danger" style="text-align:left;padding:12px;"><strong>STAGFLATION</strong><br><span style="font-size:10px;color:var(--muted);">Best: Commodities, TIPS, energy, cash<br>Worst: Growth stocks, long bonds, 60/40<br>Example: H1 2022, 1970s</span></div>
+</div>
+</div>
+
+<h3>The Five Intermarket Confirmation Signals</h3>
+<p>When these five signals agree, regime conviction is high. When they diverge, caution is essential:</p>
+
+<table class="fw-table">
+<thead><tr><th>Signal</th><th>Risk-On Reading</th><th>Risk-Off Reading</th></tr></thead>
+<tbody>
+<tr><td><strong class="hl">Yield Curve</strong></td><td>Steepening (improving growth expectations)</td><td>Flattening / Inverting (recession signal)</td></tr>
+<tr><td><strong class="hl">Credit Spreads</strong></td><td>Tightening (rising risk appetite)</td><td>Widening (rising stress)</td></tr>
+<tr><td><strong class="hl">U.S. Dollar</strong></td><td>Weakening (global growth, risk-on)</td><td>Strengthening (flight to safety)</td></tr>
+<tr><td><strong class="hl">Copper</strong></td><td>Rising (industrial demand confirming)</td><td>Falling (demand weakening)</td></tr>
+<tr><td><strong class="hl">Equity Breadth</strong></td><td>Expanding (broad participation)</td><td>Narrowing (fragile, concentrated rally)</td></tr>
+</tbody>
+</table>
+
+<div class="callout"><div class="callout-label">The Pillar I Conclusion</div><p>"The beginner looks at one stock. The intermediate investor looks at one market. The professional reads the entire machine." All ten lessons build to this: understanding these cross-asset signals IS Market Brain. Convergence = high conviction. Divergence = caution. This system reading powers every downstream decision in Pillars II through V.</p></div>
+</div>
+
+</div><!-- end lesson-grid -->
+</div>
+
+<div class="section">
+<div class="section-title">Pillar I Master Framework Summary</div>
+<table class="fw-table">
+<thead><tr><th>Framework</th><th>Core Principle</th><th>Beat Lynch / NIL Application</th></tr></thead>
+<tbody>
+<tr><td><strong class="hl">Market Microstructure</strong></td><td>Price is where supply meets demand in an auction. Price ≠ Value.</td><td>Mean Magic assesses value independently of price</td></tr>
+<tr><td><strong class="hl">Institutional Flows</strong></td><td>Professional money creates patterns. Mandates create forced flows.</td><td>Technical Durability Score, institutional accumulation signals</td></tr>
+<tr><td><strong class="hl">Interest Rates</strong></td><td>Rates set the discount rate for all assets. Duration matters.</td><td>Risk Vector sensitivity, Market Brain rate regime</td></tr>
+<tr><td><strong class="hl">Business Cycle</strong></td><td>Four phases create sector rotation patterns. Know where you are.</td><td>Market Brain Macro Regime Engine</td></tr>
+<tr><td><strong class="hl">Credit Cycle</strong></td><td>Credit is the amplifier. Reflexive expansion and violent contraction.</td><td>Market Brain Stress Signals</td></tr>
+<tr><td><strong class="hl">Central Banks</strong></td><td>The Fed sets the liquidity regime. Guidance = policy.</td><td>Market Brain Liquidity Stance</td></tr>
+<tr><td><strong class="hl">Currencies</strong></td><td>Dollar direction is a hidden factor exposure in every portfolio.</td><td>Cross-Asset Signals, portfolio drift detection</td></tr>
+<tr><td><strong class="hl">Commodities</strong></td><td>Real assets signal inflation and economic activity. They cycle, not compound.</td><td>Inflation regime, commodity signals</td></tr>
+<tr><td><strong class="hl">Bond Market</strong></td><td>Larger, more institutional, often smarter than equities.</td><td>Stress Signal Engine, correlation regime</td></tr>
+<tr><td><strong class="hl">Cross-Asset Synthesis</strong></td><td>Markets are one interconnected system. Read the full machine.</td><td>Market Brain daily regime output</td></tr>
+</tbody>
+</table>
+</div>
+
+</div>
+</div>
+
+<!-- ===== EXAM TAB ===== -->
+<div class="tab-content" id="tab-exam">
+<div class="container">
+<div class="exam-wrap" id="exam-area">
+
+<div class="start-exam-wrap" id="exam-start">
+<h2>Pillar I Final Exam</h2>
+<p>30 questions covering all 10 lessons — 3 questions per lesson. Requires genuine understanding of the material. 75% required to pass.</p>
+<div class="anti-game-notice">⚠ Answer positions and lengths are randomized each attempt. The longest answer is frequently wrong. Read each question carefully.</div>
+<div class="exam-rules">
+<div class="rule-card"><div class="r-num">30</div><div class="r-label">Questions</div></div>
+<div class="rule-card"><div class="r-num">23</div><div class="r-label">To Pass</div></div>
+<div class="rule-card"><div class="r-num">250</div><div class="r-label">MP Reward</div></div>
+<div class="rule-card"><div class="r-num">∞</div><div class="r-label">Retakes</div></div>
+</div>
+<button class="exam-btn" onclick="startExam()">BEGIN EXAM</button>
+</div>
+
+<div id="exam-live" style="display:none;">
+<div class="score-bar-wrap">
+<div><div class="score-big" id="score-display">0</div><div class="score-sub">Correct</div></div>
+<div style="flex:1;">
+<div style="display:flex;justify-content:space-between;font-family:Arial,sans-serif;font-size:11px;color:var(--muted);margin-bottom:6px;">
+<span>Progress</span><span id="progress-label">0 / 30</span>
+</div>
+<div class="progress-track"><div class="progress-fill" id="progress-bar" style="width:0%"></div></div>
+</div>
+</div>
+<div id="questions-container"></div>
+<div class="exam-result" id="exam-result">
+<div class="result-score" id="result-pct"></div>
+<div id="result-status" style="font-family:Arial,sans-serif;font-size:18px;font-weight:700;margin-bottom:8px;"></div>
+<div class="result-msg" id="result-msg"></div>
+<button class="exam-btn" onclick="retakeExam()">RETAKE EXAM</button>
+</div>
+</div>
+
+</div></div></div>
+
+<script>
+function showTab(t){document.querySelectorAll('.tab-content').forEach(el=>el.classList.remove('active'));document.querySelectorAll('.tab-btn').forEach(el=>el.classList.remove('active'));document.getElementById('tab-'+t).classList.add('active');document.querySelectorAll('.tab-btn').forEach(b=>{if((t==='curriculum'&&b.textContent.trim()==='CURRICULUM')||(t==='exam'&&b.textContent.trim()==='FINAL EXAM'))b.classList.add('active');});}
+function toggleLesson(i){var d=document.getElementById('ld-'+i);var c=d.previousElementSibling;var open=d.classList.contains('open');document.querySelectorAll('.lesson-detail').forEach(el=>el.classList.remove('open'));document.querySelectorAll('.lesson-card').forEach(el=>el.classList.remove('active-card'));if(!open){d.classList.add('open');c.classList.add('active-card');}}
+
+var Q_BANK=[
+// ===== L1: MICROSTRUCTURE (Q1-3) =====
+{q:"A market maker's primary business model is:",
+opts:[
+"Continuously buying at the bid and selling at the ask, capturing the spread on massive volume",
+"Building large directional positions based on fundamental research and holding until mispricing corrects, generating returns from patient capital deployment over long time horizons",
+"Predicting short-term price movements using proprietary macroeconomic models and positioning ahead of the market",
+"Charging per-trade commissions to retail brokerages for order routing services"
+],ans:0,exp:"Market makers profit from the bid-ask spread — buying at the bid and selling at the ask thousands of times per second. They provide liquidity and are generally indifferent to direction. They don't charge commissions (that's a brokerage model) or make directional bets (that's a hedge fund strategy)."},
+
+{q:"During the 2010 Flash Crash, P&G dropped 35% in seconds because:",
+opts:[
+"A coordinated short-selling attack overwhelmed normal buying pressure across multiple exchanges",
+"Automated market makers detected toxic order flow, withdrew liquidity, and the order book evaporated — there were no buyers at reasonable prices",
+"Retail investors panicked after false bankruptcy reports spread on social media platforms",
+"The SEC halted trading, causing a cascade of stop-loss orders to execute at market prices"
+],ans:1,exp:"The Flash Crash was a microstructure failure. Automated market makers detected overwhelmingly one-directional (toxic) flow, pulled their quotes to avoid losses, and liquidity vanished. P&G's business hadn't changed — the auction mechanism broke. This is why understanding market microstructure matters."},
+
+{q:"'Price is a fact. Value is an opinion.' This core principle means:",
+opts:[
+"Technical analysis is superior to fundamental analysis because price captures all relevant information",
+"Market prices are always efficient reflections of intrinsic value through the activity of informed participants",
+"Price reflects the last auction transaction; value is an estimate of what the business is worth — the persistent gap between them is where investment returns originate",
+"Value investing always outperforms because prices are systematically wrong across all time periods"
+],ans:2,exp:"Price is the last transaction output from the continuous double auction — observable and factual. Value is an analyst's estimate of what the business is actually worth. These almost never match. The gap between them is where every investment gain or loss originates."},
+
+// ===== L2: INSTITUTIONAL MONEY (Q4-6) =====
+{q:"When Tesla was added to the S&P 500 in December 2020, it surged 60%+. The primary driver was:",
+opts:[
+"Tesla announced breakthrough battery technology that fundamentally changed its earnings trajectory",
+"Forced, price-insensitive buying from index funds that had to purchase Tesla at market-cap weight regardless of valuation",
+"A surprise Fed rate cut the same week created a broad growth-stock rally",
+"Short sellers covering their positions ahead of the inclusion event"
+],ans:1,exp:"Index funds tracking the S&P 500 (~$7.5T AUM) must hold every constituent at market-cap weight. They had to buy ~$80B of Tesla shares regardless of whether the price made sense. This forced, price-insensitive buying overwhelmed supply. The business didn't change — the mandate required it."},
+
+{q:"Tax-loss harvesting in Q4 creates opportunities for informed investors because:",
+opts:[
+"All stocks systematically rise in Q4 as institutions deploy year-end capital allocations",
+"The IRS requires all investors to realize capital losses before December 31st, affecting all stocks equally",
+"Taxable investors sell year-to-date losers for tax benefits, pushing already-beaten-down stocks below fair value through selling unrelated to fundamentals",
+"Market makers widen spreads in Q4 to capture additional revenue during holiday trading"
+],ans:2,exp:"Tax-loss harvesting creates forced selling driven by tax optimization, not fundamental analysis. Already-beaten-down stocks get pushed even lower. The opportunity: these stocks frequently rebound in January once the artificial selling pressure lifts (the 'January effect'). The selling is mechanical, not informational."},
+
+{q:"A stock's volume doubles over three weeks while price gradually rises 8% on no news. The most likely explanation is:",
+opts:[
+"High-frequency traders are engaging in quote-stuffing to create artificial volume and price movement",
+"A large institution is accumulating shares using algorithms, iceberg orders, and dark pools to minimize market impact",
+"The company is conducting an illegal share buyback through multiple disguised broker-dealer accounts",
+"Retail investors discovered the stock on social media and are collectively buying"
+],ans:1,exp:"Gradual price increase on elevated volume is a classic institutional accumulation signature. Large funds can't buy their full position at once without spiking the price, so they use algorithms that spread buying across weeks. Iceberg orders show only a fraction of total size. This pattern — rising volume, gradual price appreciation, no news catalyst — points to professional accumulation."},
+
+// ===== L3: INTEREST RATES (Q7-9) =====
+{q:"If the discount rate rises from 4% to 6%, a $100 cash flow received in 20 years loses approximately:",
+opts:[
+"About 2% of its present value — rate changes have minimal impact on distant cash flows",
+"About 32% of its present value",
+"Exactly 10% — each percentage point reduces value by 5% per year",
+"About 75% of its present value due to exponential compounding"
+],ans:1,exp:"At 4%, PV of $100 in 20 years = $45.64. At 6%, PV = $31.18. That's a ~32% decline. The exponent (n=20) amplifies rate changes for distant cash flows. This is why high-growth stocks with most value in the far future are devastated by rate increases — they are 'long duration' assets."},
+
+{q:"The inverted yield curve (short-term rates exceeding long-term rates) has historically:",
+opts:[
+"Predicted roughly half of recessions but generated too many false positives to be reliable alone",
+"Preceded every U.S. recession since 1970, making it one of the most reliable recession signals in finance",
+"Had zero predictive power — its shape is entirely determined by Fed policy with no forward-looking information",
+"Only been relevant before 2008, after which QE permanently distorted the curve's signaling value"
+],ans:1,exp:"The inverted yield curve preceded every U.S. recession since 1970 (1980, 1981-82, 1990-91, 2001, 2008-09, 2020). Lead time varies (6-24 months), but the record is remarkably consistent. It works because it reflects the bond market's expectation that the Fed will need to cut rates to fight a coming recession."},
+
+{q:"ARK Innovation fell ~75% from its peak in 2022 primarily because:",
+opts:[
+"Cathie Wood's individual stock picks had deteriorating fundamentals that would have caused the decline regardless of macro conditions",
+"The fund experienced massive retail redemptions that forced liquidation of concentrated positions",
+"Its holdings were long-duration assets — most value concentrated in distant future cash flows devastated when discount rates rose from near-zero to 5%+",
+"SEC investigations into several portfolio companies triggered compliance-driven forced selling"
+],ans:2,exp:"ARK's high-multiple growth stocks derive most value from cash flows expected 10-20+ years in the future. When rates went from ~0% to 5%+, the present value of those distant cash flows collapsed (the math from the PV formula). This 'long duration' effect — not stock picking alone — is why virtually ALL high-growth stocks fell dramatically, not just ARK's."},
+
+// ===== L4: BUSINESS CYCLE (Q10-12) =====
+{q:"Which sectors typically lead during early economic expansion?",
+opts:[
+"Utilities and healthcare — investors remain cautious and favor defensive sectors early in recoveries",
+"Technology and communication services — innovation spending drives early-cycle corporate IT budgets",
+"Energy and materials — commodity prices spike as supply chains rebuild during early recovery",
+"Financials and consumer discretionary — they benefit from a steepening yield curve and releasing pent-up demand"
+],ans:3,exp:"Early expansion features rate cuts, a steepening yield curve, and pent-up demand. Financials benefit from the steepening curve (wider net interest margins) and rising loan demand. Consumer discretionary benefits from renewed spending. Tech tends to lead mid-cycle, energy/materials late-cycle, and utilities/healthcare during contraction."},
+
+{q:"An investor sees unemployment at 3.5% and concludes the economy is strong. The critical analytical error is:",
+opts:[
+"The unemployment rate is a lagging indicator — it tells you where the economy WAS, not where it's going",
+"There is no error — unemployment is the most comprehensive single measure of economic health",
+"Low unemployment always signals an imminent recession because tight labor markets force aggressive Fed rate hikes",
+"The investor should be using U-6 underemployment instead of the standard U-3 measure"
+],ans:0,exp:"Unemployment is a lagging indicator — it peaks well after recessions begin and falls well after recoveries start. In October 2007, unemployment was 4.7% (healthy), but leading indicators like the yield curve and housing starts had already signaled trouble. The Great Recession began two months later. Leading indicators tell you where you're going; lagging indicators tell you where you've been."},
+
+{q:"Howard Marks' pendulum concept identifies the most dangerous moment in the cycle when:",
+opts:[
+"Both leading and lagging indicators deteriorate simultaneously, creating universal consensus that recession has arrived",
+"Leading indicators deteriorate while lagging indicators still look healthy — sentiment is at the 'everything is fine' extreme",
+"The Federal Reserve begins cutting rates, signaling that economic damage is already severe",
+"Foreign central banks are easing while the Fed is tightening, creating divergent monetary policy"
+],ans:1,exp:"Maximum danger: leading indicators (yield curve, ISM) are deteriorating but lagging ones (unemployment, profits) look great. Sentiment reaches 'everything is fine.' The 2007 market peak had unemployment at 4.4% and stocks at highs while the yield curve had already inverted and housing starts had collapsed. The pendulum was at its most euphoric extreme right before the worst recession in 80 years."},
+
+// ===== L5: CREDIT CYCLE (Q13-15) =====
+{q:"Soros' concept of reflexivity in the credit cycle describes:",
+opts:[
+"A linear cause-and-effect chain where central bank policy directly and predictably determines credit availability and asset prices",
+"A self-reinforcing feedback loop: more lending → higher asset prices → more collateral → even more lending — then the same process reverses violently",
+"The mathematical arbitrage relationship between bond yields and credit default swap spreads",
+"The tendency for credit markets to self-correct quickly because sophisticated institutions prevent bubble formation"
+],ans:1,exp:"Reflexivity means participants' actions change the fundamentals they're reacting to. In credit: lending pushes prices up, creating collateral that enables more lending (boom), then the reverse creates forced selling and collateral collapse (bust). The 2003-2008 housing bubble was textbook reflexivity. Critically, contraction is always faster than expansion."},
+
+{q:"Credit spreads were at their tightest in June 2007, weeks before the worst crisis in 80 years. This demonstrates that:",
+opts:[
+"Credit markets failed as a predictive tool and should not be relied upon for risk assessment",
+"The crisis was caused by unpredictable fraud at specific institutions, so no market signal could have anticipated it",
+"Tight spreads correctly reflected safe conditions — the crisis was caused by an unforeseeable external shock",
+"Perceived risk was lowest precisely when actual risk was highest — tight spreads reflected complacency, not safety"
+],ans:3,exp:"Credit spreads measure perceived risk, not actual risk. At the credit cycle's peak, lending standards are loosest, leverage is highest, and everything appears healthy — exactly why spreads are tight. But loose standards and high leverage ARE the ingredients for the coming bust. The market's perception of low risk IS the condition that creates high risk. This is the credit cycle's most important lesson."},
+
+{q:"When credit spreads widen while equities continue to rally, the most informed interpretation is:",
+opts:[
+"The equity market is correctly pricing in strong fundamentals that bond markets are too conservative to recognize",
+"An irrelevant divergence that occurs randomly with no predictive value for future equity returns",
+"Both markets rationally responding to different sector-specific information rather than macro conditions",
+"A warning signal — the credit market often detects stress 3-6 months before equities price it in"
+],ans:3,exp:"When credit and equity markets diverge, credit is historically the better predictor. The bond market is larger (~$130T), more institutional, and priced with more mathematical precision. In 2006-2007, credit spreads began widening months before the S&P 500 peaked. When bonds say 'danger' and stocks say 'party,' listen to bonds."},
+
+// ===== L6: CENTRAL BANKS (Q16-18) =====
+{q:"Quantitative Easing (QE) transmits to markets by:",
+opts:[
+"The Fed purchasing stocks directly from the open market to push equity prices higher",
+"Printing physical currency and distributing it to banks to stimulate consumer spending",
+"The Fed buying Treasuries and MBS, injecting cash into the banking system, pushing yields down and forcing investors into riskier assets",
+"Raising bank reserve requirements, which paradoxically increases lending as banks seek to maintain return on equity"
+],ans:2,exp:"QE: the Fed buys bonds → injects cash → bond yields fall → investors move to riskier assets for returns → asset prices rise. The Fed does NOT buy stocks or print physical bills. March 2020: unlimited QE was announced and the S&P 500 bottomed within days — demonstrating the extraordinary power of liquidity injection on asset prices."},
+
+{q:"Druckenmiller's principle — 'Liquidity is the most important variable in the short and intermediate term' — means:",
+opts:[
+"Only liquid stocks with tight spreads and high volume are worth investing in",
+"Cash reserves should always be at least 40% of a portfolio to survive liquidity crises",
+"Earnings quality is irrelevant at every time horizon because Fed policy overrides all fundamentals",
+"The Fed's liquidity regime (easing or tightening) determines the broad direction of asset prices in the short to medium term, regardless of individual company quality"
+],ans:3,exp:"Druckenmiller separates the short-term driver (liquidity/Fed policy) from the long-term driver (earnings/fundamentals). When the Fed eases, even mediocre businesses rise. When it tightens, even great businesses struggle. Understanding the liquidity regime is the most important context variable for shorter-term positioning. Long-term, fundamentals still dominate."},
+
+{q:"The 2013 'Taper Tantrum' — when 10-year yields surged from 1.6% to 3.0% — demonstrated that:",
+opts:[
+"The Fed should never publicly communicate its policy intentions because transparency creates unnecessary volatility",
+"Bond markets are irrational and should be ignored by equity investors focused on company fundamentals",
+"Forward guidance — what the Fed says about future policy — moves markets as powerfully as actual policy changes",
+"Tapering QE always triggers a recession within 6 months as removal of stimulus exposes economic weakness"
+],ans:2,exp:"Bernanke merely suggested that tapering might begin — no actual policy change occurred. Yet yields surged dramatically over four months. Markets price expectations of future liquidity, not just current conditions. This is why every word of every Fed statement is parsed — guidance IS policy in its market impact."},
+
+// ===== L7: CURRENCIES (Q19-21) =====
+{q:"The 'Dollar Smile' describes the U.S. dollar strengthening during:",
+opts:[
+"Periods of simultaneously rising U.S. inflation and falling employment (stagflation)",
+"Both crisis/risk-off periods AND U.S. economic outperformance — weakening during global growth periods in between",
+"U.S. trade surplus periods and weakening during trade deficit periods",
+"Presidential election years, following a well-documented political cycle in currency markets"
+],ans:1,exp:"The Dollar Smile: the dollar strengthens at both extremes. Left side: crises (2008, March 2020) drive flight to safety into USD. Right side: U.S. outperformance (2014-15, 2022) attracts capital inflows. Middle: global growth sends capital to higher-returning international markets, weakening the dollar."},
+
+{q:"A portfolio of U.S. multinationals with 55% international revenue faces a 10% dollar appreciation. The impact is:",
+opts:[
+"Neutral — multinational companies maintain hedging programs that fully offset currency translation effects",
+"Positive — a stronger dollar increases the purchasing power of domestic cash flows",
+"A significant earnings headwind — foreign revenue translates to fewer dollars, reducing EPS by several percentage points",
+"Impossible to determine without knowing exact currency mixes and hedging ratios"
+],ans:2,exp:"When the dollar strengthens, earnings in euros/yen/pounds translate into fewer dollars. For 55% international revenue and 10% dollar appreciation, reported EPS could drop 3-5%. Most companies hedge only partially, and translation effects hit reported earnings regardless. Dollar direction is a hidden factor exposure embedded in every international position."},
+
+{q:"Carry trade unwinds are a systemic risk because:",
+opts:[
+"They only affect specific currency pairs with no spillover into other asset classes",
+"Mass unwinding forces simultaneous selling of high-rate assets AND buying of low-rate currencies, cascading through equities via margin calls and forced liquidation",
+"Central banks always intervene to prevent carry trade losses from exceeding 5%",
+"Carry trades are actually risk-free by construction because the interest rate differential guarantees positive returns"
+],ans:1,exp:"Carry trades create leveraged, crowded positions. When they unwind — often triggered by sudden moves in funding currencies like JPY — the simultaneous rush to close creates violent cross-asset moves. Forced selling of equities to meet margin calls connects currency markets to stocks through leverage. The 2015 Swiss franc unpegging demonstrated this cascade vividly."},
+
+// ===== L8: COMMODITIES (Q22-24) =====
+{q:"The fundamental structural difference between commodities and equities is:",
+opts:[
+"Commodities are regulated by the CFTC while equities are regulated by the SEC, creating different risk profiles",
+"Equities represent businesses that can compound value over time; commodities cycle through supply/demand imbalances and don't compound",
+"Commodity markets are more liquid than equity markets due to 24-hour global trading",
+"Commodity returns have historically exceeded equity returns over 30-year periods"
+],ans:1,exp:"A share of Visa represents a business whose moat can widen — value compounds. A barrel of oil doesn't grow or innovate. Commodity prices are driven by physical supply/demand that creates violent cycles (underinvest → scarcity → spike → overinvest → glut → collapse). This is why Buffett favored compounding businesses and commodity exposure should be tactical, not structural."},
+
+{q:"Copper is called 'Dr. Copper' because:",
+opts:[
+"Copper mining companies have historically provided the most accurate forward earnings guidance of any industry",
+"Its demand tracks broad industrial activity, giving it predictive power for economic growth and turning points",
+"Copper was the first commodity to have an exchange-traded fund, earning an honorary title",
+"Copper's use in pharmaceutical manufacturing creates a direct correlation with healthcare spending"
+],ans:1,exp:"Copper is used across construction, manufacturing, electronics, and infrastructure — virtually all industrial activity. Rising copper = economic expansion; falling copper = slowdown warning. It turned down ~4 months before the 2008 recession was officially recognized. In the macro toolkit, copper is one of the most reliable real-time growth signals, earning its 'PhD in economics.'"},
+
+{q:"Rising oil prices alongside falling equities most likely signals:",
+opts:[
+"A healthy sector rotation from technology into energy with no broader implications",
+"Stagflation risk — rising commodity costs squeeze margins and consumer spending while pushing inflation higher",
+"An imminent oil price collapse because the equity-oil divergence always resolves with oil correcting downward",
+"A strong buy signal for equities based on historical divergence patterns"
+],ans:1,exp:"Rising oil + falling equities = inflation pressure without growth — the definition of stagflation. Oil acts as a tax on consumers and corporations (bad for stocks) while pushing CPI higher (forcing the Fed to tighten, also bad for stocks). H1 2022 and the 1970s were textbook examples — two of the worst environments for equity investors."},
+
+// ===== L9: BONDS (Q25-27) =====
+{q:"A bond with 8.5 years of duration will lose approximately how much if rates rise 1%?",
+opts:[
+"4.25% — duration must be divided by 2 to get actual price sensitivity",
+"8.5% — the duration approximation: price change ≈ duration × rate change",
+"1% — duration measures time, not price sensitivity",
+"17% — duration effects compound geometrically for rate changes above 50 basis points"
+],ans:1,exp:"Duration provides an approximate rule: for every 1% rate change, a bond's price moves by roughly its duration in percentage terms. Duration 8.5 × 1% rate increase ≈ 8.5% price decline. In 2022, 10-year yields rose ~2.7%, producing ~15-20% losses on long-duration bonds — the worst bond market in 40+ years."},
+
+{q:"In 2022, stocks and bonds fell simultaneously because:",
+opts:[
+"International investors coordinated to exit all U.S. financial assets simultaneously",
+"The bond-equity correlation is always positive — 2022 simply exposed the diversification myth",
+"Inflation was the dominant force — rising rates directly hurt both bond prices AND equity valuations at the same time",
+"The Fed was secretly selling both equities and bonds through intermediary accounts"
+],ans:2,exp:"Normally, bonds and equities are negatively correlated: stocks fall → bonds rise (safety). But in 2022, inflation was the dominant macro force. The Fed raised rates aggressively to fight it, directly hurting bond prices (rate sensitivity) AND increasing the discount rate for equities (valuation compression). When inflation is the driver, traditional 60/40 diversification breaks."},
+
+{q:"In 2006, credit spreads began widening while the S&P 500 continued making new highs. This divergence was:",
+opts:[
+"A false signal — equities correctly priced strong fundamentals that bond markets were too slow to recognize",
+"The bond market signaling danger that equities hadn't yet priced in — credit proved correct 12-15 months later",
+"Evidence that bond and equity markets are disconnected and cross-market analysis is unreliable",
+"A normal seasonal pattern that occurs every few years with no predictive significance"
+],ans:1,exp:"Credit spreads measure financial stress with less narrative bias than equities. The S&P 500 peaked in October 2007, roughly 12-15 months after credit spreads began widening. The bond market — larger, more institutional, more mathematically precise — saw it first. When credit signals increasing risk while stocks rally on momentum, the bond market's warning is usually more reliable."},
+
+// ===== L10: CROSS-ASSET SYNTHESIS (Q28-30) =====
+{q:"In the Growth × Inflation framework, stagflation (falling growth + rising inflation) favors:",
+opts:[
+"Growth stocks and long-duration bonds — falling growth drives investors toward secular growers and safe havens",
+"Commodities, TIPS, energy, cash, and short-duration assets",
+"Corporate bonds and real estate — both benefit from inflation through higher nominal income",
+"Emerging market equities — stagflation in the U.S. creates relative outperformance abroad"
+],ans:1,exp:"Stagflation is the worst quadrant for traditional portfolios — both growth stocks (hurt by rising rates) and long bonds (hurt by inflation) suffer simultaneously. Winners are assets that profit from inflation (commodities, energy) or are protected from it (TIPS, short-duration, cash). H1 2022 and the 1970s are the primary historical examples. This is the one regime where 60/40 fails completely."},
+
+{q:"When all five intermarket signals agree — yield curve steepening, credit spreads tightening, dollar weakening, copper rising, and breadth expanding — this indicates:",
+opts:[
+"An imminent market crash — unanimous bullish consensus is the contrarian warning signal",
+"A high-conviction risk-on environment with all five signals confirming improving growth and broad participation",
+"Mixed conditions requiring a balanced 50/50 equity-cash allocation",
+"Stagflation — rising copper indicates inflation that will overwhelm other signals within months"
+],ans:1,exp:"When all five intermarket signals agree, regime conviction is high. Steepening curve = improving growth expectations, tightening spreads = rising risk appetite, weakening dollar = global growth/risk-on, rising copper = industrial demand confirming, expanding breadth = broad participation. This maps to the Goldilocks quadrant. Convergence = conviction; divergence = caution."},
+
+{q:"[SYNTHESIS] The Fed announces an emergency 50bp rate cut and launches QE. Credit spreads have widened 300bp in two weeks. The dollar spiked then reversed. Copper has fallen 15%. This environment maps to which regime quadrant?",
+opts:[
+"Goldilocks — Fed easing guarantees asset price recovery based on historical patterns",
+"Deflation Scare — collapsing growth expectations with severe credit stress, requiring defensive posture first",
+"Stagflation — copper decline combined with Fed easing creates unanchored inflation expectations",
+"Reflation — massive easing will reverse all negative signals within days"
+],ans:1,exp:"Credit widening 300bp = severe stress (Lesson 5). Copper −15% = industrial demand collapsing (Lesson 8). Emergency cut + QE = Fed sees serious risk (Lesson 6). Dollar spike then reversal = flight to safety then easing-driven weakening (Lesson 7). This maps to the Deflation Scare quadrant. Go defensive first, then prepare for recovery once spreads peak and stabilize — as happened in March 2020."}
+];
+
+function shuffleArray(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+var Q=[];
+function prepareQuestions(){
+Q=[];
+for(var i=0;i<Q_BANK.length;i++){
+var qb=Q_BANK[i];
+var indexed=qb.opts.map(function(o,idx){return{text:o,origIdx:idx};});
+shuffleArray(indexed);
+var newAns=-1;
+for(var j=0;j<indexed.length;j++){if(indexed[j].origIdx===qb.ans){newAns=j;break;}}
+Q.push({q:qb.q,opts:indexed.map(function(x){return x.text;}),ans:newAns,exp:qb.exp});
+}}
+var answered=0,correct=0,TOTAL=30;
+function startExam(){prepareQuestions();document.getElementById('exam-start').style.display='none';document.getElementById('exam-live').style.display='block';renderQuestions();}
+function renderQuestions(){var c=document.getElementById('questions-container');c.innerHTML='';Q.forEach(function(q,i){var h='<div class="q-block" id="qb-'+i+'"><div class="q-num">Question '+(i+1)+' of '+TOTAL+(i>=29?' · SYNTHESIS':'')+'</div><div class="q-text">'+q.q+'</div><div class="q-options">';var L=['A','B','C','D'];q.opts.forEach(function(o,j){h+='<button class="q-opt" id="qo-'+i+'-'+j+'" onclick="answer('+i+','+j+')"><span class="opt-letter">'+L[j]+'</span><span>'+o+'</span></button>';});h+='</div><div class="q-feedback" id="qf-'+i+'"></div></div>';c.innerHTML+=h;});}
+function answer(qi,oi){var q=Q[qi],bl=document.getElementById('qb-'+qi),fb=document.getElementById('qf-'+qi);if(bl.classList.contains('answered-correct')||bl.classList.contains('answered-wrong'))return;var btns=bl.querySelectorAll('.q-opt');btns.forEach(function(b){b.disabled=true;});answered++;if(oi===q.ans){correct++;btns[oi].classList.add('correct');bl.classList.add('answered-correct');fb.className='q-feedback correct';fb.innerHTML='<strong>Correct.</strong> '+q.exp;}else{btns[oi].classList.add('wrong');btns[q.ans].classList.add('reveal-correct');bl.classList.add('answered-wrong');fb.className='q-feedback wrong';fb.innerHTML='<strong>Incorrect.</strong> '+q.exp;}fb.style.display='block';document.getElementById('score-display').textContent=correct;document.getElementById('progress-label').textContent=answered+' / '+TOTAL;document.getElementById('progress-bar').style.width=(answered/TOTAL*100)+'%';if(answered===TOTAL)showResult();}
+function showResult(){var r=document.getElementById('exam-result');r.style.display='block';var pct=Math.round(correct/TOTAL*100);document.getElementById('result-pct').textContent=pct+'%';var s=document.getElementById('result-status');var m=document.getElementById('result-msg');if(correct>=23){s.innerHTML='<span class="result-pass">PASSED — '+correct+'/'+TOTAL+'</span>';m.textContent='Congratulations. You\'ve earned 250 Mastery Points and completed Pillar I: Market & Finance Foundations. Proceed to Pillar II: Accounting & Valuation.';}else{s.innerHTML='<span class="result-fail">NOT YET — '+correct+'/'+TOTAL+'</span>';m.textContent='You need 23/30 (75%) to pass. Review the lessons where you struggled and retake when ready. Understanding the machine rewards study, not guessing.';}r.scrollIntoView({behavior:'smooth'});}
+function retakeExam(){answered=0;correct=0;document.getElementById('score-display').textContent='0';document.getElementById('progress-label').textContent='0 / '+TOTAL;document.getElementById('progress-bar').style.width='0%';document.getElementById('exam-result').style.display='none';prepareQuestions();renderQuestions();document.getElementById('exam-live').scrollIntoView({behavior:'smooth'});}
+</script>
+</body>
+</html>

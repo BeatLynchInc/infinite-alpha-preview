@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Course 2.1 — Applied Company Analysis</title>
+<style>
+:root{--gold:#C9A84C;--dark:#0D0F14;--panel:#13161E;--border:#1E2330;--text:#E8EAF0;--muted:#7A8099;--accent:#3B82F6;--green:#22C55E;--red:#EF4444;--purple:#a855f7;--orange:#f59e0b;--cyan:#06b6d4;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--dark);color:var(--text);font-family:'Georgia',serif;font-size:16px;line-height:1.75;}
+.top-bar{background:var(--panel);border-bottom:1px solid var(--border);padding:12px 32px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:100;}
+.logo{font-family:Arial,sans-serif;font-weight:900;font-size:18px;color:var(--gold);letter-spacing:2px;}
+.pill{background:var(--gold);color:var(--dark);font-family:Arial,sans-serif;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:1px;}
+.pill-tier{background:var(--accent);color:#fff;}
+.tab-nav{display:flex;gap:4px;margin-left:auto;}
+.tab-btn{background:none;border:1px solid var(--border);color:var(--muted);font-family:Arial,sans-serif;font-size:12px;font-weight:700;padding:6px 16px;border-radius:6px;cursor:pointer;transition:all .2s;letter-spacing:.5px;}
+.tab-btn.active{background:var(--gold);color:var(--dark);border-color:var(--gold);}
+.tab-btn:hover:not(.active){border-color:var(--gold);color:var(--gold);}
+.hero{background:linear-gradient(135deg,#0D0F14,#13161E,#0a0c10);border-bottom:1px solid var(--border);padding:56px 32px 40px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:500px;height:500px;background:radial-gradient(circle,rgba(201,168,76,.06) 0%,transparent 70%);pointer-events:none;}
+.course-label{font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:12px;}
+.hero h1{font-size:clamp(26px,4vw,44px);font-weight:400;color:#fff;margin-bottom:12px;line-height:1.2;}
+.hero-sub{font-size:17px;color:var(--muted);max-width:680px;margin:0 auto 28px;}
+.meta-row{display:flex;justify-content:center;gap:28px;flex-wrap:wrap;}
+.meta-item{text-align:center;}
+.meta-num{font-family:Arial,sans-serif;font-size:26px;font-weight:700;color:var(--gold);}
+.meta-label{font-family:Arial,sans-serif;font-size:10px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-top:2px;}
+.container{max-width:960px;margin:0 auto;padding:40px 24px;}
+.section{margin-bottom:52px;}
+.section-title{font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:20px;padding-bottom:10px;border-bottom:1px solid var(--border);}
+h2{font-size:22px;color:#fff;font-weight:400;margin-bottom:10px;}
+h3{font-family:Arial,sans-serif;font-size:12px;font-weight:700;color:var(--gold);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;margin-top:22px;}
+p{color:#BEC3D4;margin-bottom:14px;}
+strong.hl{color:#fff;}
+.tab-content{display:none;}.tab-content.active{display:block;}
+.lesson-grid{display:flex;flex-direction:column;border:1px solid var(--border);border-radius:12px;overflow:hidden;}
+.lesson-card{background:var(--panel);border-bottom:1px solid var(--border);padding:18px 22px;display:grid;grid-template-columns:46px 1fr auto;gap:14px;align-items:start;cursor:pointer;transition:background .2s;}
+.lesson-card:last-child{border-bottom:none;}
+.lesson-card:hover,.lesson-card.active-card{background:#1a1e2a;}
+.lesson-card.active-card{border-left:3px solid var(--gold);}
+.lesson-num{font-family:Arial,sans-serif;font-size:20px;font-weight:700;color:var(--gold);line-height:1;}
+.lesson-title{font-size:16px;color:#fff;margin-bottom:3px;}
+.lesson-desc{font-family:Arial,sans-serif;font-size:12px;color:var(--muted);line-height:1.5;}
+.lesson-mp{font-family:Arial,sans-serif;font-size:12px;font-weight:700;color:var(--gold);background:rgba(201,168,76,.1);padding:3px 10px;border-radius:20px;white-space:nowrap;align-self:center;}
+.lesson-detail{background:#0e1018;border-top:1px solid var(--border);padding:28px;display:none;}
+.lesson-detail.open{display:block;}
+.fw-table{width:100%;border-collapse:collapse;margin:12px 0 20px;}
+.fw-table th{background:rgba(201,168,76,.08);font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);padding:10px 14px;text-align:left;border-bottom:1px solid var(--border);}
+.fw-table td{padding:12px 14px;border-bottom:1px solid var(--border);font-family:Arial,sans-serif;font-size:13px;color:#BEC3D4;vertical-align:top;}
+.fw-table tr:last-child td{border-bottom:none;}
+.fw-table tr:hover td{background:rgba(255,255,255,.02);}
+.callout{background:rgba(201,168,76,.05);border-left:3px solid var(--gold);padding:16px 20px;border-radius:0 8px 8px 0;margin:18px 0;}
+.callout-label{font-family:Arial,sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;}
+.callout p{color:var(--text);margin:0;font-size:14px;}
+.callout-blue{border-left-color:var(--accent);background:rgba(59,130,246,.05);}.callout-blue .callout-label{color:var(--accent);}
+.callout-red{border-left-color:var(--red);background:rgba(239,68,68,.05);}.callout-red .callout-label{color:var(--red);}
+.callout-green{border-left-color:var(--green);background:rgba(34,197,94,.05);}.callout-green .callout-label{color:var(--green);}
+.callout-purple{border-left-color:var(--purple);background:rgba(168,85,247,.05);}.callout-purple .callout-label{color:var(--purple);}
+.callout-cyan{border-left-color:var(--cyan);background:rgba(6,182,212,.05);}.callout-cyan .callout-label{color:var(--cyan);}
+.callout-orange{border-left-color:var(--orange);background:rgba(245,158,11,.05);}.callout-orange .callout-label{color:var(--orange);}
+.exhibit{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:22px;margin:18px 0;}
+.exhibit-label{font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:14px;}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0;}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:16px 0;}
+@media(max-width:640px){.two-col,.three-col{grid-template-columns:1fr;}}
+.stat-card{background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.2);border-radius:10px;padding:18px;text-align:center;}
+.stat-num{font-family:Arial,sans-serif;font-size:28px;font-weight:900;color:var(--gold);line-height:1;margin-bottom:4px;}
+.stat-label{font-family:Arial,sans-serif;font-size:11px;color:var(--muted);line-height:1.4;}
+.tag-row{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 14px;}
+.ctag{font-family:Arial,sans-serif;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;letter-spacing:.5px;background:rgba(201,168,76,.15);color:var(--gold);border:1px solid rgba(201,168,76,.3);}
+.divider{border:none;border-top:1px solid var(--border);margin:36px 0;}
+.completion-badge{background:linear-gradient(135deg,rgba(201,168,76,.1),rgba(59,130,246,.06));border:1px solid rgba(201,168,76,.35);border-radius:16px;padding:32px;text-align:center;margin:24px 0;}
+.exam-wrap{max-width:800px;margin:0 auto;}
+.start-exam-wrap{text-align:center;padding:40px 20px;}
+.start-exam-wrap h2{color:#fff;margin-bottom:12px;}
+.start-exam-wrap p{color:var(--muted);max-width:500px;margin:0 auto 24px;}
+.exam-rules{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin:24px 0;text-align:left;}
+.rule-card{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:14px;}
+.rule-card .r-num{font-family:Arial,sans-serif;font-size:22px;font-weight:900;color:var(--gold);}
+.rule-card .r-label{font-family:Arial,sans-serif;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;}
+.score-bar-wrap{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:20px 28px;margin-bottom:28px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;}
+.score-big{font-size:42px;font-weight:900;color:var(--gold);line-height:1;}
+.score-sub{font-size:12px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;}
+.progress-track{flex:1;min-width:200px;background:rgba(255,255,255,.06);border-radius:8px;height:12px;overflow:hidden;}
+.progress-fill{height:100%;background:linear-gradient(90deg,rgba(201,168,76,.5),var(--gold));border-radius:8px;transition:width .5s ease;}
+.q-block{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:22px;margin-bottom:14px;transition:border-color .3s;}
+.q-block.answered-correct{border-color:var(--green);}
+.q-block.answered-wrong{border-color:var(--red);}
+.q-num{font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:8px;}
+.q-text{font-size:15px;color:#fff;margin-bottom:16px;line-height:1.6;}
+.q-options{display:flex;flex-direction:column;gap:8px;}
+.q-opt{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:8px;padding:11px 15px;font-family:Arial,sans-serif;font-size:14px;color:#BEC3D4;cursor:pointer;transition:all .2s;text-align:left;display:flex;gap:12px;align-items:flex-start;}
+.q-opt:hover:not(:disabled){background:rgba(201,168,76,.06);border-color:rgba(201,168,76,.4);color:#fff;}
+.q-opt:disabled{cursor:default;}
+.q-opt.correct{background:rgba(34,197,94,.1);border-color:var(--green);color:var(--green);}
+.q-opt.wrong{background:rgba(239,68,68,.1);border-color:var(--red);color:var(--red);}
+.q-opt.reveal-correct{background:rgba(34,197,94,.07);border-color:rgba(34,197,94,.4);color:var(--green);}
+.opt-letter{font-weight:700;flex-shrink:0;width:18px;}
+.q-feedback{margin-top:10px;padding:11px 15px;border-radius:8px;font-family:Arial,sans-serif;font-size:13px;line-height:1.5;display:none;}
+.q-feedback.correct{background:rgba(34,197,94,.08);color:var(--green);border:1px solid rgba(34,197,94,.2);}
+.q-feedback.wrong{background:rgba(239,68,68,.08);color:#f87171;border:1px solid rgba(239,68,68,.2);}
+.exam-result{background:linear-gradient(135deg,rgba(201,168,76,.07),rgba(59,130,246,.04));border:1px solid rgba(201,168,76,.3);border-radius:16px;padding:40px;text-align:center;margin-top:32px;display:none;}
+.result-score{font-family:Arial,sans-serif;font-size:64px;font-weight:900;color:var(--gold);line-height:1;margin-bottom:8px;}
+.exam-btn{background:var(--gold);color:var(--dark);font-family:Arial,sans-serif;font-weight:700;font-size:14px;letter-spacing:1px;padding:12px 28px;border-radius:8px;border:none;cursor:pointer;margin:4px;}
+.exam-btn.secondary{background:transparent;color:var(--gold);border:1px solid var(--gold);}
+.result-pass{color:var(--green);}.result-fail{color:var(--red);}
+.result-msg{color:var(--muted);max-width:520px;margin:0 auto 24px;font-size:15px;}
+.hbar-chart{display:flex;flex-direction:column;gap:10px;padding:8px 0;}
+.hbar-row{display:grid;grid-template-columns:100px 1fr 50px;gap:10px;align-items:center;}
+.hbar-row .hbar-name{font-family:Arial,sans-serif;font-size:12px;color:var(--text);text-align:right;}
+.hbar-row .hbar-track{background:rgba(255,255,255,.06);border-radius:6px;height:22px;overflow:hidden;}
+.hbar-row .hbar-fill{height:100%;border-radius:6px;transition:width .8s ease;}
+.hbar-row .hbar-val{font-family:Arial,sans-serif;font-size:12px;font-weight:700;color:var(--gold);}
+.qual-cell{padding:10px 14px;font-family:Arial,sans-serif;font-size:12px;display:flex;justify-content:space-between;align-items:center;}
+.qual-cell.header{background:rgba(201,168,76,.08);color:var(--gold);font-weight:700;font-size:11px;letter-spacing:1px;text-transform:uppercase;}
+.qual-cell.neutral{background:rgba(255,255,255,.03);color:var(--muted);}
+/* Case study box */
+.case-study{background:linear-gradient(135deg,rgba(201,168,76,.04),rgba(59,130,246,.03));border:1px solid rgba(201,168,76,.25);border-radius:12px;padding:22px;margin:18px 0;position:relative;}
+.case-study::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--accent));border-radius:12px 12px 0 0;}
+.case-study-label{font-family:Arial,sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.case-study-label::before{content:'◆';font-size:8px;}
+.case-study h4{font-family:Arial,sans-serif;font-size:14px;color:#fff;font-weight:700;margin-bottom:8px;}
+.case-study p{font-size:13px;color:#BEC3D4;margin-bottom:8px;}
+.case-study p:last-child{margin-bottom:0;}
+.case-study .cs-metric{display:inline-block;font-family:Arial,sans-serif;font-size:12px;font-weight:700;padding:2px 10px;border-radius:12px;margin:2px 4px 2px 0;}
+.cs-good{background:rgba(34,197,94,.12);color:var(--green);border:1px solid rgba(34,197,94,.25);}
+.cs-bad{background:rgba(239,68,68,.12);color:var(--red);border:1px solid rgba(239,68,68,.25);}
+.cs-neutral{background:rgba(201,168,76,.12);color:var(--gold);border:1px solid rgba(201,168,76,.25);}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <div class="logo">BEAT LYNCH</div>
+  <span class="pill pill-tier">TIER 2</span>
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="switchTab('curriculum')">CURRICULUM</button>
+    <button class="tab-btn" onclick="switchTab('exam')">FINAL EXAM</button>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="course-label">Infinite Alpha · Tier 2: Competitive Readiness · Course 1 of 4</div>
+  <h1>Applied Company Analysis</h1>
+  <p class="hero-sub">Move from reading financial statements to evaluating businesses. Learn repeatable frameworks for assessing revenue quality, profitability, financial health, earnings integrity, and building investment cases with real company data.</p>
+  <div class="meta-row">
+    <div class="meta-item"><div class="meta-num">5</div><div class="meta-label">Lessons</div></div>
+    <div class="meta-item"><div class="meta-num">125</div><div class="meta-label">Mastery Points</div></div>
+    <div class="meta-item"><div class="meta-num">80%</div><div class="meta-label">Pass Threshold</div></div>
+    <div class="meta-item"><div class="meta-num">20</div><div class="meta-label">Exam Questions</div></div>
+  </div>
+</div>
+
+<!-- CURRICULUM TAB -->
+<div class="tab-content active" id="tab-curriculum">
+<div class="container">
+<div class="section">
+  <div class="section-title">Course 2.1 — Lessons</div>
+  <div class="lesson-grid" id="lessonGrid">
+
+<!-- ════════════════════════════════════════════════════════════════ -->
+<!-- LESSON 1 -->
+<!-- ════════════════════════════════════════════════════════════════ -->
+<div class="lesson-card" onclick="toggleLesson(0)">
+  <div class="lesson-num">01</div>
+  <div><div class="lesson-title">Revenue Quality & Growth Analysis</div><div class="lesson-desc">Recurring vs. one-time · Organic vs. acquisition · Concentration risk · Growth durability · TAM</div></div>
+  <div class="lesson-mp">25 MP</div>
+</div>
+<div class="lesson-detail" id="ld0">
+
+<div class="tag-row">
+  <span class="ctag">Revenue Durability</span><span class="ctag">Organic Growth</span><span class="ctag">Customer Concentration</span><span class="ctag">TAM Analysis</span>
+</div>
+
+<h3>Not All Revenue Is Created Equal</h3>
+<p>In Tier 1 you learned to read an income statement from revenue down to net income. Now we go deeper: <strong class="hl">the quality of the top line matters more than its size.</strong> A company reporting $5 billion in revenue could be a fortress or a house of cards — the difference lies in whether that revenue is recurring, organically grown, diversified, and durable. Think of it this way: revenue is the foundation of every other financial metric. If the foundation is unreliable, everything built on it is suspect.</p>
+
+<p>Professional analysts assess revenue quality across four dimensions: <strong class="hl">recurrence</strong> (will it repeat?), <strong class="hl">source</strong> (organic or bought?), <strong class="hl">concentration</strong> (how many customers?), and <strong class="hl">durability</strong> (can it sustain growth?). A company can look great on a single quarter's numbers yet score poorly on all four.</p>
+
+<div class="exhibit">
+  <div class="exhibit-label">Exhibit 1.1 — Revenue Quality Spectrum</div>
+  <div class="hbar-chart">
+    <div class="hbar-row"><div class="hbar-name">Contractual SaaS</div><div class="hbar-track"><div class="hbar-fill" style="width:95%;background:var(--green)"></div></div><div class="hbar-val">95</div></div>
+    <div class="hbar-row"><div class="hbar-name">Subscription</div><div class="hbar-track"><div class="hbar-fill" style="width:88%;background:var(--green)"></div></div><div class="hbar-val">88</div></div>
+    <div class="hbar-row"><div class="hbar-name">Recurring Service</div><div class="hbar-track"><div class="hbar-fill" style="width:75%;background:var(--accent)"></div></div><div class="hbar-val">75</div></div>
+    <div class="hbar-row"><div class="hbar-name">Consumable</div><div class="hbar-track"><div class="hbar-fill" style="width:65%;background:var(--accent)"></div></div><div class="hbar-val">65</div></div>
+    <div class="hbar-row"><div class="hbar-name">Repeat Purchase</div><div class="hbar-track"><div class="hbar-fill" style="width:55%;background:var(--orange)"></div></div><div class="hbar-val">55</div></div>
+    <div class="hbar-row"><div class="hbar-name">One-Time Sale</div><div class="hbar-track"><div class="hbar-fill" style="width:30%;background:var(--red)"></div></div><div class="hbar-val">30</div></div>
+    <div class="hbar-row"><div class="hbar-name">Project/Contract</div><div class="hbar-track"><div class="hbar-fill" style="width:20%;background:var(--red)"></div></div><div class="hbar-val">20</div></div>
+  </div>
+  <p style="font-family:Arial,sans-serif;font-size:11px;color:var(--muted);margin-top:8px;text-align:center;">Revenue Quality Score (higher = more predictable and durable)</p>
+</div>
+
+<div class="case-study">
+  <div class="case-study-label">Real-World Examples — Revenue Types in Action</div>
+  <h4>Mapping the Spectrum to Actual Companies</h4>
+  <p><strong class="hl">Contractual SaaS (95):</strong> <strong>Salesforce</strong> — 94% of its ~$35B in revenue comes from multi-year subscription contracts. Customers sign agreements, data gets embedded in workflows, and switching costs are enormous. This is the gold standard of revenue predictability.</p>
+  <p><strong class="hl">Subscription (88):</strong> <strong>Netflix</strong> — monthly subscription model with ~260M global subscribers. No contracts lock users in, but the habit loop is strong. Slightly lower quality than SaaS because cancellation is frictionless.</p>
+  <p><strong class="hl">Recurring Service (75):</strong> <strong>Waste Management</strong> — customers don't sign multi-year SaaS deals, but nobody switches trash haulers on a whim. Service agreements renew almost automatically.</p>
+  <p><strong class="hl">Consumable (65):</strong> <strong>Procter & Gamble</strong> — you'll buy toothpaste and detergent again, but P&G has to earn that repeat purchase against store brands every time.</p>
+  <p><strong class="hl">One-Time Sale (30):</strong> <strong>Peloton</strong> — the bike purchase is one-and-done (their subscription revenue is higher quality, but the hardware sale itself is low recurrence and high-consideration).</p>
+  <p><strong class="hl">Project/Contract (20):</strong> <strong>Construction firms like Fluor Corp</strong> — each project is bid competitively with no guarantee of the next one. Revenue resets to zero every contract cycle.</p>
+</div>
+
+<h3>Organic vs. Acquisition-Driven Growth</h3>
+<p>When a company reports 20% revenue growth, your first question should be: <strong class="hl">how much was organic?</strong> Organic growth — revenue gained from existing operations, new customers, and price increases — is far more valuable than growth purchased through acquisitions. Acquisitions bring integration risk, goodwill write-downs, and often mask slowing organic trends. Microsoft's Azure cloud business growing 29% organically is fundamentally different from a company that grew 29% by buying three competitors.</p>
+
+<p>To isolate organic growth, check whether the company discloses it directly (many do). If not, compare revenue growth to the year-ago period, note any acquisitions closed in the interval, and subtract the acquired revenue. <strong class="hl">Critically, you need both the current-year and prior-year organic revenue figures to calculate organic growth precisely.</strong> If a company acquired a business that generated $180M this year, that acquired company also generated revenue last year — and that prior-year revenue is baked into the baseline. Without knowing how much of the prior-year total came from the now-acquired business, you cannot isolate the true organic growth rate. If a company consistently relies on acquisitions for growth and never discloses organic numbers, treat that as a yellow flag.</p>
+
+<div class="exhibit">
+  <div class="exhibit-label">Exhibit 1.2 — Organic vs. Acquired Growth: Two Company Profiles (2019–2023)</div>
+  <div class="two-col">
+    <div>
+      <p style="font-family:Arial,sans-serif;font-size:13px;font-weight:700;color:var(--green);margin-bottom:8px;">Company A — Costco</p>
+      <svg viewBox="0 0 220 130" style="width:100%;max-width:220px;">
+        <rect x="20" y="95" width="32" height="25" rx="3" fill="rgba(34,197,94,.7)"/>
+        <rect x="62" y="85" width="32" height="35" rx="3" fill="rgba(34,197,94,.7)"/>
+        <rect x="104" y="68" width="32" height="52" rx="3" fill="rgba(34,197,94,.7)"/>
+        <rect x="146" y="48" width="32" height="72" rx="3" fill="rgba(34,197,94,.7)"/>
+        <rect x="188" y="30" width="32" height="90" rx="3" fill="rgba(34,197,94,.7)"/>
+        <text x="36" y="126" fill="#7A8099" font-family="Arial" font-size="9" text-anchor="middle">'19</text>
+        <text x="78" y="126" fill="#7A8099" font-family="Arial" font-size="9" text-anchor="middle">'20</text>
+        <text x="120" y="126" fill="#7A8099" font-family="Arial" font-size="9" text-anchor="middle">'21</text>
+        <text x="162" y="126" fill="#7A8099" font-family="Arial" font-size="9" text-anchor="middle">'22</text>
+        <text x="204" y="126" fill="#7A8099" font-family="Arial" font-size="9" text-anchor="middle">'23</text>
+        <text x="36" y="90" fill="#E8EAF0" font-family="Arial" font-size="9" text-anchor="middle" font-weight="700">$153B</text>
+        <text x="78" y="80" fill="#E8EAF0" font-family="Arial" font-size="9" text-anchor="middle" font-weight="700">$167B</text>
+        <text x="120" y="63" fill="#E8EAF0" font-family="Arial" font-size="9" text-anchor="middle" font-weight="700">$196B</text>
+        <text x="162" y="43" fill="#E8EAF0" font-family="Arial" font-size="9" text-anchor="middle" font-weight="700">$227B</text>
+        <text x="204" y="25" fill="#E8EAF0" font-family="Arial" font-size="9" text-anchor="middle" font-weight="700">$243B</text>
+      </svg>
+      <p style="font-family:Arial,sans-serif;font-size:11px;color:var(--green);">~100% organic · No major acquisitions · 12% CAGR</p>
+    </div>
+    <div>
+      <p style="font-family:Arial,sans-serif;font-size:13px;font-weight:700;color:var(--orange);margin-bottom:8px;">Company B — Illustrative Roll-Up</p>
+      <svg viewBox="0 0 220 130" style="width:100%;max-width:220px;">
+        <rect x="20" y="95" width="32" height="25" rx="3" fill="rgba(245,158,11,.4)"/>
+        <rect x="62" y="80" width="32" height="20" rx="3" fill="rgba(245,158,11,.4)"/>
+        <rect x="62" y="62" width="32" height="16" rx="3" fill="rgba(239,68,68,.5)"/>
+        <rect x="104" y="72" width="32" height="16" rx="3" fill="rgba(245,158,11,.4)"/>
+        <rect x="104" y="42" width="32" height="28" rx="3" fill="rgba(239,68,68,.5)"/>
+        <rect x="146" y="60" width="32" height="14" rx="3" fill="rgba(245,158,11,.4)"/>
+        <rect x="146" y="25" width="32" height="33" rx="3" fill="rgba(239,68,68,.5)"/>
+        <rect x="188" y="52" width="32" height="12" rx="3" fill="rgba(245,158,11,.4)"/>
+        <rect x="188" y="10" width="32" height="40" rx="3" fill="rgba(239,68,68,.5)"/>
+        <text x="36" y="126" fill="#7A8099" font-family="Arial" font-size="9" text-anchor="middle">'19</text>
+        <text x="78" y="126" fill="#7A8099" font-family="Arial" font-size="9" text-anchor="middle">'20</text>
+        <text x="120" y="126" fill="#7A8099" font-family="Arial" font-size="9" text-anchor="middle">'21</text>
+        <text x="162" y="126" fill="#7A8099" font-family="Arial" font-size="9" text-anchor="middle">'22</text>
+        <text x="204" y="126" fill="#7A8099" font-family="Arial" font-size="9" text-anchor="middle">'23</text>
+      </svg>
+      <div style="display:flex;gap:12px;margin-top:4px;">
+        <span style="font-family:Arial,sans-serif;font-size:11px;color:var(--orange);display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;background:rgba(245,158,11,.5);border-radius:2px;display:inline-block;"></span>Organic (3%)</span>
+        <span style="font-family:Arial,sans-serif;font-size:11px;color:var(--red);display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;background:rgba(239,68,68,.5);border-radius:2px;display:inline-block;"></span>Acquired (18%)</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="case-study">
+  <div class="case-study-label">Real-World Example — The Valeant Pharmaceuticals Warning</div>
+  <h4>When Acquisition-Driven Growth Unravels</h4>
+  <p>Valeant Pharmaceuticals (now Bausch Health) was the poster child for acquisition-fueled growth. From 2010 to 2015, Valeant acquired over 100 companies, reporting explosive revenue growth. Organic growth was anemic — single digits at best. When the acquisition pipeline slowed and debt came due, the stock collapsed from ~$260 to under $15. <strong class="hl">The lesson: if you strip away acquisitions and organic growth is flat or declining, the growth story is a mirage.</strong></p>
+</div>
+
+<h3>Customer Concentration & Addressable Market</h3>
+<p>A company earning 40% of revenue from a single customer carries concentration risk — if that customer leaves, churns, or renegotiates terms, the impact is devastating. Check annual reports for customer concentration disclosures. <strong class="hl">Companies with their top customer below 10% of revenue are well-diversified; above 20% warrants serious scrutiny.</strong> Also consider <strong class="hl">end-market concentration:</strong> a company with 500 customers all in the oil industry isn't truly diversified — it's concentrated in one sector disguised as diversification.</p>
+
+<div class="case-study">
+  <div class="case-study-label">Real-World Example — Concentration Risk</div>
+  <h4>Qualcomm & Apple: When Your Biggest Customer Becomes Your Biggest Threat</h4>
+  <p>For years, Qualcomm derived roughly 20% of its revenue from Apple through modem chip licensing. When Apple began developing its own modem chips and simultaneously launched a multi-billion-dollar legal dispute over licensing fees, Qualcomm faced an existential threat to a fifth of its revenue. They eventually settled, but the dependency created years of uncertainty and billions in legal costs. <strong class="hl">Any single customer above 20% of revenue is a strategic vulnerability, not just a financial one.</strong></p>
+</div>
+
+<p>Finally, assess the total addressable market (TAM). A company growing 15% into a $500 billion TAM with 2% market share has a much longer runway than one growing 15% into a $10 billion TAM where it already holds 30%. TAM isn't destiny — execution matters — but it sets the ceiling for growth durability.</p>
+
+<div class="case-study">
+  <div class="case-study-label">Real-World Example — TAM & Growth Runway</div>
+  <h4>CrowdStrike: Small Fish, Massive Pond</h4>
+  <p>CrowdStrike generates ~$3.4B in annual recurring revenue in a global cybersecurity market estimated at $200B+ and expanding rapidly. That's less than 2% market share in a TAM growing double digits. Even if CrowdStrike's growth rate decelerates, it has decades of runway before approaching saturation. Contrast this with a niche enterprise software vendor generating $500M in a $2B TAM with 25% share — it's already fighting for scraps. <strong class="hl">TAM penetration below 15% signals long runway; above 30% signals the growth ceiling is approaching.</strong></p>
+</div>
+
+<div class="exhibit">
+  <div class="exhibit-label">Exhibit 1.3 — Revenue Quality Assessment Checklist</div>
+  <table class="fw-table">
+    <thead><tr><th>Question</th><th>Strong Signal</th><th>Weak Signal</th></tr></thead>
+    <tbody>
+      <tr><td>Is revenue recurring?</td><td><span style="color:var(--green)">&#10003; Subscription/contract-based</span></td><td><span style="color:var(--red)">&#10007; One-time/project-based</span></td></tr>
+      <tr><td>Is growth organic?</td><td><span style="color:var(--green)">&#10003; >70% organic</span></td><td><span style="color:var(--red)">&#10007; Primarily acquisition-driven</span></td></tr>
+      <tr><td>Top customer &lt;10% of revenue?</td><td><span style="color:var(--green)">&#10003; Diversified base</span></td><td><span style="color:var(--red)">&#10007; &gt;20% from one customer</span></td></tr>
+      <tr><td>3-year revenue CAGR &gt;5%?</td><td><span style="color:var(--green)">&#10003; Sustained growth</span></td><td><span style="color:var(--red)">&#10007; Flat or declining</span></td></tr>
+      <tr><td>TAM penetration &lt;15%?</td><td><span style="color:var(--green)">&#10003; Long runway</span></td><td><span style="color:var(--red)">&#10007; Approaching saturation</span></td></tr>
+      <tr><td>Pricing power visible?</td><td><span style="color:var(--green)">&#10003; Raises prices without churn</span></td><td><span style="color:var(--red)">&#10007; Competing on price</span></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="callout">
+  <div class="callout-label">Beat Lynch Connection</div>
+  <p>The Stock Analyzer's <strong>Growth Quality Score</strong> captures exactly these dimensions — revenue recurrence, organic growth rate, concentration, and TAM runway. When you see a Growth Quality Score of 78, the system has already evaluated these factors using the Lynch-inspired GARP framework from Course 1.1. Now you understand what drives that number.</p>
+</div>
+
+<div class="callout callout-green">
+  <div class="callout-label">Analyst Framework</div>
+  <p>When evaluating any company's revenue, run the checklist in Exhibit 1.3 systematically. Write down the answer for each row. Companies scoring "strong" on 5 or 6 dimensions have fortress-grade top lines. Those scoring strong on only 1–2 are candidates for deeper scrutiny before investing.</p>
+</div>
+
+</div><!-- end lesson-detail -->
+
+<!-- ════════════════════════════════════════════════════════════════ -->
+<!-- LESSON 2 -->
+<!-- ════════════════════════════════════════════════════════════════ -->
+<div class="lesson-card" onclick="toggleLesson(1)">
+  <div class="lesson-num">02</div>
+  <div><div class="lesson-title">Profitability & Returns on Capital</div><div class="lesson-desc">Gross, operating, and net margins · ROE vs. ROIC · Cross-industry comparison · Capital efficiency</div></div>
+  <div class="lesson-mp">25 MP</div>
+</div>
+<div class="lesson-detail" id="ld1">
+
+<div class="tag-row">
+  <span class="ctag">Margin Structure</span><span class="ctag">ROIC</span><span class="ctag">ROE</span><span class="ctag">Capital Efficiency</span><span class="ctag">Moat Strength</span>
+</div>
+
+<h3>The Margin Waterfall: From Revenue to Profit</h3>
+<p>Revenue gets attention, but margins reveal the real business. A company's <strong class="hl">margin structure</strong> tells you about its competitive position, pricing power, cost discipline, and ultimately the quality of earnings available to shareholders. You already know the three main margins from Tier 1's income statement work. Now you'll learn to use them diagnostically — like a doctor reading vital signs.</p>
+
+<p><strong class="hl">Gross margin</strong> reflects the fundamental economics of a business: how much it costs to produce or deliver what it sells. The key principle: <strong class="hl">always compare margins within similar business models, never across them.</strong> Here are the typical gross margin ranges by industry that every analyst should know:</p>
+
+<div class="exhibit">
+  <div class="exhibit-label">Exhibit 2.0 — Industry Gross Margin Ranges: Know Your Benchmarks</div>
+  <div class="hbar-chart">
+    <div class="hbar-row"><div class="hbar-name" style="font-size:11px">Enterprise SaaS</div><div class="hbar-track"><div class="hbar-fill" style="width:82%;background:linear-gradient(90deg,rgba(34,197,94,.4),var(--green))"></div></div><div class="hbar-val" style="font-size:11px">70–85%</div></div>
+    <div class="hbar-row"><div class="hbar-name" style="font-size:11px">Payments/Fintech</div><div class="hbar-track"><div class="hbar-fill" style="width:72%;background:linear-gradient(90deg,rgba(34,197,94,.4),var(--green))"></div></div><div class="hbar-val" style="font-size:11px">60–80%</div></div>
+    <div class="hbar-row"><div class="hbar-name" style="font-size:11px">Pharma/Biotech</div><div class="hbar-track"><div class="hbar-fill" style="width:68%;background:linear-gradient(90deg,rgba(59,130,246,.4),var(--accent))"></div></div><div class="hbar-val" style="font-size:11px">60–75%</div></div>
+    <div class="hbar-row"><div class="hbar-name" style="font-size:11px">Consumer Electronics</div><div class="hbar-track"><div class="hbar-fill" style="width:35%;background:linear-gradient(90deg,rgba(245,158,11,.4),var(--orange))"></div></div><div class="hbar-val" style="font-size:11px">25–35%</div></div>
+    <div class="hbar-row"><div class="hbar-name" style="font-size:11px">Airlines</div><div class="hbar-track"><div class="hbar-fill" style="width:38%;background:linear-gradient(90deg,rgba(245,158,11,.4),var(--orange))"></div></div><div class="hbar-val" style="font-size:11px">30–40%</div></div>
+    <div class="hbar-row"><div class="hbar-name" style="font-size:11px">Grocery Retail</div><div class="hbar-track"><div class="hbar-fill" style="width:30%;background:linear-gradient(90deg,rgba(239,68,68,.4),var(--red))"></div></div><div class="hbar-val" style="font-size:11px">25–30%</div></div>
+    <div class="hbar-row"><div class="hbar-name" style="font-size:11px">Auto Manufacturing</div><div class="hbar-track"><div class="hbar-fill" style="width:22%;background:linear-gradient(90deg,rgba(239,68,68,.4),var(--red))"></div></div><div class="hbar-val" style="font-size:11px">15–22%</div></div>
+  </div>
+  <p style="font-family:Arial,sans-serif;font-size:11px;color:var(--muted);margin-top:8px;">A 42% gross margin is exceptional in consumer electronics but deeply concerning for enterprise software. Context is everything.</p>
+</div>
+
+<p>Software companies typically operate at 70–85% gross margins because distributing code costs almost nothing. Consumer electronics companies typically run at 25–35% because components, manufacturing, and logistics are significant direct costs — Apple is the notable outlier at ~44% gross margins, reflecting its extraordinary brand and pricing power. Airlines run at 30–40% because fuel, labor, and equipment are enormous direct costs. <strong class="hl">A 40% gross margin is stellar for a retailer but concerning for a SaaS company.</strong></p>
+
+<p><strong class="hl">Operating margin</strong> adds SG&A, R&D, and other operating expenses. It measures how efficiently the company turns gross profit into operating profit. <strong class="hl">Net margin</strong> captures the final picture after interest and taxes. The gap between operating and net margin reveals capital structure choices (debt load) and tax efficiency.</p>
+
+<div class="case-study">
+  <div class="case-study-label">Real-World Example — Why Industry Context Matters</div>
+  <h4>Apple vs. Salesforce: Same Margin, Opposite Signals</h4>
+  <p>Imagine two companies both reporting 42% gross margins. <strong>Company A operates in consumer electronics</strong> (industry range: 25–35%). A 42% margin here means extraordinary brand pricing power — this is Apple territory, operating 7+ points above peers. <strong>Company B operates in enterprise software</strong> (industry range: 70–85%). A 42% margin here signals a services-heavy, cost-inefficient model — nearly 30 points below peers. Same number, completely opposite diagnostic conclusions. <strong class="hl">Never evaluate a margin without its industry context.</strong></p>
+</div>
+
+<div class="exhibit">
+  <div class="exhibit-label">Exhibit 2.1 — Margin Waterfall: Visa vs. Delta Air Lines (FY 2023)</div>
+  <div class="two-col">
+    <div>
+      <p style="font-family:Arial,sans-serif;font-size:13px;font-weight:700;color:var(--green);margin-bottom:10px;">Visa (V) — Digital Toll Booth</p>
+      <svg viewBox="0 0 200 160" style="width:100%;">
+        <defs><linearGradient id="gv" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="rgba(34,197,94,.7)"/><stop offset="100%" stop-color="rgba(34,197,94,.3)"/></linearGradient></defs>
+        <rect x="10" y="10" width="50" height="120" rx="4" fill="url(#gv)"/>
+        <text x="35" y="138" fill="#7A8099" font-family="Arial" font-size="9" text-anchor="middle">Revenue</text>
+        <text x="35" y="6" fill="#E8EAF0" font-family="Arial" font-size="10" text-anchor="middle" font-weight="700">$32.7B</text>
+        <rect x="75" y="18" width="50" height="112" rx="4" fill="rgba(34,197,94,.55)"/>
+        <text x="100" y="138" fill="#7A8099" font-family="Arial" font-size="9" text-anchor="middle">Gross</text>
+        <text x="100" y="14" fill="#22C55E" font-family="Arial" font-size="10" text-anchor="middle" font-weight="700">79.7%</text>
+        <rect x="140" y="28" width="50" height="102" rx="4" fill="rgba(34,197,94,.4)"/>
+        <text x="165" y="138" fill="#7A8099" font-family="Arial" font-size="9" text-anchor="middle">Operating</text>
+        <text x="165" y="24" fill="#22C55E" font-family="Arial" font-size="10" text-anchor="middle" font-weight="700">67.0%</text>
+      </svg>
+    </div>
+    <div>
+      <p style="font-family:Arial,sans-serif;font-size:13px;font-weight:700;color:var(--orange);margin-bottom:10px;">Delta Air Lines (DAL) — Asset-Heavy Carrier</p>
+      <svg viewBox="0 0 200 160" style="width:100%;">
+        <defs><linearGradient id="gd" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="rgba(245,158,11,.7)"/><stop offset="100%" stop-color="rgba(245,158,11,.3)"/></linearGradient></defs>
+        <rect x="10" y="10" width="50" height="120" rx="4" fill="url(#gd)"/>
+        <text x="35" y="138" fill="#7A8099" font-family="Arial" font-size="9" text-anchor="middle">Revenue</text>
+        <text x="35" y="6" fill="#E8EAF0" font-family="Arial" font-size="10" text-anchor="middle" font-weight="700">$58.0B</text>
+        <rect x="75" y="64" width="50" height="66" rx="4" fill="rgba(245,158,11,.55)"/>
+        <text x="100" y="138" fill="#7A8099" font-family="Arial" font-size="9" text-anchor="middle">Gross</text>
+        <text x="100" y="60" fill="#f59e0b" font-family="Arial" font-size="10" text-anchor="middle" font-weight="700">38.2%</text>
+        <rect x="140" y="88" width="50" height="42" rx="4" fill="rgba(245,158,11,.4)"/>
+        <text x="165" y="138" fill="#7A8099" font-family="Arial" font-size="9" text-anchor="middle">Operating</text>
+        <text x="165" y="84" fill="#f59e0b" font-family="Arial" font-size="10" text-anchor="middle" font-weight="700">12.3%</text>
+      </svg>
+    </div>
+  </div>
+  <p style="font-family:Arial,sans-serif;font-size:11px;color:var(--muted);margin-top:8px;">Delta generates nearly twice Visa's revenue but retains a fraction of every dollar. Visa's network model — digital toll booth — requires minimal incremental cost to process each transaction. Every additional Visa swipe is almost pure profit.</p>
+</div>
+
+<h3>ROE vs. ROIC: Why Capital Efficiency Is the Ultimate Test</h3>
+<p>Margins tell you how much profit a company earns per dollar of revenue. <strong class="hl">Returns on capital</strong> tell you how much profit it earns per dollar invested. This is the more important metric — it reveals whether the business creates value or destroys it. Return on equity (ROE) measures net income relative to shareholders' equity. Return on invested capital (ROIC) measures after-tax operating profit relative to total invested capital (equity + debt – excess cash).</p>
+
+<p>ROIC is superior to ROE because <strong class="hl">ROE can be inflated by leverage.</strong> A company that borrows aggressively can boost ROE while actually destroying value if its ROIC is below its cost of capital. A company with ROE of 28% but debt/equity of 2.5 might look impressive — until you realize the business itself isn't generating those returns, the leverage is. Meanwhile, a company achieving 22% ROE with debt/equity of just 0.3 is demonstrating genuine business quality, because the returns are coming from the operations, not from financial engineering. <strong class="hl">ROIC above 15% sustained over five or more years is the single strongest quantitative signal of a competitive moat.</strong> This was central to Greenblatt's Magic Formula logic from Course 1.1 — he ranked companies by ROIC because it measures the economic engine directly.</p>
+
+<div class="exhibit">
+  <div class="exhibit-label">Exhibit 2.2 — ROIC Comparison Across Business Models (2023)</div>
+  <div class="hbar-chart">
+    <div class="hbar-row"><div class="hbar-name">Visa</div><div class="hbar-track"><div class="hbar-fill" style="width:95%;background:linear-gradient(90deg,rgba(34,197,94,.5),var(--green))"></div></div><div class="hbar-val">59.5%</div></div>
+    <div class="hbar-row"><div class="hbar-name">Apple</div><div class="hbar-track"><div class="hbar-fill" style="width:85%;background:linear-gradient(90deg,rgba(34,197,94,.5),var(--green))"></div></div><div class="hbar-val">53.1%</div></div>
+    <div class="hbar-row"><div class="hbar-name">Microsoft</div><div class="hbar-track"><div class="hbar-fill" style="width:55%;background:linear-gradient(90deg,rgba(59,130,246,.5),var(--accent))"></div></div><div class="hbar-val">34.2%</div></div>
+    <div class="hbar-row"><div class="hbar-name">Costco</div><div class="hbar-track"><div class="hbar-fill" style="width:42%;background:linear-gradient(90deg,rgba(59,130,246,.5),var(--accent))"></div></div><div class="hbar-val">26.0%</div></div>
+    <div class="hbar-row"><div class="hbar-name">JPMorgan</div><div class="hbar-track"><div class="hbar-fill" style="width:26%;background:linear-gradient(90deg,rgba(201,168,76,.4),var(--gold))"></div></div><div class="hbar-val">16.0%</div></div>
+    <div class="hbar-row"><div class="hbar-name">Delta</div><div class="hbar-track"><div class="hbar-fill" style="width:14%;background:linear-gradient(90deg,rgba(245,158,11,.4),var(--orange))"></div></div><div class="hbar-val">8.7%</div></div>
+    <div class="hbar-row"><div class="hbar-name">Ford</div><div class="hbar-track"><div class="hbar-fill" style="width:5%;background:linear-gradient(90deg,rgba(239,68,68,.4),var(--red))"></div></div><div class="hbar-val">3.1%</div></div>
+  </div>
+  <p style="font-family:Arial,sans-serif;font-size:11px;color:var(--muted);margin-top:6px;">Asset-light, moated businesses (Visa, Apple) generate dramatically more return per dollar of capital. This is the quantitative fingerprint of Buffett's "economic moat."</p>
+</div>
+
+<div class="callout callout-cyan">
+  <div class="callout-label">Industry ROIC Benchmarks — Context Matters</div>
+  <p>Don't compare ROIC across industries without context. Here are the benchmarks: <strong class="hl">Banks/Financial Services:</strong> 10–15% ROIC is excellent (JPMorgan at 16% is best-in-class). <strong class="hl">Software/Tech Platforms:</strong> 20%+ expected for quality companies; below 15% is mediocre. <strong class="hl">Industrials/Manufacturing:</strong> 12–15% is solid; above 18% suggests a moat. <strong class="hl">Retail:</strong> 15–20% is strong (Costco at 26% is exceptional). <strong class="hl">Airlines/Autos:</strong> 8–12% is typical; these are structurally low-return industries. The Beat Lynch Stock Analyzer handles sector-relative scoring automatically.</p>
+</div>
+
+<h3>Analytical Walkthrough: Calculating ROIC</h3>
+<p>Here is the step-by-step method you should use: <strong class="hl">(1)</strong> Find operating income (EBIT) on the income statement. <strong class="hl">(2)</strong> Tax-adjust it: NOPAT = EBIT × (1 – tax rate). Use the effective tax rate from the income statement. <strong class="hl">(3)</strong> Calculate invested capital: total equity + total debt – cash and equivalents. <strong class="hl">(4)</strong> ROIC = NOPAT ÷ invested capital. Use average invested capital (beginning + ending ÷ 2) for precision.</p>
+
+<div class="exhibit">
+  <div class="exhibit-label">Exhibit 2.3 — ROIC Calculation: Visa vs. Delta (FY 2023)</div>
+  <table class="fw-table">
+    <thead><tr><th>Step</th><th>Metric</th><th>Visa</th><th>Delta</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td><strong class="hl">EBIT</strong></td><td>$21.9B</td><td>$7.1B</td></tr>
+      <tr><td>2</td><td><strong class="hl">Tax rate (effective)</strong></td><td>19.0%</td><td>21.5%</td></tr>
+      <tr><td>3</td><td><strong class="hl">NOPAT</strong> = EBIT × (1 − tax rate)</td><td>$17.7B</td><td>$5.6B</td></tr>
+      <tr><td>4</td><td><strong class="hl">Total equity</strong></td><td>$18.0B</td><td>$5.2B</td></tr>
+      <tr><td>5</td><td><strong class="hl">Total debt</strong></td><td>$20.8B</td><td>$18.6B</td></tr>
+      <tr><td>6</td><td><strong class="hl">Cash</strong></td><td>$9.0B</td><td>$3.2B</td></tr>
+      <tr><td>7</td><td><strong class="hl">Invested capital</strong> = equity + debt − cash</td><td>$29.8B</td><td>$20.6B</td></tr>
+      <tr><td>8</td><td style="color:var(--gold);font-weight:700;">ROIC = NOPAT ÷ invested capital</td><td style="color:var(--green);font-weight:700;">59.5%</td><td style="color:var(--orange);font-weight:700;">27.2%</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="callout">
+  <div class="callout-label">Beat Lynch Connection</div>
+  <p>The <strong>Moat Strength</strong> dimension in Mean Magic scoring is heavily anchored to sustained ROIC. A company with ROIC above 20% for five consecutive years will score significantly higher on Moat Strength than one with volatile returns. Greenblatt's ROIC Screening Logic — the exact calculation you just learned — feeds this score directly.</p>
+</div>
+
+<div class="callout callout-orange">
+  <div class="callout-label">Common Mistake</div>
+  <p>Don't compare ROIC across industries without context. A bank with 14% ROIC is exceptional. A software company with 14% ROIC is mediocre. Always benchmark against industry medians (see the benchmarks above). The Beat Lynch Stock Analyzer handles this automatically using sector-relative scoring.</p>
+</div>
+
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════ -->
+<!-- LESSON 3 -->
+<!-- ════════════════════════════════════════════════════════════════ -->
+<div class="lesson-card" onclick="toggleLesson(2)">
+  <div class="lesson-num">03</div>
+  <div><div class="lesson-title">Financial Health & Risk Assessment</div><div class="lesson-desc">Leverage ratios · Interest coverage · Liquidity · FCF consistency · Fragile vs. resilient balance sheets</div></div>
+  <div class="lesson-mp">25 MP</div>
+</div>
+<div class="lesson-detail" id="ld2">
+
+<div class="tag-row">
+  <span class="ctag">Leverage</span><span class="ctag">Interest Coverage</span><span class="ctag">Liquidity</span><span class="ctag">Free Cash Flow</span><span class="ctag">Financial Durability</span>
+</div>
+
+<h3>Why Balance Sheet Strength Is Non-Negotiable</h3>
+<p>A company can have extraordinary revenue growth and sky-high margins but still go bankrupt. The culprit is almost always the balance sheet. Graham's margin of safety — the foundational principle from Course 1.1 — begins with financial health. <strong class="hl">A company that cannot survive a downturn cannot compound wealth over time.</strong> In Tier 1, you learned what assets, liabilities, and equity are. Now you learn to evaluate whether a company's financial structure is resilient or fragile.</p>
+
+<p>The four pillars of financial health assessment are: <strong class="hl">leverage</strong> (how much debt relative to earnings and equity), <strong class="hl">coverage</strong> (can it service its debt comfortably?), <strong class="hl">liquidity</strong> (can it pay near-term obligations?), and <strong class="hl">cash generation</strong> (does the business consistently produce free cash flow?).</p>
+
+<div class="case-study">
+  <div class="case-study-label">Historical Warning — When the Balance Sheet Kills a "Great" Company</div>
+  <h4>General Electric: From Bluest of Blue Chips to Balance Sheet Crisis</h4>
+  <p>In 2000, GE was the most valuable company in the world with a $600B market cap. By 2018 it was removed from the Dow Jones Industrial Average for the first time since 1907. What happened? GE Capital had accumulated massive hidden leverage — insurance liabilities, long-term care obligations, and opaque financial instruments that didn't show up cleanly on a standard leverage analysis. When the financial crisis hit, GE's "fortress" balance sheet proved to be an illusion. <strong class="hl">The lesson: even legendary companies can be destroyed by balance sheet fragility. Never skip this analysis, regardless of a company's reputation.</strong></p>
+</div>
+
+<div class="exhibit">
+  <div class="exhibit-label">Exhibit 3.1 — Financial Health Dashboard: Four-Pillar Assessment</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;">
+    <div class="qual-cell header">Metric</div>
+    <div class="qual-cell header">Thresholds</div>
+    <div class="qual-cell neutral"><strong class="hl">Debt/Equity</strong></div>
+    <div class="qual-cell neutral"><span style="color:var(--green);">&#9679; &lt;0.5 Strong</span> &nbsp; <span style="color:var(--orange);">&#9679; 0.5–1.5 Moderate</span> &nbsp; <span style="color:var(--red);">&#9679; &gt;1.5 Elevated</span></div>
+    <div class="qual-cell neutral"><strong class="hl">Net Debt/EBITDA</strong></div>
+    <div class="qual-cell neutral"><span style="color:var(--green);">&#9679; &lt;1.5× Safe</span> &nbsp; <span style="color:var(--orange);">&#9679; 1.5–3× Moderate</span> &nbsp; <span style="color:var(--red);">&#9679; &gt;3× Stressed</span></div>
+    <div class="qual-cell neutral"><strong class="hl">Interest Coverage</strong></div>
+    <div class="qual-cell neutral"><span style="color:var(--green);">&#9679; &gt;8× Fortress</span> &nbsp; <span style="color:var(--orange);">&#9679; 3–8× Adequate</span> &nbsp; <span style="color:var(--red);">&#9679; &lt;3× Danger</span></div>
+    <div class="qual-cell neutral"><strong class="hl">Current Ratio</strong></div>
+    <div class="qual-cell neutral"><span style="color:var(--green);">&#9679; &gt;1.5 Healthy</span> &nbsp; <span style="color:var(--orange);">&#9679; 1.0–1.5 Tight</span> &nbsp; <span style="color:var(--red);">&#9679; &lt;1.0 Risk</span></div>
+  </div>
+</div>
+
+<h3>Leverage: How Much Debt Is Too Much?</h3>
+<p><strong class="hl">Debt-to-equity</strong> measures total debt as a proportion of shareholders' equity. It tells you how reliant the company is on borrowed money. <strong class="hl">Net debt/EBITDA</strong> is the more operationally meaningful ratio — it tells you how many years of earnings it would take to pay off debt, assuming no other uses of cash. A company with net debt/EBITDA of 1.0× can theoretically repay all debt from one year of EBITDA. At 5.0×, it takes five years — and any earnings stumble makes the debt burden dangerous.</p>
+
+<p><strong class="hl">Interest coverage</strong> = EBIT ÷ interest expense. This is the "can they pay the bills?" metric. Coverage below 3× means the company is using a dangerously high share of its operating profit just to service debt. Coverage above 8× means debt payments are trivially easy. <strong class="hl">When both net debt/EBITDA exceeds 3× and interest coverage falls below 3×, the balance sheet is in distress territory</strong> — two alarm bells ringing simultaneously is a strong signal to avoid.</p>
+
+<div class="exhibit">
+  <div class="exhibit-label">Exhibit 3.2 — Balance Sheet Stress Test: Resilient vs. Fragile (2023)</div>
+  <table class="fw-table">
+    <thead><tr><th>Metric</th><th>Microsoft</th><th>Boeing</th><th>Verdict</th></tr></thead>
+    <tbody>
+      <tr><td><strong class="hl">Debt/Equity</strong></td><td style="color:var(--green)">0.31</td><td style="color:var(--red)">N/M (neg. equity)</td><td>Boeing has negative equity — debt exceeds total assets net of liabilities</td></tr>
+      <tr><td><strong class="hl">Net Debt/EBITDA</strong></td><td style="color:var(--green)">0.4×</td><td style="color:var(--red)">N/M (neg. EBITDA)</td><td>Microsoft could repay all debt in ~5 months of EBITDA</td></tr>
+      <tr><td><strong class="hl">Interest Coverage</strong></td><td style="color:var(--green)">47.2×</td><td style="color:var(--red)">-2.8×</td><td>Boeing's operating losses don't cover interest</td></tr>
+      <tr><td><strong class="hl">Current Ratio</strong></td><td style="color:var(--green)">1.77</td><td style="color:var(--orange)">1.14</td><td>Microsoft has ample near-term liquidity</td></tr>
+      <tr><td><strong class="hl">FCF (5-yr avg)</strong></td><td style="color:var(--green)">$59B avg</td><td style="color:var(--red)">-$4.2B avg</td><td>Microsoft generates massive cash; Boeing burns it</td></tr>
+    </tbody>
+  </table>
+  <p style="font-family:Arial,sans-serif;font-size:11px;color:var(--muted);margin-top:6px;">This is not a debate: Microsoft's balance sheet is a fortress; Boeing's is distressed. Every metric confirms the diagnosis. This is the kind of clarity financial health analysis provides.</p>
+</div>
+
+<h3>Free Cash Flow Consistency: The Ultimate Health Signal</h3>
+<p>Net income can be manipulated through accounting choices. Free cash flow — operating cash flow minus capital expenditures — is much harder to fake. <strong class="hl">A company that generates positive FCF every year for five or more years demonstrates genuine economic health.</strong> Negative FCF for one year might be acceptable (major investment cycle), but persistent negative FCF is a red flag regardless of what the income statement shows.</p>
+
+<p>When you evaluate FCF, look at two things: the absolute level (is the company generating meaningful cash?) and the trend (is FCF growing, stable, or deteriorating?). Also calculate <strong class="hl">FCF margin</strong> = FCF ÷ revenue. This normalizes across company sizes and lets you compare capital efficiency directly. <strong class="hl">A critical test: if a company reports growing net income but declining or negative free cash flow for two or more consecutive years, something is wrong.</strong> Earnings and cash flow should directionally agree over time. Persistent divergence means either aggressive accounting, excessive capital spending with poor returns, or working capital deterioration.</p>
+
+<div class="exhibit">
+  <div class="exhibit-label">Exhibit 3.3 — Free Cash Flow Trajectories: Microsoft vs. Boeing (2019–2023, $B)</div>
+  <svg viewBox="0 0 460 180" style="width:100%;max-width:480px;display:block;margin:0 auto;">
+    <line x1="50" y1="20" x2="440" y2="20" stroke="rgba(255,255,255,.04)" stroke-width="1"/>
+    <line x1="50" y1="55" x2="440" y2="55" stroke="rgba(255,255,255,.04)" stroke-width="1"/>
+    <line x1="50" y1="90" x2="440" y2="90" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
+    <line x1="50" y1="125" x2="440" y2="125" stroke="rgba(255,255,255,.04)" stroke-width="1"/>
+    <line x1="50" y1="160" x2="440" y2="160" stroke="rgba(255,255,255,.04)" stroke-width="1"/>
+    <text x="45" y="24" fill="#7A8099" font-family="Arial" font-size="9" text-anchor="end">$70B</text>
+    <text x="45" y="59" fill="#7A8099" font-family="Arial" font-size="9" text-anchor="end">$50B</text>
+    <text x="45" y="94" fill="#7A8099" font-family="Arial" font-size="9" text-anchor="end">$30B</text>
+    <text x="45" y="129" fill="#7A8099" font-family="Arial" font-size="9" text-anchor="end">$10B</text>
+    <text x="45" y="164" fill="#7A8099" font-family="Arial" font-size="9" text-anchor="end">-$10B</text>
+    <text x="110" y="178" fill="#7A8099" font-family="Arial" font-size="10" text-anchor="middle">2019</text>
+    <text x="195" y="178" fill="#7A8099" font-family="Arial" font-size="10" text-anchor="middle">2020</text>
+    <text x="280" y="178" fill="#7A8099" font-family="Arial" font-size="10" text-anchor="middle">2021</text>
+    <text x="365" y="178" fill="#7A8099" font-family="Arial" font-size="10" text-anchor="middle">2022</text>
+    <text x="440" y="178" fill="#7A8099" font-family="Arial" font-size="10" text-anchor="middle">2023</text>
+    <!-- MSFT line -->
+    <polyline points="110,74 195,59 280,38 365,26 440,20" fill="none" stroke="var(--green)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="110" cy="74" r="4" fill="var(--green)"/>
+    <circle cx="195" cy="59" r="4" fill="var(--green)"/>
+    <circle cx="280" cy="38" r="4" fill="var(--green)"/>
+    <circle cx="365" cy="26" r="4" fill="var(--green)"/>
+    <circle cx="440" cy="20" r="4" fill="var(--green)"/>
+    <text x="110" y="68" fill="var(--green)" font-family="Arial" font-size="9" text-anchor="middle" font-weight="700">$38B</text>
+    <text x="440" y="14" fill="var(--green)" font-family="Arial" font-size="9" text-anchor="middle" font-weight="700">$68B</text>
+    <!-- Boeing line -->
+    <polyline points="110,151 195,151 280,148 365,145 440,155" fill="none" stroke="var(--red)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6,4"/>
+    <circle cx="110" cy="151" r="4" fill="var(--red)"/>
+    <circle cx="195" cy="151" r="4" fill="var(--red)"/>
+    <circle cx="280" cy="148" r="4" fill="var(--red)"/>
+    <circle cx="365" cy="145" r="4" fill="var(--red)"/>
+    <circle cx="440" cy="155" r="4" fill="var(--red)"/>
+    <text x="110" y="146" fill="var(--red)" font-family="Arial" font-size="9" text-anchor="middle" font-weight="700">-$4.4B</text>
+    <text x="440" y="150" fill="var(--red)" font-family="Arial" font-size="9" text-anchor="middle" font-weight="700">-$5.9B</text>
+    <circle cx="160" cy="11" r="4" fill="var(--green)"/>
+    <text x="168" y="14" fill="var(--green)" font-family="Arial" font-size="10">Microsoft</text>
+    <circle cx="240" cy="11" r="4" fill="var(--red)"/>
+    <text x="248" y="14" fill="var(--red)" font-family="Arial" font-size="10">Boeing</text>
+  </svg>
+  <p style="font-family:Arial,sans-serif;font-size:11px;color:var(--muted);margin-top:8px;">Microsoft's FCF has nearly doubled in 5 years. Boeing has burned cash every single year. Revenue size is irrelevant — Boeing's $78B in revenue produces negative cash flow. Microsoft's $211B produces $68B in free cash. <strong style="color:var(--text)">Revenue without consistent free cash flow means the business cannot convert sales into shareholder value.</strong></p>
+</div>
+
+<div class="callout">
+  <div class="callout-label">Beat Lynch Connection</div>
+  <p>The <strong>Financial Durability</strong> score in Mean Magic incorporates all four pillars: leverage, coverage, liquidity, and FCF consistency. Graham's Risk Vector — the margin of safety applied to balance sheet health — is the foundation. When the Stock Analyzer displays a Financial Durability of 85, it means the company passes all four pillars convincingly.</p>
+</div>
+
+<div class="callout callout-red">
+  <div class="callout-label">Red Flag</div>
+  <p>If a company reports growing net income but declining or negative free cash flow for two or more consecutive years, something is wrong. Earnings and cash flow should directionally agree over time. Persistent divergence means either aggressive accounting, excessive capital spending with poor returns, or working capital deterioration. Always check.</p>
+</div>
+
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════ -->
+<!-- LESSON 4 -->
+<!-- ════════════════════════════════════════════════════════════════ -->
+<div class="lesson-card" onclick="toggleLesson(3)">
+  <div class="lesson-num">04</div>
+  <div><div class="lesson-title">Earnings Quality & Red Flags</div><div class="lesson-desc">GAAP vs. non-GAAP · Revenue recognition · Stock-based comp · Cash flow divergence · Red flag checklist</div></div>
+  <div class="lesson-mp">25 MP</div>
+</div>
+<div class="lesson-detail" id="ld3">
+
+<div class="tag-row">
+  <span class="ctag">GAAP vs. Non-GAAP</span><span class="ctag">Revenue Recognition</span><span class="ctag">Stock-Based Comp</span><span class="ctag">Accruals</span><span class="ctag">Red Flags</span>
+</div>
+
+<h3>Why Earnings Quality Matters</h3>
+<p>Lessons 1–3 gave you frameworks for evaluating revenue, profitability, and financial health. But all of that analysis assumes the numbers are reliable. <strong class="hl">Earnings quality analysis asks a more fundamental question: can you trust what the company is reporting?</strong> This isn't about fraud detection (that's a Tier 3 topic). It's about understanding how accounting choices, management discretion, and reporting incentives can make a mediocre business look great — or a deteriorating one look stable.</p>
+
+<p>The gap between high-quality and low-quality earnings often determines whether an investment thesis survives contact with reality. A company showing 15% EPS growth looks identical on a screener whether that growth comes from genuine business improvement, share buybacks funded by debt, aggressive revenue recognition, or excluding real expenses from "adjusted" earnings. <strong class="hl">You must always verify earnings quality before building any investment thesis on reported numbers.</strong> If the numbers aren't trustworthy, the entire thesis is built on sand.</p>
+
+<h3>GAAP vs. Non-GAAP: The Adjustment Gap</h3>
+<p>GAAP (Generally Accepted Accounting Principles) is the standardized reporting framework. Non-GAAP or "adjusted" earnings exclude items management deems non-recurring or non-cash. The problem: <strong class="hl">the gap between GAAP and non-GAAP earnings has widened dramatically.</strong> What companies exclude has expanded from truly one-time items (a factory fire) to routine costs repackaged as "adjustments" (restructuring charges that happen every year, stock-based compensation that dilutes shareholders annually).</p>
+
+<div class="case-study">
+  <div class="case-study-label">Real-World Example — Non-GAAP Absurdity</div>
+  <h4>WeWork's "Community Adjusted EBITDA"</h4>
+  <p>In its 2019 IPO filing, WeWork invented a metric called "Community Adjusted EBITDA" that excluded not just interest, taxes, depreciation, and amortization — but also building-level operating expenses, general and administrative costs, development and design spending, and marketing. The metric stripped out virtually every cost of running the business. Under GAAP, WeWork was losing billions. Under its custom metric, it appeared profitable. <strong class="hl">The lesson: always start with GAAP and work backward. Any company that can only show profitability with heavy adjustments deserves skepticism.</strong></p>
+</div>
+
+<div class="exhibit">
+  <div class="exhibit-label">Exhibit 4.1 — GAAP vs. Non-GAAP EPS: The "Adjustment Gap" Across S&P 500 Tech</div>
+  <svg viewBox="0 0 440 200" style="width:100%;max-width:460px;display:block;margin:0 auto;">
+    <g>
+      <!-- Meta -->
+      <rect x="35" y="50" width="28" height="110" rx="3" fill="rgba(59,130,246,.6)"/>
+      <rect x="67" y="20" width="28" height="140" rx="3" fill="rgba(201,168,76,.6)"/>
+      <text x="64" y="175" fill="#7A8099" font-family="Arial" font-size="9" text-anchor="middle">Meta</text>
+      <text x="49" y="45" fill="var(--accent)" font-family="Arial" font-size="8" text-anchor="middle" font-weight="700">$14.87</text>
+      <text x="81" y="15" fill="var(--gold)" font-family="Arial" font-size="8" text-anchor="middle" font-weight="700">$21.29</text>
+      <text x="64" y="186" fill="var(--orange)" font-family="Arial" font-size="7" text-anchor="middle">Gap: 1.4×</text>
+    </g>
+    <g>
+      <!-- AMZN -->
+      <rect x="120" y="110" width="28" height="50" rx="3" fill="rgba(59,130,246,.6)"/>
+      <rect x="152" y="55" width="28" height="105" rx="3" fill="rgba(201,168,76,.6)"/>
+      <text x="150" y="175" fill="#7A8099" font-family="Arial" font-size="9" text-anchor="middle">Amazon</text>
+      <text x="134" y="105" fill="var(--accent)" font-family="Arial" font-size="8" text-anchor="middle" font-weight="700">$2.90</text>
+      <text x="166" y="50" fill="var(--gold)" font-family="Arial" font-size="8" text-anchor="middle" font-weight="700">$4.83</text>
+      <text x="150" y="186" fill="var(--orange)" font-family="Arial" font-size="7" text-anchor="middle">Gap: 1.7×</text>
+    </g>
+    <g>
+      <!-- NVDA -->
+      <rect x="205" y="60" width="28" height="100" rx="3" fill="rgba(59,130,246,.6)"/>
+      <rect x="237" y="25" width="28" height="135" rx="3" fill="rgba(201,168,76,.6)"/>
+      <text x="235" y="175" fill="#7A8099" font-family="Arial" font-size="9" text-anchor="middle">Nvidia</text>
+      <text x="219" y="55" fill="var(--accent)" font-family="Arial" font-size="8" text-anchor="middle" font-weight="700">$11.93</text>
+      <text x="251" y="20" fill="var(--gold)" font-family="Arial" font-size="8" text-anchor="middle" font-weight="700">$16.84</text>
+      <text x="235" y="186" fill="var(--orange)" font-family="Arial" font-size="7" text-anchor="middle">Gap: 1.4×</text>
+    </g>
+    <g>
+      <!-- Salesforce -->
+      <rect x="290" y="118" width="28" height="42" rx="3" fill="rgba(59,130,246,.6)"/>
+      <rect x="322" y="50" width="28" height="110" rx="3" fill="rgba(201,168,76,.6)"/>
+      <text x="323" y="175" fill="#7A8099" font-family="Arial" font-size="9" text-anchor="middle">Salesforce</text>
+      <text x="304" y="113" fill="var(--accent)" font-family="Arial" font-size="8" text-anchor="middle" font-weight="700">$4.20</text>
+      <text x="336" y="45" fill="var(--gold)" font-family="Arial" font-size="8" text-anchor="middle" font-weight="700">$9.86</text>
+      <text x="323" y="186" fill="var(--red)" font-family="Arial" font-size="7" text-anchor="middle" font-weight="700">Gap: 2.3×</text>
+    </g>
+    <g>
+      <!-- Uber -->
+      <rect x="375" y="130" width="28" height="30" rx="3" fill="rgba(59,130,246,.6)"/>
+      <rect x="407" y="80" width="28" height="80" rx="3" fill="rgba(201,168,76,.6)"/>
+      <text x="405" y="175" fill="#7A8099" font-family="Arial" font-size="9" text-anchor="middle">Uber</text>
+      <text x="389" y="125" fill="var(--accent)" font-family="Arial" font-size="8" text-anchor="middle" font-weight="700">$1.04</text>
+      <text x="421" y="75" fill="var(--gold)" font-family="Arial" font-size="8" text-anchor="middle" font-weight="700">$3.40</text>
+      <text x="405" y="186" fill="var(--red)" font-family="Arial" font-size="7" text-anchor="middle" font-weight="700">Gap: 3.3×</text>
+    </g>
+    <!-- Legend -->
+    <rect x="130" y="196" width="10" height="10" rx="2" fill="rgba(59,130,246,.6)"/>
+    <text x="144" y="205" fill="#7A8099" font-family="Arial" font-size="10">GAAP EPS</text>
+    <rect x="230" y="196" width="10" height="10" rx="2" fill="rgba(201,168,76,.6)"/>
+    <text x="244" y="205" fill="#7A8099" font-family="Arial" font-size="10">Non-GAAP EPS</text>
+  </svg>
+  <p style="font-family:Arial,sans-serif;font-size:11px;color:var(--muted);margin-top:6px;">Salesforce's non-GAAP EPS is 2.3× its GAAP EPS — meaning "adjustments" account for more than half of reported earnings. Uber's gap is even wider at 3.3×. The primary culprit in both: stock-based compensation excluded from non-GAAP.</p>
+</div>
+
+<h3>Stock-Based Compensation: The Hidden Dilution</h3>
+<p>Stock-based compensation (SBC) is a real cost — it dilutes existing shareholders by creating new shares. Yet most tech companies exclude it from "adjusted" earnings, arguing it's "non-cash." This is misleading: <strong class="hl">SBC transfers value from existing shareholders to employees just as surely as if the company paid cash salaries and issued new shares to raise the funds.</strong> When evaluating companies with heavy SBC, always check SBC as a percentage of revenue and look at diluted share count trends. If share count is rising 2–3% per year despite buybacks, SBC is a material cost being hidden.</p>
+
+<p><strong class="hl">The red flag threshold: SBC exceeding 15% of revenue signals material dilution being hidden from profitability calculations.</strong> To compute this, find SBC on the cash flow statement (it's an add-back to operating cash flow) and divide by total revenue. At 15%+, the company is giving away a significant portion of its economic output in shares rather than reporting it as a compensation expense.</p>
+
+<div class="case-study">
+  <div class="case-study-label">Real-World Example — SBC in Practice</div>
+  <h4>Snap Inc.: When SBC Exceeds 25% of Revenue</h4>
+  <p>Snap Inc. has historically reported SBC of 20–30% of revenue. In some quarters, GAAP losses were massive while non-GAAP "profitability" was positive — the only difference being the exclusion of SBC. If you paid Snap's employees in cash instead of stock, the company's "profits" would vanish entirely. For shareholders, the effect is the same: existing ownership gets diluted year after year. <strong class="hl">Always treat SBC as a real expense. The cash flow statement can't lie about it — it's right there as an add-back.</strong></p>
+</div>
+
+<h3>Revenue Recognition & Accounts Receivable</h3>
+<p>Aggressive revenue recognition is one of the subtlest ways companies inflate their results. <strong class="hl">When a company's accounts receivable grow significantly faster than revenue — say A/R up 28% while revenue grows only 12% — it's a warning sign.</strong> This divergence suggests the company may be booking sales before cash is collected, potentially through channel stuffing (shipping products to distributors who haven't ordered them), extended payment terms to flatter the top line, or simply recognizing revenue ahead of actual delivery.</p>
+
+<p><strong class="hl">When a company changes its revenue recognition policy and the change "coincidentally" accelerates revenue into earlier quarters, be skeptical.</strong> Legitimate policy changes are usually imposed by new accounting standards (like ASC 606). Voluntary changes that boost reported revenue deserve heavy scrutiny.</p>
+
+<h3>The Earnings Quality Red Flag Checklist</h3>
+
+<div class="exhibit">
+  <div class="exhibit-label">Exhibit 4.2 — Earnings Quality Red Flag Checklist</div>
+  <table class="fw-table">
+    <thead><tr><th>Red Flag</th><th>What to Look For</th><th>Why It Matters</th></tr></thead>
+    <tbody>
+      <tr><td><strong class="hl" style="color:var(--red);">Persistent "one-time" charges</strong></td><td>Restructuring or impairment charges in 3+ consecutive years</td><td>If it happens every year, it's not one-time — it's a cost of doing business that should be treated as an operating expense</td></tr>
+      <tr><td><strong class="hl" style="color:var(--red);">Growing GAAP-to-adjusted gap</strong></td><td>Non-GAAP EPS diverging further from GAAP EPS each year</td><td>Increasingly aggressive "adjustments" to make results look better</td></tr>
+      <tr><td><strong class="hl" style="color:var(--red);">Revenue-cash flow divergence</strong></td><td>Revenue growing but OCF flat or declining for 2+ years</td><td>Revenue may be recognized aggressively; cash isn't arriving</td></tr>
+      <tr><td><strong class="hl" style="color:var(--red);">Rising accounts receivable</strong></td><td>A/R growing faster than revenue for 2+ quarters</td><td>Company may be booking revenue before customers actually pay</td></tr>
+      <tr><td><strong class="hl" style="color:var(--red);">SBC &gt; 15% of revenue</strong></td><td>Stock-based comp as a share of total revenue</td><td>Material dilution being excluded from "profitability" — at this level, true owner earnings are substantially lower than headlines</td></tr>
+      <tr><td><strong class="hl" style="color:var(--red);">Frequent changes in accounting</strong></td><td>Shifts in revenue recognition, depreciation methods, segment definitions</td><td>Makes year-over-year comparison difficult — sometimes intentionally</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="callout callout-orange">
+  <div class="callout-label">Critical Analytical Principle</div>
+  <p>When multiple red flags appear simultaneously — for example, flat operating cash flow despite growing earnings, A/R growing 2× faster than revenue, AND a widening GAAP-to-adjusted gap — the pattern collectively points to earnings quality deterioration. Each flag alone might be explainable. Together, they form a pattern of aggressive accounting inflating reported results above actual economic performance. This is exactly the pattern this checklist is designed to catch.</p>
+</div>
+
+<div class="callout">
+  <div class="callout-label">Beat Lynch Connection</div>
+  <p>Earnings quality directly impacts the <strong>explainability</strong> of every score Mean Magic produces. If a company's reported numbers are unreliable, the Growth Quality, Moat Strength, and Financial Durability scores all inherit that noise. This is why the Stock Analyzer cross-references cash flow patterns against reported earnings — it's looking for exactly the divergences described in this lesson.</p>
+</div>
+
+<div class="callout callout-red">
+  <div class="callout-label">Red Flag — Revenue Recognition</div>
+  <p>When a company changes its revenue recognition policy and the change "coincidentally" accelerates revenue into earlier quarters, be skeptical. Legitimate policy changes are usually imposed by new accounting standards (like ASC 606). Voluntary changes that boost reported revenue deserve heavy scrutiny.</p>
+</div>
+
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════ -->
+<!-- LESSON 5 -->
+<!-- ════════════════════════════════════════════════════════════════ -->
+<div class="lesson-card" onclick="toggleLesson(4)">
+  <div class="lesson-num">05</div>
+  <div><div class="lesson-title">Catalysts, Risks & the Investment Case</div><div class="lesson-desc">Catalyst types · Risk identification · Building the bull/bear case · Variant perception · Investment thesis</div></div>
+  <div class="lesson-mp">25 MP</div>
+</div>
+<div class="lesson-detail" id="ld4">
+
+<div class="tag-row">
+  <span class="ctag">Catalyst Identification</span><span class="ctag">Risk Assessment</span><span class="ctag">Bull/Bear Case</span><span class="ctag">Variant Perception</span><span class="ctag">Investment Thesis</span>
+</div>
+
+<h3>From Analysis to Action: Building the Investment Case</h3>
+<p>Lessons 1–4 gave you the analytical toolkit: you can now evaluate revenue quality, profitability, balance sheet health, and earnings integrity. But analysis without synthesis is just data collection. <strong class="hl">The investment case is where you integrate everything into a buy, sell, or pass decision.</strong> This is where you transition from analyst to investor.</p>
+
+<p>Every investment case has four components: <strong class="hl">(1) the thesis</strong> — why this company will generate returns; <strong class="hl">(2) catalysts</strong> — what specific events will unlock value; <strong class="hl">(3) risks</strong> — what could go wrong and how badly; and <strong class="hl">(4) valuation context</strong> — whether the price gives you adequate margin of safety. In this lesson, we focus on the first three. Valuation tools (P/E, PEG, EV/EBITDA) are covered as you apply them in competition contexts.</p>
+
+<h3>Catalyst Identification</h3>
+<p>A catalyst is a specific, identifiable event or development that could move a stock's price toward your target. Catalysts transform a cheap stock from "cheap and going nowhere" to "cheap and about to rerate." <strong class="hl">Without a catalyst, value traps persist indefinitely</strong> — Graham's margin of safety works, but patience has limits in a competition context. In a NIL tournament with a defined time window, you need catalysts that will play out within the tournament timeframe.</p>
+
+<div class="exhibit">
+  <div class="exhibit-label">Exhibit 5.1 — Catalyst Taxonomy & Impact Framework</div>
+  <table class="fw-table">
+    <thead><tr><th>Category</th><th>Examples</th><th>Typical Timeline</th><th>Strength</th></tr></thead>
+    <tbody>
+      <tr><td><strong class="hl">Earnings Acceleration</strong></td><td>Margin expansion, revenue inflection, new product ramp</td><td>1–3 quarters</td><td style="color:var(--green);font-weight:700;">High</td></tr>
+      <tr><td><strong class="hl">Capital Return</strong></td><td>Buyback authorization, dividend initiation, special dividend</td><td>Immediate–2 quarters</td><td style="color:var(--green);font-weight:700;">Medium–High</td></tr>
+      <tr><td><strong class="hl">Strategic Action</strong></td><td>Acquisition, divestiture, spin-off, new partnership</td><td>Variable</td><td style="color:var(--gold);font-weight:700;">Medium</td></tr>
+      <tr><td><strong class="hl">Sector/Macro Tailwind</strong></td><td>Rate cuts benefiting REITs, regulation favoring specific industry</td><td>Multi-quarter</td><td style="color:var(--gold);font-weight:700;">Medium</td></tr>
+      <tr><td><strong class="hl">Management Change</strong></td><td>New CEO, activist involvement, board restructuring</td><td>6–18 months</td><td style="color:var(--orange);font-weight:700;">Variable</td></tr>
+      <tr><td><strong class="hl">Narrative Shift</strong></td><td>Analyst upgrades, index inclusion, media attention</td><td>Days–weeks</td><td style="color:var(--orange);font-weight:700;">Low–Medium</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="case-study">
+  <div class="case-study-label">Real-World Example — Catalysts in Action</div>
+  <h4>Meta's "Year of Efficiency" (2023): Multiple Catalysts Stacking</h4>
+  <p>In early 2023, Meta Platforms (META) stock had fallen 75% from its peak. Then Mark Zuckerberg declared 2023 the "Year of Efficiency" — a combination of catalysts that transformed the stock:</p>
+  <p><span class="cs-metric cs-good">Earnings Acceleration</span> Massive cost cuts: 21,000 employees laid off, driving operating margins from 20% to 40%+.</p>
+  <p><span class="cs-metric cs-good">Capital Return</span> First-ever dividend announced in February 2024, plus $40B buyback program.</p>
+  <p><span class="cs-metric cs-good">Narrative Shift</span> The story flipped from "Zuckerberg is burning cash on the metaverse" to "Meta is a disciplined AI company." Analyst upgrades followed in waves.</p>
+  <p>The result: META rose over 180% in 2023. <strong class="hl">Each catalyst was identifiable in advance and trackable in real time — exactly the kind of catalyst-driven thesis that wins competitions.</strong></p>
+</div>
+
+<h3>Risk Identification & Asymmetric Thinking</h3>
+<p>Every investment thesis must include a clear-eyed assessment of what could go wrong. Professional analysts structure risk into three categories: <strong class="hl">company-specific risks</strong> (execution, competition, key-person dependency), <strong class="hl">sector risks</strong> (regulation, disruption, cyclicality), and <strong class="hl">macro risks</strong> (recession, interest rates, geopolitics). For each risk, assess both the probability and the potential magnitude of impact.</p>
+
+<p>The key mental model is <strong class="hl">asymmetry.</strong> You want investments where the upside if you're right is much larger than the downside if you're wrong. A stock with 60% upside potential and 15% downside is highly asymmetric in your favor. One with 30% upside and 40% downside is a poor bet even if you think you'll be right — the math doesn't work unless your conviction is extremely high.</p>
+
+<div class="exhibit">
+  <div class="exhibit-label">Exhibit 5.2 — Investment Case Template: The Five-Part Framework</div>
+  <div style="display:flex;flex-direction:column;gap:2px;">
+    <div style="background:rgba(34,197,94,.08);border-radius:8px 8px 0 0;padding:14px 18px;">
+      <p style="font-family:Arial,sans-serif;font-size:11px;font-weight:700;color:var(--green);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;">1. Thesis (Why Buy)</p>
+      <p style="font-size:13px;margin:0;color:var(--text);">One paragraph: What does this company do well, and why will the market reward it? Reference revenue quality (L1), profitability (L2), and financial health (L3). Verify earnings quality (L4) before building on reported numbers.</p>
+    </div>
+    <div style="background:rgba(59,130,246,.08);padding:14px 18px;">
+      <p style="font-family:Arial,sans-serif;font-size:11px;font-weight:700;color:var(--accent);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;">2. Catalysts (What Unlocks Value)</p>
+      <p style="font-size:13px;margin:0;color:var(--text);">List 2–3 specific catalysts with timelines. Each must be identifiable and trackable. In tournament settings, prioritize catalysts within the competition window.</p>
+    </div>
+    <div style="background:rgba(239,68,68,.08);padding:14px 18px;">
+      <p style="font-family:Arial,sans-serif;font-size:11px;font-weight:700;color:var(--red);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;">3. Risks (What Could Go Wrong)</p>
+      <p style="font-size:13px;margin:0;color:var(--text);">List 2–3 key risks. For each: probability (low/medium/high), impact severity, and what would change your mind.</p>
+    </div>
+    <div style="background:rgba(201,168,76,.08);padding:14px 18px;">
+      <p style="font-family:Arial,sans-serif;font-size:11px;font-weight:700;color:var(--gold);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;">4. Valuation Context (Is It Cheap Enough)</p>
+      <p style="font-size:13px;margin:0;color:var(--text);">Current P/E, PEG, EV/EBITDA vs. historical averages and peers. What price offers margin of safety?</p>
+    </div>
+    <div style="background:rgba(168,85,247,.08);border-radius:0 0 8px 8px;padding:14px 18px;">
+      <p style="font-family:Arial,sans-serif;font-size:11px;font-weight:700;color:var(--purple);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;">5. Variant Perception (What the Market Misses)</p>
+      <p style="font-size:13px;margin:0;color:var(--text);">What do you believe that consensus does not? This is where alpha lives. If you agree with everyone, the price already reflects your view — and you have no edge.</p>
+    </div>
+  </div>
+</div>
+
+<h3>Variant Perception: Where Alpha Lives</h3>
+<p>This concept, drawn from Druckenmiller's decision hierarchy in Course 1.1, is what separates good analysts from good investors. <strong class="hl">Variant perception means holding a well-reasoned view that differs from market consensus on a specific, identifiable dimension.</strong> Markets are efficient most of the time — you need to find the places where they're wrong and have the conviction to act. This isn't contrarianism for its own sake. It's identifying where your analysis reveals something the market hasn't priced in.</p>
+
+<p><strong class="hl">Variant perception is separated from the thesis as a distinct component because it forces you to answer the most critical question: "What do I believe that the market doesn't?"</strong> A strong thesis, catalysts, and valuation are necessary but not sufficient — if everyone agrees with your analysis, the stock already reflects it. By making variant perception explicit, the framework prevents you from mistaking consensus-confirming analysis for an edge.</p>
+
+<div class="case-study">
+  <div class="case-study-label">Real-World Example — Variant Perception</div>
+  <h4>Microsoft + OpenAI (2023): Seeing What Others Missed</h4>
+  <p>In late 2022, consensus viewed Microsoft as a mature, slow-growth enterprise software company. The variant perception: Microsoft's early investment in OpenAI positioned it to embed AI into every product — Office, Azure, GitHub, Bing — creating a revenue acceleration that the market was dramatically underpricing. Investors who recognized this specific dimension of disagreement (AI would accelerate growth, not just be a feature) were rewarded as Microsoft added over $1 trillion in market cap in 2023. <strong class="hl">The edge wasn't "Microsoft is good" (everyone knew that) — it was "the market underestimates how much AI changes Microsoft's growth trajectory."</strong></p>
+</div>
+
+<div class="callout callout-purple">
+  <div class="callout-label">Second-Level Thinking</div>
+  <p>Howard Marks taught us that first-level thinking says "This is a great company, let's buy." Second-level thinking says "This is a great company, everyone knows it, the stock is expensive, and expectations are sky-high — any disappointment causes a major selloff. Let's wait." Your investment case must include second-level reasoning about what's already priced in. First-level thinking produces obvious conclusions. Second-level thinking produces edge.</p>
+</div>
+
+<div class="callout">
+  <div class="callout-label">Beat Lynch Connection</div>
+  <p>When you build your competition portfolio in Course 2.3, every position will need an investment case built using this five-part framework. The <strong>Catalyst Vector</strong> and <strong>Risk Vector</strong> in the Stock Analyzer are the platform's quantified versions of parts 2 and 3. The complete framework you learned here becomes your decision-making discipline in NIL tournaments.</p>
+</div>
+
+<div class="completion-badge">
+  <div style="font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:8px;">Course 2.1 Complete</div>
+  <div style="font-size:20px;color:#fff;margin-bottom:6px;">Applied Company Analysis</div>
+  <div style="font-family:Arial,sans-serif;font-size:14px;color:var(--muted);">125 Mastery Points available upon passing the Final Exam</div>
+</div>
+
+</div>
+
+</div><!-- end lesson-grid -->
+</div><!-- end section -->
+</div><!-- end container -->
+</div><!-- end tab-curriculum -->
+
+<!-- ════════════════════════════════════════════════════════════════ -->
+<!-- EXAM TAB -->
+<!-- ════════════════════════════════════════════════════════════════ -->
+<div class="tab-content" id="tab-exam">
+<div class="container">
+<div class="exam-wrap" id="examWrap">
+
+<div class="start-exam-wrap" id="startExam">
+  <h2>Final Exam — Applied Company Analysis</h2>
+  <p>20 scenario-driven questions testing your ability to evaluate companies using the frameworks from all five lessons. 80% (16/20) required to pass and earn 125 Mastery Points.</p>
+  <div class="exam-rules">
+    <div class="rule-card"><div class="r-num">20</div><div class="r-label">Questions</div></div>
+    <div class="rule-card"><div class="r-num">80%</div><div class="r-label">Pass Threshold</div></div>
+    <div class="rule-card"><div class="r-num">125</div><div class="r-label">Mastery Points</div></div>
+    <div class="rule-card"><div class="r-num">3</div><div class="r-label">Synthesis Qs</div></div>
+  </div>
+  <button class="exam-btn" onclick="startExam()">BEGIN EXAM</button>
+</div>
+
+<div id="examContent" style="display:none;">
+  <div class="score-bar-wrap">
+    <div><div class="score-big" id="scoreNum">0</div><div class="score-sub">of 20 correct</div></div>
+    <div style="flex:1;min-width:200px;">
+      <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+      <div style="display:flex;justify-content:space-between;margin-top:4px;font-family:Arial,sans-serif;font-size:10px;color:var(--muted);"><span id="answeredCount">0/20 answered</span><span>Pass: 16/20</span></div>
+    </div>
+  </div>
+  <div id="questionsContainer"></div>
+  <div class="exam-result" id="examResult">
+    <div class="result-score" id="finalScore"></div>
+    <div id="resultStatus" style="font-family:Arial,sans-serif;font-size:18px;font-weight:700;margin-bottom:8px;"></div>
+    <div class="result-msg" id="resultMsg"></div>
+    <button class="exam-btn" onclick="retakeExam()">RETAKE EXAM</button>
+  </div>
+</div>
+
+</div>
+</div>
+</div>
+
+<script>
+function switchTab(t){
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
+  document.getElementById('tab-'+t).classList.add('active');
+  document.querySelectorAll('.tab-btn').forEach(b=>{if(b.textContent.trim().toLowerCase().replace(/\s/g,'').includes(t))b.classList.add('active');});
+}
+document.querySelectorAll('.tab-btn').forEach(b=>b.addEventListener('click',function(){
+  let t=this.textContent.trim().toLowerCase()==='curriculum'?'curriculum':'exam';
+  switchTab(t);
+}));
+
+function toggleLesson(i){
+  let d=document.getElementById('ld'+i);
+  let c=d.previousElementSibling;
+  if(d.classList.contains('open')){d.classList.remove('open');c.classList.remove('active-card');}
+  else{document.querySelectorAll('.lesson-detail').forEach(x=>x.classList.remove('open'));document.querySelectorAll('.lesson-card').forEach(x=>x.classList.remove('active-card'));d.classList.add('open');c.classList.add('active-card');}
+}
+
+const Q=[
+{q:"A software company reports $800M in revenue, of which 72% comes from annual subscriptions and 28% from professional services engagements. A competitor reports $800M in revenue, of which 90% is from multi-year contractual SaaS agreements. Which company likely has higher revenue quality, and why?",opts:["The first company, because professional services add diversification to the revenue base","The second company, because multi-year SaaS contracts provide greater revenue predictability and recurrence","Both are equal because total revenue is identical","The first company, because annual subscriptions give more flexibility than multi-year contracts"],ans:1,exp:"Multi-year contractual SaaS revenue scores 95 on the revenue quality spectrum — the highest tier. It's both recurring and contractually locked in. While both companies have subscription components, 90% multi-year SaaS is significantly more predictable than 72% annual subscriptions plus 28% project-based professional services (which score much lower on the recurrence scale). As demonstrated by the Salesforce example in Lesson 1, contractual SaaS creates massive switching costs and revenue visibility."},
+{q:"Company X grew revenue 25% last year. Upon further analysis, you discover the company completed two acquisitions contributing $180M in revenue this year, while total revenue is $900M. What is the approximate organic growth rate?",opts:["25% — the acquisitions simply accelerate existing trends","5% — organic revenue of $720M grew from approximately $685M the prior year, a ~5% increase","20% — only $180M of $900M was acquired","Impossible to determine precisely without knowing the prior-year organic revenue breakdown"],ans:3,exp:"This is a critical analytical skill. Total revenue is $900M at 25% growth, so prior-year revenue was $720M. Acquired businesses contributed $180M this year — but those same businesses were also generating revenue last year (before being acquired), and that revenue was counted in somebody's prior-year total. Without knowing how much of the $720M prior-year base included these acquired companies' prior revenue, you can't isolate the true organic growth rate. As taught in Lesson 1: calculating organic growth requires both current and prior-year organic revenue figures — always check if the company discloses organic growth directly."},
+{q:"A retailer generates 35% of its revenue from a single wholesale customer. Which of the following best describes the primary risk?",opts:["The company cannot grow because it's dependent on retail trends","The company faces concentration risk — losing or renegotiating with this customer would devastate revenue","The company's TAM is too small to support growth","The company's margins must be low because wholesale pricing is discounted"],ans:1,exp:"Customer concentration above 20% from a single source creates material risk — and 35% is extreme. If that customer reduces orders, shifts to a competitor, or renegotiates terms, the company loses more than a third of its revenue. As illustrated by the Qualcomm/Apple example in Lesson 1, even when the relationship is active, the dependency creates strategic vulnerability and negotiating weakness."},
+{q:"Company A has gross margins of 42% and operates in consumer electronics. Company B has gross margins of 42% and operates in enterprise software. Which statement is most accurate?",opts:["Both companies have identical competitive positioning since margins are the same","Company A likely has stronger competitive positioning relative to its industry than Company B","The comparison is meaningless without operating margins","Company B likely has stronger competitive positioning since software margins are typically higher"],ans:1,exp:"As detailed in Lesson 2's industry margin benchmarks: consumer electronics typically operates at 25–35% gross margins, so 42% is exceptional — 7+ points above the range, suggesting extraordinary brand pricing power (Apple territory at ~44%). Enterprise software typically operates at 70–85% gross margins, making 42% nearly 30 points below the industry range — indicating a services-heavy or cost-inefficient model. Same number, completely opposite diagnostic conclusions. Company A is the standout relative to its peers."},
+{q:"You're comparing two companies. Company P has ROE of 28% with debt/equity of 2.5. Company Q has ROE of 22% with debt/equity of 0.3. Which company more clearly demonstrates genuine business quality?",opts:["Company P, because 28% ROE is higher than 22%","Company Q, because its 22% ROE is achieved with minimal leverage, indicating the business itself generates strong returns","Both are equivalent quality — ROE is ROE regardless of leverage","Neither — you need ROIC to evaluate business quality"],ans:1,exp:"Company P's high ROE is significantly inflated by leverage (debt/equity of 2.5 is well above the 1.5 'elevated' threshold from Lesson 3). Company Q achieves a strong 22% ROE with minimal debt (0.3 is in the 'strong' zone), meaning the underlying business generates excellent returns on its own. This is exactly why Lesson 2 teaches that ROIC is preferred over ROE — ROE can be boosted by financial engineering. Company Q's low-leverage ROE more closely reflects genuine capital efficiency."},
+{q:"A company reports EBIT of $500M, an effective tax rate of 25%, total equity of $1.2B, total debt of $800M, and cash of $300M. What is the company's ROIC?",opts:["22.1%","29.4%","37.5%","20.8%"],ans:0,exp:"Following the four-step ROIC calculation from Lesson 2: (1) EBIT = $500M. (2) NOPAT = $500M × (1 − 0.25) = $375M. (3) Invested capital = $1.2B equity + $800M debt − $300M cash = $1.7B. (4) ROIC = $375M ÷ $1.7B = 22.1%. This exceeds the 15% moat threshold and sits in 'strong' territory for most industries."},
+{q:"Which of the following sustained ROIC levels most strongly suggests the presence of a durable competitive moat?",opts:["8% ROIC maintained for 10 years","15% ROIC for 2 years followed by decline to 9%","22% ROIC maintained for 7 consecutive years","40% ROIC in a single exceptional year"],ans:2,exp:"Lesson 2 is explicit: 'ROIC above 15% sustained over five or more years is the single strongest quantitative signal of a competitive moat.' A single great year (even 40%) proves nothing about durability — it could be a one-time event. Two years at 15% followed by decline suggests temporary advantage, not a moat. Eight percent for 10 years shows consistency but below the moat threshold. Seven consecutive years at 22% — well above 15% and sustained beyond the five-year bar — is the clearest moat signal."},
+{q:"A company has net debt/EBITDA of 4.2× and interest coverage of 2.1×. How would you characterize its financial health?",opts:["Healthy — these are normal levels for most companies","Stressed — both leverage and coverage ratios are in concerning territory","Moderate — leverage is high but coverage is adequate","Cannot determine without knowing the current ratio"],ans:1,exp:"Per the four-pillar dashboard in Lesson 3: Net debt/EBITDA above 3× is 'Stressed' (this company is at 4.2×). Interest coverage below 3× is 'Danger' zone (this company is at 2.1×). When both metrics flag simultaneously, the balance sheet is clearly distressed — the company has too much debt relative to earnings and barely enough operating profit to service it. You don't need the current ratio to reach this conclusion; two pillars in red is diagnostic."},
+{q:"Microsoft generates ~$68B in annual FCF. Boeing has generated negative FCF averaging -$4.2B over five years. A peer claims Boeing is a better investment because its revenue ($78B) is higher than some years of Microsoft. What is the most critical flaw in this reasoning?",opts:["Revenue size is irrelevant — only earnings matter","Revenue without consistent free cash flow generation indicates the business cannot convert sales into shareholder value","Boeing's negative FCF is temporary and will reverse","Revenue comparisons only work within the same industry"],ans:1,exp:"The fundamental flaw is equating revenue size with business quality. As Lesson 3 demonstrates with the Microsoft vs. Boeing FCF chart, free cash flow is the ultimate test of business health — it measures actual cash the business generates for shareholders after all expenses and investments. Boeing produces $78B in revenue but burns cash doing it. Revenue without FCF means the business cannot convert sales into shareholder value — exactly the principle that makes FCF consistency the fourth pillar of financial health."},
+{q:"A tech company reports non-GAAP EPS of $8.50 and GAAP EPS of $3.20. The primary exclusion is stock-based compensation of $2.1B against revenue of $9.5B. What is SBC as a percentage of revenue, and is this a red flag?",opts:["22.1% — yes, this exceeds the 15% threshold and represents material shareholder dilution being hidden","22.1% — no, SBC is a non-cash expense and is correctly excluded","3.8% — this is well within normal ranges","Cannot determine without knowing the share count"],ans:0,exp:"SBC/revenue = $2.1B ÷ $9.5B = 22.1%. This exceeds the 15% red flag threshold from Lesson 4's Earnings Quality Red Flag Checklist. While SBC is technically non-cash, it dilutes existing shareholders just as surely as cash compensation — as illustrated by the Snap Inc. example. At 22.1%, the company is giving away over a fifth of its economic output in shares while excluding this cost from 'profitability.' The 2.7× gap between non-GAAP ($8.50) and GAAP ($3.20) EPS confirms how much these adjustments inflate the picture."},
+{q:"A company's accounts receivable grew 28% year-over-year while revenue grew only 12%. Which earnings quality concern does this most directly suggest?",opts:["The company is becoming more profitable","The company may be recognizing revenue aggressively — booking sales before cash is collected","The company is investing heavily in growth","This is normal for any growing company"],ans:1,exp:"When A/R grows significantly faster than revenue (28% vs. 12% — more than double), it suggests the company is booking revenue that hasn't been collected in cash. As Lesson 4 teaches, this divergence could indicate channel stuffing, extended payment terms to flatter the top line, or aggressive revenue recognition. It's a classic red flag: 'A/R growing faster than revenue for 2+ quarters' means the company may be pulling future revenue into the present."},
+{q:"A company reports restructuring charges in 2020, 2021, 2022, and 2023, each time calling them \"one-time.\" What should an analyst conclude?",opts:["Each restructuring is genuinely separate and should be excluded from ongoing analysis","These are effectively recurring costs of doing business and should be treated as operating expenses when evaluating earnings","The company is improving its operations through continuous restructuring","This is standard practice for large companies and not a concern"],ans:1,exp:"Four consecutive years of 'one-time' charges is a clear red flag from Lesson 4's checklist: 'Restructuring or impairment charges in 3+ consecutive years — if it happens every year, it's not one-time — it's a cost of doing business that should be treated as an operating expense.' An honest earnings assessment treats these as recurring operating expenses, not adjustable items. Companies that routinely reclassify operating costs as 'one-time' are systematically inflating their adjusted earnings."},
+{q:"You identify a stock trading at 14× earnings that you believe is worth 20× based on improving margins. However, you cannot identify a specific catalyst that would cause the market to re-rate the stock. What is the primary risk of this position?",opts:["The stock could decline further due to lack of catalyst","The stock could become a value trap — fairly valued by your analysis but never reaching that value without a trigger","The absence of a catalyst means your analysis is wrong","14× earnings is already expensive so there's no upside"],ans:1,exp:"This is the value trap problem from Lesson 5. Without an identifiable catalyst, a cheap stock can remain cheap indefinitely — your analysis may be completely correct, but the market needs a reason to rerate. As the lesson teaches: 'Without a catalyst, value traps persist indefinitely — patience has limits in a competition context.' In a NIL tournament with a defined time window, this risk is particularly acute."},
+{q:"Which catalyst type typically has the shortest timeline to impact stock price?",opts:["Management change with activist involvement","Capital return announcement (buyback or dividend)","Sector-wide regulatory reform","New product development reaching commercial launch"],ans:1,exp:"Per Exhibit 5.1's Catalyst Taxonomy: Capital return actions (buybacks, dividends) have a timeline of 'Immediate–2 quarters' — the shortest of any category. They often move the stock on the announcement itself because they signal management confidence and return cash directly to shareholders. Management changes take 6–18 months, regulatory reform unfolds over multiple quarters, and product launches have variable timelines."},
+{q:"An investor builds a bull case arguing: 'This company has 20% revenue growth, 30% operating margins, and ROIC of 25%. It's a clear buy.' What critical element is missing from this analysis?",opts:["A discounted cash flow model","Earnings quality verification — are the reported numbers reliable before building a thesis on them?","Share price momentum data","Competitor revenue comparisons"],ans:1,exp:"Before building any investment case on reported numbers, Lesson 4 teaches you must verify earnings quality. What if the 20% growth is acquisition-driven (Lesson 1)? What if the 30% margins exclude massive SBC? What if ROIC is calculated on understated invested capital? As stated in Lesson 4: 'You must always verify earnings quality before building any investment thesis on reported numbers. If the numbers aren't trustworthy, the entire thesis is built on sand.'"},
+{q:"Variant perception, as applied in the investment case framework, is best described as:",opts:["Disagreeing with Wall Street analysts on principle to find contrarian opportunities","A well-reasoned analytical view that differs from market consensus on a specific, identifiable dimension","Buying stocks that have recently declined in price","Following insider buying signals to identify opportunities the market has missed"],ans:1,exp:"Lesson 5 defines variant perception precisely: 'holding a well-reasoned view that differs from market consensus on a specific, identifiable dimension.' It's not blind contrarianism or a mechanical strategy. As the Microsoft/OpenAI example illustrates, the edge was a specific insight — 'the market underestimates how much AI changes Microsoft's growth trajectory' — not just a vague disagreement. This requires evidence-based analysis identifying exactly where consensus is wrong."},
+{q:"[SYNTHESIS] A company reports: revenue up 18% (all organic), gross margin 74%, ROIC 31%, debt/equity 0.4, interest coverage 22×, FCF margin 28%. However, SBC is 19% of revenue and GAAP EPS is 40% below non-GAAP EPS. What is the most balanced assessment?",opts:["This is an outstanding business with no concerns — all fundamental metrics are exceptional","The business is fundamentally strong (quality revenue, moat-grade ROIC, fortress balance sheet), but earnings quality is compromised by heavy SBC, meaning true profitability is materially lower than non-GAAP suggests","The SBC issue invalidates all the positive metrics — this is a poor investment","You cannot evaluate this company without performing a DCF analysis"],ans:1,exp:"This synthesis question integrates Lessons 1–4. The fundamentals are genuinely strong: 18% organic growth (L1 — passes the checklist), 74% gross margin and 31% ROIC (L2 — moat-grade returns well above 15% threshold), low leverage with 22× interest coverage (L3 — fortress on all four pillars). But Lesson 4's analysis reveals SBC at 19% of revenue — above the 15% red flag threshold — and a 40% GAAP-to-adjusted gap. The business is real, but true owner earnings are materially lower than headlines suggest. You'd invest with eyes open to the dilution cost."},
+{q:"[SYNTHESIS] You're evaluating two companies for a NIL tournament portfolio. Company X: 8% organic revenue growth, ROIC 24%, FCF margin 22%, no debt, but trading at 28× earnings with no clear near-term catalyst. Company Y: 15% organic revenue growth, ROIC 16%, net debt/EBITDA 2.8×, but with an upcoming product launch expected next quarter and trading at 18× earnings. Which analysis best applies the Course 2.1 frameworks?",opts:["Company X is clearly better — higher ROIC and zero debt make it the safer choice","Company Y is clearly better — higher growth and cheaper valuation make it the obvious winner","Company X is the higher-quality business (Lessons 1–3), but Company Y has a better risk-reward profile for a tournament given its catalyst, lower valuation, and higher growth — with the caveat that its leverage warrants monitoring","Both are equally attractive and should receive equal position sizes"],ans:2,exp:"This integrates all five lessons. Company X scores higher on quality: better ROIC at 24% (L2), pristine balance sheet with zero debt (L3), strong FCF. But it lacks a catalyst (L5) and is expensive at 28×. Company Y has stronger growth at 15% (L1), an identifiable near-term catalyst — the product launch (L5), better valuation at 18× — but leverage at 2.8× net debt/EBITDA approaches the 3× 'stressed' threshold (L3). In a tournament with time constraints, Company Y's catalyst and valuation create better risk-reward, provided you monitor the balance sheet."},
+{q:"[SYNTHESIS] A company shows: revenue growing 12% annually, net income growing 20% annually, but operating cash flow has been flat for three years. Accounts receivable have grown 25% each year while revenue grew 12%. GAAP-to-adjusted earnings gap has widened from 10% to 35% over four years. What is the most likely explanation?",opts:["The company is investing heavily for future growth, temporarily depressing cash flow","Earnings growth is likely being manufactured through aggressive accounting — revenue recognition, growing receivables, and widening adjustments all suggest reported profits overstate true economic performance","Cash flow timing differences that will normalize in future quarters","The company is transitioning business models, which temporarily disrupts cash flow patterns"],ans:1,exp:"Three simultaneous red flags from the Lesson 4 checklist: (1) flat OCF despite growing earnings = revenue-cash flow divergence, (2) A/R growing at 2× revenue growth = potential aggressive revenue recognition, and (3) GAAP-to-adjusted gap tripling from 10% to 35% = widening adjustment abuse. As the lesson's critical analytical principle states: 'When multiple red flags appear simultaneously, the pattern collectively points to earnings quality deterioration. Each flag alone might be explainable. Together, they form a pattern of aggressive accounting inflating reported results.' This is exactly the pattern the red flag checklist was designed to catch."},
+{q:"The five-part investment case framework presented in Lesson 5 includes Thesis, Catalysts, Risks, Valuation Context, and Variant Perception. Why is variant perception included as a separate component rather than being embedded in the thesis?",opts:["It's a marketing distinction with no practical analytical purpose","Because variant perception explicitly identifies where your view differs from consensus — without it, you may be buying a stock where your bullish thesis is already fully priced in, eliminating potential alpha","Because variant perception replaces traditional fundamental analysis with behavioral analysis","Because it's required by the Beat Lynch Stock Analyzer's scoring algorithm"],ans:1,exp:"As Lesson 5 teaches: 'Variant perception is separated from the thesis as a distinct component because it forces you to answer the most critical question: What do I believe that the market doesn't?' A strong thesis, catalysts, and valuation are necessary but not sufficient — if everyone agrees with your analysis, the stock already reflects it. The Microsoft/OpenAI example shows this in practice: 'Microsoft is good' was consensus. 'AI changes Microsoft's growth trajectory more than the market expects' was variant perception — and that's where the alpha lived."}
+];
+
+let score=0,answered=0;
+
+function startExam(){
+  document.getElementById('startExam').style.display='none';
+  document.getElementById('examContent').style.display='block';
+  renderQuestions();
+}
+
+function renderQuestions(){
+  let h='';
+  Q.forEach((q,i)=>{
+    let synth=q.q.startsWith('[SYNTHESIS]')?'<span style="color:var(--purple);font-weight:700;">[SYNTHESIS] </span>':'';
+    let qText=q.q.startsWith('[SYNTHESIS]')?q.q.slice(12):q.q;
+    h+='<div class="q-block" id="qb'+i+'"><div class="q-num">Question '+(i+1)+' of 20</div><div class="q-text">'+synth+qText+'</div><div class="q-options">';
+    let letters=['A','B','C','D'];
+    q.opts.forEach((o,j)=>{
+      h+='<button class="q-opt" id="qo'+i+'_'+j+'" onclick="answer('+i+','+j+')"><span class="opt-letter">'+letters[j]+'</span><span>'+o+'</span></button>';
+    });
+    h+='</div><div class="q-feedback" id="qf'+i+'"></div></div>';
+  });
+  document.getElementById('questionsContainer').innerHTML=h;
+}
+
+function answer(qi,oi){
+  if(document.getElementById('qb'+qi).classList.contains('answered-correct')||document.getElementById('qb'+qi).classList.contains('answered-wrong'))return;
+  let q=Q[qi],correct=oi===q.ans;
+  answered++;
+  if(correct)score++;
+  q.opts.forEach((_,j)=>{
+    let btn=document.getElementById('qo'+qi+'_'+j);
+    btn.disabled=true;
+    if(j===q.ans)btn.classList.add('correct');
+    if(j===oi&&!correct){btn.classList.add('wrong');document.getElementById('qo'+qi+'_'+q.ans).classList.add('reveal-correct');}
+  });
+  document.getElementById('qb'+qi).classList.add(correct?'answered-correct':'answered-wrong');
+  let fb=document.getElementById('qf'+qi);
+  fb.className='q-feedback '+(correct?'correct':'wrong');
+  fb.style.display='block';
+  fb.textContent=(correct?'Correct. ':'Incorrect. ')+q.exp;
+  document.getElementById('scoreNum').textContent=score;
+  document.getElementById('answeredCount').textContent=answered+'/20 answered';
+  document.getElementById('progressFill').style.width=(answered/20*100)+'%';
+  if(answered===20)showResult();
+}
+
+function showResult(){
+  let r=document.getElementById('examResult');
+  r.style.display='block';
+  document.getElementById('finalScore').textContent=score+'/20';
+  let pass=score>=16;
+  document.getElementById('resultStatus').innerHTML=pass?'<span class="result-pass">PASSED — 125 MP EARNED</span>':'<span class="result-fail">NOT YET — '+score+'/20 (need 16)</span>';
+  document.getElementById('resultMsg').textContent=pass?'You have demonstrated applied company analysis competency. These frameworks — revenue quality, profitability, financial health, earnings quality, and investment case construction — are your analytical foundation for everything ahead in Tier 2.':'Review the lessons, focusing on the areas where you made errors. Each question maps to a specific lesson framework. Retake when ready.';
+  r.scrollIntoView({behavior:'smooth'});
+}
+
+function retakeExam(){
+  score=0;answered=0;
+  document.getElementById('examResult').style.display='none';
+  document.getElementById('scoreNum').textContent='0';
+  document.getElementById('answeredCount').textContent='0/20 answered';
+  document.getElementById('progressFill').style.width='0%';
+  renderQuestions();
+  document.querySelector('.score-bar-wrap').scrollIntoView({behavior:'smooth'});
+}
+</script>
+</body>
+</html>

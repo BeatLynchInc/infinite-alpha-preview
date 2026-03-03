@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course 0.1 — Introduction to Investing & Beat Lynch</title>
+<style>
+:root{--gold:#C9A84C;--dark:#0D0F14;--panel:#13161E;--border:#1E2330;--text:#E8EAF0;--muted:#7A8099;--accent:#3B82F6;--green:#22C55E;--red:#EF4444;--purple:#a855f7;--orange:#f59e0b;--cyan:#06b6d4;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--dark);color:var(--text);font-family:'Georgia',serif;font-size:16px;line-height:1.75;}
+.top-bar{background:var(--panel);border-bottom:1px solid var(--border);padding:12px 32px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:100;}
+.logo{font-family:Arial,sans-serif;font-weight:900;font-size:18px;color:var(--gold);letter-spacing:2px;}
+.pill{background:var(--gold);color:var(--dark);font-family:Arial,sans-serif;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:1px;}
+.tab-nav{display:flex;gap:4px;margin-left:auto;}
+.tab-btn{background:none;border:1px solid var(--border);color:var(--muted);font-family:Arial,sans-serif;font-size:12px;font-weight:700;padding:6px 16px;border-radius:6px;cursor:pointer;transition:all .2s;letter-spacing:.5px;}
+.tab-btn.active{background:var(--gold);color:var(--dark);border-color:var(--gold);}
+.tab-btn:hover:not(.active){border-color:var(--gold);color:var(--gold);}
+.hero{background:linear-gradient(135deg,#0D0F14,#13161E,#0a0c10);border-bottom:1px solid var(--border);padding:56px 32px 40px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:500px;height:500px;background:radial-gradient(circle,rgba(201,168,76,.08) 0%,transparent 70%);pointer-events:none;}
+.course-label{font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:12px;}
+.hero h1{font-size:clamp(26px,4vw,44px);font-weight:400;color:#fff;margin-bottom:12px;line-height:1.2;}
+.hero-sub{font-size:17px;color:var(--muted);max-width:680px;margin:0 auto 28px;}
+.meta-row{display:flex;justify-content:center;gap:28px;flex-wrap:wrap;}
+.meta-item{text-align:center;}
+.meta-num{font-family:Arial,sans-serif;font-size:26px;font-weight:700;color:var(--gold);}
+.meta-label{font-family:Arial,sans-serif;font-size:10px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-top:2px;}
+.container{max-width:960px;margin:0 auto;padding:40px 24px;}
+.section{margin-bottom:52px;}
+.section-title{font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:20px;padding-bottom:10px;border-bottom:1px solid var(--border);}
+h2{font-size:22px;color:#fff;font-weight:400;margin-bottom:10px;}
+h3{font-family:Arial,sans-serif;font-size:12px;font-weight:700;color:var(--gold);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;margin-top:22px;}
+p{color:#BEC3D4;margin-bottom:14px;}
+strong.hl{color:#fff;}
+.tab-content{display:none;}.tab-content.active{display:block;}
+.lesson-grid{display:flex;flex-direction:column;border:1px solid var(--border);border-radius:12px;overflow:hidden;}
+.lesson-card{background:var(--panel);border-bottom:1px solid var(--border);padding:18px 22px;display:grid;grid-template-columns:46px 1fr auto;gap:14px;align-items:start;cursor:pointer;transition:background .2s;}
+.lesson-card:last-child{border-bottom:none;}
+.lesson-card:hover,.lesson-card.active-card{background:#1a1e2a;}
+.lesson-card.active-card{border-left:3px solid var(--gold);}
+.lesson-num{font-family:Arial,sans-serif;font-size:20px;font-weight:700;color:var(--gold);line-height:1;}
+.lesson-title{font-size:16px;color:#fff;margin-bottom:3px;}
+.lesson-desc{font-family:Arial,sans-serif;font-size:12px;color:var(--muted);line-height:1.5;}
+.lesson-mp{font-family:Arial,sans-serif;font-size:12px;font-weight:700;color:var(--gold);background:rgba(201,168,76,.1);padding:3px 10px;border-radius:20px;white-space:nowrap;align-self:center;}
+.lesson-detail{background:#0e1018;border-top:1px solid var(--border);padding:28px;display:none;}
+.lesson-detail.open{display:block;}
+.fw-table{width:100%;border-collapse:collapse;margin:12px 0 20px;}
+.fw-table th{background:rgba(201,168,76,.08);font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);padding:10px 14px;text-align:left;border-bottom:1px solid var(--border);}
+.fw-table td{padding:12px 14px;border-bottom:1px solid var(--border);font-family:Arial,sans-serif;font-size:13px;color:#BEC3D4;vertical-align:top;}
+.fw-table tr:last-child td{border-bottom:none;}
+.fw-table tr:hover td{background:rgba(255,255,255,.02);}
+.callout{background:rgba(201,168,76,.05);border-left:3px solid var(--gold);padding:16px 20px;border-radius:0 8px 8px 0;margin:18px 0;}
+.callout-label{font-family:Arial,sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;}
+.callout p{color:var(--text);margin:0;font-size:14px;}
+.callout-blue{border-left-color:var(--accent);background:rgba(59,130,246,.05);}.callout-blue .callout-label{color:var(--accent);}
+.callout-red{border-left-color:var(--red);background:rgba(239,68,68,.05);}.callout-red .callout-label{color:var(--red);}
+.callout-green{border-left-color:var(--green);background:rgba(34,197,94,.05);}.callout-green .callout-label{color:var(--green);}
+.callout-purple{border-left-color:var(--purple);background:rgba(168,85,247,.05);}.callout-purple .callout-label{color:var(--purple);}
+.callout-cyan{border-left-color:var(--cyan);background:rgba(6,182,212,.05);}.callout-cyan .callout-label{color:var(--cyan);}
+.callout-orange{border-left-color:var(--orange);background:rgba(245,158,11,.05);}.callout-orange .callout-label{color:var(--orange);}
+.exhibit{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:22px;margin:18px 0;}
+.exhibit-label{font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:14px;}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0;}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:16px 0;}
+@media(max-width:640px){.two-col,.three-col,.five-col{grid-template-columns:1fr;}}
+.stat-card{background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.2);border-radius:10px;padding:18px;text-align:center;}
+.stat-num{font-family:Arial,sans-serif;font-size:28px;font-weight:900;color:var(--gold);line-height:1;margin-bottom:4px;}
+.stat-label{font-family:Arial,sans-serif;font-size:11px;color:var(--muted);line-height:1.4;}
+.tag-row{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 14px;}
+.ctag{font-family:Arial,sans-serif;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;letter-spacing:.5px;background:rgba(201,168,76,.15);color:var(--gold);border:1px solid rgba(201,168,76,.3);}
+.divider{border:none;border-top:1px solid var(--border);margin:36px 0;}
+.completion-badge{background:linear-gradient(135deg,rgba(201,168,76,.1),rgba(59,130,246,.06));border:1px solid rgba(201,168,76,.35);border-radius:16px;padding:32px;text-align:center;margin:24px 0;}
+.svg-wrap{display:flex;justify-content:center;margin:18px 0;}
+.svg-wrap svg{max-width:100%;height:auto;}
+.legend-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0;}
+@media(max-width:640px){.legend-grid{grid-template-columns:1fr;}}
+.legend-mini{background:rgba(201,168,76,.04);border:1px solid rgba(201,168,76,.15);border-radius:10px;padding:14px 16px;display:flex;gap:12px;align-items:center;}
+.legend-mini .l-icon{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:Arial,sans-serif;font-size:15px;font-weight:900;color:var(--dark);flex-shrink:0;}
+.legend-mini .l-name{font-family:Arial,sans-serif;font-size:13px;font-weight:700;color:#fff;}
+.legend-mini .l-hook{font-family:Arial,sans-serif;font-size:11px;color:var(--muted);line-height:1.4;}
+/* Company example cards */
+.co-example{background:rgba(201,168,76,.04);border:1px solid rgba(201,168,76,.18);border-radius:10px;padding:16px 18px;margin:12px 0;display:flex;gap:14px;align-items:flex-start;}
+.co-example .co-icon{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:Arial,sans-serif;font-size:18px;font-weight:900;flex-shrink:0;}
+.co-example .co-body{flex:1;}
+.co-example .co-name{font-family:Arial,sans-serif;font-size:14px;font-weight:700;color:#fff;margin-bottom:2px;}
+.co-example .co-ticker{font-family:Arial,sans-serif;font-size:11px;color:var(--gold);font-weight:700;margin-bottom:4px;}
+.co-example .co-text{font-family:Arial,sans-serif;font-size:13px;color:#BEC3D4;line-height:1.5;margin:0;}
+/* Exam styles */
+.exam-wrap{max-width:800px;margin:0 auto;}
+.start-exam-wrap{text-align:center;padding:40px 20px;}
+.start-exam-wrap h2{color:#fff;margin-bottom:12px;}
+.start-exam-wrap p{color:var(--muted);max-width:500px;margin:0 auto 24px;}
+.exam-rules{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin:24px 0;text-align:left;}
+.rule-card{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:14px;}
+.rule-card .r-num{font-family:Arial,sans-serif;font-size:22px;font-weight:900;color:var(--gold);}
+.rule-card .r-label{font-family:Arial,sans-serif;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;}
+.score-bar-wrap{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:20px 28px;margin-bottom:28px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;}
+.score-big{font-size:42px;font-weight:900;color:var(--gold);line-height:1;}
+.score-sub{font-size:12px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;}
+.progress-track{flex:1;min-width:200px;background:rgba(255,255,255,.06);border-radius:8px;height:12px;overflow:hidden;}
+.progress-fill{height:100%;background:linear-gradient(90deg,rgba(201,168,76,.5),var(--gold));border-radius:8px;transition:width .5s ease;}
+.q-block{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:22px;margin-bottom:14px;transition:border-color .3s;}
+.q-block.answered-correct{border-color:var(--green);}
+.q-block.answered-wrong{border-color:var(--red);}
+.q-num{font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:8px;}
+.q-text{font-size:15px;color:#fff;margin-bottom:16px;line-height:1.6;}
+.q-options{display:flex;flex-direction:column;gap:8px;}
+.q-opt{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:8px;padding:11px 15px;font-family:Arial,sans-serif;font-size:14px;color:#BEC3D4;cursor:pointer;transition:all .2s;text-align:left;display:flex;gap:12px;align-items:flex-start;}
+.q-opt:hover:not(:disabled){background:rgba(201,168,76,.06);border-color:rgba(201,168,76,.4);color:#fff;}
+.q-opt:disabled{cursor:default;}
+.q-opt.correct{background:rgba(34,197,94,.1);border-color:var(--green);color:var(--green);}
+.q-opt.wrong{background:rgba(239,68,68,.1);border-color:var(--red);color:var(--red);}
+.q-opt.reveal-correct{background:rgba(34,197,94,.07);border-color:rgba(34,197,94,.4);color:var(--green);}
+.opt-letter{font-weight:700;flex-shrink:0;width:18px;}
+.q-feedback{margin-top:10px;padding:11px 15px;border-radius:8px;font-family:Arial,sans-serif;font-size:13px;line-height:1.5;display:none;}
+.q-feedback.correct{background:rgba(34,197,94,.08);color:var(--green);border:1px solid rgba(34,197,94,.2);}
+.q-feedback.wrong{background:rgba(239,68,68,.08);color:#f87171;border:1px solid rgba(239,68,68,.2);}
+.exam-result{background:linear-gradient(135deg,rgba(201,168,76,.07),rgba(59,130,246,.04));border:1px solid rgba(201,168,76,.3);border-radius:16px;padding:40px;text-align:center;margin-top:32px;display:none;}
+.result-score{font-family:Arial,sans-serif;font-size:64px;font-weight:900;color:var(--gold);line-height:1;margin-bottom:8px;}
+.exam-btn{background:var(--gold);color:var(--dark);font-family:Arial,sans-serif;font-weight:700;font-size:14px;letter-spacing:1px;padding:12px 28px;border-radius:8px;border:none;cursor:pointer;margin:4px;}
+.exam-btn.secondary{background:transparent;color:var(--gold);border:1px solid var(--gold);}
+.result-pass{color:var(--green);}.result-fail{color:var(--red);}
+.result-msg{color:var(--muted);max-width:520px;margin:0 auto 24px;font-size:15px;}
+/* Behavior pattern visual */
+.behavior-bar{display:flex;align-items:center;gap:8px;margin:6px 0;font-family:Arial,sans-serif;font-size:12px;}
+.behavior-bar .b-label{width:140px;color:var(--muted);text-align:right;flex-shrink:0;}
+.behavior-bar .b-track{flex:1;height:20px;background:rgba(255,255,255,.04);border-radius:4px;overflow:hidden;position:relative;}
+.behavior-bar .b-fill{height:100%;border-radius:4px;}
+.behavior-bar .b-val{width:60px;font-weight:700;flex-shrink:0;}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <div class="logo">BEAT LYNCH</div>
+  <span class="pill">WELCOME</span>
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="showTab('curriculum')">CURRICULUM</button>
+    <button class="tab-btn" onclick="showTab('exam')">FINAL EXAM</button>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="course-label">Infinite Alpha &middot; Welcome &middot; Course 0.1</div>
+  <h1>Introduction to Investing &amp; Beat Lynch</h1>
+  <p class="hero-sub">What investing really is, why mastery is learnable, and the journey ahead of you.</p>
+  <div class="meta-row">
+    <div class="meta-item"><div class="meta-num">3</div><div class="meta-label">Lessons</div></div>
+    <div class="meta-item"><div class="meta-num">50</div><div class="meta-label">Mastery Points</div></div>
+    <div class="meta-item"><div class="meta-num">80%</div><div class="meta-label">Pass Threshold</div></div>
+    <div class="meta-item"><div class="meta-num">10</div><div class="meta-label">Exam Questions</div></div>
+  </div>
+</div>
+
+<!-- ==================== CURRICULUM TAB ==================== -->
+<div class="tab-content active" id="tab-curriculum">
+<div class="container">
+<div class="section">
+<div class="section-title">Course Lessons</div>
+<div class="lesson-grid">
+
+<!-- ============================================================ -->
+<!-- LESSON 1 -->
+<!-- ============================================================ -->
+<div class="lesson-card" onclick="toggleLesson(0)">
+  <div class="lesson-num">01</div>
+  <div><div class="lesson-title">What Is a Stock? What Is Investing?</div><div class="lesson-desc">Stocks are ownership. Investing is buying businesses. Everything else builds on this.</div></div>
+  <div class="lesson-mp">17 MP</div>
+</div>
+<div class="lesson-detail" id="ld-0">
+  <div class="tag-row">
+    <span class="ctag">Ownership</span><span class="ctag">Stocks</span><span class="ctag">Long-Term Wealth</span><span class="ctag">Price vs. Value</span>
+  </div>
+
+  <h3>You're Buying a Business, Not a Ticker Symbol</h3>
+  <p>Here's the single most important idea in investing &mdash; and most people never hear it stated clearly: <strong class="hl">when you buy a stock, you are buying a small piece of ownership in a real business</strong>. Not a lottery ticket. Not a blinking number on a screen. A real company with real employees, real products, and real profits.</p>
+  <p>When you buy one share of Nike, you become a fractional owner of every shoe they sell, every store they operate, every sponsorship deal they sign, and every dollar of profit they earn. When Nike has a great quarter, your tiny ownership stake becomes more valuable. When they struggle, it becomes less valuable. That's all a stock price is &mdash; the market's current estimate of what your ownership stake is worth.</p>
+  <p>This is the mental shift that separates investors from everyone else. Gamblers see stocks as bets. Day traders see them as price patterns. But investors see them as <strong class="hl">pieces of real businesses</strong> &mdash; and they analyze those businesses the way you'd analyze a company you were thinking about buying entirely.</p>
+
+  <!-- OWNERSHIP INFOGRAPHIC -->
+  <div class="exhibit">
+    <div class="exhibit-label">Exhibit 1.1 &mdash; What You Actually Own</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg" style="max-width:660px;">
+        <circle cx="100" cy="140" r="44" fill="rgba(201,168,76,.1)" stroke="#C9A84C" stroke-width="1.5"/>
+        <text x="100" y="134" text-anchor="middle" font-family="Arial" font-size="22" font-weight="900" fill="#C9A84C">YOU</text>
+        <text x="100" y="152" text-anchor="middle" font-family="Arial" font-size="10" fill="#7A8099">Buy 1 share</text>
+        <line x1="148" y1="140" x2="208" y2="140" stroke="#C9A84C" stroke-width="1.5" marker-end="url(#arrowG)"/>
+        <rect x="216" y="54" width="460" height="172" rx="12" fill="#13161E" stroke="#C9A84C" stroke-width="1.2"/>
+        <text x="446" y="82" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#C9A84C" letter-spacing="2">YOU NOW OWN A TINY PIECE OF...</text>
+        <rect x="236" y="100" width="130" height="52" rx="8" fill="rgba(34,197,94,.06)" stroke="rgba(34,197,94,.25)" stroke-width="1"/>
+        <text x="301" y="121" text-anchor="middle" font-family="Arial" font-size="11" font-weight="700" fill="#22C55E">Revenue</text>
+        <text x="301" y="139" text-anchor="middle" font-family="Arial" font-size="10" fill="#7A8099">Every sale they make</text>
+        <rect x="380" y="100" width="130" height="52" rx="8" fill="rgba(59,130,246,.06)" stroke="rgba(59,130,246,.25)" stroke-width="1"/>
+        <text x="445" y="121" text-anchor="middle" font-family="Arial" font-size="11" font-weight="700" fill="#3B82F6">Profits</text>
+        <text x="445" y="139" text-anchor="middle" font-family="Arial" font-size="10" fill="#7A8099">Every dollar they keep</text>
+        <rect x="524" y="100" width="130" height="52" rx="8" fill="rgba(168,85,247,.06)" stroke="rgba(168,85,247,.25)" stroke-width="1"/>
+        <text x="589" y="121" text-anchor="middle" font-family="Arial" font-size="11" font-weight="700" fill="#a855f7">Assets</text>
+        <text x="589" y="139" text-anchor="middle" font-family="Arial" font-size="10" fill="#7A8099">Stores, IP, brand value</text>
+        <rect x="308" y="166" width="130" height="48" rx="8" fill="rgba(201,168,76,.06)" stroke="rgba(201,168,76,.25)" stroke-width="1"/>
+        <text x="373" y="186" text-anchor="middle" font-family="Arial" font-size="11" font-weight="700" fill="#C9A84C">Growth</text>
+        <text x="373" y="202" text-anchor="middle" font-family="Arial" font-size="10" fill="#7A8099">Future expansion</text>
+        <rect x="452" y="166" width="130" height="48" rx="8" fill="rgba(6,182,212,.06)" stroke="rgba(6,182,212,.25)" stroke-width="1"/>
+        <text x="517" y="186" text-anchor="middle" font-family="Arial" font-size="11" font-weight="700" fill="#06b6d4">Cash Flow</text>
+        <text x="517" y="202" text-anchor="middle" font-family="Arial" font-size="10" fill="#7A8099">Real money generated</text>
+        <defs><marker id="arrowG" markerWidth="8" markerHeight="6" refX="4" refY="3" orient="auto"><path d="M0,6 L4,0 L8,6" fill="none" stroke="#C9A84C" stroke-width="1.2"/></marker></defs>
+      </svg>
+    </div>
+  </div>
+
+  <!-- REAL COMPANY EXAMPLES -->
+  <h3>See It in the Real World</h3>
+  <p>Let's make this concrete. Here's what "owning a piece of a business" actually looks like with companies you already know:</p>
+
+  <div class="co-example">
+    <div class="co-icon" style="background:linear-gradient(135deg,#333,#555);color:#fff;">&#9679;</div>
+    <div class="co-body">
+      <div class="co-name">Apple Inc.</div>
+      <div class="co-ticker">AAPL &middot; ~$3 Trillion Market Cap</div>
+      <p class="co-text">When you buy one share of Apple, you own a sliver of every iPhone sold worldwide, every App Store transaction, every AirPod, every MacBook, and every subscription to Apple Music or iCloud. Apple earns over $90 billion in profit per year. As a shareholder, a fraction of that profit belongs to you &mdash; and Apple literally sends some of it back as a quarterly dividend.</p>
+    </div>
+  </div>
+
+  <div class="co-example">
+    <div class="co-icon" style="background:linear-gradient(135deg,#00704A,#1E3932);color:#fff;">&#9733;</div>
+    <div class="co-body">
+      <div class="co-name">Starbucks</div>
+      <div class="co-ticker">SBUX &middot; ~38,000 Stores Worldwide</div>
+      <p class="co-text">Own a share of Starbucks, and you own a piece of every latte poured in 38,000 stores across 80+ countries. When your local Starbucks is packed on a Monday morning, those sales flow to your bottom line as an owner. When Starbucks opens 500 new stores next year, your ownership stake covers those too.</p>
+    </div>
+  </div>
+
+  <div class="co-example">
+    <div class="co-icon" style="background:linear-gradient(135deg,#e31837,#c8102e);color:#fff;">C</div>
+    <div class="co-body">
+      <div class="co-name">Costco</div>
+      <div class="co-ticker">COST &middot; 130+ Million Members</div>
+      <p class="co-text">Every time a member renews their Costco card, that fee flows to the business you partly own. Costco's 130+ million members pay dues whether they shop that month or not &mdash; creating a river of predictable income. As a shareholder, you own a fraction of that river.</p>
+    </div>
+  </div>
+
+  <div class="callout callout-blue">
+    <div class="callout-label">Think Like an Owner</div>
+    <p>Notice the pattern: each of these companies has products people use daily, revenue that grows year after year, and profits that compound. When you start seeing stocks as <em>businesses</em> instead of <em>ticker symbols</em>, you begin thinking the way every great investor in history has thought. That mental shift is the foundation of everything in Beat Lynch.</p>
+  </div>
+
+  <h3>Why Stocks Exist</h3>
+  <p>Companies need money to build products, hire people, and grow. They have two basic choices: borrow the money (which they'll have to pay back with interest) or sell ownership stakes to investors. When a company "goes public," it lists its shares on a stock exchange, and anyone &mdash; including you &mdash; can buy a piece. The stock market is simply the marketplace where those ownership stakes trade hands, every day, millions of times.</p>
+
+  <h3>Why Prices Move</h3>
+  <p>Stock prices move because people disagree about what a business is worth. When more people want to buy than sell, the price goes up. When more want to sell, it goes down. In the short term, prices are driven by <strong class="hl">emotion, headlines, and momentum</strong> &mdash; people panic, get excited, or follow the crowd. In the long term, prices follow the <strong class="hl">actual performance of the business: its revenue, its profits, its growth</strong>.</p>
+  <p><strong class="hl">This gap between short-term noise and long-term value is where investing skill lives.</strong></p>
+
+  <div class="callout callout-purple">
+    <div class="callout-label">Real Example &mdash; Amazon (AMZN)</div>
+    <p>In March 2020, fear over COVID-19 crashed Amazon's stock from $2,170 to $1,676 &mdash; a 23% drop in three weeks. Panicked sellers saw a crisis. Investors who understood the business saw that Amazon's core engine &mdash; e-commerce and cloud computing &mdash; would only accelerate in a world locked at home. Within 6 months the stock doubled. <strong>Short-term prices followed emotion. Long-term prices followed the business.</strong></p>
+  </div>
+
+  <h3>Investing vs. Everything Else</h3>
+  <div class="exhibit">
+    <div class="exhibit-label">Exhibit 1.2 &mdash; Investing Is Not What You Think</div>
+    <table class="fw-table">
+      <thead><tr><th>Activity</th><th>What It Actually Is</th><th>Time Horizon</th></tr></thead>
+      <tbody>
+        <tr><td><strong class="hl">Day Trading</strong></td><td>Trying to profit from minute-to-minute price swings. Extremely difficult &mdash; studies show that <strong>over 80% of day traders lose money</strong> over any 12-month period.</td><td>Minutes to hours</td></tr>
+        <tr><td><strong class="hl">Gambling</strong></td><td>Random chance with no analytical edge. The house always wins over time.</td><td>Seconds</td></tr>
+        <tr><td><strong class="hl">Saving</strong></td><td>Storing money safely at or near the rate of inflation. Purchasing power may be maintained, but wealth grows little if at all.</td><td>Any</td></tr>
+        <tr><td style="color:var(--gold);"><strong>Investing</strong></td><td style="color:var(--gold);">Buying ownership in real businesses below what they're worth, and holding while they grow. Requires analysis, patience, and a long-term time horizon of <strong>years to decades</strong>.</td><td style="color:var(--gold);">Years to decades</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- COMPOUNDING VISUAL -->
+  <div class="exhibit">
+    <div class="exhibit-label">Exhibit 1.3 &mdash; Why Investing Matters: $10,000 Over 20 Years</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 700 320" xmlns="http://www.w3.org/2000/svg" style="max-width:660px;">
+        <!-- Axes -->
+        <line x1="80" y1="250" x2="660" y2="250" stroke="#1E2330" stroke-width="1"/>
+        <line x1="80" y1="40" x2="80" y2="250" stroke="#1E2330" stroke-width="1"/>
+        <!-- Grid lines -->
+        <line x1="80" y1="197" x2="660" y2="197" stroke="#1E2330" stroke-width=".5" stroke-dasharray="2,4"/>
+        <line x1="80" y1="145" x2="660" y2="145" stroke="#1E2330" stroke-width=".5" stroke-dasharray="2,4"/>
+        <line x1="80" y1="92" x2="660" y2="92" stroke="#1E2330" stroke-width=".5" stroke-dasharray="2,4"/>
+        <!-- Y labels -->
+        <text x="70" y="254" text-anchor="end" font-family="Arial" font-size="10" fill="#7A8099">$0</text>
+        <text x="70" y="197" text-anchor="end" font-family="Arial" font-size="10" fill="#7A8099">$15K</text>
+        <text x="70" y="145" text-anchor="end" font-family="Arial" font-size="10" fill="#7A8099">$30K</text>
+        <text x="70" y="92" text-anchor="end" font-family="Arial" font-size="10" fill="#7A8099">$45K</text>
+        <text x="70" y="50" text-anchor="end" font-family="Arial" font-size="10" fill="#7A8099">$70K</text>
+        <!-- X labels -->
+        <text x="80" y="270" text-anchor="middle" font-family="Arial" font-size="10" fill="#7A8099">Year 0</text>
+        <text x="225" y="270" text-anchor="middle" font-family="Arial" font-size="10" fill="#7A8099">Year 5</text>
+        <text x="370" y="270" text-anchor="middle" font-family="Arial" font-size="10" fill="#7A8099">Year 10</text>
+        <text x="515" y="270" text-anchor="middle" font-family="Arial" font-size="10" fill="#7A8099">Year 15</text>
+        <text x="660" y="270" text-anchor="middle" font-family="Arial" font-size="10" fill="#7A8099">Year 20</text>
+        <!-- Inflation-eroded cash line (declining) -->
+        <path d="M80,216 C200,219 400,226 660,235" fill="none" stroke="#EF4444" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <text x="665" y="232" font-family="Arial" font-size="10" font-weight="700" fill="#EF4444" text-anchor="start">Cash (after inflation): ~$6,700</text>
+        <!-- Cash line (nominal flat) -->
+        <line x1="80" y1="216" x2="660" y2="216" stroke="#7A8099" stroke-width="1.5" stroke-dasharray="6,4"/>
+        <text x="665" y="212" font-family="Arial" font-size="10" font-weight="700" fill="#7A8099" text-anchor="start">Cash (nominal): $10,000</text>
+        <!-- Invested curve (10% annual) -->
+        <path d="M80,216 C180,210 280,185 370,155 C460,118 560,75 660,48" fill="none" stroke="#C9A84C" stroke-width="3"/>
+        <circle cx="660" cy="48" r="5" fill="#C9A84C"/>
+        <text x="665" y="44" font-family="Arial" font-size="11" font-weight="700" fill="#C9A84C" text-anchor="start">Invested: $67,275</text>
+        <!-- Fill area -->
+        <path d="M80,216 C180,210 280,185 370,155 C460,118 560,75 660,48 L660,250 L80,250 Z" fill="url(#goldGrad)" opacity=".15"/>
+        <!-- Starting point -->
+        <circle cx="80" cy="216" r="5" fill="#C9A84C"/>
+        <text x="88" y="208" font-family="Arial" font-size="10" fill="#C9A84C">$10,000</text>
+        <!-- Difference callout -->
+        <rect x="420" y="84" width="160" height="48" rx="8" fill="rgba(201,168,76,.12)" stroke="#C9A84C" stroke-width="1"/>
+        <text x="500" y="103" text-anchor="middle" font-family="Arial" font-size="10" font-weight="700" fill="#C9A84C" letter-spacing="1">COMPOUNDING GAIN</text>
+        <text x="500" y="124" text-anchor="middle" font-family="Arial" font-size="18" font-weight="900" fill="#C9A84C">+$57,275</text>
+        <!-- Note about year 5 vs 15-20 -->
+        <rect x="160" y="290" width="380" height="24" rx="4" fill="rgba(201,168,76,.06)"/>
+        <text x="350" y="306" text-anchor="middle" font-family="Arial" font-size="10" fill="#C9A84C">Notice: most of the growth happens in the final years. That's compounding.</text>
+        <defs>
+          <linearGradient id="goldGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#C9A84C" stop-opacity=".3"/><stop offset="100%" stop-color="#C9A84C" stop-opacity="0"/></linearGradient>
+        </defs>
+      </svg>
+    </div>
+    <p style="font-size:13px;color:var(--muted);text-align:center;margin-top:6px;">Assumes 10% average annual return (the historical average of the U.S. stock market). Cash earns nothing &mdash; and inflation quietly destroys its value. Compounding does the rest.</p>
+  </div>
+
+  <div class="callout">
+    <div class="callout-label">The Insight That Starts Everything</div>
+    <p>When Peter Lynch walked through a shopping mall and noticed a store was always packed with customers, he wasn't just shopping &mdash; he was doing research. He bought stock in Dunkin' Donuts after noticing that every location was busy; in Hanes after his wife loved their L'eggs pantyhose product; and in La Quinta motor inns after he noticed them packed near office parks. Every great investor starts with the same realization you just had: <strong>stocks are real businesses, and the best way to understand them is to pay attention to the world around you.</strong></p>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- LESSON 2 -->
+<!-- ============================================================ -->
+<div class="lesson-card" onclick="toggleLesson(1)">
+  <div class="lesson-num">02</div>
+  <div><div class="lesson-title">What Is Investing Mastery?</div><div class="lesson-desc">The greatest investors aren't geniuses with secrets. They're disciplined thinkers with learnable systems.</div></div>
+  <div class="lesson-mp">17 MP</div>
+</div>
+<div class="lesson-detail" id="ld-1">
+  <div class="tag-row">
+    <span class="ctag">Mastery</span><span class="ctag">Systems</span><span class="ctag">The Ten Legends</span><span class="ctag">Learnable Skill</span>
+  </div>
+
+  <h3>Most People Invest Poorly &mdash; And It's Not Their Fault</h3>
+  <p>Here's a fact that surprises most people: the average individual investor dramatically underperforms the stock market. The DALBAR Quantitative Analysis of Investor Behavior has tracked this for over 30 years, and the pattern never changes. The stock market might return 10% in a year, but the average investor earns only 3&ndash;4%. Not because they're unintelligent &mdash; because <strong class="hl">they've never been taught a system</strong>.</p>
+  <p>They buy because a friend told them to, because they saw a headline, or because a stock is going up and they don't want to miss out. They sell because they're scared, because prices dropped, or because they need the money. This pattern &mdash; <strong class="hl">buying high on excitement and selling low on fear</strong> &mdash; has been documented across decades of data. And it is <strong class="hl">entirely fixable</strong>.</p>
+
+  <!-- BEHAVIORAL GAP VISUAL -->
+  <div class="exhibit">
+    <div class="exhibit-label">Exhibit 2.0 &mdash; The Behavior Gap: Why Average Investors Lose</div>
+    <div style="padding:6px 0;">
+      <div class="behavior-bar">
+        <div class="b-label">S&P 500 (Market)</div>
+        <div class="b-track"><div class="b-fill" style="width:82%;background:linear-gradient(90deg,#22C55E,#16a34a);border-radius:4px;"></div></div>
+        <div class="b-val" style="color:#22C55E;">~10%/yr</div>
+      </div>
+      <div class="behavior-bar">
+        <div class="b-label">Average Investor</div>
+        <div class="b-track"><div class="b-fill" style="width:32%;background:linear-gradient(90deg,#EF4444,#dc2626);border-radius:4px;"></div></div>
+        <div class="b-val" style="color:#EF4444;">~3.5%/yr</div>
+      </div>
+      <div class="behavior-bar">
+        <div class="b-label" style="color:var(--gold);">The Gap</div>
+        <div class="b-track"><div class="b-fill" style="width:50%;background:linear-gradient(90deg,rgba(201,168,76,.3),var(--gold));border-radius:4px;"></div></div>
+        <div class="b-val" style="color:var(--gold);">~6.5%/yr</div>
+      </div>
+    </div>
+    <p style="font-size:12px;color:var(--muted);text-align:center;margin:10px 0 0;">Source: DALBAR QAIB, 30-year rolling data. The gap is caused almost entirely by behavioral mistakes &mdash; not bad stock picks.</p>
+  </div>
+
+  <div class="callout callout-orange">
+    <div class="callout-label">Why It Happens &mdash; The Psychology Trap</div>
+    <p>The biggest enemy of investing success isn't a bad stock pick &mdash; it's your own psychology. When markets drop 20%, every instinct screams "sell." When a hot stock doubles, every instinct screams "buy." Acting on those instincts is exactly what causes the behavior gap above. Understanding this is the first step toward mastery, and you'll study these behavioral patterns in depth during Tier 1.</p>
+  </div>
+
+  <div class="callout callout-red">
+    <div class="callout-label">Real Example &mdash; The GameStop Mania (2021)</div>
+    <p>In January 2021, GameStop (GME) stock rocketed from $17 to $483 in three weeks, fueled by social media hype on Reddit. Millions of people piled in near the top because they "didn't want to miss out." Within days, the stock crashed back below $50. The people who bought at $300+ on hype &mdash; with no understanding of GameStop's actual business &mdash; lost 80%+ of their money. <strong>No system. No analysis. Pure emotion.</strong> That's the pattern mastery is designed to break.</p>
+  </div>
+
+  <h3>The Greatest Investors Built Repeatable Systems</h3>
+  <p>There are roughly ten investors in history whose track records are so extraordinary they've been studied like scientific phenomena. Their strategies are different &mdash; some hunt for bargains, others look for growth, others focus on entire economies &mdash; but they all share one trait: <strong class="hl">they each built a repeatable system for making investment decisions</strong>. Not hunches. Not tips from friends. Not gut feelings. Systems &mdash; step-by-step frameworks for analyzing businesses, assessing risk, and deciding when to buy and sell.</p>
+  <p>These aren't secret methods locked in a vault. They've been published, studied, and documented for decades. And in Beat Lynch, you'll learn all ten of them.</p>
+
+  <!-- TEN LEGENDS GRID -->
+  <div class="exhibit">
+    <div class="exhibit-label">Exhibit 2.1 &mdash; The Ten Legends You'll Study</div>
+    <div class="legend-grid">
+      <div class="legend-mini"><div class="l-icon" style="background:#6B8E23;">BG</div><div><div class="l-name">Benjamin Graham</div><div class="l-hook">Invented value investing &mdash; buying stocks for less than the business is worth</div></div></div>
+      <div class="legend-mini"><div class="l-icon" style="background:#4682B4;">WB</div><div><div class="l-name">Warren Buffett</div><div class="l-hook">The most successful investor ever &mdash; turned $10K into $100B+ over 60 years</div></div></div>
+      <div class="legend-mini"><div class="l-icon" style="background:#CD853F;">PL</div><div><div class="l-name">Peter Lynch</div><div class="l-hook">29% annual returns for 13 years &mdash; by investing in what he observed in everyday life</div></div></div>
+      <div class="legend-mini"><div class="l-icon" style="background:#708090;">PF</div><div><div class="l-name">Philip Fisher</div><div class="l-hook">Pioneered "scuttlebutt" &mdash; talking to customers, competitors, and employees</div></div></div>
+      <div class="legend-mini"><div class="l-icon" style="background:#B8860B;">WO</div><div><div class="l-name">William O'Neil</div><div class="l-hook">Created the CAN SLIM system merging business fundamentals with price charts</div></div></div>
+      <div class="legend-mini"><div class="l-icon" style="background:#8B4513;">JG</div><div><div class="l-name">Joel Greenblatt</div><div class="l-hook">Built a "magic formula" that systematically finds great companies at cheap prices</div></div></div>
+      <div class="legend-mini"><div class="l-icon" style="background:#556B2F;">GS</div><div><div class="l-name">George Soros</div><div class="l-hook">Understood when markets misprice reality &mdash; and bet big when they did</div></div></div>
+      <div class="legend-mini"><div class="l-icon" style="background:#8B008B;">HM</div><div><div class="l-name">Howard Marks</div><div class="l-hook">Mastered the art of market cycles &mdash; knowing when to be greedy and when to be cautious</div></div></div>
+      <div class="legend-mini"><div class="l-icon" style="background:#2F4F4F;">RD</div><div><div class="l-name">Ray Dalio</div><div class="l-hook">Built portfolios designed to survive and profit in any economic environment</div></div></div>
+      <div class="legend-mini"><div class="l-icon" style="background:#8B0000;">SD</div><div><div class="l-name">Stanley Druckenmiller</div><div class="l-hook">30 consecutive years without a single losing year &mdash; unmatched consistency</div></div></div>
+    </div>
+  </div>
+
+  <div class="callout callout-green">
+    <div class="callout-label">Why Their Strategies Are Different &mdash; But All Teachable</div>
+    <p>Graham and Greenblatt hunt for bargains. Lynch and Fisher look for growth. Soros and Druckenmiller trade entire markets. Dalio builds all-weather portfolios. Marks reads cycles. Buffett combines everything. <strong>Their strategies differ, but every one of them built a repeatable, documented framework.</strong> That's what makes investing mastery learnable &mdash; and that's what you'll study at Beat Lynch.</p>
+  </div>
+
+  <h3>What "Mastery" Actually Means</h3>
+  <p>Investing mastery doesn't mean you never lose money &mdash; every great investor has losing positions. Even Warren Buffett lost billions on his investment in Kraft Heinz. Peter Lynch held stocks that went to zero. It means you have a <strong class="hl">repeatable process that wins more than it loses, and wins bigger than it loses</strong>. It means you can analyze a business, assess its value, understand the risks, decide how much to invest, and manage your portfolio with discipline. It means your results come from <strong class="hl">skill, not luck</strong> &mdash; and that distinction can be measured.</p>
+
+  <!-- MASTERY SPECTRUM -->
+  <div class="exhibit">
+    <div class="exhibit-label">Exhibit 2.2 &mdash; The Mastery Spectrum: Where Are You Now?</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 720 260" xmlns="http://www.w3.org/2000/svg" style="max-width:700px;">
+        <rect x="40" y="80" width="640" height="10" rx="5" fill="#1E2330"/>
+        <rect x="40" y="80" width="640" height="10" rx="5" fill="url(#specGrad)"/>
+        <circle cx="56" cy="85" r="8" fill="#EF4444" stroke="#0D0F14" stroke-width="2"/>
+        <circle cx="168" cy="85" r="8" fill="#f59e0b" stroke="#0D0F14" stroke-width="2"/>
+        <circle cx="296" cy="85" r="8" fill="#3B82F6" stroke="#0D0F14" stroke-width="2"/>
+        <circle cx="424" cy="85" r="8" fill="#22C55E" stroke="#0D0F14" stroke-width="2"/>
+        <circle cx="552" cy="85" r="8" fill="#a855f7" stroke="#0D0F14" stroke-width="2"/>
+        <circle cx="664" cy="85" r="8" fill="#C9A84C" stroke="#0D0F14" stroke-width="2"/>
+        <text x="56" y="56" text-anchor="middle" font-family="Arial" font-size="11" font-weight="700" fill="#EF4444">Gambler</text>
+        <text x="56" y="120" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">Buys on tips</text>
+        <text x="56" y="132" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">No system</text>
+        <text x="168" y="56" text-anchor="middle" font-family="Arial" font-size="11" font-weight="700" fill="#f59e0b">Beginner</text>
+        <text x="168" y="120" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">Owns stocks</text>
+        <text x="168" y="132" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">Doesn't know why</text>
+        <text x="296" y="56" text-anchor="middle" font-family="Arial" font-size="11" font-weight="700" fill="#3B82F6">Literate</text>
+        <text x="296" y="120" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">Reads financials</text>
+        <text x="296" y="132" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">Knows the basics</text>
+        <text x="424" y="56" text-anchor="middle" font-family="Arial" font-size="11" font-weight="700" fill="#22C55E">Analyst</text>
+        <text x="424" y="120" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">Evaluates businesses</text>
+        <text x="424" y="132" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">Builds a thesis</text>
+        <text x="552" y="56" text-anchor="middle" font-family="Arial" font-size="11" font-weight="700" fill="#a855f7">Competitor</text>
+        <text x="552" y="120" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">Manages portfolios</text>
+        <text x="552" y="132" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">Under pressure</text>
+        <text x="664" y="56" text-anchor="middle" font-family="Arial" font-size="11" font-weight="700" fill="#C9A84C">Master</text>
+        <text x="664" y="120" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">Repeatable edge</text>
+        <text x="664" y="132" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">Sustained alpha</text>
+        <rect x="90" y="150" width="155" height="36" rx="6" fill="rgba(201,168,76,.1)" stroke="#C9A84C" stroke-width="1"/>
+        <text x="167" y="173" text-anchor="middle" font-family="Arial" font-size="11" font-weight="700" fill="#C9A84C">&#9650; YOU ARE HERE</text>
+        <text x="296" y="172" text-anchor="middle" font-family="Arial" font-size="9" font-weight="700" fill="#3B82F6">TIER 1</text>
+        <text x="296" y="184" text-anchor="middle" font-family="Arial" font-size="9" fill="#3B82F6">&#8593;</text>
+        <text x="424" y="172" text-anchor="middle" font-family="Arial" font-size="9" font-weight="700" fill="#22C55E">TIER 2</text>
+        <text x="424" y="184" text-anchor="middle" font-family="Arial" font-size="9" fill="#22C55E">&#8593;</text>
+        <text x="608" y="172" text-anchor="middle" font-family="Arial" font-size="9" font-weight="700" fill="#C9A84C">TIER 3</text>
+        <text x="608" y="184" text-anchor="middle" font-family="Arial" font-size="9" fill="#C9A84C">&#8593;</text>
+        <line x1="250" y1="196" x2="340" y2="196" stroke="#3B82F6" stroke-width="1" opacity=".5"/>
+        <line x1="380" y1="196" x2="470" y2="196" stroke="#22C55E" stroke-width="1" opacity=".5"/>
+        <line x1="520" y1="196" x2="680" y2="196" stroke="#C9A84C" stroke-width="1" opacity=".5"/>
+        <defs><linearGradient id="specGrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#EF4444" stop-opacity=".5"/><stop offset="30%" stop-color="#f59e0b" stop-opacity=".4"/><stop offset="50%" stop-color="#3B82F6" stop-opacity=".4"/><stop offset="70%" stop-color="#22C55E" stop-opacity=".4"/><stop offset="85%" stop-color="#a855f7" stop-opacity=".4"/><stop offset="100%" stop-color="#C9A84C" stop-opacity=".6"/></linearGradient></defs>
+      </svg>
+    </div>
+  </div>
+
+  <h3>Why This Is Learnable</h3>
+  <p>You don't need a finance degree, a Bloomberg terminal, or Wall Street connections. Every framework used by the ten legends has been documented, studied, and adapted for structured learning. Benjamin Graham literally wrote the textbook (<em>The Intelligent Investor</em>, 1949). Peter Lynch explained his entire system in <em>One Up on Wall Street</em>. Joel Greenblatt published his magic formula step by step. What you need is: the right frameworks, guided practice, and a system that tells you when you're improving. That's exactly what you're starting right now.</p>
+
+  <div class="callout callout-green">
+    <div class="callout-label">The Key Insight</div>
+    <p>Every framework you'll learn in this Academy was developed by someone who compounded wealth across decades. These aren't theories &mdash; they're <strong>battle-tested systems from the greatest investors who ever lived</strong>. They're all documented. They're all learnable. And they all share a common thread: they replace emotion with analysis, and hunches with process.</p>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- LESSON 3 -->
+<!-- ============================================================ -->
+<div class="lesson-card" onclick="toggleLesson(2)">
+  <div class="lesson-num">03</div>
+  <div><div class="lesson-title">Your Beat Lynch Journey</div><div class="lesson-desc">The Academy, the tools, and the competition. Here's the full map of where you're headed.</div></div>
+  <div class="lesson-mp">16 MP</div>
+</div>
+<div class="lesson-detail" id="ld-2">
+  <div class="tag-row">
+    <span class="ctag">Beat Lynch</span><span class="ctag">Academy</span><span class="ctag">NIL</span><span class="ctag">The Journey</span><span class="ctag">Mastery Platform</span>
+  </div>
+
+  <h3>What Beat Lynch Is (And What It's Not)</h3>
+  <p>Beat Lynch is <strong class="hl">not</strong> an app for buying stocks. You won't trade real money here. It's not a social media platform for sharing tips, and it's not a brokerage account. Beat Lynch is the world's first <strong class="hl">Investing Mastery Platform</strong> &mdash; a complete system for learning to invest, proving your skill, and competing against others and against a benchmark built by artificial intelligence.</p>
+  <p>Think of it as the investing equivalent of a chess platform: you study grandmasters, learn openings and strategies, analyze positions with intelligent tools, practice against engines, and compete in rated tournaments. Your skill level is measured, tracked, and visible. Beat Lynch does the same thing for investing &mdash; with three interlocking layers.</p>
+
+  <!-- THREE LAYERS GRAPHIC -->
+  <div class="exhibit">
+    <div class="exhibit-label">Exhibit 3.1 &mdash; Three Layers of Beat Lynch</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 700 310" xmlns="http://www.w3.org/2000/svg" style="max-width:680px;">
+        <!-- LEARN -->
+        <rect x="20" y="20" width="200" height="270" rx="12" fill="#13161E" stroke="#C9A84C" stroke-width="1.5"/>
+        <text x="120" y="52" text-anchor="middle" font-family="Arial" font-size="12" font-weight="700" fill="#C9A84C" letter-spacing="2">LEARN</text>
+        <text x="120" y="72" text-anchor="middle" font-family="Arial" font-size="15" font-weight="900" fill="#E8EAF0">The Academy</text>
+        <rect x="40" y="92" width="160" height="34" rx="6" fill="rgba(201,168,76,.06)" stroke="rgba(201,168,76,.2)" stroke-width="1"/>
+        <text x="120" y="113" text-anchor="middle" font-family="Arial" font-size="11" fill="#C9A84C">Tier 1: Foundations</text>
+        <rect x="40" y="134" width="160" height="34" rx="6" fill="rgba(59,130,246,.06)" stroke="rgba(59,130,246,.2)" stroke-width="1"/>
+        <text x="120" y="155" text-anchor="middle" font-family="Arial" font-size="11" fill="#3B82F6">Tier 2: Competitive Ready</text>
+        <rect x="40" y="176" width="160" height="34" rx="6" fill="rgba(168,85,247,.06)" stroke="rgba(168,85,247,.2)" stroke-width="1"/>
+        <text x="120" y="197" text-anchor="middle" font-family="Arial" font-size="11" fill="#a855f7">Tier 3: The Five Pillars</text>
+        <text x="120" y="240" text-anchor="middle" font-family="Arial" font-size="22" font-weight="900" fill="#C9A84C">75+</text>
+        <text x="120" y="258" text-anchor="middle" font-family="Arial" font-size="10" fill="#7A8099" letter-spacing="1">LESSONS</text>
+        <text x="120" y="278" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">10 legends' frameworks</text>
+
+        <!-- Arrow 1 -->
+        <text x="240" y="155" text-anchor="middle" font-family="Arial" font-size="20" fill="#C9A84C">&#8594;</text>
+
+        <!-- ANALYZE -->
+        <rect x="260" y="20" width="200" height="270" rx="12" fill="#13161E" stroke="#22C55E" stroke-width="1.5"/>
+        <text x="360" y="52" text-anchor="middle" font-family="Arial" font-size="12" font-weight="700" fill="#22C55E" letter-spacing="2">ANALYZE</text>
+        <text x="360" y="72" text-anchor="middle" font-family="Arial" font-size="15" font-weight="900" fill="#E8EAF0">The Tools</text>
+        <rect x="280" y="92" width="160" height="34" rx="6" fill="rgba(34,197,94,.06)" stroke="rgba(34,197,94,.2)" stroke-width="1"/>
+        <text x="360" y="113" text-anchor="middle" font-family="Arial" font-size="11" fill="#22C55E">Stock Analyzer</text>
+        <rect x="280" y="134" width="160" height="34" rx="6" fill="rgba(34,197,94,.06)" stroke="rgba(34,197,94,.2)" stroke-width="1"/>
+        <text x="360" y="155" text-anchor="middle" font-family="Arial" font-size="11" fill="#22C55E">Market Brain</text>
+        <rect x="280" y="176" width="160" height="34" rx="6" fill="rgba(34,197,94,.06)" stroke="rgba(34,197,94,.2)" stroke-width="1"/>
+        <text x="360" y="197" text-anchor="middle" font-family="Arial" font-size="11" fill="#22C55E">Portfolio Lab (incl. Sector Map)</text>
+        <text x="360" y="240" text-anchor="middle" font-family="Arial" font-size="22" font-weight="900" fill="#22C55E">3</text>
+        <text x="360" y="258" text-anchor="middle" font-family="Arial" font-size="10" fill="#7A8099" letter-spacing="1">CORE TOOLS</text>
+        <text x="360" y="278" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">Score, read, build</text>
+
+        <!-- Arrow 2 -->
+        <text x="480" y="155" text-anchor="middle" font-family="Arial" font-size="20" fill="#22C55E">&#8594;</text>
+
+        <!-- COMPETE -->
+        <rect x="500" y="20" width="180" height="270" rx="12" fill="#13161E" stroke="#a855f7" stroke-width="1.5"/>
+        <text x="590" y="52" text-anchor="middle" font-family="Arial" font-size="12" font-weight="700" fill="#a855f7" letter-spacing="2">COMPETE</text>
+        <text x="590" y="72" text-anchor="middle" font-family="Arial" font-size="15" font-weight="900" fill="#E8EAF0">NIL</text>
+        <rect x="516" y="92" width="148" height="34" rx="6" fill="rgba(168,85,247,.06)" stroke="rgba(168,85,247,.2)" stroke-width="1"/>
+        <text x="590" y="113" text-anchor="middle" font-family="Arial" font-size="11" fill="#a855f7">5-Tier Tournament Ladder</text>
+        <rect x="516" y="134" width="148" height="34" rx="6" fill="rgba(168,85,247,.06)" stroke="rgba(168,85,247,.2)" stroke-width="1"/>
+        <text x="590" y="155" text-anchor="middle" font-family="Arial" font-size="11" fill="#a855f7">PATR Scoring</text>
+        <rect x="516" y="176" width="148" height="34" rx="6" fill="rgba(168,85,247,.06)" stroke="rgba(168,85,247,.2)" stroke-width="1"/>
+        <text x="590" y="197" text-anchor="middle" font-family="Arial" font-size="11" fill="#a855f7">Beat Lynch Model</text>
+        <text x="590" y="240" text-anchor="middle" font-family="Arial" font-size="22" font-weight="900" fill="#a855f7">&#8734;</text>
+        <text x="590" y="258" text-anchor="middle" font-family="Arial" font-size="10" fill="#7A8099" letter-spacing="1">SEASONS</text>
+        <text x="590" y="278" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">$1M simulated portfolio</text>
+      </svg>
+    </div>
+  </div>
+
+  <h3>The Academy: Three Tiers of Mastery</h3>
+  <p><strong class="hl">Tier 1 &mdash; Investor Foundations</strong> is where you start. Across four courses and 25 lessons, you'll study all ten investing legends and their frameworks, develop the investor's mindset, understand how markets actually work, and learn to read financial statements like a professional analyst. Successfully completing Tier 1 earns you 400 Mastery Points and the <em>Infinite Alpha Initiate</em> credential.</p>
+  <p><strong class="hl">Tier 2 &mdash; Competitive Readiness</strong> takes you from understanding to doing. You'll learn to evaluate a company's growth, profitability, and risk; understand sector dynamics and the economy; build a real portfolio with position sizing and sell discipline; and master the rules of NIL competition. Successfully completing Tier 2 earns you 500 more Mastery Points and the <em>Infinite Alpha Competitor Ready</em> credential.</p>
+  <p><strong class="hl">Tier 3 &mdash; The Five Pillars</strong> is advanced mastery: 50 lessons covering valuation modeling, earnings forensics, portfolio architecture, and more. This is graduate-level investing education, adapted for Beat Lynch competitors. Successfully completing Tier 3 earns you 1,750 Mastery Points and the <em>Infinite Alpha Educated Investor</em> credential.</p>
+
+  <!-- JOURNEY MAP -->
+  <div class="exhibit">
+    <div class="exhibit-label">Exhibit 3.2 &mdash; Your Complete Journey</div>
+    <div class="svg-wrap">
+      <svg viewBox="0 0 720 350" xmlns="http://www.w3.org/2000/svg" style="max-width:700px;">
+        <!-- Course 0.1 -->
+        <rect x="20" y="20" width="140" height="120" rx="10" fill="rgba(201,168,76,.08)" stroke="#C9A84C" stroke-width="2"/>
+        <text x="90" y="48" text-anchor="middle" font-family="Arial" font-size="10" font-weight="700" fill="#C9A84C" letter-spacing="1.5">COURSE 0.1</text>
+        <text x="90" y="68" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#E8EAF0">Welcome</text>
+        <text x="90" y="90" text-anchor="middle" font-family="Arial" font-size="22" font-weight="900" fill="#C9A84C">50</text>
+        <text x="90" y="105" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099" letter-spacing="1">MASTERY POINTS</text>
+        <text x="90" y="130" text-anchor="middle" font-family="Arial" font-size="10" font-weight="700" fill="#C9A84C">&#9650; YOU ARE HERE</text>
+        <line x1="164" y1="80" x2="194" y2="80" stroke="#C9A84C" stroke-width="1.5" marker-end="url(#arrJ)"/>
+        <!-- TIER 1 -->
+        <rect x="200" y="20" width="150" height="120" rx="10" fill="rgba(201,168,76,.04)" stroke="rgba(201,168,76,.3)" stroke-width="1"/>
+        <text x="275" y="48" text-anchor="middle" font-family="Arial" font-size="10" font-weight="700" fill="#C9A84C" letter-spacing="1.5">TIER 1</text>
+        <text x="275" y="68" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#E8EAF0">Foundations</text>
+        <text x="275" y="90" text-anchor="middle" font-family="Arial" font-size="22" font-weight="900" fill="#C9A84C">400</text>
+        <text x="275" y="105" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099" letter-spacing="1">MASTERY POINTS</text>
+        <text x="275" y="128" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">4 courses &middot; 25 lessons</text>
+        <line x1="354" y1="80" x2="384" y2="80" stroke="#3B82F6" stroke-width="1.5" marker-end="url(#arrJ2)"/>
+        <!-- TIER 2 -->
+        <rect x="390" y="20" width="150" height="120" rx="10" fill="rgba(59,130,246,.04)" stroke="rgba(59,130,246,.3)" stroke-width="1"/>
+        <text x="465" y="48" text-anchor="middle" font-family="Arial" font-size="10" font-weight="700" fill="#3B82F6" letter-spacing="1.5">TIER 2</text>
+        <text x="465" y="68" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#E8EAF0">Competitor Ready</text>
+        <text x="465" y="90" text-anchor="middle" font-family="Arial" font-size="22" font-weight="900" fill="#3B82F6">500</text>
+        <text x="465" y="105" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099" letter-spacing="1">MASTERY POINTS</text>
+        <text x="465" y="128" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">4 courses &middot; 20 lessons</text>
+        <line x1="544" y1="80" x2="574" y2="80" stroke="#a855f7" stroke-width="1.5" marker-end="url(#arrJ3)"/>
+        <!-- TIER 3 -->
+        <rect x="580" y="20" width="120" height="120" rx="10" fill="rgba(168,85,247,.04)" stroke="rgba(168,85,247,.3)" stroke-width="1"/>
+        <text x="640" y="48" text-anchor="middle" font-family="Arial" font-size="10" font-weight="700" fill="#a855f7" letter-spacing="1.5">TIER 3</text>
+        <text x="640" y="68" text-anchor="middle" font-family="Arial" font-size="13" font-weight="700" fill="#E8EAF0">Five Pillars</text>
+        <text x="640" y="90" text-anchor="middle" font-family="Arial" font-size="22" font-weight="900" fill="#a855f7">1,750</text>
+        <text x="640" y="105" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099" letter-spacing="1">MASTERY POINTS</text>
+        <text x="640" y="128" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">5 pillars &middot; 50 lessons</text>
+        <!-- Credentials -->
+        <rect x="20" y="170" width="140" height="40" rx="6" fill="rgba(201,168,76,.06)" stroke="rgba(201,168,76,.2)" stroke-width="1"/>
+        <text x="90" y="195" text-anchor="middle" font-family="Arial" font-size="10" font-weight="700" fill="#C9A84C">Beat Lynch Enrolled</text>
+        <rect x="200" y="170" width="150" height="40" rx="6" fill="rgba(201,168,76,.06)" stroke="rgba(201,168,76,.2)" stroke-width="1"/>
+        <text x="275" y="188" text-anchor="middle" font-family="Arial" font-size="10" font-weight="700" fill="#C9A84C">Infinite Alpha</text>
+        <text x="275" y="202" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">Initiate</text>
+        <rect x="390" y="170" width="150" height="40" rx="6" fill="rgba(59,130,246,.06)" stroke="rgba(59,130,246,.2)" stroke-width="1"/>
+        <text x="465" y="188" text-anchor="middle" font-family="Arial" font-size="10" font-weight="700" fill="#3B82F6">Infinite Alpha</text>
+        <text x="465" y="202" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">Competitor Ready</text>
+        <rect x="580" y="170" width="120" height="40" rx="6" fill="rgba(168,85,247,.06)" stroke="rgba(168,85,247,.2)" stroke-width="1"/>
+        <text x="640" y="188" text-anchor="middle" font-family="Arial" font-size="10" font-weight="700" fill="#a855f7">Infinite Alpha</text>
+        <text x="640" y="202" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">Educated Investor</text>
+        <!-- Total bar -->
+        <rect x="20" y="240" width="680" height="60" rx="10" fill="rgba(201,168,76,.04)" stroke="rgba(201,168,76,.25)" stroke-width="1"/>
+        <text x="360" y="266" text-anchor="middle" font-family="Arial" font-size="12" font-weight="700" fill="#C9A84C" letter-spacing="2">YOUR TOTAL JOURNEY</text>
+        <text x="180" y="288" text-anchor="middle" font-family="Arial" font-size="13" fill="#E8EAF0"><tspan font-weight="900" fill="#C9A84C">78</tspan> lessons</text>
+        <text x="360" y="288" text-anchor="middle" font-family="Arial" font-size="13" fill="#E8EAF0"><tspan font-weight="900" fill="#C9A84C">2,700</tspan> Mastery Points</text>
+        <text x="540" y="288" text-anchor="middle" font-family="Arial" font-size="13" fill="#E8EAF0"><tspan font-weight="900" fill="#C9A84C">4</tspan> credentials</text>
+        <defs>
+          <marker id="arrJ" markerWidth="8" markerHeight="6" refX="4" refY="3" orient="auto"><path d="M0,6 L4,0 L8,6" fill="none" stroke="#C9A84C" stroke-width="1.2"/></marker>
+          <marker id="arrJ2" markerWidth="8" markerHeight="6" refX="4" refY="3" orient="auto"><path d="M0,6 L4,0 L8,6" fill="none" stroke="#3B82F6" stroke-width="1.2"/></marker>
+          <marker id="arrJ3" markerWidth="8" markerHeight="6" refX="4" refY="3" orient="auto"><path d="M0,6 L4,0 L8,6" fill="none" stroke="#a855f7" stroke-width="1.2"/></marker>
+        </defs>
+      </svg>
+    </div>
+  </div>
+
+  <h3>The Tools: Your Analyst Toolkit</h3>
+  <p>As you progress through the Academy, you'll learn to use Beat Lynch's suite of three core analytical tools:</p>
+  <p>The <strong class="hl">Stock Analyzer</strong> scores every stock across multiple dimensions derived from the ten legends' frameworks. Imagine pulling up Apple and seeing how it scores on Buffett's quality metrics, Graham's value metrics, and Lynch's growth metrics &mdash; all in one view.</p>
+  <p>The <strong class="hl">Market Brain</strong> reads the current market environment &mdash; whether conditions favor aggressive or defensive positioning. Think of it as a weather report for investing: is it sunny (growth mode) or stormy (protect your portfolio)?</p>
+  <p>The <strong class="hl">Portfolio Lab</strong> lets you build, test, and diagnose your portfolio before you enter competition. It includes the Sector Map, which visualizes which industries are leading and which are lagging &mdash; because even great stocks can struggle in a weak sector. Every tool connects to what you learn in the Academy &mdash; and every lesson in the Academy makes the tools more powerful in your hands.</p>
+
+  <h3>The Competition: NIL (National Investing League)</h3>
+  <p>The National Investing League is where everything comes together. NIL is a structured tournament system with a <strong class="hl">five-tier competitive ladder</strong> &mdash; from Local tournaments all the way up to the World Series of Investing Mastery (WSIM). You manage a <strong class="hl">$1,000,000 simulated portfolio</strong> under professional rules. No real money is at risk &mdash; but the skill you develop is real.</p>
+  <p>You're scored on a metric called <strong class="hl">PATR</strong> (Performance-Adjusted Total Return), which rewards disciplined returns and penalizes reckless risk-taking. This means you can't just swing for the fences &mdash; you have to manage risk the way professionals do.</p>
+  <p>And in every tournament, there's a published benchmark: the <strong class="hl">Beat Lynch Model</strong>. This is a portfolio built by the platform's scoring engine, synthesizing the wisdom of all ten investing legends into a single allocation. Beating other human competitors determines your tournament placement. But <strong class="hl">beating the model is the ultimate test</strong> &mdash; proof that your judgment adds value beyond what systematic analysis alone can produce. That's what "Beat Lynch" means.</p>
+
+  <div class="callout">
+    <div class="callout-label">Why It's Called "Beat Lynch"</div>
+    <p>Peter Lynch achieved one of the greatest investment track records in history &mdash; averaging <strong>29% annual returns over 13 years</strong> as manager of Fidelity's Magellan Fund. The Beat Lynch Model is a portfolio built on the frameworks of all ten investing legends, including Lynch himself. It synthesizes their collective wisdom into a single AI-driven allocation. Can you beat it? That's the question your entire journey is designed to answer.</p>
+  </div>
+
+  <p>Your competitive identity &mdash; your wins, your PATR history, your model beat rate &mdash; <strong class="hl">persists across seasons</strong>. It becomes your investing resume, written in performance data.</p>
+
+  <h3>Where You Start</h3>
+  <p>Right now, you're completing Course 0.1 &mdash; and earning your first 50 Mastery Points. Pass the exam below with at least 80% (8 out of 10 correct) and you'll hold the <em>Beat Lynch Enrolled</em> credential, which unlocks Tier 1. Your next step is Course 1.1: Masters 101, where you'll meet all ten investing legends and learn their complete frameworks.</p>
+  <p>The path is structured. Every lesson builds on the last. You don't need to figure out what to learn next &mdash; the system guides you.</p>
+
+  <div class="callout callout-cyan">
+    <div class="callout-label">Your Competitive Vision</div>
+    <p>Your PATR score, model beat rate, and tournament record will persist across every season. In NIL, you don't just win a tournament &mdash; you build a competitive identity. Think of it as your investing resume, written in performance data. The journey starts with the exam below.</p>
+  </div>
+
+  <div class="completion-badge">
+    <div style="font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:8px;">Course Complete</div>
+    <div style="font-size:22px;color:#fff;margin-bottom:6px;">Introduction to Investing &amp; Beat Lynch</div>
+    <div style="font-family:Arial,sans-serif;font-size:14px;color:var(--muted);margin-bottom:16px;">Pass the Final Exam to earn 50 Mastery Points and unlock Tier 1.</div>
+    <div class="three-col" style="max-width:420px;margin:0 auto;">
+      <div class="stat-card"><div class="stat-num">3</div><div class="stat-label">Lessons Complete</div></div>
+      <div class="stat-card"><div class="stat-num">50</div><div class="stat-label">MP Available</div></div>
+      <div class="stat-card"><div class="stat-num">80%</div><div class="stat-label">Pass Threshold</div></div>
+    </div>
+  </div>
+</div>
+
+</div><!-- lesson-grid -->
+</div><!-- section -->
+</div><!-- container -->
+</div><!-- tab-curriculum -->
+
+<!-- ==================== EXAM TAB ==================== -->
+<div class="tab-content" id="tab-exam">
+<div class="container">
+<div class="exam-wrap" id="exam-area">
+
+<div class="start-exam-wrap" id="exam-start">
+  <h2>Course 0.1 Final Exam</h2>
+  <p>10 questions covering stocks, investing mastery, and the Beat Lynch journey. 80% required to pass and earn your first 50 Mastery Points.</p>
+  <div class="exam-rules">
+    <div class="rule-card"><div class="r-num">10</div><div class="r-label">Questions</div></div>
+    <div class="rule-card"><div class="r-num">8</div><div class="r-label">To Pass</div></div>
+    <div class="rule-card"><div class="r-num">50</div><div class="r-label">MP Reward</div></div>
+    <div class="rule-card"><div class="r-num">&infin;</div><div class="r-label">Retakes</div></div>
+  </div>
+  <button class="exam-btn" onclick="startExam()">BEGIN EXAM</button>
+</div>
+
+<div id="exam-live" style="display:none;">
+  <div class="score-bar-wrap">
+    <div><div class="score-big" id="score-display">0</div><div class="score-sub">Correct</div></div>
+    <div style="flex:1;">
+      <div style="display:flex;justify-content:space-between;font-family:Arial,sans-serif;font-size:11px;color:var(--muted);margin-bottom:6px;">
+        <span>Progress</span><span id="progress-label">0 / 10</span>
+      </div>
+      <div class="progress-track"><div class="progress-fill" id="progress-bar" style="width:0%"></div></div>
+    </div>
+  </div>
+  <div id="questions-container"></div>
+  <div class="exam-result" id="exam-result">
+    <div class="result-score" id="result-pct"></div>
+    <div id="result-status" style="font-family:Arial,sans-serif;font-size:18px;font-weight:700;margin-bottom:8px;"></div>
+    <div class="result-msg" id="result-msg"></div>
+    <button class="exam-btn" onclick="retakeExam()">RETAKE EXAM</button>
+  </div>
+</div>
+
+</div>
+</div>
+</div>
+
+<script>
+function showTab(t){
+  document.querySelectorAll('.tab-content').forEach(el=>el.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(el=>el.classList.remove('active'));
+  document.getElementById('tab-'+t).classList.add('active');
+  document.querySelectorAll('.tab-btn').forEach(b=>{if(b.textContent.trim()===(t==='curriculum'?'CURRICULUM':'FINAL EXAM'))b.classList.add('active');});
+}
+function toggleLesson(i){
+  var d=document.getElementById('ld-'+i),c=d.previousElementSibling,open=d.classList.contains('open');
+  document.querySelectorAll('.lesson-detail').forEach(el=>el.classList.remove('open'));
+  document.querySelectorAll('.lesson-card').forEach(el=>el.classList.remove('active-card'));
+  if(!open){d.classList.add('open');c.classList.add('active-card');}
+}
+
+var Q=[
+{q:"When you buy one share of a company\u2019s stock, what do you actually own?",
+opts:["A loan to the company that they'll repay with interest","A small piece of ownership in that real business \u2014 its revenue, profits, assets, and growth","A guaranteed promise that the stock price will go up","A short-term contract that expires in 30 days"],
+ans:1,
+exp:"As Lesson 1 explains, a stock is a fractional ownership stake in a real business. When you own a share of Apple, you own a tiny piece of every iPhone sold, every dollar of profit earned, and every asset the company holds. It's not a loan, not a guarantee, and it doesn't expire. This is the foundational insight of investing."},
+
+{q:"In the long term, what primarily drives a stock\u2019s price?",
+opts:["Social media trends and viral news stories","The actual performance of the business \u2014 its revenue, profits, and growth","Which celebrities endorse the company","The number of people talking about the stock online"],
+ans:1,
+exp:"Lesson 1 teaches that short-term prices are driven by emotion, headlines, and momentum. But over years and decades, stock prices follow the fundamental performance of the business. Amazon's stock dropped 23% during COVID panic in 2020, but investors who understood the business saw the long-term engine was intact \u2014 and the stock doubled within 6 months. Long-term prices follow the business."},
+
+{q:"What is the key difference between investing and day trading?",
+opts:["Investing uses real money; day trading uses fake money","Investing focuses on long-term business ownership; day trading tries to profit from short-term price swings","There is no difference \u2014 they're the same thing","Day trading is safer because you hold for less time"],
+ans:1,
+exp:"Exhibit 1.2 makes this distinction clear. Investing means buying ownership in businesses you believe will grow over years to decades. Day trading means trying to profit from minute-to-minute or hour-to-hour price movements. Studies show over 80% of day traders lose money. They require completely different approaches."},
+
+{q:"What is the single biggest reason most individual investors underperform the market?",
+opts:["They don't have enough money to invest properly","They lack access to secret Wall Street information","They have no system \u2014 they buy on hype and sell on fear, driven by emotion rather than analysis","The stock market is rigged against small investors"],
+ans:2,
+exp:"Lesson 2 and the DALBAR behavior gap data show that the average investor earns roughly 3.5% per year while the market returns ~10% \u2014 a gap of 6.5% caused almost entirely by behavioral mistakes. They buy when excited (high) and sell when scared (low). Having no system is the root cause. This is exactly what the GameStop mania example illustrated."},
+
+{q:"What do all ten investing legends studied in Beat Lynch have in common?",
+opts:["They all use the exact same strategy","They all trade stocks every day","They each built a repeatable, documented system for making investment decisions","They all inherited their wealth"],
+ans:2,
+exp:"While their strategies differ \u2014 Graham and Greenblatt hunt for bargains, Lynch and Fisher look for growth, Soros and Druckenmiller trade entire markets \u2014 every legend built a systematic, repeatable framework for analyzing investments. As Lesson 2 emphasizes, that's what makes their methods teachable, and it's what you'll study at Beat Lynch."},
+
+{q:"What does it mean to achieve \u201cinvesting mastery\u201d?",
+opts:["Never losing money on any investment","Having a repeatable process that wins more than it loses, driven by skill rather than luck","Knowing everything there is to know about every stock","Making at least one trade every day"],
+ans:1,
+exp:"Lesson 2 defines mastery clearly: even the greatest investors have losing positions (Buffett lost billions on Kraft Heinz, Lynch held stocks that went to zero). Mastery means having a disciplined, repeatable process where your wins outweigh your losses \u2014 and your results come from skill and analysis, not random chance."},
+
+{q:"Beat Lynch is best described as:",
+opts:["A stock brokerage where you trade real money","A social media platform for sharing stock tips","An investing mastery platform with three layers: structured education (The Academy), analytical tools, and real competition (NIL)","A savings account with higher interest rates"],
+ans:2,
+exp:"Lesson 3 explicitly defines Beat Lynch as the world's first Investing Mastery Platform with three interlocking layers: LEARN (The Academy with 75+ lessons across 3 tiers), ANALYZE (three core tools: Stock Analyzer, Market Brain, and Portfolio Lab which includes the Sector Map), and COMPETE (NIL tournaments with PATR scoring). It is not a brokerage, not a social platform, and doesn't involve real money."},
+
+{q:"In NIL competition, what is the Beat Lynch Model?",
+opts:["A tutorial that teaches you how to trade","A portfolio built by the platform\u2019s scoring engine, synthesizing frameworks from all ten investing legends into a single benchmark","A leaderboard showing the top 10 competitors","A practice mode with no scoring"],
+ans:1,
+exp:"Lesson 3 explains that the Beat Lynch Model is a published benchmark portfolio that competes alongside human participants in every NIL tournament. It synthesizes the wisdom of all ten legends into a single AI-driven allocation. Beating other humans determines your placement, but beating the model is the ultimate test \u2014 proof that your judgment adds value beyond systematic analysis."},
+
+{q:"How is the Infinite Alpha Academy structured, and what is the total journey?",
+opts:["2 Tiers, 20 lessons, and 1,000 Mastery Points","3 Tiers plus a Welcome course, covering 78 lessons and 2,700 total Mastery Points","5 Tiers, 100 lessons, and 5,000 Mastery Points","1 Tier, 10 lessons, and 500 Mastery Points"],
+ans:1,
+exp:"Exhibit 3.2 maps the complete journey: Course 0.1 Welcome (50 MP) \u2192 Tier 1 Foundations (earn 400 MP, 4 courses, 25 lessons) \u2192 Tier 2 Competitive Readiness (earn 500 MP, 4 courses, 20 lessons) \u2192 Tier 3 The Five Pillars (earn 1,750 MP, 5 pillars, 50 lessons). Total: 78 lessons, 2,700 Mastery Points earned, and 4 credentials."},
+
+{q:"[SYNTHESIS] A friend tells you: \u201cI bought a stock because it\u2019s been going up for three days and I don\u2019t want to miss out. I\u2019ll sell it as soon as it drops.\u201d Based on everything you\u2019ve learned, what is wrong with this approach?",
+opts:["Nothing \u2014 buying things that are going up is always a smart strategy","They\u2019re treating a stock like a short-term price bet instead of business ownership, buying on emotion instead of analysis, and have no system \u2014 exactly the pattern that causes the behavior gap documented in Lesson 2","They should have bought two stocks instead of one","The only problem is that three days isn\u2019t long enough \u2014 they should wait five days"],
+ans:1,
+exp:"This friend is exhibiting every pattern that leads to the behavior gap: treating stocks as price bets rather than business ownership (Lesson 1), buying based on momentum and FOMO rather than business analysis (the GameStop pattern from Lesson 2), planning to sell based on emotion rather than a system, and having no analytical framework. This is the exact opposite of investing mastery."}
+];
+
+var answered=0,correct=0,total=Q.length;
+function startExam(){document.getElementById('exam-start').style.display='none';document.getElementById('exam-live').style.display='block';renderQuestions();}
+function renderQuestions(){
+  var c=document.getElementById('questions-container');c.innerHTML='';
+  Q.forEach(function(q,i){
+    var h='<div class="q-block" id="qb-'+i+'"><div class="q-num">Question '+(i+1)+' of '+total+(i===total-1?' \u00b7 [SYNTHESIS]':'')+'</div><div class="q-text">'+q.q+'</div><div class="q-options">';
+    var L=['A','B','C','D'];
+    q.opts.forEach(function(o,j){h+='<button class="q-opt" onclick="answer('+i+','+j+')"><span class="opt-letter">'+L[j]+'</span><span>'+o+'</span></button>';});
+    h+='</div><div class="q-feedback" id="qf-'+i+'"></div></div>';
+    c.innerHTML+=h;
+  });
+}
+function answer(qi,oi){
+  var q=Q[qi],bl=document.getElementById('qb-'+qi),fb=document.getElementById('qf-'+qi);
+  if(bl.classList.contains('answered-correct')||bl.classList.contains('answered-wrong'))return;
+  var btns=bl.querySelectorAll('.q-opt');btns.forEach(function(b){b.disabled=true;});
+  answered++;
+  if(oi===q.ans){correct++;btns[oi].classList.add('correct');bl.classList.add('answered-correct');fb.className='q-feedback correct';fb.innerHTML='<strong>Correct!</strong> '+q.exp;}
+  else{btns[oi].classList.add('wrong');btns[q.ans].classList.add('reveal-correct');bl.classList.add('answered-wrong');fb.className='q-feedback wrong';fb.innerHTML='<strong>Not quite.</strong> '+q.exp;}
+  fb.style.display='block';
+  document.getElementById('score-display').textContent=correct;
+  document.getElementById('progress-label').textContent=answered+' / '+total;
+  document.getElementById('progress-bar').style.width=(answered/total*100)+'%';
+  if(answered===total)setTimeout(showResult,600);
+}
+function showResult(){
+  var r=document.getElementById('exam-result');r.style.display='block';
+  var pct=Math.round(correct/total*100);
+  document.getElementById('result-pct').textContent=pct+'%';
+  var s=document.getElementById('result-status'),m=document.getElementById('result-msg');
+  if(correct>=8){s.innerHTML='<span class="result-pass">PASSED \u2014 '+correct+'/'+total+'</span>';m.textContent='Welcome to Beat Lynch. You\u2019ve earned 50 Mastery Points and the Beat Lynch Enrolled credential. Tier 1 is now unlocked \u2014 Course 1.1: Masters 101 is your next step. The journey begins.';}
+  else{s.innerHTML='<span class="result-fail">NOT YET \u2014 '+correct+'/'+total+'</span>';m.textContent='You need 8/10 (80%) to pass. Review the lessons \u2014 every answer is covered in the course material \u2014 and try again. You have unlimited retakes.';}
+  r.scrollIntoView({behavior:'smooth'});
+}
+function retakeExam(){answered=0;correct=0;document.getElementById('score-display').textContent='0';document.getElementById('progress-label').textContent='0 / '+total;document.getElementById('progress-bar').style.width='0%';document.getElementById('exam-result').style.display='none';renderQuestions();document.getElementById('exam-live').scrollIntoView({behavior:'smooth'});}
+</script>
+</body>
+</html>

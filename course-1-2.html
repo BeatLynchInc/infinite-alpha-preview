@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course 1.2 — The Investor's Mindset | Infinite Alpha Academy</title>
+<style>
+:root{--gold:#C9A84C;--dark:#0D0F14;--panel:#13161E;--border:#1E2330;--text:#E8EAF0;--muted:#7A8099;--accent:#3B82F6;--green:#22C55E;--red:#EF4444;--purple:#a855f7;--orange:#f59e0b;--cyan:#06b6d4;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--dark);color:var(--text);font-family:'Georgia',serif;font-size:16px;line-height:1.75;}
+.top-bar{background:var(--panel);border-bottom:1px solid var(--border);padding:12px 32px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:100;flex-wrap:wrap;}
+.logo{font-family:Arial,sans-serif;font-weight:900;font-size:18px;color:var(--gold);letter-spacing:2px;}
+.pill{background:var(--gold);color:var(--dark);font-family:Arial,sans-serif;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:1px;}
+.pill-tier{background:var(--accent);color:#fff;}
+.tab-nav{display:flex;gap:4px;margin-left:auto;}
+.tab-btn{background:none;border:1px solid var(--border);color:var(--muted);font-family:Arial,sans-serif;font-size:12px;font-weight:700;padding:6px 16px;border-radius:6px;cursor:pointer;transition:all .2s;letter-spacing:.5px;}
+.tab-btn.active{background:var(--gold);color:var(--dark);border-color:var(--gold);}
+.tab-btn:hover:not(.active){border-color:var(--gold);color:var(--gold);}
+.hero{background:linear-gradient(135deg,#0D0F14,#13161E,#0a0c10);border-bottom:1px solid var(--border);padding:56px 32px 40px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:500px;height:500px;background:radial-gradient(circle,rgba(201,168,76,.06) 0%,transparent 70%);pointer-events:none;}
+.course-label{font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:12px;}
+.hero h1{font-size:clamp(26px,4vw,44px);font-weight:400;color:#fff;margin-bottom:12px;line-height:1.2;}
+.hero-sub{font-size:17px;color:var(--muted);max-width:680px;margin:0 auto 28px;}
+.meta-row{display:flex;justify-content:center;gap:28px;flex-wrap:wrap;}
+.meta-item{text-align:center;}
+.meta-num{font-family:Arial,sans-serif;font-size:26px;font-weight:700;color:var(--gold);}
+.meta-label{font-family:Arial,sans-serif;font-size:10px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-top:2px;}
+.container{max-width:960px;margin:0 auto;padding:40px 24px;}
+.section{margin-bottom:52px;}
+.section-title{font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:20px;padding-bottom:10px;border-bottom:1px solid var(--border);}
+h2{font-size:22px;color:#fff;font-weight:400;margin-bottom:10px;}
+h3{font-family:Arial,sans-serif;font-size:12px;font-weight:700;color:var(--gold);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;margin-top:22px;}
+p{color:#BEC3D4;margin-bottom:14px;}
+strong.hl{color:#fff;}
+.tab-content{display:none;}.tab-content.active{display:block;}
+.lesson-grid{display:flex;flex-direction:column;border:1px solid var(--border);border-radius:12px;overflow:hidden;}
+.lesson-card{background:var(--panel);border-bottom:1px solid var(--border);padding:18px 22px;display:grid;grid-template-columns:46px 1fr auto;gap:14px;align-items:start;cursor:pointer;transition:background .2s;}
+.lesson-card:last-child{border-bottom:none;}
+.lesson-card:hover,.lesson-card.active-card{background:#1a1e2a;}
+.lesson-card.active-card{border-left:3px solid var(--gold);}
+.lesson-num{font-family:Arial,sans-serif;font-size:20px;font-weight:700;color:var(--gold);line-height:1;}
+.lesson-title{font-size:16px;color:#fff;margin-bottom:3px;}
+.lesson-desc{font-family:Arial,sans-serif;font-size:12px;color:var(--muted);line-height:1.5;}
+.lesson-mp{font-family:Arial,sans-serif;font-size:12px;font-weight:700;color:var(--gold);background:rgba(201,168,76,.1);padding:3px 10px;border-radius:20px;white-space:nowrap;align-self:center;}
+.lesson-detail{background:#0e1018;border-top:1px solid var(--border);padding:28px;display:none;}
+.lesson-detail.open{display:block;}
+.fw-table{width:100%;border-collapse:collapse;margin:12px 0 20px;}
+.fw-table th{background:rgba(201,168,76,.08);font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);padding:10px 14px;text-align:left;border-bottom:1px solid var(--border);}
+.fw-table td{padding:12px 14px;border-bottom:1px solid var(--border);font-family:Arial,sans-serif;font-size:13px;color:#BEC3D4;vertical-align:top;}
+.fw-table tr:last-child td{border-bottom:none;}
+.fw-table tr:hover td{background:rgba(255,255,255,.02);}
+.callout{background:rgba(201,168,76,.05);border-left:3px solid var(--gold);padding:16px 20px;border-radius:0 8px 8px 0;margin:18px 0;}
+.callout-label{font-family:Arial,sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;}
+.callout p{color:var(--text);margin:0;font-size:14px;}
+.callout-blue{border-left-color:var(--accent);background:rgba(59,130,246,.05);}.callout-blue .callout-label{color:var(--accent);}
+.callout-red{border-left-color:var(--red);background:rgba(239,68,68,.05);}.callout-red .callout-label{color:var(--red);}
+.callout-green{border-left-color:var(--green);background:rgba(34,197,94,.05);}.callout-green .callout-label{color:var(--green);}
+.callout-purple{border-left-color:var(--purple);background:rgba(168,85,247,.05);}.callout-purple .callout-label{color:var(--purple);}
+.callout-cyan{border-left-color:var(--cyan);background:rgba(6,182,212,.05);}.callout-cyan .callout-label{color:var(--cyan);}
+.callout-orange{border-left-color:var(--orange);background:rgba(245,158,11,.05);}.callout-orange .callout-label{color:var(--orange);}
+.exhibit{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:22px;margin:18px 0;}
+.exhibit-label{font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:14px;}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0;}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:16px 0;}
+@media(max-width:640px){.two-col,.three-col{grid-template-columns:1fr;}.top-bar{padding:10px 16px;gap:8px;}}
+.stat-card{background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.2);border-radius:10px;padding:18px;text-align:center;}
+.stat-num{font-family:Arial,sans-serif;font-size:28px;font-weight:900;color:var(--gold);line-height:1;margin-bottom:4px;}
+.stat-label{font-family:Arial,sans-serif;font-size:11px;color:var(--muted);line-height:1.4;}
+.tag-row{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 14px;}
+.ctag{font-family:Arial,sans-serif;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;letter-spacing:.5px;background:rgba(201,168,76,.15);color:var(--gold);border:1px solid rgba(201,168,76,.3);}
+.divider{border:none;border-top:1px solid var(--border);margin:36px 0;}
+.completion-badge{background:linear-gradient(135deg,rgba(201,168,76,.1),rgba(59,130,246,.06));border:1px solid rgba(201,168,76,.35);border-radius:16px;padding:32px;text-align:center;margin:24px 0;}
+.chart-container{margin:16px 0;padding:20px;background:var(--panel);border:1px solid var(--border);border-radius:12px;}
+.chart-label{font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:14px;}
+.bar-chart{display:flex;align-items:flex-end;gap:8px;height:200px;padding:0 10px;border-bottom:1px solid var(--border);margin-bottom:8px;}
+.bar-group{display:flex;flex-direction:column;align-items:center;flex:1;gap:4px;justify-content:flex-end;height:100%;}
+.bar{width:100%;max-width:48px;border-radius:4px 4px 0 0;transition:height .6s ease;position:relative;min-height:2px;}
+.bar-val{font-family:Arial,sans-serif;font-size:10px;font-weight:700;color:var(--text);text-align:center;margin-bottom:2px;}
+.bar-label{font-family:Arial,sans-serif;font-size:10px;color:var(--muted);text-align:center;margin-top:4px;line-height:1.2;}
+.spectrum{position:relative;height:40px;border-radius:8px;margin:16px 0 32px;overflow:visible;}
+.spectrum-marker{position:absolute;top:-6px;width:3px;height:52px;background:#fff;border-radius:2px;z-index:2;}
+.spectrum-label{position:absolute;top:50px;font-family:Arial,sans-serif;font-size:10px;color:var(--text);transform:translateX(-50%);white-space:nowrap;text-align:center;}
+.bias-card{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:16px 18px;margin:10px 0;}
+.bias-icon{font-size:22px;margin-bottom:6px;}
+.bias-name{font-family:Arial,sans-serif;font-size:13px;font-weight:700;color:#fff;margin-bottom:4px;}
+.bias-desc{font-family:Arial,sans-serif;font-size:12px;color:#BEC3D4;line-height:1.5;}
+.bias-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0;}
+@media(max-width:640px){.bias-grid{grid-template-columns:1fr;}}
+/* Case Study */
+.case-study{background:linear-gradient(135deg,rgba(201,168,76,.04),rgba(59,130,246,.03));border:1px solid rgba(201,168,76,.25);border-radius:12px;padding:22px;margin:20px 0;position:relative;overflow:hidden;}
+.case-study::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:linear-gradient(180deg,var(--gold),var(--accent));}
+.case-label{font-family:Arial,sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:4px;}
+.case-company{font-family:Arial,sans-serif;font-size:18px;font-weight:900;color:#fff;margin-bottom:8px;}
+.case-study p{font-size:14px;margin-bottom:10px;}
+.case-takeaway{background:rgba(201,168,76,.08);border-radius:8px;padding:12px 16px;margin-top:10px;}
+.case-takeaway-label{font-family:Arial,sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:4px;}
+.case-takeaway p{font-size:13px;margin:0;color:var(--text);}
+/* Timeline */
+.timeline{position:relative;padding-left:28px;margin:18px 0;}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--gold),var(--accent),var(--purple));}
+.tl-item{position:relative;margin-bottom:18px;}
+.tl-item::before{content:'';position:absolute;left:-24px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--gold);border:2px solid var(--dark);}
+.tl-date{font-family:Arial,sans-serif;font-size:11px;font-weight:700;color:var(--gold);letter-spacing:1px;}
+.tl-text{font-family:Arial,sans-serif;font-size:13px;color:#BEC3D4;line-height:1.5;margin-top:2px;}
+/* Exam styles */
+.exam-wrap{max-width:800px;margin:0 auto;}
+.start-exam-wrap{text-align:center;padding:40px 20px;}
+.start-exam-wrap h2{color:#fff;margin-bottom:12px;}
+.start-exam-wrap p{color:var(--muted);max-width:500px;margin:0 auto 24px;}
+.exam-rules{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin:24px 0;text-align:left;}
+.rule-card{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:14px;}
+.rule-card .r-num{font-family:Arial,sans-serif;font-size:22px;font-weight:900;color:var(--gold);}
+.rule-card .r-label{font-family:Arial,sans-serif;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;}
+.score-bar-wrap{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:20px 28px;margin-bottom:28px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;}
+.score-big{font-family:Arial,sans-serif;font-size:42px;font-weight:900;color:var(--gold);line-height:1;}
+.score-sub{font-family:Arial,sans-serif;font-size:12px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;}
+.progress-track{flex:1;min-width:200px;background:rgba(255,255,255,.06);border-radius:8px;height:12px;overflow:hidden;}
+.progress-fill{height:100%;background:linear-gradient(90deg,rgba(201,168,76,.5),var(--gold));border-radius:8px;transition:width .5s ease;}
+.q-block{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:22px;margin-bottom:14px;transition:border-color .3s;}
+.q-block.answered-correct{border-color:var(--green);}
+.q-block.answered-wrong{border-color:var(--red);}
+.q-num{font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:8px;}
+.q-text{font-size:15px;color:#fff;margin-bottom:16px;line-height:1.6;}
+.q-options{display:flex;flex-direction:column;gap:8px;}
+.q-opt{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:8px;padding:11px 15px;font-family:Arial,sans-serif;font-size:14px;color:#BEC3D4;cursor:pointer;transition:all .2s;text-align:left;display:flex;gap:12px;align-items:flex-start;}
+.q-opt:hover:not(:disabled){background:rgba(201,168,76,.06);border-color:rgba(201,168,76,.4);color:#fff;}
+.q-opt:disabled{cursor:default;}
+.q-opt.correct{background:rgba(34,197,94,.1);border-color:var(--green);color:var(--green);}
+.q-opt.wrong{background:rgba(239,68,68,.1);border-color:var(--red);color:var(--red);}
+.q-opt.reveal-correct{background:rgba(34,197,94,.07);border-color:rgba(34,197,94,.4);color:var(--green);}
+.opt-letter{font-weight:700;flex-shrink:0;width:18px;}
+.q-feedback{margin-top:10px;padding:11px 15px;border-radius:8px;font-family:Arial,sans-serif;font-size:13px;line-height:1.5;display:none;}
+.q-feedback.correct{background:rgba(34,197,94,.08);color:var(--green);border:1px solid rgba(34,197,94,.2);}
+.q-feedback.wrong{background:rgba(239,68,68,.08);color:#f87171;border:1px solid rgba(239,68,68,.2);}
+.exam-result{background:linear-gradient(135deg,rgba(201,168,76,.07),rgba(59,130,246,.04));border:1px solid rgba(201,168,76,.3);border-radius:16px;padding:40px;text-align:center;margin-top:32px;display:none;}
+.result-score{font-family:Arial,sans-serif;font-size:64px;font-weight:900;color:var(--gold);line-height:1;margin-bottom:8px;}
+.exam-btn{background:var(--gold);color:var(--dark);font-family:Arial,sans-serif;font-weight:700;font-size:14px;letter-spacing:1px;padding:12px 28px;border-radius:8px;border:none;cursor:pointer;margin:4px;}
+.exam-btn.secondary{background:transparent;color:var(--gold);border:1px solid var(--gold);}
+.result-pass{color:var(--green);}.result-fail{color:var(--red);}
+.result-msg{color:var(--muted);max-width:520px;margin:0 auto 24px;font-size:15px;}
+.axis-label{font-family:Arial,sans-serif;font-size:10px;fill:var(--muted);}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <span class="logo">BEAT LYNCH</span>
+  <span class="pill">INFINITE ALPHA</span>
+  <span class="pill pill-tier">TIER 1</span>
+  <span style="font-family:Arial;font-size:13px;color:var(--muted);margin-left:4px">The Investor's Mindset</span>
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="switchTab('curriculum',this)">Curriculum</button>
+    <button class="tab-btn" onclick="switchTab('exam',this)">Final Exam</button>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="course-label">Infinite Alpha · Tier 1: Investor Foundations · Course 2 of 4</div>
+  <h1>The Investor's Mindset</h1>
+  <p class="hero-sub">Before you study a single stock, you must understand yourself. The greatest threat to your wealth is not a bad market — it is a bad decision. This course rewires how you think about money, risk, and time.</p>
+  <div class="meta-row">
+    <div class="meta-item"><div class="meta-num">5</div><div class="meta-label">Lessons</div></div>
+    <div class="meta-item"><div class="meta-num">100</div><div class="meta-label">Mastery Points</div></div>
+    <div class="meta-item"><div class="meta-num">80%</div><div class="meta-label">Pass Threshold</div></div>
+    <div class="meta-item"><div class="meta-num">~3 hrs</div><div class="meta-label">Study Time</div></div>
+  </div>
+</div>
+
+<!-- CURRICULUM TAB -->
+<div id="tab-curriculum" class="tab-content active">
+<div class="container">
+
+<div class="section">
+<div class="section-title">Course Map</div>
+<p>Five lessons build upon each other in sequence. What investing actually is leads to the psychological traps that sabotage it, which leads to a redefinition of risk, then the force that makes patience pay — compounding — and finally, the discipline that ties everything together: systematic thinking.</p>
+</div>
+
+<div class="section">
+<div class="section-title">Lessons</div>
+<div class="lesson-grid">
+
+<!-- ==================== LESSON 1 ==================== -->
+<div class="lesson-card" onclick="toggleLesson('d1',this)">
+  <div class="lesson-num">1</div>
+  <div>
+    <div class="lesson-title">What Investing Actually Is</div>
+    <div class="lesson-desc">Ownership, intrinsic value, margin of safety, and why investing is not what most people think.</div>
+  </div>
+  <div class="lesson-mp">+20 MP</div>
+</div>
+<div class="lesson-detail" id="d1">
+
+<div class="tag-row">
+  <span class="ctag">Intrinsic Value</span>
+  <span class="ctag">Ownership</span>
+  <span class="ctag">Margin of Safety</span>
+  <span class="ctag">Speculation vs. Investing</span>
+  <span class="ctag">Expected Value</span>
+  <span class="ctag">Time Horizon</span>
+</div>
+
+<h3>The Most Misunderstood Activity in Finance</h3>
+<p>Most people believe investing means buying stocks and hoping they go up. That definition is not just incomplete — it is dangerous. If your entire framework for putting money to work is "buy low, sell high," you have no way to determine what <strong class="hl">"low"</strong> or <strong class="hl">"high"</strong> actually mean. You are guessing. Guessing with money has a name: <strong class="hl">speculation</strong>.</p>
+
+<p>Investing, properly defined, is <strong class="hl">buying ownership in an asset for less than its intrinsic value</strong> — the true economic worth of what that asset will produce over its lifetime. When Benjamin Graham wrote <em>The Intelligent Investor</em> in 1949, he drew a line that still holds: the investor analyses a business and its value; the speculator bets on price movements without analyzing the underlying value. The distinction is not about how long you hold. It is about <em>why</em> you buy.</p>
+
+<p>Someone who buys whatever stocks are trending on social media and sells when the hype dies is not investing. They are <strong class="hl">speculating</strong> — betting on price movements driven by narratives and momentum, without any assessment of what the businesses are actually worth. This is true regardless of whether they call themselves an "investor" or how long they hold.</p>
+
+<div class="exhibit">
+  <div class="exhibit-label">Exhibit 1.1 — The Activity Spectrum</div>
+  <div class="spectrum" style="background:linear-gradient(90deg, var(--green), var(--accent), var(--orange), var(--red));height:40px;border-radius:8px;position:relative;">
+    <div class="spectrum-marker" style="left:8%;"></div>
+    <div class="spectrum-label" style="left:8%;">Savings<br><span style="color:var(--muted)">0% equity risk</span></div>
+    <div class="spectrum-marker" style="left:30%;"></div>
+    <div class="spectrum-label" style="left:30%;">Investing<br><span style="color:var(--muted)">Value-driven</span></div>
+    <div class="spectrum-marker" style="left:58%;"></div>
+    <div class="spectrum-label" style="left:58%;">Trading<br><span style="color:var(--muted)">Price-driven</span></div>
+    <div class="spectrum-marker" style="left:78%;"></div>
+    <div class="spectrum-label" style="left:78%;">Speculation<br><span style="color:var(--muted)">Narrative-driven</span></div>
+    <div class="spectrum-marker" style="left:95%;"></div>
+    <div class="spectrum-label" style="left:95%;">Gambling<br><span style="color:var(--muted)">Luck-driven</span></div>
+  </div>
+</div>
+
+<h3>Intrinsic Value — The Foundation of Everything</h3>
+<p><strong class="hl">Intrinsic value</strong> is the present worth of all the cash a business will generate in the future. If a lemonade stand will produce $1,000 a year in profit for the next 20 years, its intrinsic value is the sum of those future cash flows, adjusted for the time value of money (a dollar today is worth more than a dollar next year because you could invest it). You do not need to calculate this precisely yet — that comes later. For now, understand the concept: every business has an economic worth that exists independently of its stock price.</p>
+
+<p>When you buy shares of a company, you are not buying a ticker symbol. You are buying <strong class="hl">fractional ownership</strong> of a real business — its factories, patents, customer relationships, brand, and future earnings. An investor who buys 100 shares of Apple is a part-owner of Apple, entitled to a proportional share of its profits. The stock price on any given day is just what other people are willing to pay for that ownership right now. It may be higher or lower than what the ownership is actually worth.</p>
+
+<div class="case-study">
+  <div class="case-label">Real-World Example</div>
+  <div class="case-company">Coca-Cola — What Ownership Really Means</div>
+  <p>In 1988, Warren Buffett began buying Coca-Cola shares for roughly $5 per share (split-adjusted). Wall Street was lukewarm. But Buffett wasn't buying a stock chart — he was buying a <strong class="hl">business</strong> that sold a product consumed 1.6 billion times a day across 200 countries, with a brand worth more than its physical assets, and profit margins that had expanded for decades. He bought ownership in those future earnings.</p>
+  <p>By 2024, Berkshire Hathaway's Coca-Cola stake — never sold — was worth over $25 billion. And the dividends alone now pay Berkshire more per year than the entire original investment. The stock price bounced around wildly over those 36 years, but the <em>business</em> kept earning, kept growing, and kept paying.</p>
+  <div class="case-takeaway">
+    <div class="case-takeaway-label">Lesson</div>
+    <p>Buffett bought ownership in Coca-Cola's future cash flows. The stock price was just the entry ticket. He never sold because the business continued to produce exactly what he'd analyzed it would produce.</p>
+  </div>
+</div>
+
+<div class="two-col">
+  <div style="background:rgba(34,197,94,.06);border:1px solid rgba(34,197,94,.2);border-radius:8px;padding:16px;">
+    <div style="font-family:Arial;font-size:12px;font-weight:700;color:var(--green);margin-bottom:8px;letter-spacing:1px;">THE INVESTOR ASKS</div>
+    <div style="font-family:Arial;font-size:12px;color:#BEC3D4;line-height:1.9;">"What is this business worth based on its earnings, assets, and competitive position? Is the current price below that value?"</div>
+  </div>
+  <div style="background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.2);border-radius:8px;padding:16px;">
+    <div style="font-family:Arial;font-size:12px;font-weight:700;color:var(--red);margin-bottom:8px;letter-spacing:1px;">THE SPECULATOR ASKS</div>
+    <div style="font-family:Arial;font-size:12px;color:#BEC3D4;line-height:1.9;">"Is this stock going up tomorrow? What's the momentum? What are people saying on social media?"</div>
+  </div>
+</div>
+
+<h3>Margin of Safety — The Investor's Seat Belt</h3>
+<p>Benjamin Graham's single most important concept is the <strong class="hl">margin of safety</strong>. It is the gap between a stock's intrinsic value and the price you pay. If you calculate that a company is worth $80 per share and the stock trades at $62, the $18 difference is your margin of safety — a buffer that protects you if your analysis is imperfect or if something unexpected happens.</p>
+
+<p>Think of it like engineering a bridge. Engineers design bridges to hold far more weight than they expect. They build in a margin of error. Investors do the same thing by only buying when the price is significantly below their estimate of intrinsic value. Graham typically insisted on a margin of safety of at least 25–35%. The wider the margin, the less you need to be right — and the less you can lose if you are wrong.</p>
+
+<div class="exhibit">
+  <div class="exhibit-label">Exhibit 1.2 — How Margin of Safety Works</div>
+  <svg viewBox="0 0 700 200" style="width:100%;max-width:700px;display:block;margin:0 auto;">
+    <defs>
+      <linearGradient id="msGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="rgba(34,197,94,0.3)"/>
+        <stop offset="100%" stop-color="rgba(34,197,94,0.05)"/>
+      </linearGradient>
+    </defs>
+    <!-- Background -->
+    <rect x="80" y="10" width="540" height="160" rx="8" fill="rgba(255,255,255,0.02)" stroke="var(--border)" stroke-width="1"/>
+    <!-- Intrinsic value line -->
+    <line x1="100" y1="50" x2="600" y2="50" stroke="var(--gold)" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="610" y="54" fill="var(--gold)" font-family="Arial" font-size="12" font-weight="700">$80 — Intrinsic Value</text>
+    <!-- Market price line -->
+    <line x1="100" y1="110" x2="600" y2="110" stroke="var(--accent)" stroke-width="2"/>
+    <text x="610" y="114" fill="var(--accent)" font-family="Arial" font-size="12" font-weight="700">$62 — Market Price</text>
+    <!-- Margin of safety zone -->
+    <rect x="100" y="50" width="500" height="60" fill="url(#msGrad)" rx="4"/>
+    <!-- Arrow -->
+    <line x1="90" y1="52" x2="90" y2="108" stroke="var(--green)" stroke-width="2" marker-end="url(#arrowG)"/>
+    <line x1="90" y1="108" x2="90" y2="52" stroke="var(--green)" stroke-width="2" marker-end="url(#arrowG)"/>
+    <defs><marker id="arrowG" markerWidth="8" markerHeight="6" refX="4" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="var(--green)"/></marker></defs>
+    <text x="50" y="84" fill="var(--green)" font-family="Arial" font-size="11" font-weight="700" text-anchor="middle">$18</text>
+    <text x="50" y="96" fill="var(--green)" font-family="Arial" font-size="9" text-anchor="middle">MARGIN</text>
+    <!-- Label -->
+    <text x="350" y="84" fill="var(--green)" font-family="Arial" font-size="13" font-weight="700" text-anchor="middle" opacity="0.8">MARGIN OF SAFETY ZONE</text>
+    <text x="350" y="150" fill="var(--muted)" font-family="Arial" font-size="11" text-anchor="middle">The wider this gap, the more protection you have against errors in your analysis</text>
+  </svg>
+</div>
+
+<div class="callout callout-green">
+  <div class="callout-label">Key Definition — Margin of Safety</div>
+  <p>The <strong>margin of safety</strong> is the difference between a stock's intrinsic value and the price you pay. A stock worth $80 trading at $62 has an $18 (22.5%) margin of safety. This buffer protects against analytical errors and unforeseen events. It is the most important concept in value investing.</p>
+</div>
+
+<h3>Thinking in Probabilities</h3>
+<p>Professional investors do not think in certainties. They think in <strong class="hl">expected value</strong> — the probability-weighted average of all possible outcomes. Imagine a bet that pays $300 if a coin lands heads and loses $100 on tails. The expected value is (50% × $300) + (50% × −$100) = <strong class="hl">$100</strong>. Even though you lose half the time, this is a good bet because the expected value is positive.</p>
+
+<p>Investing works the same way: you build a portfolio of decisions where the odds are in your favor over many repetitions. No single investment is guaranteed — but <strong class="hl">over many decisions, a portfolio of positive expected value choices produces favorable results</strong>. This is the same mathematical principle that makes casinos profitable: any single hand of blackjack is uncertain, but over thousands of hands, the house edge guarantees profit.</p>
+
+<div class="exhibit">
+  <div class="exhibit-label">Exhibit 1.3 — Expected Value: Two Hypothetical Investments</div>
+  <table class="fw-table">
+    <thead><tr><th>Scenario</th><th>Probability</th><th>Investment A Return</th><th>Investment B Return</th></tr></thead>
+    <tbody>
+      <tr><td><strong class="hl">Bull case</strong></td><td>30%</td><td>+40%</td><td>+100%</td></tr>
+      <tr><td><strong class="hl">Base case</strong></td><td>50%</td><td>+12%</td><td>+5%</td></tr>
+      <tr><td><strong class="hl">Bear case</strong></td><td>20%</td><td>−10%</td><td>−60%</td></tr>
+      <tr style="background:rgba(201,168,76,.06);"><td><strong class="hl">Expected value</strong></td><td>—</td><td><strong class="hl">+16.0%</strong></td><td><strong class="hl">+20.5%</strong></td></tr>
+    </tbody>
+  </table>
+  <p style="font-family:Arial;font-size:12px;color:var(--muted);margin-top:8px;">Investment B has higher expected value — but look at the bear case. A −60% loss requires a +150% gain just to break even. This is why expected value alone doesn't define good investing. Risk matters — and Lesson 3 will explain why.</p>
+</div>
+
+<h3>Time Horizon — The Investor's Edge</h3>
+<p>The single greatest structural advantage an individual investor has over Wall Street is <strong class="hl">time horizon</strong>. Hedge fund managers report quarterly returns. Mutual fund managers get compared monthly. You can wait years. Warren Buffett's favorite holding period is "forever." Peter Lynch held Fannie Mae for over a decade. When you extend your time horizon, short-term noise fades and business fundamentals drive returns.</p>
+
+<div class="case-study">
+  <div class="case-label">Real-World Example</div>
+  <div class="case-company">Amazon — The Patience Premium</div>
+  <p>Amazon went public in 1997 at $18 per share. By late 1999, it hit $113. Then the dot-com bust arrived. By September 2001, Amazon traded at $5.97 — a 95% decline from its high. Wall Street declared it dead. Analyst Ravi Suria published a famous note predicting Amazon's bankruptcy.</p>
+  <p>But anyone who analyzed the <em>business</em> — growing revenue, expanding product categories, a fanatical customer base, and Jeff Bezos's relentless reinvestment — saw something different. An investor who bought at the IPO and simply held would have turned $10,000 into over $2 million by 2024. The investor who panicked during the 95% drawdown locked in a devastating loss. Same stock. Radically different outcomes. The only variable: time horizon and conviction in the business.</p>
+  <div class="case-takeaway">
+    <div class="case-takeaway-label">Lesson</div>
+    <p>Time horizon transforms volatility from an enemy into an irrelevance. When you extend your holding period, price noise fades and the business's actual value creation drives your returns.</p>
+  </div>
+</div>
+
+<div class="callout">
+  <div class="callout-label">Beat Lynch Connection</div>
+  <p>Beat Lynch's Mean Magic scoring engine evaluates stocks across ten dimensions drawn from the legends you studied in Course 1.1. Every one of those dimensions measures something about the <em>business</em> — not about tomorrow's price. The entire system is built on the principle that price follows value over time. Understanding this distinction is the prerequisite for reading any Beat Lynch score.</p>
+</div>
+
+</div>
+
+<!-- ==================== LESSON 2 ==================== -->
+<div class="lesson-card" onclick="toggleLesson('d2',this)">
+  <div class="lesson-num">2</div>
+  <div>
+    <div class="lesson-title">The Behavioral Minefield</div>
+    <div class="lesson-desc">The cognitive biases that silently destroy returns — and how to recognize them.</div>
+  </div>
+  <div class="lesson-mp">+20 MP</div>
+</div>
+<div class="lesson-detail" id="d2">
+
+<div class="tag-row">
+  <span class="ctag">Loss Aversion</span>
+  <span class="ctag">Overconfidence</span>
+  <span class="ctag">Herding</span>
+  <span class="ctag">Recency Bias</span>
+  <span class="ctag">Anchoring</span>
+  <span class="ctag">Behavior Gap</span>
+</div>
+
+<h3>Your Brain Is the Biggest Risk</h3>
+<p>The financial industry spends billions on data, algorithms, and analysis. Yet the academic research is overwhelming: <strong class="hl">investor behavior</strong> destroys more wealth than bad stock picks, high fees, and bear markets combined. A landmark study by Dalbar Inc. tracked actual investor returns versus the S&P 500 over 30 years and found a staggering gap — not because people picked bad funds, but because they <strong class="hl">bought after rallies and sold during panics</strong>. The market returned roughly 10% annually. The average investor captured roughly 4%.</p>
+
+<div class="two-col">
+  <div class="stat-card">
+    <div class="stat-num">~10%</div>
+    <div class="stat-label">S&P 500 annualized return over 30 years</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num" style="color:var(--red);">~4%</div>
+    <div class="stat-label">Average equity investor annualized return (Dalbar)</div>
+  </div>
+</div>
+
+<p>That gap — roughly 6 percentage points per year — is the <strong class="hl">behavior tax</strong>. Over 30 years, $100,000 at 10% grows to $1.74 million. At 4%, it reaches $324,000. The difference — <strong class="hl">$1.4 million</strong> — is the cost of being human without a system. The Dalbar study specifically measured the gap between fund returns and investor returns — meaning investors owned the right funds but bought and sold at the wrong times. The gap is driven entirely by emotional decision-making: buying when markets feel safe (after gains) and selling when markets feel dangerous (after losses).</p>
+
+<h3>The Five Biases That Cost the Most</h3>
+<p>Behavioral finance — the study of how psychological biases affect financial decisions — has identified dozens of cognitive traps. Five are responsible for most of the damage.</p>
+
+<div class="bias-grid">
+  <div class="bias-card">
+    <div class="bias-icon" style="color:var(--red);">⚖️</div>
+    <div class="bias-name">1. Loss Aversion</div>
+    <div class="bias-desc">Losses feel roughly <strong style="color:#fff;">twice as painful</strong> as equivalent gains feel good. This asymmetry, proven by Kahneman and Tversky's Prospect Theory in 1979, causes investors to hold losing stocks too long (hoping to break even) and sell winners too early (locking in the pleasure). <strong style="color:#fff;">The pain of watching losses mount becomes so unbearable that investors sell just to make the emotional suffering stop</strong> — regardless of whether selling makes financial sense.</div>
+  </div>
+  <div class="bias-card">
+    <div class="bias-icon" style="color:var(--orange);">🎯</div>
+    <div class="bias-name">2. Overconfidence</div>
+    <div class="bias-desc">Most people rate themselves above average at driving, at their jobs — and at picking stocks. Overconfident investors trade too frequently, concentrate positions too aggressively, and underestimate downside scenarios. Studies show the most active traders earn the lowest returns.</div>
+  </div>
+  <div class="bias-card">
+    <div class="bias-icon" style="color:var(--accent);">👥</div>
+    <div class="bias-name">3. Herding</div>
+    <div class="bias-desc">Humans are social animals. When everyone is buying, it feels safe. When everyone is selling, it feels dangerous. This is exactly backward: when everyone has already bought, prices are high and future returns are low. The dot-com bubble (1999) and meme stock frenzy (2021) are textbook herding events.</div>
+  </div>
+  <div class="bias-card">
+    <div class="bias-icon" style="color:var(--purple);">🔄</div>
+    <div class="bias-name">4. Recency Bias</div>
+    <div class="bias-desc">We overweight recent events and <strong style="color:#fff;">extrapolate the recent past into the future</strong>. After a two-year bull market, people expect more gains. After a crash, they expect more losses. This is why investors pile in near market tops and flee near market bottoms.</div>
+  </div>
+</div>
+
+<div class="bias-card" style="margin:0 0 14px;">
+  <div class="bias-icon" style="color:var(--cyan);">⚓</div>
+  <div class="bias-name">5. Anchoring</div>
+  <div class="bias-desc">Once you see a number, it sticks. <strong style="color:#fff;">If you bought a stock at $120, that price becomes your mental reference point.</strong> When it drops to $85, you fixate on "getting back to even" rather than asking the real question: "Is this stock worth $85 today?" Your purchase price has <em>zero relevance</em> to the stock's current or future value, but it dominates your decision-making. Anchoring to your purchase price is one of the most common — and most costly — errors in investing.</div>
+</div>
+
+<div class="case-study">
+  <div class="case-label">Real-World Example — Herding</div>
+  <div class="case-company">GameStop (2021) — The Herd Stampede</div>
+  <p>In January 2021, GameStop — a struggling brick-and-mortar video game retailer with declining revenue — surged from $17 to $483 in three weeks. The frenzy was driven entirely by social media hype on Reddit's WallStreetBets. Millions of new investors piled in not because of any analysis of GameStop's business value, but because <strong class="hl">everyone else was buying</strong>. That is textbook herding.</p>
+  <p>Those who bought near the peak at $400+ watched it crash to $40 within days. The business hadn't changed. Only the crowd's enthusiasm had. By the time most people heard about the trade and jumped in, the early participants had already sold.</p>
+  <div class="case-takeaway">
+    <div class="case-takeaway-label">Lesson</div>
+    <p>When the herd is stampeding, it is the most dangerous time to follow. The crowd creates the peak — and then becomes the victim of it. The investor asks "what is this business worth?" The herd asks "what is everyone else doing?"</p>
+  </div>
+</div>
+
+<div class="case-study">
+  <div class="case-label">Real-World Example — Anchoring</div>
+  <div class="case-company">General Electric — The $60 Anchor Trap</div>
+  <p>GE traded near $60 per share in 2000. For decades, it was America's most admired company. Millions of investors anchored to that $60 price as their mental reference. As the stock slowly declined — $40, $30, $20 — investors kept holding, waiting to "get back to even." They were anchored to a purchase price that had no relevance to the company's deteriorating reality.</p>
+  <p>By 2018, GE traded below $7. The business had fundamentally changed — its financial arm was imploding, its industrial segments were underperforming, and management had destroyed capital for years. Investors who asked "how do I get back to $60?" instead of "is GE worth $20 today?" suffered catastrophic losses.</p>
+  <div class="case-takeaway">
+    <div class="case-takeaway-label">Lesson</div>
+    <p>Your purchase price is irrelevant. The only question that matters is: "Given what I know today, is this stock worth its current price?" If the answer is no, sell — regardless of what you paid.</p>
+  </div>
+</div>
+
+<div class="exhibit">
+  <div class="exhibit-label">Exhibit 2.1 — The Behavior Gap: How Biases Destroy Returns Over Time</div>
+  <div class="chart-container" style="background:transparent;border:none;padding:0;">
+    <div style="display:flex;gap:16px;margin-bottom:16px;font-family:Arial;font-size:11px;">
+      <span><span style="display:inline-block;width:12px;height:12px;border-radius:3px;background:var(--gold);vertical-align:middle;margin-right:4px;"></span>Market Return (10%/yr)</span>
+      <span><span style="display:inline-block;width:12px;height:12px;border-radius:3px;background:var(--red);vertical-align:middle;margin-right:4px;"></span>Avg. Investor (4%/yr)</span>
+      <span><span style="display:inline-block;width:10px;height:10px;border-radius:3px;background:rgba(201,168,76,.3);vertical-align:middle;margin-right:4px;border:1px dashed var(--gold);"></span>Behavior Gap (lost wealth)</span>
+    </div>
+    <svg viewBox="0 0 700 300" style="width:100%;max-width:700px;display:block;margin:0 auto;">
+      <!-- Grid -->
+      <line x1="80" y1="260" x2="660" y2="260" stroke="var(--border)" stroke-width="1"/>
+      <line x1="80" y1="20" x2="80" y2="260" stroke="var(--border)" stroke-width="1"/>
+      <line x1="80" y1="200" x2="660" y2="200" stroke="var(--border)" stroke-width="0.5" stroke-dasharray="4"/>
+      <line x1="80" y1="140" x2="660" y2="140" stroke="var(--border)" stroke-width="0.5" stroke-dasharray="4"/>
+      <line x1="80" y1="80" x2="660" y2="80" stroke="var(--border)" stroke-width="0.5" stroke-dasharray="4"/>
+      <!-- Y labels -->
+      <text x="72" y="264" class="axis-label" text-anchor="end">$0</text>
+      <text x="72" y="204" class="axis-label" text-anchor="end">$500K</text>
+      <text x="72" y="144" class="axis-label" text-anchor="end">$1.0M</text>
+      <text x="72" y="84" class="axis-label" text-anchor="end">$1.5M</text>
+      <text x="72" y="30" class="axis-label" text-anchor="end">$2.0M</text>
+      <!-- 5yr bars -->
+      <rect x="110" y="237" width="32" height="23" rx="3" fill="var(--gold)"/>
+      <rect x="145" y="240" width="32" height="20" rx="3" fill="var(--red)" opacity="0.8"/>
+      <text x="143" y="232" fill="var(--gold)" font-family="Arial" font-size="9" font-weight="700" text-anchor="middle">$161K</text>
+      <text x="161" y="255" fill="var(--muted)" font-family="Arial" font-size="9" text-anchor="middle">5yr</text>
+      <!-- 10yr bars -->
+      <rect x="225" y="224" width="32" height="36" rx="3" fill="var(--gold)"/>
+      <rect x="260" y="232" width="32" height="28" rx="3" fill="var(--red)" opacity="0.8"/>
+      <text x="258" y="218" fill="var(--gold)" font-family="Arial" font-size="9" font-weight="700" text-anchor="middle">$259K</text>
+      <text x="276" y="255" fill="var(--muted)" font-family="Arial" font-size="9" text-anchor="middle">10yr</text>
+      <!-- 20yr bars -->
+      <rect x="340" y="178" width="38" height="82" rx="3" fill="var(--gold)"/>
+      <rect x="381" y="222" width="38" height="38" rx="3" fill="var(--red)" opacity="0.8"/>
+      <!-- Gap annotation -->
+      <rect x="340" y="178" width="38" height="44" rx="0" fill="rgba(201,168,76,0.15)" stroke="var(--gold)" stroke-width="1" stroke-dasharray="3"/>
+      <text x="375" y="172" fill="var(--gold)" font-family="Arial" font-size="9" font-weight="700" text-anchor="middle">$672K</text>
+      <text x="400" y="216" fill="var(--red)" font-family="Arial" font-size="9" font-weight="700" text-anchor="middle">$324K</text>
+      <text x="390" y="255" fill="var(--muted)" font-family="Arial" font-size="9" text-anchor="middle">20yr</text>
+      <!-- 30yr bars -->
+      <rect x="470" y="48" width="44" height="212" rx="3" fill="var(--gold)"/>
+      <rect x="518" y="222" width="44" height="38" rx="3" fill="var(--red)" opacity="0.8"/>
+      <!-- Gap -->
+      <rect x="470" y="48" width="44" height="174" rx="0" fill="rgba(201,168,76,0.1)" stroke="var(--gold)" stroke-width="1" stroke-dasharray="3"/>
+      <text x="492" y="40" fill="#fff" font-family="Arial" font-size="12" font-weight="900" text-anchor="middle">$1.74M</text>
+      <text x="540" y="216" fill="var(--red)" font-family="Arial" font-size="9" font-weight="700" text-anchor="middle">$324K</text>
+      <text x="516" y="255" fill="var(--muted)" font-family="Arial" font-size="9" text-anchor="middle">30yr</text>
+      <!-- Lost wealth label -->
+      <line x1="516" y1="120" x2="580" y2="80" stroke="var(--gold)" stroke-width="1" stroke-dasharray="3"/>
+      <text x="585" y="76" fill="var(--gold)" font-family="Arial" font-size="11" font-weight="700">$1.4M lost</text>
+      <text x="585" y="90" fill="var(--muted)" font-family="Arial" font-size="9">to behavioral mistakes</text>
+    </svg>
+    <p style="font-family:Arial;font-size:11px;color:var(--muted);margin-top:12px;">Growth of $100,000. The dashed gold area shows wealth destroyed by behavioral mistakes. The gap widens exponentially because of compounding (Lesson 4) — every year of behavioral errors compounds on every previous year's errors.</p>
+  </div>
+</div>
+
+<h3>The Antidote: Awareness and Systems</h3>
+<p>You cannot eliminate biases. They are hardwired into human cognition by millions of years of evolution — the same instincts that kept your ancestors alive on the savanna work against you in financial markets. What you <em>can</em> do is build awareness and structure your process to constrain their damage. Howard Marks writes that "the biggest investing errors come not from factors that are informational or analytical, but from those that are psychological." This is why Lesson 5 of this course will introduce systems-based thinking — the structural antidote to emotional decision-making.</p>
+
+<div class="callout callout-red">
+  <div class="callout-label">Warning — The Real-World Cost: COVID Crash 2020</div>
+  <p>During the COVID crash of March 2020, the S&P 500 fell 34% in 23 trading days. Millions of investors, gripped by <strong>loss aversion</strong> (the pain was unbearable), <strong>recency bias</strong> (assuming recent losses would continue), and <strong>herding</strong> (everyone else was selling), sold near the bottom. The market recovered to its prior highs within five months. Those who sold locked in permanent losses; those who stayed earned 100%+ returns by year-end 2021. Three biases, working in concert, cost panic-sellers a fortune.</p>
+</div>
+
+<div class="callout">
+  <div class="callout-label">Beat Lynch Connection</div>
+  <p>Beat Lynch exists precisely because of these biases. The platform's scoring engine externalizes judgment — it gives you a structured, multi-framework evaluation so you are not relying on gut feeling. When your gut says "sell everything," the system gives you data. When your gut says "this is a sure thing," the system shows you the risk dimensions. The entire architecture is a behavioral defense system.</p>
+</div>
+
+</div>
+
+<!-- ==================== LESSON 3 ==================== -->
+<div class="lesson-card" onclick="toggleLesson('d3',this)">
+  <div class="lesson-num">3</div>
+  <div>
+    <div class="lesson-title">Risk Is Not Volatility</div>
+    <div class="lesson-desc">Redefining risk as permanent capital loss — the concept Wall Street gets wrong.</div>
+  </div>
+  <div class="lesson-mp">+20 MP</div>
+</div>
+<div class="lesson-detail" id="d3">
+
+<div class="tag-row">
+  <span class="ctag">Permanent Capital Loss</span>
+  <span class="ctag">Volatility ≠ Risk</span>
+  <span class="ctag">Purchasing Power Risk</span>
+  <span class="ctag">Opportunity Cost</span>
+  <span class="ctag">Behavioral Risk</span>
+  <span class="ctag">Drawdown</span>
+</div>
+
+<h3>The Most Dangerous Confusion in Finance</h3>
+<p>Wall Street typically defines risk as <strong class="hl">volatility</strong> — how much a stock price bounces around. This definition, rooted in academic Modern Portfolio Theory, is mathematically convenient. It is also deeply misleading. A stock that drops 30% and then recovers to new highs was "risky" by the volatility definition, but the investor who held through the turbulence lost nothing. Meanwhile, a stock that drifts down 2% per month for five years with minimal volatility quietly destroys 70% of your capital. Which was riskier?</p>
+
+<p>The legends understood this. Benjamin Graham, Warren Buffett, and Howard Marks all define risk the same way: <strong class="hl">the probability and magnitude of permanent capital loss</strong>. Not the squiggly line on a chart. Not beta. Not standard deviation. The actual, irreversible loss of your money.</p>
+
+<div class="exhibit">
+  <div class="exhibit-label">Exhibit 3.1 — Volatility vs. Permanent Loss: Two Stocks Over Five Years</div>
+  <svg viewBox="0 0 700 310" style="width:100%;max-width:700px;display:block;margin:0 auto;">
+    <!-- Grid -->
+    <line x1="60" y1="270" x2="660" y2="270" stroke="var(--border)" stroke-width="1"/>
+    <line x1="60" y1="20" x2="60" y2="270" stroke="var(--border)" stroke-width="1"/>
+    <line x1="60" y1="145" x2="660" y2="145" stroke="var(--border)" stroke-width="0.5" stroke-dasharray="4"/>
+    <text x="55" y="149" class="axis-label" text-anchor="end">$100</text>
+    <text x="55" y="274" class="axis-label" text-anchor="end">$40</text>
+    <text x="55" y="24" class="axis-label" text-anchor="end">$180</text>
+    <!-- X labels -->
+    <text x="100" y="288" class="axis-label" text-anchor="middle">Start</text>
+    <text x="220" y="288" class="axis-label" text-anchor="middle">Yr 1</text>
+    <text x="340" y="288" class="axis-label" text-anchor="middle">Yr 2</text>
+    <text x="460" y="288" class="axis-label" text-anchor="middle">Yr 3</text>
+    <text x="540" y="288" class="axis-label" text-anchor="middle">Yr 4</text>
+    <text x="640" y="288" class="axis-label" text-anchor="middle">Yr 5</text>
+    <!-- Stock A - high volatility, good outcome -->
+    <polyline fill="none" stroke="var(--gold)" stroke-width="2.5"
+      points="100,145 220,213 340,113 460,158 540,78 640,52"/>
+    <circle cx="220" cy="213" r="4" fill="var(--gold)"/>
+    <text x="225" y="228" fill="var(--gold)" font-family="Arial" font-size="9" font-weight="700">-35%</text>
+    <circle cx="340" cy="113" r="4" fill="var(--gold)"/>
+    <circle cx="640" cy="52" r="5" fill="var(--gold)" stroke="#fff" stroke-width="2"/>
+    <text x="645" y="44" fill="var(--green)" font-family="Arial" font-size="11" font-weight="900">+56%</text>
+    <!-- Stock B - low volatility, bad outcome -->
+    <polyline fill="none" stroke="var(--red)" stroke-width="2.5" stroke-dasharray="6 3"
+      points="100,145 220,155 340,170 460,200 540,220 640,238"/>
+    <circle cx="640" cy="238" r="5" fill="var(--red)" stroke="#fff" stroke-width="2"/>
+    <text x="645" y="250" fill="var(--red)" font-family="Arial" font-size="11" font-weight="900">-35%</text>
+    <!-- Legend -->
+    <line x1="200" y1="300" x2="230" y2="300" stroke="var(--gold)" stroke-width="2.5"/>
+    <text x="235" y="303" fill="var(--muted)" font-family="Arial" font-size="10">Stock A: High Volatility (Wall Street says "risky")</text>
+    <line x1="470" y1="300" x2="500" y2="300" stroke="var(--red)" stroke-width="2.5" stroke-dasharray="6 3"/>
+    <text x="505" y="303" fill="var(--muted)" font-family="Arial" font-size="10">Stock B: Low Volatility (Wall Street says "safe")</text>
+    <!-- Labels -->
+    <rect x="470" y="50" width="130" height="38" rx="6" fill="rgba(34,197,94,0.1)" stroke="rgba(34,197,94,0.3)" stroke-width="1"/>
+    <text x="535" y="66" fill="var(--green)" font-family="Arial" font-size="10" font-weight="700" text-anchor="middle">Stock A: WEALTH CREATED</text>
+    <text x="535" y="80" fill="var(--green)" font-family="Arial" font-size="9" text-anchor="middle">despite wild price swings</text>
+    <rect x="470" y="188" width="130" height="38" rx="6" fill="rgba(239,68,68,0.1)" stroke="rgba(239,68,68,0.3)" stroke-width="1"/>
+    <text x="535" y="204" fill="var(--red)" font-family="Arial" font-size="10" font-weight="700" text-anchor="middle">Stock B: WEALTH DESTROYED</text>
+    <text x="535" y="218" fill="var(--red)" font-family="Arial" font-size="9" text-anchor="middle">with barely any volatility</text>
+  </svg>
+  <p style="font-family:Arial;font-size:12px;color:var(--muted);margin-top:8px;">The "riskier" stock (by volatility measures) produced superior returns. The "safer" stock steadily destroyed capital. This is why Buffett says: "Volatility is far from synonymous with risk." <strong style="color:var(--text);">What matters is the trajectory of the business, not the bounce of the price.</strong></p>
+</div>
+
+<div class="case-study">
+  <div class="case-label">Real-World Example — High Volatility, No Real Risk</div>
+  <div class="case-company">Netflix — The Volatile Winner</div>
+  <p>Netflix has experienced multiple drawdowns exceeding 70% during its publicly traded life. In 2011, it fell 77% in four months after a botched pricing change. By Wall Street's volatility metrics, it was among the "riskiest" stocks in the market. But the underlying business — streaming subscribers growing exponentially, content library expanding, international expansion accelerating — was fundamentally sound.</p>
+  <p>An investor who analyzed the business and held through the volatility turned $10,000 invested in 2007 into over $350,000 by 2024. The price was volatile. The business was not. The risk was <em>psychological</em> — the danger that you would panic-sell during a drawdown, not that the business would fail.</p>
+  <div class="case-takeaway">
+    <div class="case-takeaway-label">Lesson</div>
+    <p>High price volatility in a stock with strong, growing business fundamentals is <strong>not</strong> real risk. It is uncomfortable, but it is temporary. Real risk is when the <em>business itself</em> is deteriorating — declining revenue, rising debt, losing customers — regardless of how "smooth" the stock price appears.</p>
+  </div>
+</div>
+
+<h3>The Four Faces of Real Risk</h3>
+<p>There are four types of risk that actually threaten your wealth. Memorize these — they appear throughout the Beat Lynch framework.</p>
+
+<div class="exhibit">
+  <div class="exhibit-label">Exhibit 3.2 — Four Types of Investor Risk</div>
+  <table class="fw-table">
+    <thead><tr><th>Risk Type</th><th>Definition</th><th>Real-World Example</th></tr></thead>
+    <tbody>
+      <tr><td><strong class="hl">1. Permanent Capital Loss</strong></td><td>The business fails or is impaired beyond recovery</td><td>Enron shareholders lost 100% — the company was fraudulent. Lehman Brothers: $0.</td></tr>
+      <tr><td><strong class="hl">2. Purchasing Power Risk</strong></td><td>Inflation erodes the real value of your money even if nominal value stays the same</td><td>Cash earning 1% while inflation runs at 5% loses 4% of real purchasing power per year. In 10 years, your money buys ~34% less.</td></tr>
+      <tr><td><strong class="hl">3. Opportunity Cost</strong></td><td>Capital tied up in a mediocre investment cannot be deployed to better opportunities</td><td>Holding a flat stock for 5 years while the market doubled means you "lost" the gains you could have earned elsewhere.</td></tr>
+      <tr><td><strong class="hl">4. Behavioral Risk</strong></td><td>Your own psychology causes you to buy high and sell low</td><td>Panic-selling during the March 2020 COVID crash, then missing the recovery rally that followed within months.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="case-study">
+  <div class="case-label">Real-World Example — Purchasing Power Risk</div>
+  <div class="case-company">The "Safety" Illusion of Cash</div>
+  <p>From 2020 to 2024, U.S. inflation averaged roughly 5% per year while most savings accounts paid 0.5–1%. An investor who kept $100,000 in a savings account to "stay safe" lost approximately <strong class="hl">$16,000–$18,000 in real purchasing power</strong> over four years. Their account balance barely changed, but what that money could buy shrank dramatically. Groceries, housing, healthcare — all cost substantially more.</p>
+  <p>Purchasing power risk is invisible and insidious. There is no red number on a screen. No panicked headline. Just the quiet erosion of your money's ability to do its job. This is why Buffett warns that cash is not as "safe" as people think — over long periods, inflation guarantees that cash loses value.</p>
+  <div class="case-takeaway">
+    <div class="case-takeaway-label">Lesson</div>
+    <p>Holding cash feels safe because the nominal number doesn't go down. But purchasing power risk is real — inflation quietly destroys the value of idle capital. Cash earning 1% while inflation runs at 5% is losing 4% per year in real terms.</p>
+  </div>
+</div>
+
+<h3>Drawdowns: Temporary Pain vs. Permanent Loss</h3>
+<p>A <strong class="hl">drawdown</strong> is the peak-to-trough decline in an investment's value before it recovers. A 30% drawdown in a quality business during a recession is temporary pain — the business still earns money, still serves customers, and the stock eventually reflects that reality. But a 30% drawdown in a business that is losing customers, burning cash, and carrying too much debt may be the beginning of a permanent loss. The key skill is distinguishing between the two.</p>
+
+<p>Here is a critical mathematical truth about drawdowns that every investor must internalize: <strong class="hl">losses are asymmetric</strong>. A 50% loss does not require a 50% gain to recover — it requires a <strong class="hl">100% gain</strong>. This is why capital protection comes first — always.</p>
+
+<div class="exhibit">
+  <div class="exhibit-label">Exhibit 3.3 — The Asymmetry of Losses</div>
+  <svg viewBox="0 0 700 320" style="width:100%;max-width:700px;display:block;margin:0 auto;">
+    <!-- Grid -->
+    <line x1="80" y1="260" x2="660" y2="260" stroke="var(--border)" stroke-width="1"/>
+    <line x1="80" y1="20" x2="80" y2="260" stroke="var(--border)" stroke-width="1"/>
+    <!-- Bars - Loss (red) and Recovery (green) paired -->
+    <!-- 10% loss -->
+    <rect x="100" y="236" width="30" height="24" rx="3" fill="var(--red)" opacity="0.7"/>
+    <rect x="133" y="230" width="30" height="30" rx="3" fill="var(--green)" opacity="0.7"/>
+    <text x="115" y="230" fill="var(--red)" font-family="Arial" font-size="9" font-weight="700" text-anchor="middle">-10%</text>
+    <text x="148" y="224" fill="var(--green)" font-family="Arial" font-size="9" font-weight="700" text-anchor="middle">+11%</text>
+    <text x="131" y="276" fill="var(--muted)" font-family="Arial" font-size="9" text-anchor="middle">10% loss</text>
+    <!-- 20% loss -->
+    <rect x="190" y="212" width="30" height="48" rx="3" fill="var(--red)" opacity="0.7"/>
+    <rect x="223" y="200" width="30" height="60" rx="3" fill="var(--green)" opacity="0.7"/>
+    <text x="205" y="206" fill="var(--red)" font-family="Arial" font-size="9" font-weight="700" text-anchor="middle">-20%</text>
+    <text x="238" y="194" fill="var(--green)" font-family="Arial" font-size="9" font-weight="700" text-anchor="middle">+25%</text>
+    <text x="221" y="276" fill="var(--muted)" font-family="Arial" font-size="9" text-anchor="middle">20% loss</text>
+    <!-- 33% loss -->
+    <rect x="280" y="180" width="30" height="80" rx="3" fill="var(--red)" opacity="0.7"/>
+    <rect x="313" y="140" width="30" height="120" rx="3" fill="var(--green)" opacity="0.7"/>
+    <text x="295" y="174" fill="var(--red)" font-family="Arial" font-size="9" font-weight="700" text-anchor="middle">-33%</text>
+    <text x="328" y="134" fill="var(--green)" font-family="Arial" font-size="9" font-weight="700" text-anchor="middle">+50%</text>
+    <text x="311" y="276" fill="var(--muted)" font-family="Arial" font-size="9" text-anchor="middle">33% loss</text>
+    <!-- 50% loss -->
+    <rect x="380" y="140" width="34" height="120" rx="3" fill="var(--red)" opacity="0.8"/>
+    <rect x="417" y="60" width="34" height="200" rx="3" fill="var(--green)" opacity="0.8"/>
+    <text x="397" y="134" fill="var(--red)" font-family="Arial" font-size="10" font-weight="700" text-anchor="middle">-50%</text>
+    <text x="434" y="54" fill="var(--green)" font-family="Arial" font-size="10" font-weight="900" text-anchor="middle">+100%</text>
+    <text x="411" y="276" fill="var(--text)" font-family="Arial" font-size="10" font-weight="700" text-anchor="middle">50% loss</text>
+    <!-- 75% loss -->
+    <rect x="480" y="80" width="34" height="180" rx="3" fill="var(--red)" opacity="0.8"/>
+    <rect x="517" y="22" width="34" height="238" rx="3" fill="var(--green)" opacity="0.8"/>
+    <text x="497" y="74" fill="var(--red)" font-family="Arial" font-size="10" font-weight="700" text-anchor="middle">-75%</text>
+    <text x="534" y="16" fill="var(--green)" font-family="Arial" font-size="10" font-weight="900" text-anchor="middle">+300%</text>
+    <text x="511" y="276" fill="var(--muted)" font-family="Arial" font-size="9" text-anchor="middle">75% loss</text>
+    <!-- 90% loss -->
+    <rect x="580" y="40" width="34" height="220" rx="3" fill="var(--red)" opacity="0.9"/>
+    <rect x="617" y="22" width="34" height="238" rx="3" fill="var(--green)" opacity="0.9" stroke="var(--gold)" stroke-width="1" stroke-dasharray="4"/>
+    <text x="597" y="34" fill="var(--red)" font-family="Arial" font-size="10" font-weight="700" text-anchor="middle">-90%</text>
+    <text x="634" y="16" fill="#fff" font-family="Arial" font-size="10" font-weight="900" text-anchor="middle">+900%!</text>
+    <text x="611" y="276" fill="var(--muted)" font-family="Arial" font-size="9" text-anchor="middle">90% loss</text>
+    <!-- Legend -->
+    <rect x="160" y="296" width="12" height="12" rx="2" fill="var(--red)" opacity="0.7"/>
+    <text x="178" y="306" fill="var(--muted)" font-family="Arial" font-size="10">Loss size</text>
+    <rect x="260" y="296" width="12" height="12" rx="2" fill="var(--green)" opacity="0.7"/>
+    <text x="278" y="306" fill="var(--muted)" font-family="Arial" font-size="10">Gain required to recover</text>
+    <text x="500" y="306" fill="var(--gold)" font-family="Arial" font-size="10" font-weight="700">← This is why capital preservation comes first</text>
+  </svg>
+</div>
+
+<div class="case-study">
+  <div class="case-label">Real-World Example — Permanent Capital Loss</div>
+  <div class="case-company">Enron (2001) — When Risk Becomes Reality</div>
+  <p>Enron was the seventh-largest company in America by revenue. It was named Fortune's "Most Innovative Company" six years in a row. Its stock traded at $90 in August 2000. By December 2001, it was worth $0.26. Shareholders lost effectively 100% of their investment — a permanent, total capital loss.</p>
+  <p>The destruction was not caused by a bad quarter or a market downturn. The company was <strong class="hl">fraudulent</strong> — it used complex accounting structures to hide billions in debt and fabricate profits. This is permanent capital loss in its purest form: the business itself was not what investors believed it to be.</p>
+  <div class="case-takeaway">
+    <div class="case-takeaway-label">Lesson</div>
+    <p>Permanent capital loss occurs when the business is fundamentally impaired beyond recovery — through fraud, structural decline, excessive debt, or competitive obsolescence. No amount of "holding through volatility" recovers a permanent loss. This is why quality of business and balance sheet strength matter more than anything.</p>
+  </div>
+</div>
+
+<div class="callout callout-purple">
+  <div class="callout-label">Howard Marks on Risk</div>
+  <p>"Risk means more things can happen than will happen." Risk is not a number on a Bloomberg terminal. It is the full range of possible outcomes — including the ones you haven't imagined. The investor's job is not to avoid risk, but to be <em>compensated</em> for it and to protect against the worst outcomes.</p>
+</div>
+
+<div class="callout">
+  <div class="callout-label">Beat Lynch Connection</div>
+  <p>Beat Lynch's Risk Vector dimension — inspired by Graham — does not measure volatility. It measures margin of safety, balance sheet strength, and downside protection. The Cycle Overlay dimension, inspired by Marks, assesses where we are in the market cycle and how much risk is being priced in. Together, they answer: "How much can I lose permanently?" — the only risk question that truly matters.</p>
+</div>
+
+</div>
+
+<!-- ==================== LESSON 4 ==================== -->
+<div class="lesson-card" onclick="toggleLesson('d4',this)">
+  <div class="lesson-num">4</div>
+  <div>
+    <div class="lesson-title">The Power of Compounding</div>
+    <div class="lesson-desc">The most powerful force in finance — and why patience is a competitive advantage.</div>
+  </div>
+  <div class="lesson-mp">+20 MP</div>
+</div>
+<div class="lesson-detail" id="d4">
+
+<div class="tag-row">
+  <span class="ctag">Compound Interest</span>
+  <span class="ctag">Rule of 72</span>
+  <span class="ctag">Time in Market</span>
+  <span class="ctag">Loss Asymmetry</span>
+  <span class="ctag">Small Edges Compound</span>
+</div>
+
+<h3>Einstein's Eighth Wonder</h3>
+<p>Compound interest is frequently attributed to Einstein as the "eighth wonder of the world." Whether he actually said it is debatable. Whether it is true is not. <strong class="hl">Compounding</strong> is the process by which your returns themselves generate returns. When you earn 10% on $100, you have $110. Next year, you earn 10% on $110 — not on the original $100. That extra dollar seems trivial. Give it thirty years, and it is the difference between comfortable and wealthy.</p>
+
+<p>Here is the math that changes how you see time. $10,000 invested at 10% annual return for 30 years grows to roughly <strong class="hl">$174,000</strong>. The investor contributed $10,000. Compounding contributed $164,000. <strong class="hl">Over 93% of the final wealth came not from the original investment, but from returns on returns.</strong></p>
+
+<div class="exhibit">
+  <div class="exhibit-label">Exhibit 4.1 — The Compounding Curve: $10,000 at 10% Annual Return</div>
+  <div class="chart-container" style="background:transparent;border:none;padding:0;">
+    <svg viewBox="0 0 700 310" style="width:100%;max-width:700px;display:block;margin:0 auto;">
+      <!-- Grid lines -->
+      <line x1="60" y1="20" x2="60" y2="260" stroke="#1E2330" stroke-width="1"/>
+      <line x1="60" y1="260" x2="680" y2="260" stroke="#1E2330" stroke-width="1"/>
+      <line x1="60" y1="200" x2="680" y2="200" stroke="#1E2330" stroke-width="0.5" stroke-dasharray="4"/>
+      <line x1="60" y1="140" x2="680" y2="140" stroke="#1E2330" stroke-width="0.5" stroke-dasharray="4"/>
+      <line x1="60" y1="80" x2="680" y2="80" stroke="#1E2330" stroke-width="0.5" stroke-dasharray="4"/>
+      <line x1="60" y1="20" x2="680" y2="20" stroke="#1E2330" stroke-width="0.5" stroke-dasharray="4"/>
+      <!-- Y-axis labels -->
+      <text x="55" y="264" class="axis-label" text-anchor="end">$10K</text>
+      <text x="55" y="204" class="axis-label" text-anchor="end">$50K</text>
+      <text x="55" y="144" class="axis-label" text-anchor="end">$100K</text>
+      <text x="55" y="84" class="axis-label" text-anchor="end">$150K</text>
+      <text x="55" y="24" class="axis-label" text-anchor="end">$200K</text>
+      <!-- X-axis labels -->
+      <text x="60" y="278" class="axis-label" text-anchor="middle">0</text>
+      <text x="163" y="278" class="axis-label" text-anchor="middle">5</text>
+      <text x="267" y="278" class="axis-label" text-anchor="middle">10</text>
+      <text x="370" y="278" class="axis-label" text-anchor="middle">15</text>
+      <text x="473" y="278" class="axis-label" text-anchor="middle">20</text>
+      <text x="577" y="278" class="axis-label" text-anchor="middle">25</text>
+      <text x="680" y="278" class="axis-label" text-anchor="middle">30 yrs</text>
+      <!-- Linear growth (simple interest) -->
+      <polyline fill="none" stroke="#7A8099" stroke-width="2" stroke-dasharray="6 4"
+        points="60,260 163,246 267,232 370,219 473,205 577,192 680,178"/>
+      <!-- Fill area — original investment -->
+      <rect x="60" y="253" width="620" height="7" fill="rgba(59,130,246,0.15)" rx="2"/>
+      <!-- Fill area under compound curve -->
+      <defs>
+        <linearGradient id="cg" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="rgba(201,168,76,0.5)"/>
+          <stop offset="100%" stop-color="#C9A84C"/>
+        </linearGradient>
+        <linearGradient id="cfill" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="rgba(201,168,76,0.2)"/>
+          <stop offset="100%" stop-color="rgba(201,168,76,0.02)"/>
+        </linearGradient>
+      </defs>
+      <polygon fill="url(#cfill)"
+        points="60,260 163,240 267,214 370,175 473,118 577,55 680,20 680,260"/>
+      <polyline fill="none" stroke="url(#cg)" stroke-width="3"
+        points="60,260 163,240 267,214 370,175 473,118 577,55 680,20"/>
+      <!-- Dots -->
+      <circle cx="60" cy="260" r="4" fill="var(--gold)"/>
+      <circle cx="267" cy="214" r="4" fill="var(--gold)"/>
+      <circle cx="473" cy="118" r="5" fill="var(--gold)"/>
+      <circle cx="680" cy="20" r="6" fill="var(--gold)" stroke="#fff" stroke-width="2"/>
+      <!-- Labels -->
+      <text x="280" y="208" fill="var(--gold)" font-family="Arial" font-size="11" font-weight="700">$25.9K</text>
+      <text x="486" y="112" fill="var(--gold)" font-family="Arial" font-size="11" font-weight="700">$67.3K</text>
+      <!-- Final value callout -->
+      <rect x="585" y="4" width="90" height="28" rx="6" fill="rgba(201,168,76,0.15)" stroke="var(--gold)" stroke-width="1"/>
+      <text x="630" y="22" fill="#fff" font-family="Arial" font-size="13" font-weight="900" text-anchor="middle">$174.5K</text>
+      <!-- Annotation: 93% from compounding -->
+      <line x1="630" y1="34" x2="630" y2="70" stroke="var(--gold)" stroke-width="1"/>
+      <rect x="558" y="70" width="144" height="30" rx="6" fill="rgba(201,168,76,0.08)" stroke="rgba(201,168,76,0.3)" stroke-width="1"/>
+      <text x="630" y="89" fill="var(--gold)" font-family="Arial" font-size="10" font-weight="700" text-anchor="middle">93%+ from compounding</text>
+      <!-- Legend -->
+      <line x1="200" y1="296" x2="230" y2="296" stroke="var(--gold)" stroke-width="3"/>
+      <text x="235" y="299" fill="var(--muted)" font-family="Arial" font-size="10">Compound growth (returns on returns)</text>
+      <line x1="460" y1="296" x2="490" y2="296" stroke="var(--muted)" stroke-width="2" stroke-dasharray="6 4"/>
+      <text x="495" y="299" fill="var(--muted)" font-family="Arial" font-size="10">Simple interest (no compounding)</text>
+    </svg>
+    <p style="font-family:Arial;font-size:12px;color:var(--muted);margin-top:8px;">The curve accelerates because each year's gains become the base for next year's growth. The original $10,000 contribution is a tiny fraction of the final wealth — compounding did the rest.</p>
+  </div>
+</div>
+
+<h3>The Rule of 72</h3>
+<p>There is a shortcut every investor should memorize. The <strong class="hl">Rule of 72</strong>: divide 72 by your annual rate of return to estimate how many years it takes to double your money. At 10%, your money doubles every <strong class="hl">7.2 years</strong> (72 ÷ 10 = 7.2). At 6%, every 12 years. At 3%, every 24 years. This simple rule makes the power of compounding viscerally real.</p>
+
+<div class="exhibit">
+  <div class="exhibit-label">Exhibit 4.2 — Rule of 72: Years to Double at Various Return Rates</div>
+  <svg viewBox="0 0 700 240" style="width:100%;max-width:700px;display:block;margin:0 auto;">
+    <line x1="80" y1="190" x2="660" y2="190" stroke="var(--border)" stroke-width="1"/>
+    <!-- 2% -->
+    <rect x="90" y="30" width="55" height="160" rx="4" fill="rgba(122,128,153,.3)"/>
+    <text x="117" y="24" fill="var(--muted)" font-family="Arial" font-size="11" font-weight="700" text-anchor="middle">36 yrs</text>
+    <text x="117" y="208" fill="var(--muted)" font-family="Arial" font-size="11" text-anchor="middle">2%</text>
+    <!-- 3% -->
+    <rect x="160" y="62" width="55" height="128" rx="4" fill="rgba(122,128,153,.4)"/>
+    <text x="187" y="56" fill="var(--muted)" font-family="Arial" font-size="11" font-weight="700" text-anchor="middle">24 yrs</text>
+    <text x="187" y="208" fill="var(--muted)" font-family="Arial" font-size="11" text-anchor="middle">3%</text>
+    <!-- 5% -->
+    <rect x="230" y="102" width="55" height="88" rx="4" fill="rgba(59,130,246,.4)"/>
+    <text x="257" y="96" fill="var(--accent)" font-family="Arial" font-size="11" font-weight="700" text-anchor="middle">14.4 yrs</text>
+    <text x="257" y="208" fill="var(--muted)" font-family="Arial" font-size="11" text-anchor="middle">5%</text>
+    <!-- 7% -->
+    <rect x="300" y="126" width="55" height="64" rx="4" fill="rgba(34,197,94,.4)"/>
+    <text x="327" y="120" fill="var(--green)" font-family="Arial" font-size="11" font-weight="700" text-anchor="middle">10.3 yrs</text>
+    <text x="327" y="208" fill="var(--muted)" font-family="Arial" font-size="11" text-anchor="middle">7%</text>
+    <!-- 10% -->
+    <rect x="380" y="148" width="60" height="42" rx="4" fill="rgba(201,168,76,.5)"/>
+    <text x="410" y="142" fill="var(--gold)" font-family="Arial" font-size="12" font-weight="900" text-anchor="middle">7.2 yrs</text>
+    <text x="410" y="208" fill="var(--gold)" font-family="Arial" font-size="12" font-weight="700" text-anchor="middle">10%</text>
+    <!-- 15% -->
+    <rect x="460" y="162" width="55" height="28" rx="4" fill="rgba(201,168,76,.7)"/>
+    <text x="487" y="156" fill="var(--gold)" font-family="Arial" font-size="11" font-weight="700" text-anchor="middle">4.8 yrs</text>
+    <text x="487" y="208" fill="var(--muted)" font-family="Arial" font-size="11" text-anchor="middle">15%</text>
+    <!-- 20% (Buffett) -->
+    <rect x="530" y="170" width="60" height="20" rx="4" fill="var(--gold)"/>
+    <text x="560" y="166" fill="#fff" font-family="Arial" font-size="12" font-weight="900" text-anchor="middle">3.6 yrs</text>
+    <text x="560" y="208" fill="var(--gold)" font-family="Arial" font-size="12" font-weight="700" text-anchor="middle">20%</text>
+    <!-- Buffett annotation -->
+    <line x1="560" y1="220" x2="560" y2="232" stroke="var(--gold)" stroke-width="1"/>
+    <text x="560" y="238" fill="var(--gold)" font-family="Arial" font-size="9" font-weight="700" text-anchor="middle">Buffett's avg. rate</text>
+  </svg>
+  <p style="font-family:Arial;font-size:12px;color:var(--muted);margin-top:8px;">Buffett's ~20% annual return doubled his capital roughly every 3.6 years — which is why Berkshire Hathaway turned $10,000 in 1965 into over $300 million by 2024.</p>
+</div>
+
+<h3>Time in the Market Beats Timing the Market</h3>
+<p>There is a famous study that illustrates this perfectly. If you invested $10,000 in the S&P 500 and held for 20 years (2003–2022), your investment grew to roughly $61,000. But if you missed just the 10 best trading days — which often occur during the most frightening moments — your return dropped to about $28,000. Miss the best 20 days and you are barely above $17,000.</p>
+
+<p>The math is brutal: <strong class="hl">the best days cluster near the worst days</strong>, during periods of maximum fear. If you sell during the panic, you almost certainly miss the recovery. This is why staying invested through turbulence — time in the market — consistently beats trying to time entries and exits.</p>
+
+<div class="three-col">
+  <div class="stat-card">
+    <div class="stat-num">$61K</div>
+    <div class="stat-label">Stayed fully invested<br>20 years (S&P 500)</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num" style="color:var(--orange);">$28K</div>
+    <div class="stat-label">Missed the 10 best<br>trading days</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num" style="color:var(--red);">$17K</div>
+    <div class="stat-label">Missed the 20 best<br>trading days</div>
+  </div>
+</div>
+
+<div class="case-study">
+  <div class="case-label">Real-World Example — Compounding at Work</div>
+  <div class="case-company">Berkshire Hathaway — The Compounding Machine</div>
+  <p>Warren Buffett started investing at age 11. By age 30, he was a millionaire. Impressive — but nothing compared to what came next. At age 50, his net worth was roughly $620 million. By 60, about $3.8 billion. By 93, over $120 billion.</p>
+  <p>Here is the astonishing fact: <strong class="hl">over 99% of Buffett's wealth was earned after his 50th birthday</strong>. Not because his skill suddenly improved — his annual returns were actually higher in his earlier years. The magic was compounding. Each year of returns built on every previous year's returns. By the time the numbers were large, even modest percentage gains added billions.</p>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-date">Age 11 — First Stock Purchase</div>
+      <div class="tl-text">Bought 3 shares of Cities Service at $38 each. Total investment: $114.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">Age 30 — $1 Million Net Worth</div>
+      <div class="tl-text">After 19 years of compounding at exceptional rates, reaches his first million.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">Age 50 — $620 Million</div>
+      <div class="tl-text">The curve accelerates. 20 more years of compounding on an increasingly large base.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">Age 72 — $36 Billion</div>
+      <div class="tl-text">Compounding turns millions into billions — the snowball effect in full force.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">Age 93 — $120+ Billion</div>
+      <div class="tl-text">99% of this wealth came after age 50. The compounding curve's final, exponential phase.</div>
+    </div>
+  </div>
+  <div class="case-takeaway">
+    <div class="case-takeaway-label">Lesson</div>
+    <p>Patience is not a virtue in investing — it is a <strong>mathematical necessity</strong>. The most powerful phase of compounding happens at the end, when you've been compounding for the longest. Every year you stay invested adds exponential, not linear, value.</p>
+  </div>
+</div>
+
+<h3>Small Edges, Massive Outcomes</h3>
+<p>Compounding amplifies small differences into enormous ones. An investor earning 12% per year versus one earning 10% per year seems to have a small edge — just two percentage points. Over 30 years, $100,000 at 10% becomes $1.74 million. At 12%, it becomes <strong class="hl">$3.0 million</strong>. A 2% edge nearly doubled the final wealth. This is why every marginal improvement in your investment process matters. Reducing fees by 0.5%, avoiding one behavioral mistake per year, having a slightly better analytical framework — these "small" improvements compound over decades into life-changing differences.</p>
+
+<div class="callout callout-green">
+  <div class="callout-label">Why This Changes Everything</div>
+  <p>Compounding is the reason Buffett earned over 99% of his wealth after age 50. He started investing at age 11. His skill was extraordinary. But the real magic was <em>time</em>. Every year of compounding at high rates built on the last. Patience is not a virtue in investing. It is a mathematical necessity.</p>
+</div>
+
+<div class="callout">
+  <div class="callout-label">Beat Lynch Connection</div>
+  <p>Beat Lynch's Moat Strength dimension (inspired by Buffett) identifies businesses with durable competitive advantages — companies that can sustain high returns on capital for decades, not just a few quarters. These are the businesses where compounding works hardest, because reinvested earnings generate high returns year after year. The system is designed to find compounding machines.</p>
+</div>
+
+</div>
+
+<!-- ==================== LESSON 5 ==================== -->
+<div class="lesson-card" onclick="toggleLesson('d5',this)">
+  <div class="lesson-num">5</div>
+  <div>
+    <div class="lesson-title">Systems Beat Stories</div>
+    <div class="lesson-desc">Why disciplined processes outperform gut instinct — and how to start building one.</div>
+  </div>
+  <div class="lesson-mp">+20 MP</div>
+</div>
+<div class="lesson-detail" id="d5">
+
+<div class="tag-row">
+  <span class="ctag">Investment Thesis</span>
+  <span class="ctag">Process vs. Outcome</span>
+  <span class="ctag">Narrative Trap</span>
+  <span class="ctag">Checklist Discipline</span>
+  <span class="ctag">Systematic Thinking</span>
+  <span class="ctag">Kill Criteria</span>
+</div>
+
+<h3>The Story That Lost Billions</h3>
+<p>In 2019, WeWork was the most valuable startup in America. The story was irresistible: a visionary founder, a revolution in how people work, explosive revenue growth, a $47 billion valuation. Softbank's Vision Fund poured in billions. The narrative was so compelling that sophisticated investors suspended their analytical judgment. Then the IPO prospectus revealed the reality: <strong class="hl">massive losses, bizarre corporate governance, self-dealing transactions, and no path to profitability</strong>. The valuation collapsed to under $10 billion before the IPO was pulled. The story was great. The <em>system</em> — basic financial analysis — would have caught this immediately.</p>
+
+<p>This is the core lesson: <strong class="hl">narratives are seductive, but systems are reliable</strong>. A narrative is an unstructured story about why something will work — "AI will change everything," "this CEO is a genius," "millennials love this brand." An <strong class="hl">investment thesis</strong> is a structured, falsifiable argument: specific claims about value, growth, and risk, with defined metrics that would prove you wrong. The defining feature of a thesis versus a narrative is <strong class="hl">falsifiability and specificity</strong>.</p>
+
+<div class="two-col">
+  <div style="background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.2);border-radius:8px;padding:16px;">
+    <div style="font-family:Arial;font-size:12px;font-weight:700;color:var(--red);margin-bottom:8px;letter-spacing:1px;">NARRATIVE (STORY)</div>
+    <div style="font-family:Arial;font-size:12px;color:#BEC3D4;line-height:1.9;">"Tesla is the future of transportation. Elon Musk is a genius. Electric vehicles will dominate. Just buy and hold."<br><br><strong style="color:var(--red);">Problems:</strong> No valuation. No risk assessment. No sell criteria. No definition of "wrong." It cannot be tested or updated — only believed or abandoned.</div>
+  </div>
+  <div style="background:rgba(34,197,94,.06);border:1px solid rgba(34,197,94,.2);border-radius:8px;padding:16px;">
+    <div style="font-family:Arial;font-size:12px;font-weight:700;color:var(--green);margin-bottom:8px;letter-spacing:1px;">THESIS (SYSTEM)</div>
+    <div style="font-family:Arial;font-size:12px;color:#BEC3D4;line-height:1.9;">"Tesla's auto gross margins above 20% and energy revenue growing 40%+ sustain a $250 fair value. If margins fall below 15% for two quarters or EV market share drops below 15%, the thesis is broken."<br><br><strong style="color:var(--green);">Strengths:</strong> Specific. Measurable. Has kill criteria. Can be proven wrong and updated with new data.</div>
+  </div>
+</div>
+
+<div class="callout callout-cyan">
+  <div class="callout-label">Key Definition — Thesis vs. Narrative</div>
+  <p>A <strong>thesis</strong> states: "I believe X because of Y, and I will be proven wrong if Z happens." It includes specific, falsifiable claims and kill criteria. A <strong>narrative</strong> is: "This company is amazing and will change the world." It is an unstructured story with no criteria for being wrong. The thesis can be tested, measured, and updated. The narrative can only be believed or abandoned.</p>
+</div>
+
+<div class="case-study">
+  <div class="case-label">Real-World Example — Narrative Trap</div>
+  <div class="case-company">Peloton — The Pandemic Story</div>
+  <p>During COVID-19, Peloton's narrative was irresistible: "The gym is dead. Home fitness is the future. Look at this revenue growth!" The stock surged from $20 to $167. The story felt bulletproof. But the narrative ignored fundamental questions a system would ask: What happens when gyms reopen? Is this growth rate sustainable? What are the unit economics without pandemic tailwinds?</p>
+  <p>By early 2023, Peloton traded below $8 — a 95% decline. A basic analytical checklist — Are customers sticky post-pandemic? Is growth sustainable at current costs? Is the balance sheet strong enough to survive a downturn? — would have flagged every risk before the crash. The story was compelling. The numbers told a different story entirely.</p>
+  <div class="case-takeaway">
+    <div class="case-takeaway-label">Lesson</div>
+    <p>Narratives feel right because they tell a story our brain wants to believe. Systems ask: "What does the data actually say?" Peloton's story was about the future of fitness. The data was about unsustainable customer acquisition costs and a one-time demand spike.</p>
+  </div>
+</div>
+
+<h3>Process Over Outcome</h3>
+<p>A poker player can make the mathematically correct call and still lose the hand. A bad poker player can shove all-in with 7-2 offsuit and win. If you judge decisions only by outcomes, you will learn the wrong lessons. In investing, the same logic applies: you can make a terrible decision and get lucky (buying a meme stock that triples) or make an excellent decision and have it go against you (a well-researched stock hit by an unpredictable regulatory change).</p>
+
+<p>Professional investors obsess over <strong class="hl">process quality</strong>, not short-term results. Over hundreds of decisions, a good process produces good outcomes. A bad process, no matter how many lucky breaks it catches, eventually destroys capital.</p>
+
+<div class="exhibit">
+  <div class="exhibit-label">Exhibit 5.1 — The Process-Outcome Matrix</div>
+  <svg viewBox="0 0 700 340" style="width:100%;max-width:700px;display:block;margin:0 auto;">
+    <!-- Headers -->
+    <text x="350" y="24" fill="var(--muted)" font-family="Arial" font-size="12" font-weight="700" text-anchor="middle" letter-spacing="2">OUTCOME</text>
+    <text x="290" y="52" fill="var(--green)" font-family="Arial" font-size="11" font-weight="700" text-anchor="middle">GOOD OUTCOME</text>
+    <text x="530" y="52" fill="var(--red)" font-family="Arial" font-size="11" font-weight="700" text-anchor="middle">BAD OUTCOME</text>
+    <!-- Row labels -->
+    <text x="80" y="124" fill="var(--green)" font-family="Arial" font-size="11" font-weight="700" text-anchor="middle" transform="rotate(-90 80 124)">GOOD PROCESS</text>
+    <text x="80" y="254" fill="var(--red)" font-family="Arial" font-size="11" font-weight="700" text-anchor="middle" transform="rotate(-90 80 254)">BAD PROCESS</text>
+    <!-- Cell 1: Good process, good outcome -->
+    <rect x="170" y="66" width="200" height="100" rx="8" fill="rgba(34,197,94,0.08)" stroke="rgba(34,197,94,0.3)" stroke-width="1.5"/>
+    <text x="270" y="96" fill="var(--green)" font-family="Arial" font-size="12" font-weight="900" text-anchor="middle">DESERVED SUCCESS</text>
+    <text x="270" y="116" fill="#BEC3D4" font-family="Arial" font-size="10" text-anchor="middle">Learn from it. Repeat.</text>
+    <text x="270" y="134" fill="#BEC3D4" font-family="Arial" font-size="10" text-anchor="middle">This is the goal.</text>
+    <!-- Cell 2: Good process, bad outcome -->
+    <rect x="410" y="66" width="200" height="100" rx="8" fill="rgba(59,130,246,0.08)" stroke="rgba(59,130,246,0.3)" stroke-width="1.5"/>
+    <text x="510" y="96" fill="var(--accent)" font-family="Arial" font-size="12" font-weight="900" text-anchor="middle">BAD LUCK</text>
+    <text x="510" y="116" fill="#BEC3D4" font-family="Arial" font-size="10" text-anchor="middle">Stay the course.</text>
+    <text x="510" y="134" fill="#BEC3D4" font-family="Arial" font-size="10" text-anchor="middle">The process was right.</text>
+    <!-- Cell 3: Bad process, good outcome — DANGER -->
+    <rect x="170" y="196" width="200" height="110" rx="8" fill="rgba(245,158,11,0.1)" stroke="var(--orange)" stroke-width="2"/>
+    <text x="270" y="222" fill="var(--orange)" font-family="Arial" font-size="12" font-weight="900" text-anchor="middle">DUMB LUCK</text>
+    <text x="270" y="244" fill="#fff" font-family="Arial" font-size="10" font-weight="700" text-anchor="middle">⚠ MOST DANGEROUS</text>
+    <text x="270" y="262" fill="#BEC3D4" font-family="Arial" font-size="10" text-anchor="middle">Reinforces reckless behavior</text>
+    <text x="270" y="278" fill="#BEC3D4" font-family="Arial" font-size="10" text-anchor="middle">by rewarding it. Will</text>
+    <text x="270" y="294" fill="#BEC3D4" font-family="Arial" font-size="10" text-anchor="middle">eventually destroy capital.</text>
+    <!-- Cell 4: Bad process, bad outcome -->
+    <rect x="410" y="196" width="200" height="110" rx="8" fill="rgba(239,68,68,0.08)" stroke="rgba(239,68,68,0.3)" stroke-width="1.5"/>
+    <text x="510" y="226" fill="var(--red)" font-family="Arial" font-size="12" font-weight="900" text-anchor="middle">DESERVED FAILURE</text>
+    <text x="510" y="248" fill="#BEC3D4" font-family="Arial" font-size="10" text-anchor="middle">Rebuild the process.</text>
+    <text x="510" y="266" fill="#BEC3D4" font-family="Arial" font-size="10" text-anchor="middle">At least you learn quickly.</text>
+  </svg>
+  <p style="font-family:Arial;font-size:12px;color:var(--muted);margin-top:8px;">The most dangerous cell is "bad process, good outcome" (dumb luck). The meme stock investor who makes 400% on a whim with no research thinks they are a genius. They will repeat the behavior with increasing size until the inevitable loss wipes out their gains and more. Dumb luck is the enemy of discipline.</p>
+</div>
+
+<h3>What a System Looks Like</h3>
+<p>You do not need to build a complex system today. But you should understand what one contains. Every serious investor operates with some version of this framework:</p>
+
+<div class="exhibit">
+  <div class="exhibit-label">Exhibit 5.2 — The Five Elements of an Investment System</div>
+  <table class="fw-table">
+    <thead><tr><th>#</th><th>Element</th><th>Question It Answers</th><th>Beat Lynch Feature</th></tr></thead>
+    <tbody>
+      <tr><td><strong class="hl">1</strong></td><td><strong class="hl">Universe Definition</strong></td><td>What types of investments do I consider? (e.g., US large caps with growing free cash flow)</td><td>Stock Screener</td></tr>
+      <tr><td><strong class="hl">2</strong></td><td><strong class="hl">Thesis Construction</strong></td><td>Why specifically do I believe this will generate attractive returns?</td><td>Stock Analyzer (10 dimensions)</td></tr>
+      <tr><td><strong class="hl">3</strong></td><td><strong class="hl">Risk Assessment</strong></td><td>What could go wrong? How much can I lose? What are the kill criteria?</td><td>Risk Vector + Cycle Overlay</td></tr>
+      <tr><td><strong class="hl">4</strong></td><td><strong class="hl">Position Sizing</strong></td><td>How much of my portfolio should this represent given conviction and risk?</td><td>Portfolio Lab</td></tr>
+      <tr><td><strong class="hl">5</strong></td><td><strong class="hl">Review & Feedback</strong></td><td>Was I right for the right reasons? What should I do differently?</td><td>Market Brain</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p>Notice what this system does: it removes the need for inspiration. You do not need to feel confident to invest. You do not need a hot tip. You need a process that has proven reliable over time, applied with discipline regardless of what markets are doing or what CNBC is saying.</p>
+
+<h3>The Checklist Manifesto for Investors</h3>
+<p>Atul Gawande's <em>The Checklist Manifesto</em> demonstrated that simple checklists dramatically reduce errors in surgery, aviation, and construction — complex fields where experts routinely miss obvious steps under pressure. Investing is no different. Joel Greenblatt's Magic Formula is a checklist: rank by ROIC, rank by earnings yield, buy the top-ranked stocks, hold, repeat. No stories. No intuition. System.</p>
+
+<div class="case-study">
+  <div class="case-label">Real-World Example — System vs. Story</div>
+  <div class="case-company">Theranos — A Checklist Would Have Saved Billions</div>
+  <p>Elizabeth Holmes built a narrative that captivated the world: a Stanford dropout revolutionizing blood testing with a device that could run hundreds of tests from a single drop of blood. The story attracted $700 million from investors including Rupert Murdoch, the Walton family, and Betsy DeVos. The board included Henry Kissinger and George Shultz.</p>
+  <p>A basic investment checklist would have prevented every dollar of loss:</p>
+  <div style="font-family:Arial;font-size:13px;color:#BEC3D4;line-height:2;padding:8px 0;">
+    ✗ Has the technology been independently validated? <strong style="color:var(--red);">No</strong><br>
+    ✗ Can the company demonstrate working products to investors? <strong style="color:var(--red);">No (they refused)</strong><br>
+    ✗ Are financials audited by a major firm? <strong style="color:var(--red);">No</strong><br>
+    ✗ Is there transparency in governance? <strong style="color:var(--red);">No (extreme secrecy)</strong><br>
+    ✗ Are there credentialed scientists verifying the claims? <strong style="color:var(--red);">No</strong>
+  </div>
+  <p>Five simple questions. Five red flags. But the narrative — the <em>story</em> — was so powerful that sophisticated investors ignored every one. The system would have said "do not invest" on question one.</p>
+  <div class="case-takeaway">
+    <div class="case-takeaway-label">Lesson</div>
+    <p>A checklist doesn't need to be complex. It needs to be followed. The discipline to run every investment through a systematic process — regardless of how exciting the story — is the single most valuable skill an investor can develop.</p>
+  </div>
+</div>
+
+<p>The lesson of this entire course distills into a single question that separates amateurs from professionals: <strong class="hl">"What is my process?"</strong> If you cannot articulate your process in specific, repeatable terms — you do not have one. And if you do not have one, your returns will be determined by luck and emotion, not skill.</p>
+
+<div class="callout callout-orange">
+  <div class="callout-label">The Most Important Question</div>
+  <p>Before you buy any investment, ask: "If I could not look at the price for the next three years, would I still be comfortable owning this?" If the answer is no, you are speculating, not investing. You are buying a price chart, not a business.</p>
+</div>
+
+<div class="callout">
+  <div class="callout-label">Beat Lynch Connection</div>
+  <p>Beat Lynch is, at its core, an investment system externalized into software. The Stock Analyzer builds thesis construction by scoring across ten dimensions. The Market Brain provides risk context. The Portfolio Lab enforces position sizing discipline. The platform does not replace your judgment — it structures it. Every feature maps to one of the five system elements above. The Academy teaches you to understand those outputs. The rest of the platform helps you act on them.</p>
+</div>
+
+<div class="completion-badge">
+  <div style="font-size:32px;margin-bottom:10px">🧠</div>
+  <div style="font-family:Arial;font-size:12px;font-weight:700;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:6px">The Investor's Mindset — Curriculum Complete</div>
+  <div style="font-family:Arial;font-size:22px;font-weight:900;color:#fff;margin-bottom:8px">Ready for the Final Exam</div>
+  <div style="font-family:Arial;font-size:13px;color:var(--muted);max-width:520px;margin:0 auto;">You now understand what investing is, the biases that sabotage it, the true meaning of risk, the power of compounding, and why systems beat stories. Prove your mastery — take the exam.</div>
+</div>
+
+</div>
+
+</div><!-- /lesson-grid -->
+</div><!-- /section -->
+</div><!-- /container -->
+</div><!-- /tab-curriculum -->
+
+<!-- EXAM TAB -->
+<div id="tab-exam" class="tab-content">
+<div class="container"><div class="exam-wrap">
+  <div id="exam-start">
+    <div class="start-exam-wrap">
+      <div class="course-label">Tier 1 · The Investor's Mindset · Final Exam</div>
+      <h2>Final Exam</h2>
+      <p>15 scenario-based questions across all 5 lessons. Score 80% or higher to earn 100 Mastery Points and complete Course 1.2.</p>
+      <div class="exam-rules">
+        <div class="rule-card"><div class="r-num">15</div><div class="r-label">Questions</div></div>
+        <div class="rule-card"><div class="r-num">80%</div><div class="r-label">Pass Threshold</div></div>
+        <div class="rule-card"><div class="r-num">100</div><div class="r-label">MP on Pass</div></div>
+        <div class="rule-card"><div class="r-num">5</div><div class="r-label">Lessons Covered</div></div>
+      </div>
+      <button class="exam-btn" onclick="startExam()">Begin Exam</button>
+    </div>
+  </div>
+  <div id="exam-body" style="display:none">
+    <div class="score-bar-wrap">
+      <div>
+        <div class="score-big" id="scoreBig">0/0</div>
+        <div class="score-sub">Correct</div>
+      </div>
+      <div style="flex:1;min-width:180px;">
+        <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+        <div style="display:flex;justify-content:space-between;margin-top:4px;">
+          <span style="font-family:Arial;font-size:11px;color:var(--muted);" id="progressLabel">0 / 15 answered</span>
+          <span style="font-family:Arial;font-size:11px;color:var(--muted);" id="accLabel">0% accuracy</span>
+        </div>
+      </div>
+    </div>
+    <div id="qContainer"></div>
+    <div class="exam-result" id="examResult"></div>
+  </div>
+</div></div>
+</div>
+
+<script>
+var Q=[
+{lesson:"Lesson 1 · What Investing Actually Is",q:"A friend tells you, 'I invest in stocks by buying whatever is trending on social media and selling when the hype dies.' Based on the activity spectrum you studied, what is the most accurate characterization of this activity?",opts:["Investing, because they are buying and selling stocks","Trading, because they have short time horizons and use technical signals","Speculation, because they are betting on price movements without analyzing the underlying business value","Gambling, because social media tips never produce positive returns"],ans:2,exp:"This is speculation — buying based on narratives and price momentum rather than an assessment of intrinsic value. Graham's distinction is clear: the investor analyses a business and its value; the speculator bets on price movements. Social-media-driven buying with no valuation analysis is speculation by definition, regardless of what the person calls it."},
+{lesson:"Lesson 1 · What Investing Actually Is",q:"An investor calculates that a company's intrinsic value is $80 per share. The stock currently trades at $62. What concept best describes the $18 difference between the intrinsic value and the market price?",opts:["Expected value — the probability-weighted return","Alpha generation — excess return over the market","Margin of safety — the buffer that protects the investor if their analysis is imperfect","Arbitrage — a risk-free profit opportunity"],ans:2,exp:"The margin of safety is the gap between intrinsic value and market price. Graham defined it as the investor's buffer against errors in estimation and unforeseen problems. Here, the $18 gap ($80 intrinsic value minus $62 market price) represents a 22.5% margin of safety — the investor's 'seat belt' in case their analysis isn't perfect."},
+{lesson:"Lesson 1 · What Investing Actually Is",q:"Which statement best captures why expected value thinking matters for investors?",opts:["It guarantees positive returns on every individual investment","It ensures that over many decisions, a portfolio of positive expected value choices produces favorable results","It eliminates the need for fundamental analysis of individual companies","It tells you exactly how much a stock will return over a given period"],ans:1,exp:"Expected value thinking recognizes that any single investment may lose money, but over many repetitions, favorable odds produce favorable results — like a casino's edge over thousands of hands. It does not guarantee any individual outcome, it does not replace fundamental analysis, and it cannot predict exact returns. The power is in the aggregate."},
+{lesson:"Lesson 2 · The Behavioral Minefield",q:"During a market downturn, Maria's portfolio drops 25%. She sells everything because she 'can't take any more losses.' Two months later, the market fully recovers. Which behavioral bias was primarily responsible?",opts:["Anchoring — she was fixated on her original portfolio value","Overconfidence — she believed she could predict the market would keep falling","Loss aversion — the pain of losses drove her to sell to stop the emotional suffering","Recency bias — she assumed the recent downtrend would continue forever"],ans:2,exp:"Loss aversion is the primary driver: Kahneman and Tversky's Prospect Theory showed that losses feel roughly twice as painful as equivalent gains feel good. Maria sold not because of analysis, but because the emotional pain of watching losses mount became unbearable — she sold to make the suffering stop. While recency bias may have contributed, the core mechanism is loss aversion's asymmetric pain response."},
+{lesson:"Lesson 2 · The Behavioral Minefield",q:"The Dalbar study found that average equity investors earned roughly 4% annually while the S&P 500 returned roughly 10% over the same 30-year period. What is the primary cause of this gap?",opts:["Higher-than-average management fees paid by retail investors","Poor stock selection — retail investors picked the wrong individual stocks","Behavioral mistakes — buying after rallies when markets felt safe, and selling during panics when markets felt dangerous","Lack of access to professional-grade research and data tools"],ans:2,exp:"The Dalbar study specifically measures the gap between fund returns and investor returns — meaning investors owned the right funds but bought and sold at the wrong times. The behavior gap is driven entirely by emotional decision-making: buying when markets feel safe (after gains) and selling when markets feel dangerous (after losses). This is the 'behavior tax' that costs investors trillions."},
+{lesson:"Lesson 2 · The Behavioral Minefield",q:"You bought a stock at $120. It is now $85. You refuse to sell because you want to 'get back to even.' Which bias is dominating your decision?",opts:["Herding — you are following what other holders are doing","Anchoring — you are fixated on your $120 purchase price, which is irrelevant to the stock's current value","Overconfidence — you believe the stock must return to $120","Recency bias — you are assuming the recent decline will reverse"],ans:1,exp:"Anchoring: your $120 purchase price has become a mental reference point that dominates your decision-making. But your purchase price has zero relevance to the stock's current or future value. The only question that matters is: 'Is this stock worth more or less than $85 today?' Not 'How do I get back to $120?' — that is anchoring to an irrelevant number."},
+{lesson:"Lesson 3 · Risk Is Not Volatility",q:"Stock X has high price volatility but strong earnings growth, no debt, and expanding market share. Stock Y has low price volatility but declining revenue, rising debt, and losing customers. Which stock carries more real investment risk as defined by Graham, Buffett, and Marks?",opts:["Stock X, because its price moves more dramatically and has higher standard deviation","Stock Y, because its deteriorating business fundamentals create a genuine threat of permanent capital loss","Both carry equal risk — risk depends entirely on portfolio diversification, not individual stock characteristics","Neither — risk cannot be assessed without knowing the current stock price and recent momentum"],ans:1,exp:"Real investment risk is the probability and magnitude of permanent capital loss — not price volatility. Stock Y's deteriorating fundamentals (declining revenue, rising debt, losing customers) create a genuine threat of permanent value destruction. Stock X's price volatility is uncomfortable but irrelevant if the underlying business is healthy and growing. As the Netflix case study shows, high volatility in a strong business is noise; low volatility in a dying business is a trap."},
+{lesson:"Lesson 3 · Risk Is Not Volatility",q:"If your portfolio drops 50% in value, what percentage gain is required to return to the original value?",opts:["50% — the same percentage you lost","75% — losses require proportionally larger recoveries","100% — if $100 falls to $50, the $50 must double to reach $100 again","150% — the asymmetry factor triples above 40% losses"],ans:2,exp:"The math: $100 falls 50% to $50. To get back to $100 from $50, you need a gain of $50 on a $50 base — that's $50/$50 = 100%. This loss asymmetry is why capital preservation is the first rule of investing. The larger the loss, the more disproportionate the recovery: a 75% loss requires a 300% gain, a 90% loss requires a 900% gain."},
+{lesson:"Lesson 3 · Risk Is Not Volatility",q:"An investor holds $100,000 in a savings account earning 1% annually while inflation runs at 5%. What type of risk is this investor primarily exposed to?",opts:["Permanent capital loss — the savings account could lose all value","Purchasing power risk — inflation erodes the real value of their money by 4% per year","Behavioral risk — they will panic and move to a worse investment","Volatility risk — savings account returns fluctuate unpredictably"],ans:1,exp:"Purchasing power risk: with 1% returns and 5% inflation, the investor loses 4% of real purchasing power every year. In 10 years, their money buys roughly 34% less. The account balance barely changes, but what that money can buy shrinks dramatically. Cash earning 1% while inflation runs at 5% is losing 4% per year in real terms — this is invisible but devastating."},
+{lesson:"Lesson 4 · The Power of Compounding",q:"Using the Rule of 72, approximately how many years would it take to double an investment earning 8% annually?",opts:["6 years","9 years — because 72 ÷ 8 = 9","12 years","15 years"],ans:1,exp:"The Rule of 72: divide 72 by the annual return rate. 72 ÷ 8 = 9 years to double. This quick mental math makes the power of different return rates intuitive. At 10%, you double in 7.2 years. At 20% (Buffett's average), you double every 3.6 years — which is why compounding at high rates creates extraordinary wealth over time."},
+{lesson:"Lesson 4 · The Power of Compounding",q:"$10,000 invested at 10% annually for 30 years grows to approximately $174,000. What percentage of the final value came from compounding (returns on returns) rather than the original $10,000?",opts:["About 50% — roughly half came from the original investment","About 74% — most came from compounding but the original investment was still significant","About 85% — compounding contributed the vast majority","Over 93% — the original $10,000 was a tiny fraction of the final wealth"],ans:3,exp:"The original investment was $10,000. The final value is approximately $174,000. That means ~$164,000 came from compounding — returns generating their own returns. That is over 93% of the total. The original capital is a tiny fraction of the final wealth. This is why time in the market matters so much: the vast majority of wealth creation comes from compounding, not from the money you put in."},
+{lesson:"Lesson 4 · The Power of Compounding",q:"A study showed that missing the S&P 500's 10 best trading days over a 20-year period cut total returns by more than half (from $61K to $28K). Why is this finding critical for investors?",opts:["It proves that active day-trading always outperforms buy-and-hold strategies","It shows that the best days often occur near the worst days, so investors who sell during panics almost certainly miss the sharp recovery rallies","It demonstrates that index funds are always the best investment in every market condition","It suggests investors should only invest during market downturns to catch the best days"],ans:1,exp:"The best trading days tend to cluster around the worst days — during periods of extreme volatility and fear. Investors who sell during panics to 'protect' themselves almost always miss the sharp recovery rallies that follow within days. This is why time in the market — staying invested through turbulence — consistently beats trying to time entries and exits. You cannot capture the best days if you have sold during the worst."},
+{lesson:"Lesson 5 · Systems Beat Stories",q:"WeWork had a compelling narrative (revolutionary workspace, visionary founder) and was valued at $47 billion. Basic financial analysis revealed massive losses and governance problems. What does this example best illustrate?",opts:["That high-growth companies should always be avoided regardless of fundamentals","That compelling narratives can override analytical judgment, which is why systematic financial analysis is essential","That IPOs are always overvalued and should never be purchased","That private market valuations are meaningless indicators of company quality"],ans:1,exp:"WeWork is the textbook case of narrative investing overriding systematic analysis. The story was compelling, but the numbers told a different story: massive cash burn, unsustainable economics, self-dealing governance. A basic financial checklist (profitability? cash flow? governance? path to sustainability?) would have flagged these issues immediately. The lesson: narratives are seductive but systems are reliable."},
+{lesson:"Lesson 5 · Systems Beat Stories",q:"A new investor makes a 400% return on a meme stock purchased on a whim with zero research. Using the Process-Outcome Matrix, which cell does this fall into — and why is it considered the most dangerous outcome?",opts:["Good process, good outcome — they should scale up this winning strategy","Bad process, bad outcome — they got lucky but should stop while ahead","Good process, bad outcome — the process was sound but unlucky","Bad process, good outcome — it reinforces reckless behavior by rewarding it, teaching wrong lessons"],ans:3,exp:"This is 'bad process, good outcome' — the most dangerous cell in the matrix. The investor had no thesis, no risk assessment, no system. The spectacular 400% return teaches them that impulsive, research-free investing works brilliantly. They will repeat the behavior with increasing size and confidence until the inevitable loss wipes out their gains and more. Dumb luck is the enemy of discipline because it rewards and reinforces exactly the wrong behavior."},
+{lesson:"Lesson 5 · Systems Beat Stories",q:"Which of the following best distinguishes an investment thesis from a narrative?",opts:["A thesis is optimistic about the investment; a narrative is pessimistic or cautionary","A thesis includes specific, falsifiable claims and kill criteria; a narrative is an unstructured story about why something should work","A thesis is always written in a formal document; a narrative is always communicated verbally","A thesis applies only to value stocks; narratives apply only to growth stocks"],ans:1,exp:"The defining feature is falsifiability and specificity. A thesis states: 'I believe X because of Y, and I will be proven wrong if Z happens.' It includes specific claims, measurable metrics, and kill criteria — conditions that would prove the thesis wrong. A narrative is: 'This company is amazing and will change the world' — an unstructured story with no way to test it. The thesis can be measured, tested, and updated with new data; the narrative can only be believed or abandoned."}
+];
+
+var answered=0,correct=0,total=Q.length;
+
+function switchTab(id,btn){
+  document.querySelectorAll('.tab-content').forEach(function(t){t.classList.remove('active')});
+  document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active')});
+  document.getElementById('tab-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+
+function toggleLesson(id,card){
+  var d=document.getElementById(id);
+  var isOpen=d.classList.contains('open');
+  document.querySelectorAll('.lesson-detail').forEach(function(el){el.classList.remove('open')});
+  document.querySelectorAll('.lesson-card').forEach(function(c){c.classList.remove('active-card')});
+  if(!isOpen){d.classList.add('open');card.classList.add('active-card');d.scrollIntoView({behavior:'smooth',block:'nearest'});}
+}
+
+function startExam(){
+  answered=0;correct=0;
+  document.getElementById('exam-start').style.display='none';
+  document.getElementById('exam-body').style.display='block';
+  document.getElementById('examResult').style.display='none';
+  var h='';
+  Q.forEach(function(q,i){
+    h+='<div class="q-block" id="qb'+i+'"><div class="q-num">Question '+(i+1)+' of '+total+' · '+q.lesson+'</div><div class="q-text">'+q.q+'</div><div class="q-options">';
+    var L=['A','B','C','D'];
+    q.opts.forEach(function(o,j){
+      h+='<button class="q-opt" id="o'+i+'_'+j+'" onclick="answer('+i+','+j+')"><span class="opt-letter">'+L[j]+'</span><span>'+o+'</span></button>';
+    });
+    h+='</div><div class="q-feedback" id="fb'+i+'"></div></div>';
+  });
+  document.getElementById('qContainer').innerHTML=h;
+  updateScore();
+}
+
+function answer(qi,oi){
+  var q=Q[qi],bl=document.getElementById('qb'+qi),fb=document.getElementById('fb'+qi);
+  var opts=bl.querySelectorAll('.q-opt');
+  if(opts[0].disabled) return;
+  opts.forEach(function(o){o.disabled=true;});
+  answered++;
+  if(oi===q.ans){
+    correct++;
+    opts[oi].classList.add('correct');
+    fb.className='q-feedback correct';
+    fb.innerHTML='<strong>Correct.</strong> '+q.exp;
+    bl.classList.add('answered-correct');
+  } else {
+    opts[oi].classList.add('wrong');
+    opts[q.ans].classList.add('reveal-correct');
+    fb.className='q-feedback wrong';
+    fb.innerHTML='<strong>Incorrect.</strong> '+q.exp;
+    bl.classList.add('answered-wrong');
+  }
+  fb.style.display='block';
+  updateScore();
+  if(answered===total) setTimeout(showResult,600);
+}
+
+function updateScore(){
+  document.getElementById('scoreBig').textContent=correct+'/'+answered;
+  document.getElementById('progressFill').style.width=(answered/total*100)+'%';
+  document.getElementById('progressLabel').textContent=answered+' / '+total+' answered';
+  document.getElementById('accLabel').textContent=answered?Math.round(correct/answered*100)+'% accuracy':'0% accuracy';
+}
+
+function showResult(){
+  var pct=Math.round(correct/total*100),pass=pct>=80;
+  var r=document.getElementById('examResult');
+  r.style.display='block';
+  r.innerHTML='<div class="result-score">'+pct+'%</div>'
+    +'<div style="font-family:Arial;font-size:20px;font-weight:900;margin-bottom:8px;" class="'+(pass?'result-pass':'result-fail')+'">'+(pass?'PASSED':'NOT YET')+'</div>'
+    +'<div class="result-msg">'+(pass?'You earned <strong style="color:var(--gold);">100 Mastery Points</strong>. The Investor\'s Mindset is complete. You now think about investing the way professionals do — through the lens of value, behavior, risk, compounding, and systems.':'You need 80% (12/15) to pass. Review the lessons and try again — every concept you master now compounds into Tier 2 and beyond.')+'</div>'
+    +'<div>'+correct+' of '+total+' correct</div>'
+    +'<div style="margin-top:16px;">'+(pass?'<button class="exam-btn" onclick="retakeExam()">Retake Exam</button>':'<button class="exam-btn" onclick="retakeExam()">Retake Exam</button> <button class="exam-btn secondary" onclick="switchTab(\'curriculum\',document.querySelectorAll(\'.tab-btn\')[0])">Review Lessons</button>')+'</div>';
+  r.scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+function retakeExam(){
+  document.getElementById('exam-body').style.display='none';
+  document.getElementById('exam-start').style.display='block';
+}
+</script>
+</body>
+</html>

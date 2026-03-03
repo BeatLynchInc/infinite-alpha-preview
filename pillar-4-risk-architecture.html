@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pillar IV — Risk & Portfolio Architecture</title>
+<style>
+:root{--gold:#C9A84C;--dark:#0D0F14;--panel:#13161E;--border:#1E2330;--text:#E8EAF0;--muted:#7A8099;--accent:#3B82F6;--green:#22C55E;--red:#EF4444;--purple:#a855f7;--orange:#f59e0b;--cyan:#06b6d4;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--dark);color:var(--text);font-family:'Georgia',serif;font-size:16px;line-height:1.75;}
+.top-bar{background:var(--panel);border-bottom:1px solid var(--border);padding:12px 32px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:100;flex-wrap:wrap;}
+.logo{font-family:Arial,sans-serif;font-weight:900;font-size:18px;color:var(--gold);letter-spacing:2px;}
+.pill{background:var(--gold);color:var(--dark);font-family:Arial,sans-serif;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:1px;}
+.pill-tier{background:var(--accent);color:#fff;}
+.pill-pillar{background:var(--red);color:#fff;}
+.tab-nav{display:flex;gap:4px;margin-left:auto;}
+.tab-btn{background:none;border:1px solid var(--border);color:var(--muted);font-family:Arial,sans-serif;font-size:12px;font-weight:700;padding:6px 16px;border-radius:6px;cursor:pointer;transition:all .2s;letter-spacing:.5px;}
+.tab-btn.active{background:var(--gold);color:var(--dark);border-color:var(--gold);}
+.tab-btn:hover:not(.active){border-color:var(--gold);color:var(--gold);}
+.hero{background:linear-gradient(135deg,#0D0F14,#13161E,#0a0c10);border-bottom:1px solid var(--border);padding:56px 32px 40px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:500px;height:500px;background:radial-gradient(circle,rgba(239,68,68,.05) 0%,transparent 70%);pointer-events:none;}
+.course-label{font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:12px;}
+.hero h1{font-size:clamp(26px,4vw,44px);font-weight:400;color:#fff;margin-bottom:12px;line-height:1.2;}
+.hero-sub{font-size:17px;color:var(--muted);max-width:720px;margin:0 auto 28px;}
+.meta-row{display:flex;justify-content:center;gap:28px;flex-wrap:wrap;}
+.meta-item{text-align:center;}
+.meta-num{font-family:Arial,sans-serif;font-size:26px;font-weight:700;color:var(--gold);}
+.meta-label{font-family:Arial,sans-serif;font-size:10px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-top:2px;}
+.container{max-width:960px;margin:0 auto;padding:40px 24px;}
+.section{margin-bottom:52px;}
+.section-title{font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:20px;padding-bottom:10px;border-bottom:1px solid var(--border);}
+h2{font-size:22px;color:#fff;font-weight:400;margin-bottom:10px;}
+h3{font-family:Arial,sans-serif;font-size:12px;font-weight:700;color:var(--gold);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;margin-top:22px;}
+p{color:#BEC3D4;margin-bottom:14px;}
+strong.hl{color:#fff;}
+.tab-content{display:none;}.tab-content.active{display:block;}
+.principle-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0 32px;}
+@media(max-width:640px){.principle-grid{grid-template-columns:1fr;}}
+.principle-card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:20px;border-top:3px solid var(--red);}
+.principle-num{font-family:Arial,sans-serif;font-size:11px;font-weight:700;color:var(--gold);letter-spacing:2px;margin-bottom:6px;}
+.principle-title{font-size:16px;color:#fff;margin-bottom:6px;}
+.principle-desc{font-family:Arial,sans-serif;font-size:13px;color:var(--muted);line-height:1.5;}
+.lesson-grid{display:flex;flex-direction:column;border:1px solid var(--border);border-radius:12px;overflow:hidden;}
+.lesson-card{background:var(--panel);border-bottom:1px solid var(--border);padding:18px 22px;display:grid;grid-template-columns:46px 1fr auto;gap:14px;align-items:start;cursor:pointer;transition:background .2s;}
+.lesson-card:last-child{border-bottom:none;}
+.lesson-card:hover,.lesson-card.active-card{background:#1a1e2a;}
+.lesson-card.active-card{border-left:3px solid var(--gold);}
+.lesson-num{font-family:Arial,sans-serif;font-size:20px;font-weight:700;color:var(--gold);line-height:1;}
+.lesson-title{font-size:16px;color:#fff;margin-bottom:3px;}
+.lesson-desc{font-family:Arial,sans-serif;font-size:12px;color:var(--muted);line-height:1.5;}
+.lesson-mp{font-family:Arial,sans-serif;font-size:12px;font-weight:700;color:var(--gold);background:rgba(201,168,76,.1);padding:3px 10px;border-radius:20px;white-space:nowrap;align-self:center;}
+.lesson-detail{background:#0e1018;border-top:1px solid var(--border);padding:28px;display:none;}
+.lesson-detail.open{display:block;}
+.fw-table{width:100%;border-collapse:collapse;margin:12px 0 20px;}
+.fw-table th{background:rgba(201,168,76,.08);font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);padding:10px 14px;text-align:left;border-bottom:1px solid var(--border);}
+.fw-table td{padding:12px 14px;border-bottom:1px solid var(--border);font-family:Arial,sans-serif;font-size:13px;color:#BEC3D4;vertical-align:top;}
+.fw-table tr:last-child td{border-bottom:none;}
+.fw-table tr:hover td{background:rgba(255,255,255,.02);}
+.callout{background:rgba(201,168,76,.05);border-left:3px solid var(--gold);padding:16px 20px;border-radius:0 8px 8px 0;margin:18px 0;}
+.callout-label{font-family:Arial,sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;}
+.callout p{color:var(--text);margin:0;font-size:14px;}
+.callout p+p{margin-top:8px;}
+.callout-blue{border-left-color:var(--accent);background:rgba(59,130,246,.05);}.callout-blue .callout-label{color:var(--accent);}
+.callout-red{border-left-color:var(--red);background:rgba(239,68,68,.05);}.callout-red .callout-label{color:var(--red);}
+.callout-green{border-left-color:var(--green);background:rgba(34,197,94,.05);}.callout-green .callout-label{color:var(--green);}
+.callout-purple{border-left-color:var(--purple);background:rgba(168,85,247,.05);}.callout-purple .callout-label{color:var(--purple);}
+.callout-cyan{border-left-color:var(--cyan);background:rgba(6,182,212,.05);}.callout-cyan .callout-label{color:var(--cyan);}
+.callout-orange{border-left-color:var(--orange);background:rgba(245,158,11,.05);}.callout-orange .callout-label{color:var(--orange);}
+.exhibit{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:22px;margin:18px 0;}
+.exhibit-label{font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:14px;}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0;}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:16px 0;}
+@media(max-width:640px){.two-col,.three-col{grid-template-columns:1fr;}}
+.stat-card{background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.2);border-radius:10px;padding:18px;text-align:center;}
+.stat-card-gold{background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.2);}
+.stat-num{font-family:Arial,sans-serif;font-size:28px;font-weight:900;color:var(--red);line-height:1;margin-bottom:4px;}
+.stat-card-gold .stat-num{color:var(--gold);}
+.stat-label{font-family:Arial,sans-serif;font-size:11px;color:var(--muted);line-height:1.4;}
+.tag-row{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 14px;}
+.ctag{font-family:Arial,sans-serif;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;letter-spacing:.5px;background:rgba(201,168,76,.15);color:var(--gold);border:1px solid rgba(201,168,76,.3);}
+.formula-box{background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.25);border-radius:10px;padding:20px 24px;text-align:center;margin:16px 0;font-family:Arial,sans-serif;}
+.formula-box-gold{background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.25);}
+.formula-main{font-size:20px;font-weight:900;color:var(--red);letter-spacing:1px;margin-bottom:6px;}
+.formula-box-gold .formula-main{color:var(--gold);}
+.formula-sub{font-size:12px;color:var(--muted);letter-spacing:.5px;}
+.bar-chart-row{display:flex;align-items:center;gap:10px;margin:6px 0;}
+.bar-chart-label{font-family:Arial,sans-serif;font-size:12px;color:var(--muted);width:160px;text-align:right;flex-shrink:0;}
+.bar-chart-track{flex:1;background:rgba(255,255,255,.04);border-radius:4px;height:22px;position:relative;overflow:hidden;}
+.bar-chart-fill{height:100%;border-radius:4px;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;font-family:Arial,sans-serif;font-size:11px;font-weight:700;color:#fff;min-width:30px;}
+.sensitivity-grid{display:grid;grid-template-columns:auto repeat(5,1fr);gap:1px;background:var(--border);border-radius:8px;overflow:hidden;margin:12px 0;}
+.sensitivity-grid div{background:var(--panel);padding:8px 6px;font-family:Arial,sans-serif;font-size:11px;text-align:center;color:#BEC3D4;}
+.sensitivity-grid .sg-header{background:rgba(201,168,76,.08);color:var(--gold);font-weight:700;font-size:10px;letter-spacing:.5px;}
+.sensitivity-grid .sg-row-header{background:rgba(59,130,246,.06);color:var(--accent);font-weight:700;text-align:right;padding-right:10px;}
+.sensitivity-grid .sg-highlight{background:rgba(34,197,94,.08);color:var(--green);font-weight:700;}
+.sensitivity-grid .sg-danger{background:rgba(239,68,68,.06);color:var(--red);}
+.svg-wrap{display:flex;justify-content:center;margin:18px 0;}
+.svg-wrap svg{max-width:100%;height:auto;}
+.exam-wrap{max-width:800px;margin:0 auto;}
+.start-exam-wrap{text-align:center;padding:40px 20px;}
+.start-exam-wrap h2{color:#fff;margin-bottom:12px;}
+.start-exam-wrap p{color:var(--muted);max-width:500px;margin:0 auto 24px;}
+.exam-rules{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin:24px 0;text-align:left;}
+.rule-card{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:14px;}
+.rule-card .r-num{font-family:Arial,sans-serif;font-size:22px;font-weight:900;color:var(--gold);}
+.rule-card .r-label{font-family:Arial,sans-serif;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;}
+.score-bar-wrap{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:20px 28px;margin-bottom:28px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;}
+.score-big{font-size:42px;font-weight:900;color:var(--gold);line-height:1;}
+.score-sub{font-size:12px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;}
+.progress-track{flex:1;min-width:200px;background:rgba(255,255,255,.06);border-radius:8px;height:12px;overflow:hidden;}
+.progress-fill{height:100%;background:linear-gradient(90deg,rgba(201,168,76,.5),var(--gold));border-radius:8px;transition:width .5s ease;}
+.q-block{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:22px;margin-bottom:14px;transition:border-color .3s;}
+.q-block.answered-correct{border-color:var(--green);}
+.q-block.answered-wrong{border-color:var(--red);}
+.q-num{font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:8px;}
+.q-text{font-size:15px;color:#fff;margin-bottom:16px;line-height:1.6;}
+.q-options{display:flex;flex-direction:column;gap:8px;}
+.q-opt{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:8px;padding:11px 15px;font-family:Arial,sans-serif;font-size:14px;color:#BEC3D4;cursor:pointer;transition:all .2s;text-align:left;display:flex;gap:12px;align-items:flex-start;}
+.q-opt:hover:not(:disabled){background:rgba(201,168,76,.06);border-color:rgba(201,168,76,.4);color:#fff;}
+.q-opt:disabled{cursor:default;}
+.q-opt.correct{background:rgba(34,197,94,.1);border-color:var(--green);color:var(--green);}
+.q-opt.wrong{background:rgba(239,68,68,.1);border-color:var(--red);color:var(--red);}
+.q-opt.reveal-correct{background:rgba(34,197,94,.07);border-color:rgba(34,197,94,.4);color:var(--green);}
+.opt-letter{font-weight:700;flex-shrink:0;width:18px;}
+.q-feedback{margin-top:10px;padding:11px 15px;border-radius:8px;font-family:Arial,sans-serif;font-size:13px;line-height:1.5;display:none;}
+.q-feedback.correct{background:rgba(34,197,94,.08);color:var(--green);border:1px solid rgba(34,197,94,.2);}
+.q-feedback.wrong{background:rgba(239,68,68,.08);color:#f87171;border:1px solid rgba(239,68,68,.2);}
+.exam-result{background:linear-gradient(135deg,rgba(201,168,76,.07),rgba(239,68,68,.04));border:1px solid rgba(201,168,76,.3);border-radius:16px;padding:40px;text-align:center;margin-top:32px;display:none;}
+.result-score{font-family:Arial,sans-serif;font-size:64px;font-weight:900;color:var(--gold);line-height:1;margin-bottom:8px;}
+.exam-btn{background:var(--gold);color:var(--dark);font-family:Arial,sans-serif;font-weight:700;font-size:14px;letter-spacing:1px;padding:12px 28px;border-radius:8px;border:none;cursor:pointer;margin:4px;}
+.exam-btn:hover{opacity:.9;}
+.result-pass{color:var(--green);}.result-fail{color:var(--red);}
+.result-msg{color:var(--muted);max-width:520px;margin:0 auto 24px;font-size:15px;}
+.anti-game-notice{background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.2);border-radius:8px;padding:14px 18px;margin:18px 0;font-family:Arial,sans-serif;font-size:12px;color:var(--red);line-height:1.5;text-align:center;}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+<div class="logo">BEAT LYNCH</div>
+<span class="pill">INFINITE ALPHA</span>
+<span class="pill pill-tier">TIER 3</span>
+<span class="pill pill-pillar">PILLAR IV OF V</span>
+<div class="tab-nav">
+<button class="tab-btn active" onclick="showTab('curriculum')">CURRICULUM</button>
+<button class="tab-btn" onclick="showTab('exam')">FINAL EXAM</button>
+</div>
+</div>
+
+<div class="hero">
+<div class="course-label">Infinite Alpha · Pillar IV of V</div>
+<h1>Risk & Portfolio Architecture</h1>
+<p class="hero-sub">How to construct, size, protect, and stress-test portfolios that survive the inevitable drawdowns, behavioral traps, and regime shocks that destroy most investors — so your compounding machine never breaks.</p>
+<div class="meta-row">
+<div class="meta-item"><div class="meta-num">10</div><div class="meta-label">Lessons</div></div>
+<div class="meta-item"><div class="meta-num">250</div><div class="meta-label">Mastery Points</div></div>
+<div class="meta-item"><div class="meta-num">75%</div><div class="meta-label">Pass Threshold</div></div>
+<div class="meta-item"><div class="meta-num">30</div><div class="meta-label">Exam Questions</div></div>
+<div class="meta-item"><div class="meta-num">~10</div><div class="meta-label">Hours Study</div></div>
+</div>
+</div>
+
+<!-- ===== CURRICULUM TAB ===== -->
+<div class="tab-content active" id="tab-curriculum">
+<div class="container">
+
+<div class="section">
+<div class="section-title">Pillar Overview</div>
+<p>Pillar IV is the <strong class="hl">"how do I survive?"</strong> pillar. Pillars I–III taught you to read the macro machine, value businesses, and decode market structure. None of it matters if a single drawdown wipes out your capital or a behavioral error at the worst moment destroys years of compounding. The graveyard of investing is populated by people who were <strong class="hl">right about the stock but wrong about the portfolio</strong>. This pillar teaches the architecture that converts analytical skill into durable wealth: risk definition, correlation, position sizing, portfolio construction, drawdown management, hedging, behavioral discipline, stress testing, rebalancing, and the synthesis of all nine into a single operational risk system.</p>
+
+<div class="exhibit">
+<div class="exhibit-label">System Integration — Pillar IV in the Infinite Alpha Architecture</div>
+<div class="svg-wrap">
+<svg viewBox="0 0 720 200" xmlns="http://www.w3.org/2000/svg" style="max-width:700px;">
+<rect x="10" y="70" width="120" height="60" rx="8" fill="rgba(59,130,246,.08)" stroke="#3B82F6" stroke-width="1"/>
+<text x="70" y="95" text-anchor="middle" font-family="Arial" font-size="10" font-weight="700" fill="#3B82F6">PILLAR I</text>
+<text x="70" y="110" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">Market Machine</text>
+<line x1="130" y1="100" x2="155" y2="100" stroke="#C9A84C" stroke-width="1.2" marker-end="url(#ag)"/>
+<rect x="155" y="70" width="120" height="60" rx="8" fill="rgba(59,130,246,.08)" stroke="#3B82F6" stroke-width="1"/>
+<text x="215" y="95" text-anchor="middle" font-family="Arial" font-size="10" font-weight="700" fill="#3B82F6">PILLAR II</text>
+<text x="215" y="110" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">Valuation</text>
+<line x1="275" y1="100" x2="300" y2="100" stroke="#C9A84C" stroke-width="1.2" marker-end="url(#ag)"/>
+<rect x="300" y="70" width="100" height="60" rx="8" fill="rgba(168,85,247,.08)" stroke="#a855f7" stroke-width="1"/>
+<text x="350" y="95" text-anchor="middle" font-family="Arial" font-size="10" font-weight="700" fill="#a855f7">PILLAR III</text>
+<text x="350" y="110" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">Structure</text>
+<line x1="400" y1="100" x2="425" y2="100" stroke="#C9A84C" stroke-width="1.2" marker-end="url(#ag)"/>
+<rect x="425" y="70" width="100" height="60" rx="8" fill="rgba(239,68,68,.12)" stroke="#EF4444" stroke-width="1.5"/>
+<text x="475" y="95" text-anchor="middle" font-family="Arial" font-size="11" font-weight="700" fill="#EF4444">PILLAR IV</text>
+<text x="475" y="112" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">Risk</text>
+<line x1="525" y1="100" x2="550" y2="100" stroke="#C9A84C" stroke-width="1.2" marker-end="url(#ag)"/>
+<rect x="550" y="70" width="100" height="60" rx="8" fill="rgba(34,197,94,.08)" stroke="#22C55E" stroke-width="1"/>
+<text x="600" y="95" text-anchor="middle" font-family="Arial" font-size="10" font-weight="700" fill="#22C55E">PILLAR V</text>
+<text x="600" y="110" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">Craft</text>
+<line x1="650" y1="100" x2="660" y2="100" stroke="#C9A84C" stroke-width="1.2" marker-end="url(#ag)"/>
+<rect x="660" y="70" width="50" height="60" rx="8" fill="rgba(201,168,76,.15)" stroke="#C9A84C" stroke-width="1.5"/>
+<text x="685" y="92" text-anchor="middle" font-family="Arial" font-size="9" font-weight="700" fill="#C9A84C">BEAT</text>
+<text x="685" y="104" text-anchor="middle" font-family="Arial" font-size="9" font-weight="700" fill="#C9A84C">LYNCH</text>
+<text x="685" y="118" text-anchor="middle" font-family="Arial" font-size="8" fill="#7A8099">+ NIL</text>
+<rect x="90" y="155" width="560" height="34" rx="6" fill="rgba(201,168,76,.06)" stroke="rgba(201,168,76,.3)" stroke-width="1"/>
+<text x="370" y="176" text-anchor="middle" font-family="Arial" font-size="10" font-weight="700" fill="#C9A84C">Mean Magic · Growth Quality · Financial Durability · Moat Strength · Catalyst Vector</text>
+<line x1="475" y1="130" x2="475" y2="155" stroke="#EF4444" stroke-width="1.2" stroke-dasharray="4,3"/>
+<text x="360" y="28" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">Pillar IV converts analytical skill from Pillars I–III into survivable, compoundable portfolio architecture</text>
+<rect x="10" y="15" width="700" height="40" rx="6" fill="none" stroke="rgba(201,168,76,.15)" stroke-width="1" stroke-dasharray="4,4"/>
+<defs><marker id="ag" markerWidth="8" markerHeight="6" refX="4" refY="3" orient="auto"><path d="M0,6 L4,0 L8,6" fill="none" stroke="#C9A84C" stroke-width="1"/></marker></defs>
+</svg>
+</div>
+</div>
+</div>
+
+<div class="section">
+<div class="section-title">Core Principles</div>
+<div class="principle-grid">
+<div class="principle-card">
+<div class="principle-num">PRINCIPLE I</div>
+<div class="principle-title">Survival First</div>
+<div class="principle-desc">The first rule of compounding is never interrupting it. A 50% loss requires a 100% gain to recover. Risk management exists to ensure you stay in the game long enough for skill to compound.</div>
+</div>
+<div class="principle-card">
+<div class="principle-num">PRINCIPLE II</div>
+<div class="principle-title">Asymmetric Construction</div>
+<div class="principle-desc">Professional portfolios are built to capture most of the upside while limiting the downside. Sizing, diversification, and hedging create convex return profiles.</div>
+</div>
+<div class="principle-card">
+<div class="principle-num">PRINCIPLE III</div>
+<div class="principle-title">Correlation Awareness</div>
+<div class="principle-desc">Diversification is not counting positions — it's counting independent risk exposures. Twenty correlated stocks are one bet. Five uncorrelated bets are genuine diversification.</div>
+</div>
+<div class="principle-card">
+<div class="principle-num">PRINCIPLE IV</div>
+<div class="principle-title">Behavioral Integration</div>
+<div class="principle-desc">The portfolio must be designed for the human operating it. The best theoretical portfolio is worthless if its drawdowns exceed what the investor can psychologically tolerate.</div>
+</div>
+</div>
+</div>
+
+<div class="section">
+<div class="section-title">Pillar IV Lessons</div>
+<div class="lesson-grid">
+
+<!-- ===== LESSON 31 ===== -->
+<div class="lesson-card" onclick="toggleLesson(0)">
+<div class="lesson-num">31</div>
+<div><div class="lesson-title">Defining Risk — Permanent Capital Loss, Not Volatility</div>
+<div class="lesson-desc">Risk vs. volatility, the asymmetry of losses, ruin probability, and the Buffett/Marks framework.</div></div>
+<div class="lesson-mp">25 MP</div>
+</div>
+<div class="lesson-detail" id="ld-0">
+<div class="tag-row"><span class="ctag">Permanent Loss</span><span class="ctag">Drawdown Math</span><span class="ctag">Risk of Ruin</span><span class="ctag">Volatility ≠ Risk</span><span class="ctag">Margin of Safety</span></div>
+
+<h3>The Most Important Distinction in Investing</h3>
+<p>Pillar III Lesson 29 introduced the distinction: volatility measures the <strong class="hl">range of outcomes</strong> (uncertainty), while risk is the <strong class="hl">probability and magnitude of permanent capital loss</strong>. Now we build the complete framework. Warren Buffett defines risk as "the possibility of permanent loss of capital." Howard Marks expands this to include opportunity risk — the risk of missing returns by being too cautious. The professional operates between these poles: aggressive enough to compound, conservative enough to survive. Every decision in Pillar IV flows from this foundational definition.</p>
+<p>Academic finance uses standard deviation (volatility) as its risk measure because it's mathematically tractable. But a stock that drops 35% in a market panic and recovers within 18 months was volatile, not risky — the investor who held experienced temporary discomfort, not permanent loss. A stock that drops 35% because its competitive moat has been destroyed (Pillar II Lesson 12 — ROIC collapsing below WACC) has experienced permanent impairment. The same 35% decline carries completely different risk implications depending on <strong class="hl">why</strong> it happened.</p>
+
+<h3>The Asymmetry of Losses — Compounding's Enemy</h3>
+<p>The mathematics of loss recovery are brutally asymmetric. A 50% loss requires a 100% gain to break even — not 50%. This non-linearity means that large losses are disproportionately destructive to long-term compounding. A portfolio that compounds at 12% annually for 10 years produces a 211% cumulative return. If that same portfolio suffers a single 50% drawdown in year 5, the cumulative return drops to just 56% — even with identical 12% returns in all other years. The single drawdown destroyed more than two-thirds of the terminal wealth.</p>
+
+<div class="exhibit">
+<div class="exhibit-label">Loss/Recovery Asymmetry Table</div>
+<table class="fw-table">
+<thead><tr><th>Portfolio Loss</th><th>Gain Required to Recover</th><th>Time to Recover at 10% Annual</th><th>Impact on 20-Year Compounding</th></tr></thead>
+<tbody>
+<tr><td><strong class="hl" style="color:var(--green)">−10%</strong></td><td>+11.1%</td><td>~1.1 years</td><td>Minimal — normal volatility</td></tr>
+<tr><td><strong class="hl" style="color:var(--gold)">−20%</strong></td><td>+25.0%</td><td>~2.4 years</td><td>Moderate — lost ~2 years of compounding</td></tr>
+<tr><td><strong class="hl" style="color:var(--orange)">−33%</strong></td><td>+50.0%</td><td>~4.3 years</td><td>Severe — lost ~4 years of compounding</td></tr>
+<tr><td><strong class="hl" style="color:var(--red)">−50%</strong></td><td>+100.0%</td><td>~7.3 years</td><td>Devastating — lost ~7 years of compounding</td></tr>
+<tr><td><strong class="hl" style="color:var(--red)">−75%</strong></td><td>+300.0%</td><td>~15+ years</td><td>Catastrophic — effective career reset</td></tr>
+<tr><td><strong class="hl" style="color:var(--red)">−90%</strong></td><td>+900.0%</td><td>~25+ years</td><td>Permanent destruction — recovery nearly impossible</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="formula-box">
+<div class="formula-main">Recovery Required = 1 / (1 − Loss%) − 1</div>
+<div class="formula-sub">A 50% loss requires 1/(1−0.50)−1 = 100% gain. A 75% loss requires 300%. Non-linearity accelerates catastrophically.</div>
+</div>
+
+<h3>Sources of Permanent Capital Loss</h3>
+<div class="exhibit">
+<div class="exhibit-label">Five Sources of Permanent Loss — Diagnostic Framework</div>
+<table class="fw-table">
+<thead><tr><th>Source</th><th>Mechanism</th><th>Prevention (Pillar Connection)</th></tr></thead>
+<tbody>
+<tr><td><strong class="hl">Business Destruction</strong></td><td>Competitive moat collapses; earnings go to zero (Kodak, Blockbuster, Lehman)</td><td>Pillar II: Moat analysis, ROIC monitoring, Quality Score</td></tr>
+<tr><td><strong class="hl">Overpayment</strong></td><td>Buying at a premium so large that even business success can't justify the price</td><td>Pillar II: DCF discipline, margin of safety, Mean Magic valuation component</td></tr>
+<tr><td><strong class="hl">Leverage Destruction</strong></td><td>Borrowing amplifies losses; margin call forces sale at the bottom</td><td>Pillar IV: Position sizing, leverage limits, stress testing (this Pillar)</td></tr>
+<tr><td><strong class="hl">Forced Selling</strong></td><td>Liquidity crisis, margin call, or behavioral panic converts temporary loss to permanent</td><td>Pillar III: Liquidity analysis + Pillar IV: Drawdown management</td></tr>
+<tr><td><strong class="hl">Concentration Blow-Up</strong></td><td>Oversized position in a stock that declines 80%+ (single-stock risk)</td><td>Pillar IV: Position sizing limits, correlation analysis</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>Risk of Ruin — The Probability That Matters Most</h3>
+<p>Risk of ruin is the probability that cumulative losses deplete your capital below the point of recovery. For a leveraged portfolio with 2:1 margin, a 50% market decline wipes you out entirely — zero recovery. Even for unleveraged portfolios, concentrating 40% in a single position that falls 90% (Enron, Lehman, Wirecard) produces a 36% portfolio loss from one position alone. The professional's first question is never "how much can I make?" — it's <strong class="hl">"what is my probability of ruin, and how do I keep it near zero?"</strong></p>
+
+<div class="three-col">
+<div class="stat-card"><div class="stat-num">100%</div><div class="stat-label">Gain required to recover from a 50% loss</div></div>
+<div class="stat-card"><div class="stat-num">7.3yr</div><div class="stat-label">Recovery time at 10% annual return from −50%</div></div>
+<div class="stat-card"><div class="stat-num">0%</div><div class="stat-label">Acceptable probability of portfolio ruin</div></div>
+</div>
+
+<div class="callout callout-red"><div class="callout-label">The First Rule</div><p>"Rule No. 1: Never lose money. Rule No. 2: Never forget Rule No. 1." — Warren Buffett. This is not a platitude — it's the mathematical recognition that losses compound asymmetrically. A portfolio that avoids 50%+ drawdowns and compounds at even modest rates will outperform a portfolio with spectacular gains punctuated by devastating losses. Protecting the compounding machine is worth more than any single winning trade.</p></div>
+
+<div class="callout callout-blue"><div class="callout-label">Beat Lynch Connection</div><p>Risk Vector's primary function is identifying permanent loss sources before they materialize. Business quality deterioration (ROIC declining, moat narrowing), valuation overpayment (Mean Magic valuation component below 5), leverage risk (Financial Durability Score), and concentration risk are all surfaced as explicit warnings. The system is designed around Buffett's framework: preventing permanent loss is more valuable than capturing every opportunity.</p></div>
+</div>
+
+<!-- ===== LESSON 32 ===== -->
+<div class="lesson-card" onclick="toggleLesson(1)">
+<div class="lesson-num">32</div>
+<div><div class="lesson-title">Correlation — The Architecture of Diversification</div>
+<div class="lesson-desc">True vs. illusory diversification, correlation regimes, factor correlation, and the crisis convergence problem.</div></div>
+<div class="lesson-mp">25 MP</div>
+</div>
+<div class="lesson-detail" id="ld-1">
+<div class="tag-row"><span class="ctag">Correlation</span><span class="ctag">Factor Diversification</span><span class="ctag">Crisis Convergence</span><span class="ctag">Independent Bets</span><span class="ctag">Concentration Trap</span></div>
+
+<h3>Diversification Is Not What You Think</h3>
+<p>Most investors define diversification as "owning many stocks." This is dangerously wrong. Pillar III Lesson 21 revealed that a portfolio of 20 stocks sharing the same factor exposure behaves as a single bet when that factor rotates. True diversification means owning <strong class="hl">independent risk exposures</strong> — positions whose outcomes depend on different drivers. Five genuinely uncorrelated positions provide more diversification than fifty correlated ones. Correlation — the degree to which two assets move together — is the mathematical foundation of diversification, and understanding its behavior is the key to portfolio construction.</p>
+<p>Correlation is measured on a scale from −1.0 (perfect inverse movement) to +1.0 (perfect co-movement). A correlation of 0.0 means the assets move independently. In normal markets, the average stock-to-stock correlation within the S&P 500 is approximately 0.25–0.40. In a crisis, that correlation spikes toward 0.80–0.95 — meaning almost everything falls together. This <strong class="hl">crisis convergence</strong> is the single most important phenomenon in portfolio risk management: diversification works least precisely when you need it most.</p>
+
+<h3>The Correlation Matrix — What Really Diversifies</h3>
+<div class="exhibit">
+<div class="exhibit-label">Asset Class Correlation Matrix (2000–2023 Normal Periods)</div>
+<div class="sensitivity-grid" style="grid-template-columns:auto repeat(6,1fr);">
+<div class="sg-header"></div><div class="sg-header">US Equity</div><div class="sg-header">Int'l Equity</div><div class="sg-header">US Bonds</div><div class="sg-header">Commodities</div><div class="sg-header">REITs</div><div class="sg-header">Gold</div>
+<div class="sg-row-header">US Equity</div><div>1.00</div><div>0.78</div><div class="sg-highlight">−0.15</div><div>0.32</div><div>0.65</div><div class="sg-highlight">0.05</div>
+<div class="sg-row-header">Int'l Equity</div><div>0.78</div><div>1.00</div><div class="sg-highlight">−0.10</div><div>0.40</div><div>0.58</div><div>0.15</div>
+<div class="sg-row-header">US Bonds</div><div class="sg-highlight">−0.15</div><div class="sg-highlight">−0.10</div><div>1.00</div><div class="sg-highlight">−0.05</div><div>0.22</div><div>0.18</div>
+<div class="sg-row-header">Commodities</div><div>0.32</div><div>0.40</div><div class="sg-highlight">−0.05</div><div>1.00</div><div>0.28</div><div>0.35</div>
+<div class="sg-row-header">REITs</div><div>0.65</div><div>0.58</div><div>0.22</div><div>0.28</div><div>1.00</div><div>0.12</div>
+<div class="sg-row-header">Gold</div><div class="sg-highlight">0.05</div><div>0.15</div><div>0.18</div><div>0.35</div><div>0.12</div><div>1.00</div>
+</div>
+<p style="font-family:Arial,sans-serif;font-size:11px;color:var(--muted);margin-top:6px;">Green highlights indicate low or negative correlation — genuine diversification benefit. Note: these correlations shift dramatically in crisis periods.</p>
+</div>
+
+<h3>Crisis Convergence — When Diversification Fails</h3>
+<p>During the 2008 financial crisis, the correlation between US equities and international equities rose from 0.78 to 0.95. REITs, which normally correlate at 0.65, spiked to 0.90+. Even "diversifying" assets like commodities saw correlations rise sharply. The only reliable crisis diversifiers were US Treasuries (correlation went to approximately −0.40) and gold (remained near 0.0 to +0.15). In March 2020, the same pattern repeated: everything that wasn't a government bond or gold fell together in the initial panic. The implication: <strong class="hl">the diversification you think you have in calm markets is larger than the diversification you actually have in crisis</strong>.</p>
+
+<div class="two-col">
+<div class="stat-card"><div class="stat-num">0.30</div><div class="stat-label">Average S&P 500 stock-to-stock correlation in normal markets</div></div>
+<div class="stat-card"><div class="stat-num">0.85+</div><div class="stat-label">Average correlation during crisis periods — diversification collapses</div></div>
+</div>
+
+<h3>The Five Layers of Diversification</h3>
+<div class="exhibit">
+<div class="exhibit-label">Diversification Quality Hierarchy</div>
+<table class="fw-table">
+<thead><tr><th>Layer</th><th>Diversification Quality</th><th>Example</th><th>Crisis Benefit</th></tr></thead>
+<tbody>
+<tr><td><strong class="hl" style="color:var(--red)">Layer 1: Stock Count</strong></td><td>Weakest — correlation often shared</td><td>20 tech stocks</td><td>Nearly zero — all fall together</td></tr>
+<tr><td><strong class="hl" style="color:var(--orange)">Layer 2: Sector</strong></td><td>Moderate — sectors have some independence</td><td>Tech + Healthcare + Energy</td><td>Partial — correlations still rise in crisis</td></tr>
+<tr><td><strong class="hl" style="color:var(--gold)">Layer 3: Factor</strong></td><td>Strong — factors have distinct drivers</td><td>Value + Momentum + Quality</td><td>Meaningful — factor correlations lower than sector</td></tr>
+<tr><td><strong class="hl" style="color:var(--green)">Layer 4: Asset Class</strong></td><td>Very Strong — fundamentally different return drivers</td><td>Equities + Bonds + Commodities</td><td>Significant — bonds rally when equities crash</td></tr>
+<tr><td><strong class="hl" style="color:var(--green)">Layer 5: Strategy</strong></td><td>Strongest — opposing market dynamics</td><td>Long equity + Tail risk hedge + Trend following</td><td>Maximum — hedges profit from crisis</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout callout-purple"><div class="callout-label">The Illusion of Diversification</div><p>"If all your stocks fall together, you don't have 15 positions — you have one position, fifteen times over." The correlation trap is the most common portfolio construction error. Investors who own 20 stocks across 5 sectors but with identical factor exposure (all growth, all high-momentum) discover in a factor rotation that they had no diversification at all. Pillar III Lesson 21's factor analysis is the prerequisite for genuine diversification."</p></div>
+
+<div class="callout callout-blue"><div class="callout-label">Beat Lynch Connection</div><p>Portfolio Intelligence monitors real-time correlation between your NIL positions. When the system detects that 5+ holdings share factor exposure (e.g., all high-P/E growth stocks), it flags "hidden concentration" — positions that appear diverse but will move together under stress. In NIL competition, portfolios that achieve genuine factor diversification demonstrate lower PATR volatility and higher risk-adjusted performance.</p></div>
+</div>
+
+<!-- ===== LESSON 33 ===== -->
+<div class="lesson-card" onclick="toggleLesson(2)">
+<div class="lesson-num">33</div>
+<div><div class="lesson-title">Position Sizing — The Most Important Decision You Make</div>
+<div class="lesson-desc">Kelly Criterion, conviction-based sizing, liquidity constraints, and the concentration–diversification frontier.</div></div>
+<div class="lesson-mp">25 MP</div>
+</div>
+<div class="lesson-detail" id="ld-2">
+<div class="tag-row"><span class="ctag">Kelly Criterion</span><span class="ctag">Conviction Sizing</span><span class="ctag">Maximum Position</span><span class="ctag">Anti-Fragile Sizing</span><span class="ctag">Liquidity Constraint</span></div>
+
+<h3>Sizing > Selection</h3>
+<p>Here is a counterintuitive truth that most investors never learn: <strong class="hl">position sizing has a larger impact on portfolio returns than stock selection</strong>. A portfolio that selects average stocks but sizes them brilliantly — large in winners, small in losers — will outperform a portfolio that selects brilliant stocks but sizes them equally. Stanley Druckenmiller, one of the greatest investors in history, says: "The way to build long-term returns is through preservation of capital and home runs. When you have tremendous conviction, go big." George Soros is even more direct: "It's not about being right or wrong. It's about how much money you make when you're right, and how much you lose when you're wrong."</p>
+<p>This lesson builds the framework for translating conviction into position size — bounded by the risk constraints of Lesson 31 (permanent loss prevention), the correlation awareness of Lesson 32 (don't size big into correlated positions), and the liquidity constraints of Pillar III Lesson 28 (can you exit this position under stress?).</p>
+
+<h3>The Kelly Criterion — Optimal Sizing Theory</h3>
+<div class="formula-box formula-box-gold">
+<div class="formula-main" style="color:var(--gold);">Kelly % = W − [(1 − W) / R]</div>
+<div class="formula-sub">W = Win probability, R = Win/Loss ratio (average win ÷ average loss). Kelly tells you the mathematically optimal bet size to maximize long-term growth.</div>
+</div>
+<p>The Kelly Criterion, developed by John Kelly at Bell Labs in 1956, calculates the bet size that maximizes long-term compound growth rate. If you have a 60% win rate (W = 0.60) with an average win of 15% and average loss of 10% (R = 1.50), Kelly says: 0.60 − (0.40/1.50) = <strong class="hl">33.3%</strong> of capital. But full Kelly is extremely aggressive — it produces maximum growth but also enormous drawdowns (50%+ is common). Professionals use <strong class="hl">fractional Kelly</strong> — typically ¼ to ½ Kelly — which sacrifices some growth for dramatically reduced drawdowns.</p>
+
+<div class="exhibit">
+<div class="exhibit-label">Full Kelly vs. Fractional Kelly — Risk/Return Tradeoff</div>
+<table class="fw-table">
+<thead><tr><th>Sizing Approach</th><th>Expected Growth Rate</th><th>Expected Max Drawdown</th><th>Behavioral Tolerance</th><th>Professional Usage</th></tr></thead>
+<tbody>
+<tr><td><strong class="hl">Full Kelly</strong></td><td>Maximum (theoretical)</td><td>50–75% (common)</td><td>Nearly impossible to tolerate</td><td>Almost never used</td></tr>
+<tr><td><strong class="hl">½ Kelly</strong></td><td>~75% of full Kelly growth</td><td>25–40%</td><td>Difficult but manageable</td><td>Aggressive professionals</td></tr>
+<tr><td><strong class="hl">¼ Kelly</strong></td><td>~50% of full Kelly growth</td><td>12–20%</td><td>Comfortable for most</td><td>Standard professional sizing</td></tr>
+<tr><td><strong class="hl">⅛ Kelly</strong></td><td>~25% of full Kelly growth</td><td>6–12%</td><td>Very comfortable</td><td>Conservative/institutional</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>Conviction-Based Sizing Framework</h3>
+<div class="exhibit">
+<div class="exhibit-label">Position Sizing by Conviction Level</div>
+<table class="fw-table">
+<thead><tr><th>Conviction Level</th><th>Position Size</th><th>Requirements</th><th>Number in Portfolio</th></tr></thead>
+<tbody>
+<tr><td><strong class="hl" style="color:var(--green)">Maximum Conviction</strong></td><td>8–15%</td><td>4+ signal convergence (L30), wide margin of safety, uncrowded, liquid</td><td>1–3 positions</td></tr>
+<tr><td><strong class="hl" style="color:var(--gold)">High Conviction</strong></td><td>5–8%</td><td>3 signal convergence, solid fundamental case, reasonable liquidity</td><td>3–5 positions</td></tr>
+<tr><td><strong class="hl" style="color:var(--orange)">Standard Position</strong></td><td>2–5%</td><td>Sound thesis, acceptable valuation, no major red flags</td><td>5–10 positions</td></tr>
+<tr><td><strong class="hl" style="color:var(--muted)">Starter / Tracking</strong></td><td>1–2%</td><td>Developing thesis, building conviction, learning the business</td><td>2–5 positions</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>The Three Constraints on Position Size</h3>
+<p>No position can exceed the <strong class="hl">most restrictive</strong> of three constraints. First, the <strong class="hl">conviction constraint</strong>: your analysis must justify the size (framework above). Second, the <strong class="hl">liquidity constraint</strong> (Pillar III Lesson 28): you must be able to exit within a reasonable timeframe even under stress — a position that represents 20 days of average volume is too large regardless of conviction. Third, the <strong class="hl">correlation constraint</strong> (Lesson 32): even if two positions are individually well-sized, their combined exposure to a single factor cannot exceed what you'd allocate to a single high-conviction position.</p>
+
+<div class="callout callout-orange"><div class="callout-label">The Sizing Paradox</div><p>"Most investors spend 90% of their time on stock selection and 10% on position sizing. The return impact is the reverse." The difference between a 3% position and a 10% position in your best idea is far more impactful than the difference between your best idea and your fifth-best idea. Sizing is the translation mechanism between analytical work and portfolio outcomes — the bridge between being right and making money.</p></div>
+
+<div class="callout callout-blue"><div class="callout-label">Beat Lynch Connection</div><p>Portfolio Intelligence provides position sizing guidance based on Mean Magic score, signal convergence, liquidity tier (Pillar III Lesson 28), and correlation with existing holdings. A stock with Mean Magic 9, low crowding, and no correlation overlap with current positions receives maximum size guidance. A stock with Mean Magic 7 but high correlation to existing positions receives reduced size guidance — the correlation constraint binds before the conviction constraint.</p></div>
+</div>
+
+<!-- ===== LESSON 34 ===== -->
+<div class="lesson-card" onclick="toggleLesson(3)">
+<div class="lesson-num">34</div>
+<div><div class="lesson-title">Portfolio Construction — From Stocks to System</div>
+<div class="lesson-desc">Core-satellite architecture, concentration frontiers, cash as a position, and construction templates.</div></div>
+<div class="lesson-mp">25 MP</div>
+</div>
+<div class="lesson-detail" id="ld-3">
+<div class="tag-row"><span class="ctag">Core-Satellite</span><span class="ctag">Concentration</span><span class="ctag">Cash Position</span><span class="ctag">Construction Template</span><span class="ctag">Portfolio Blueprint</span></div>
+
+<h3>The Difference Between a Collection of Stocks and a Portfolio</h3>
+<p>Most investors accumulate positions over time without a deliberate construction framework. The result is not a portfolio — it's a collection of opinions. A genuine portfolio is an <strong class="hl">engineered system</strong> where each position serves a defined role, the aggregate factor exposure is intentional, the correlation structure is understood, and the whole is designed to survive stress while compounding through opportunity. This lesson provides the construction blueprints.</p>
+
+<h3>Core-Satellite Architecture</h3>
+<p>The most robust portfolio architecture for fundamental investors is the <strong class="hl">core-satellite model</strong>. The core (50–70% of capital) holds your highest-conviction, highest-quality positions — wide-moat compounders with Pillar II Mean Magic scores of 7+, reasonable valuation, and strong financial durability. These positions compound through cycles. The satellite ring (20–40%) holds higher-conviction, more tactical positions — catalyst-driven ideas, mean reversion plays, momentum-aligned opportunities from Pillar III. The remaining allocation (5–20%) is held in cash or cash equivalents — not as a default, but as a <strong class="hl">strategic option</strong> providing the ability to act during forced selling events.</p>
+
+<div class="exhibit">
+<div class="exhibit-label">Core-Satellite Portfolio Blueprint</div>
+<div class="svg-wrap">
+<svg viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg" style="max-width:580px;">
+<rect x="10" y="20" width="180" height="160" rx="10" fill="rgba(34,197,94,.07)" stroke="var(--green)" stroke-width="1.5"/>
+<text x="100" y="50" text-anchor="middle" font-family="Arial" font-size="12" font-weight="900" fill="var(--green)">CORE (50–70%)</text>
+<text x="100" y="72" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">Wide-moat compounders</text>
+<text x="100" y="88" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">Mean Magic 7+</text>
+<text x="100" y="104" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">5–10% per position</text>
+<text x="100" y="120" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">Hold through cycles</text>
+<text x="100" y="140" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">Low turnover</text>
+<text x="100" y="160" text-anchor="middle" font-family="Arial" font-size="9" fill="var(--green)">5–8 positions</text>
+<rect x="210" y="20" width="180" height="160" rx="10" fill="rgba(245,158,11,.07)" stroke="var(--orange)" stroke-width="1.5"/>
+<text x="300" y="50" text-anchor="middle" font-family="Arial" font-size="12" font-weight="900" fill="var(--orange)">SATELLITE (20–40%)</text>
+<text x="300" y="72" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">Catalyst-driven positions</text>
+<text x="300" y="88" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">Tactical / momentum</text>
+<text x="300" y="104" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">2–5% per position</text>
+<text x="300" y="120" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">Mean reversion trades</text>
+<text x="300" y="140" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">Higher turnover</text>
+<text x="300" y="160" text-anchor="middle" font-family="Arial" font-size="9" fill="var(--orange)">5–10 positions</text>
+<rect x="410" y="20" width="180" height="160" rx="10" fill="rgba(201,168,76,.07)" stroke="var(--gold)" stroke-width="1.5"/>
+<text x="500" y="50" text-anchor="middle" font-family="Arial" font-size="12" font-weight="900" fill="var(--gold)">CASH (5–20%)</text>
+<text x="500" y="72" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">Strategic option value</text>
+<text x="500" y="88" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">Deploy during forced selling</text>
+<text x="500" y="104" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">Scale with sentiment</text>
+<text x="500" y="120" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">Higher in elevated regimes</text>
+<text x="500" y="140" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">Lower in crisis deployment</text>
+<text x="500" y="160" text-anchor="middle" font-family="Arial" font-size="9" fill="var(--gold)">Varies by regime</text>
+</svg>
+</div>
+</div>
+
+<h3>The Concentration Frontier — How Many Positions?</h3>
+<div class="exhibit">
+<div class="exhibit-label">Concentration vs. Diversification — Research Evidence</div>
+<table class="fw-table">
+<thead><tr><th># Positions</th><th>Unsystematic Risk Eliminated</th><th>Investor Type</th><th>Return Potential vs. Benchmark</th></tr></thead>
+<tbody>
+<tr><td><strong class="hl">5–8</strong></td><td>~70%</td><td>Concentrated conviction (Buffett-style)</td><td>Highest alpha potential; highest tracking error</td></tr>
+<tr><td><strong class="hl">10–15</strong></td><td>~85%</td><td>Focused (Lynch-style)</td><td>High alpha potential; moderate tracking error</td></tr>
+<tr><td><strong class="hl">20–30</strong></td><td>~93%</td><td>Diversified active</td><td>Moderate alpha; lower tracking error</td></tr>
+<tr><td><strong class="hl">50+</strong></td><td>~97%</td><td>Closet indexer</td><td>Near-benchmark returns minus fees</td></tr>
+</tbody>
+</table>
+<p style="font-family:Arial,sans-serif;font-size:11px;color:var(--muted);margin-top:6px;">Research (Elton & Gruber, 1977): going from 1 to 10 stocks eliminates ~75% of unsystematic risk. Going from 10 to 100 adds only ~18% more. The marginal diversification benefit declines rapidly after 10–15 positions.</p>
+</div>
+
+<h3>Cash Is a Position</h3>
+<p>Cash is not the absence of a decision — it's a <strong class="hl">deliberate allocation</strong> with option value. Holding 10% cash in a normal regime costs you approximately 1% per year in foregone equity returns (10% × average equity premium of ~10%). But that cash, deployed during a 30%+ market drawdown, can generate 10–15% incremental portfolio return over the subsequent cycle. Buffett sat on $150+ billion in cash at Berkshire Hathaway through 2023–2024 — not because he couldn't find ideas, but because the option value of cash during extreme dislocations exceeds the cost of holding it. Cash allocation should scale with Pillar III's sentiment and volatility readings: higher when complacency is extreme, lower when fear creates opportunity.</p>
+
+<div class="callout"><div class="callout-label">The Construction Principle</div><p>"A portfolio is not a collection of best ideas. It's an engineered system where each position has a role, the aggregate factor exposure is intentional, and the whole is designed to compound through stress." Construction discipline means saying no to a great stock if it doesn't improve the portfolio — because it duplicates existing factor exposure, because the portfolio is already concentrated enough, or because adding it would reduce the cash option when sentiment signals suggest caution.</p></div>
+
+<div class="callout callout-blue"><div class="callout-label">Beat Lynch Connection</div><p>Portfolio Intelligence provides a portfolio-level diagnostic: factor exposure map, correlation heatmap, concentration analysis, and liquidity profile. In NIL competition, the system evaluates whether adding a new position improves or degrades the portfolio's construction quality — not just whether the individual stock scores well. A Mean Magic 8 stock that correlates 0.85 with your largest position may actually weaken the portfolio despite being individually excellent.</p></div>
+</div>
+
+<!-- ===== LESSON 35 ===== -->
+<div class="lesson-card" onclick="toggleLesson(4)">
+<div class="lesson-num">35</div>
+<div><div class="lesson-title">Drawdown Management — Surviving to Compound</div>
+<div class="lesson-desc">Drawdown anatomy, the emotional cascade, pre-commitment rules, and recovery prioritization.</div></div>
+<div class="lesson-mp">25 MP</div>
+</div>
+<div class="lesson-detail" id="ld-4">
+<div class="tag-row"><span class="ctag">Max Drawdown</span><span class="ctag">Emotional Cascade</span><span class="ctag">Pre-Commitment</span><span class="ctag">Circuit Breakers</span><span class="ctag">Recovery Mode</span></div>
+
+<h3>Drawdowns Are Inevitable — Destruction Is Not</h3>
+<p>Every investor will experience drawdowns. From 1928 to 2023, the S&P 500 experienced intra-year drawdowns averaging −14.2% per year, yet finished positive in 73% of those years. A 10–20% decline is the normal cost of equity returns. The question is not whether drawdowns happen, but <strong class="hl">whether you survive them with your capital and your process intact</strong>. The investors who convert temporary drawdowns into permanent losses almost always do so through one of three mechanisms: selling at the bottom (behavioral), leverage liquidation (structural), or holding permanently impaired assets (analytical).</p>
+
+<h3>The Emotional Cascade — How Drawdowns Escalate</h3>
+<div class="exhibit">
+<div class="exhibit-label">The Drawdown Emotional Cascade</div>
+<table class="fw-table">
+<thead><tr><th>Drawdown Phase</th><th>Portfolio Impact</th><th>Emotional State</th><th>Common (Wrong) Action</th><th>Correct Response</th></tr></thead>
+<tbody>
+<tr><td><strong class="hl" style="color:var(--gold)">−5 to −10%</strong></td><td>Normal correction</td><td>Mild concern, vigilance</td><td>Ignore it; check less</td><td>Review thesis for each position. Is anything broken?</td></tr>
+<tr><td><strong class="hl" style="color:var(--orange)">−10 to −20%</strong></td><td>Moderate stress</td><td>Anxiety, doubt emerging</td><td>Start revenge trading or averaging down blindly</td><td>Compare drawdown to Pillar II fair values. Separate broken from beaten.</td></tr>
+<tr><td><strong class="hl" style="color:var(--red)">−20 to −30%</strong></td><td>Severe drawdown</td><td>Fear, shame, isolation</td><td>Capitulate — sell everything at the bottom</td><td>Execute pre-committed circuit breakers. Reduce position sizes per plan.</td></tr>
+<tr><td><strong class="hl" style="color:var(--red)">−30%+</strong></td><td>Crisis territory</td><td>Panic, desperation, paralysis</td><td>Total capitulation or freeze completely</td><td>Deploy cash into highest-conviction positions per pre-commitment plan.</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>Pre-Commitment Rules — The Circuit Breaker System</h3>
+<p>The time to decide how you'll handle a drawdown is <strong class="hl">before it happens</strong> — not during the emotional cascade. Pre-commitment rules (sometimes called "circuit breakers") are if/then protocols established during calm markets that automatically trigger during stress. They remove the most dangerous variable from drawdown management: real-time emotional decision-making. Examples: "If any position falls 25% from my purchase price and the Pillar II thesis is intact, I add 50% to the position. If the thesis is broken, I sell immediately." "If my portfolio draws down 15% from peak, I reduce all satellite positions by half." "If VIX exceeds 35 and my cash exceeds 15%, I deploy 5% into my top watchlist name."</p>
+
+<h3>Separating "Broken" from "Beaten"</h3>
+<p>The most important analytical task during a drawdown is distinguishing positions that are <strong class="hl">beaten</strong> (cheap due to market-wide selling, thesis intact) from positions that are <strong class="hl">broken</strong> (cheap because the business has deteriorated). This connects every prior Pillar: Pillar I tells you whether the decline is macro-driven or idiosyncratic. Pillar II tells you whether the stock is trading below intrinsic value with thesis intact. Pillar III tells you whether the decline is driven by positioning unwinds, sentiment extremes, or fundamental deterioration. A beaten stock is an opportunity. A broken stock is a value trap. The distinction determines whether you add to the position, hold, or sell.</p>
+
+<div class="three-col">
+<div class="stat-card"><div class="stat-num">−14.2%</div><div class="stat-label">Average S&P 500 intra-year drawdown (1928–2023)</div></div>
+<div class="stat-card"><div class="stat-num">73%</div><div class="stat-label">Of years the S&P 500 finished positive despite intra-year drawdowns</div></div>
+<div class="stat-card stat-card-gold"><div class="stat-num">Pre-Set</div><div class="stat-label">Circuit breaker rules decided BEFORE drawdown hits — not during</div></div>
+</div>
+
+<div class="callout callout-red"><div class="callout-label">The Capitulation Trap</div><p>"The bottom of a drawdown is the worst possible moment to make portfolio decisions — yet it's when most investors make their most consequential ones." Selling at the bottom converts temporary volatility into permanent loss. The circuit breaker system exists to replace emotional decision-making with pre-committed protocols. Every dollar sold at the bottom of the March 2020 crash was worth $2.00+ within 12 months. The professional's advantage isn't avoiding drawdowns — it's surviving them with capital and discipline intact."</p></div>
+
+<div class="callout callout-blue"><div class="callout-label">Beat Lynch Connection</div><p>Risk Vector provides the "broken vs. beaten" diagnostic during drawdowns. When a position declines 20%+, the system re-evaluates: Has ROIC declined? Has the moat narrowed? Is the decline macro-driven or company-specific? This automated analysis helps NIL competitors resist the emotional cascade by providing objective, framework-based assessment precisely when behavioral pressure is highest.</p></div>
+</div>
+
+<!-- ===== LESSON 36 ===== -->
+<div class="lesson-card" onclick="toggleLesson(5)">
+<div class="lesson-num">36</div>
+<div><div class="lesson-title">Hedging — Insurance, Not Speculation</div>
+<div class="lesson-desc">Protective puts, collar strategies, tail risk hedging, portfolio insurance costs, and when hedging destroys value.</div></div>
+<div class="lesson-mp">25 MP</div>
+</div>
+<div class="lesson-detail" id="ld-5">
+<div class="tag-row"><span class="ctag">Protective Puts</span><span class="ctag">Collar Strategy</span><span class="ctag">Tail Risk</span><span class="ctag">Insurance Cost</span><span class="ctag">Natural Hedging</span></div>
+
+<h3>Hedging Is Insurance — Frame It Correctly</h3>
+<p>A hedge is portfolio insurance — you pay a premium to reduce the impact of adverse events. Just like homeowner's insurance, you hope it expires worthless. The premium is the cost of sleep-at-night protection. Framing hedges as "investments that should make money" leads to chronic over-hedging and premium decay that destroys returns. The question is always: <strong class="hl">does the insurance cost justify the protection provided?</strong></p>
+<p>There are two broad hedging approaches: <strong class="hl">direct hedging</strong> (options on your positions or the index) and <strong class="hl">natural hedging</strong> (portfolio construction that creates built-in offsets). Natural hedging is almost always cheaper. Holding US Treasuries alongside equities is a natural hedge — no premium cost, and bonds tend to rally when equities crash. Holding a mix of value and momentum factor exposure (Pillar III Lesson 22) is a natural hedge. Direct hedging through options should be reserved for specific scenarios: earnings risk reduction, tail risk protection during extreme complacency regimes (Pillar III Lesson 29), or when concentrated position risk cannot be reduced through selling.</p>
+
+<h3>The Cost of Protection</h3>
+<div class="exhibit">
+<div class="exhibit-label">Hedging Strategy Cost-Benefit Analysis</div>
+<table class="fw-table">
+<thead><tr><th>Strategy</th><th>Annual Cost</th><th>Protection Level</th><th>Best Use Case</th><th>Drawback</th></tr></thead>
+<tbody>
+<tr><td><strong class="hl">Protective Puts (ATM)</strong></td><td>4–8% of position</td><td>Full downside below strike</td><td>Concentrated position protection around events</td><td>Expensive; decays daily; cost destroys long-term returns if permanent</td></tr>
+<tr><td><strong class="hl">Protective Puts (OTM 10%)</strong></td><td>1.5–3% of position</td><td>Downside below ~10% decline</td><td>Tail risk protection; insurance against crashes</td><td>Doesn't help in moderate declines; premium still significant</td></tr>
+<tr><td><strong class="hl">Collar (Buy put, sell call)</strong></td><td>Near zero (premium offset)</td><td>Floor and ceiling on returns</td><td>Concentrated stock position (employee equity, founder shares)</td><td>Caps upside; may trigger tax events</td></tr>
+<tr><td><strong class="hl">VIX Calls</strong></td><td>Variable; high decay</td><td>Portfolio-wide crash protection</td><td>Systemic crisis insurance</td><td>VIX calls decay rapidly; timing-dependent</td></tr>
+<tr><td><strong class="hl" style="color:var(--green)">Natural Hedge (Bonds)</strong></td><td>Opportunity cost only (~2–3%)</td><td>Moderate; depends on stock/bond correlation</td><td>Permanent portfolio structural hedge</td><td>Doesn't work when correlations spike (2022 stocks and bonds fell together)</td></tr>
+<tr><td><strong class="hl" style="color:var(--green)">Natural Hedge (Cash)</strong></td><td>Equity premium forgone (~6–8%)</td><td>Infinite optionality</td><td>Dry powder for crisis deployment</td><td>Costly in bull markets; behavioral pressure to deploy</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>When Hedging Destroys Value</h3>
+<p>Permanent hedging is almost always value-destructive. Buying protective puts continuously on a long-term portfolio costs 3–8% annually — which means you need to earn 13–18% gross just to match the S&P 500's historical 10% return. Research by AQR Capital (Ilmanen, 2022) showed that systematically buying put protection over rolling 12-month periods reduced portfolio returns by 5–7% annually while reducing volatility by only 30–40%. The insurance was overpriced relative to the actual frequency of severe crashes. The implication: <strong class="hl">hedging should be tactical, not permanent</strong> — scaled up when Pillar III's sentiment and volatility signals indicate complacency, scaled down or eliminated after corrections reset expectations.</p>
+
+<div class="callout callout-green"><div class="callout-label">The Insurance Principle</div><p>"The best hedge is a portfolio that doesn't need one." If Lesson 32's correlation awareness, Lesson 33's sizing discipline, Lesson 34's construction architecture, and Lesson 35's drawdown protocols are followed, the need for expensive direct hedging is dramatically reduced. Natural hedging through diversification, cash position, and quality bias provides 80% of the protection at 20% of the cost. Direct hedging is reserved for extreme circumstances — not as a permanent feature.</p></div>
+
+<div class="callout callout-blue"><div class="callout-label">Beat Lynch Connection</div><p>Market Brain Volatility Posture (Pillar III Lesson 29) drives hedging guidance. In "Low & Compressing" VIX regimes with extreme bullish sentiment, the system suggests increasing cash and considering tactical tail risk protection. In "Crisis / Spike" regimes, the guidance flips: hedging is expensive (VIX is high), and the probability-weighted opportunity favors deployment over protection. The system prevents the most common hedging error: buying insurance after the house is already on fire.</p></div>
+</div>
+
+<!-- ===== LESSON 37 ===== -->
+<div class="lesson-card" onclick="toggleLesson(6)">
+<div class="lesson-num">37</div>
+<div><div class="lesson-title">Behavioral Risk — The Enemy Within</div>
+<div class="lesson-desc">Loss aversion, disposition effect, overconfidence, recency bias, and systematic debiasing.</div></div>
+<div class="lesson-mp">25 MP</div>
+</div>
+<div class="lesson-detail" id="ld-6">
+<div class="tag-row"><span class="ctag">Loss Aversion</span><span class="ctag">Disposition Effect</span><span class="ctag">Overconfidence</span><span class="ctag">Recency Bias</span><span class="ctag">Decision Journal</span></div>
+
+<h3>You Are Your Own Biggest Risk</h3>
+<p>The most sophisticated analytical framework is worthless if the human operating it makes behavioral errors at critical moments. Research by Dalbar Inc. has consistently shown that the average equity mutual fund investor earns 3–4% less per year than the funds they invest in — not because the funds perform poorly, but because investors <strong class="hl">buy after rallies and sell after declines</strong>, systematically entering high and exiting low. This "behavior gap" is not a minor drag — over 30 years, it compounds to a 60–70% reduction in terminal wealth. The enemy is not the market. The enemy is the mirror.</p>
+
+<h3>The Five Critical Behavioral Biases</h3>
+<div class="exhibit">
+<div class="exhibit-label">Behavioral Bias Framework — Recognition and Mitigation</div>
+<table class="fw-table">
+<thead><tr><th>Bias</th><th>What It Does</th><th>Portfolio Damage</th><th>Debiasing Protocol</th></tr></thead>
+<tbody>
+<tr><td><strong class="hl">Loss Aversion</strong></td><td>Losses feel 2–2.5× more painful than equivalent gains feel good (Kahneman & Tversky)</td><td>Panic selling at bottoms; refusing to take appropriate risk</td><td>Pre-commitment rules (L35); frame drawdowns vs. buying price, not peak</td></tr>
+<tr><td><strong class="hl">Disposition Effect</strong></td><td>Tendency to sell winners early (lock in gains) and hold losers too long (avoid realizing losses)</td><td>Cuts winners short; lets losers run. Exactly backwards.</td><td>Thesis-based exit rules; ask "would I buy this today?" for each holding</td></tr>
+<tr><td><strong class="hl">Overconfidence</strong></td><td>Overestimating the precision of your knowledge; under-estimating uncertainty</td><td>Over-concentration, excessive trading, ignoring disconfirming evidence</td><td>Maintain a decision journal with predictions and outcomes; track calibration</td></tr>
+<tr><td><strong class="hl">Recency Bias</strong></td><td>Overweighting recent events and extrapolating them into the future</td><td>Buying after rallies; selling after crashes; chasing last year's winners</td><td>Anchor to base rates and long-term data (Pillar III Lesson 23 — mean reversion)</td></tr>
+<tr><td><strong class="hl">Anchoring</strong></td><td>Fixating on irrelevant reference points (purchase price, 52-week high)</td><td>Holding because "it was $200" when fundamentals justify $100</td><td>Re-value from scratch regularly; ask "what is this worth?" not "what did I pay?"</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>The Decision Journal — Systematic Debiasing</h3>
+<p>The single most effective debiasing tool is the <strong class="hl">decision journal</strong>. For every investment decision, record: the date, the thesis in 3–5 sentences, the key assumptions, the expected outcome, the time horizon, and the conditions that would invalidate the thesis. Then, at review intervals, compare actual outcomes to predictions. Over time, this reveals your personal pattern of biases. Do you consistently overestimate growth rates? You're overconfident. Do your losers all share a pattern of broken thesis that you held too long? You have disposition effect. Do your entries cluster after strong performance periods? Recency bias. The journal turns invisible biases into visible, correctable patterns.</p>
+
+<div class="callout callout-purple"><div class="callout-label">The Behavior Gap</div><p>"The market's average return is ~10% per year. The average investor earns ~6%. The 4% gap is not fees, not timing, not stock selection — it is behavior." This gap persists regardless of education, sophistication, or experience. Even professional fund managers exhibit disposition effect and overconfidence. The mitigation is not willpower (which fails under stress) but systems: pre-commitment rules, circuit breakers, decision journals, and portfolio construction that anticipates behavioral failure. Design the portfolio for the human, not the spreadsheet.</p></div>
+
+<div class="callout callout-blue"><div class="callout-label">Beat Lynch Connection</div><p>The entire Beat Lynch system is designed as a debiasing architecture. Mean Magic provides an objective quality anchor to resist narrative bias. Risk Vector provides sell signals to counteract disposition effect. Market Brain regime readings anchor to data rather than recency. In NIL competition, students who follow the system's framework — rather than overriding it with emotional conviction — produce measurably better PATR outcomes over multi-season periods.</p></div>
+</div>
+
+<!-- ===== LESSON 38 ===== -->
+<div class="lesson-card" onclick="toggleLesson(7)">
+<div class="lesson-num">38</div>
+<div><div class="lesson-title">Scenario Analysis & Stress Testing</div>
+<div class="lesson-desc">Bull/base/bear scenarios, historical stress tests, factor shock analysis, and portfolio resilience scoring.</div></div>
+<div class="lesson-mp">25 MP</div>
+</div>
+<div class="lesson-detail" id="ld-7">
+<div class="tag-row"><span class="ctag">Scenario Analysis</span><span class="ctag">Stress Test</span><span class="ctag">Factor Shock</span><span class="ctag">Tail Risk</span><span class="ctag">Pre-Mortem</span></div>
+
+<h3>Testing Your Portfolio Before the Market Does</h3>
+<p>Scenario analysis asks: <strong class="hl">"What happens to my portfolio if...?"</strong> Stress testing answers: <strong class="hl">"How bad does it get in the worst case?"</strong> Both are conducted before adverse events occur — not after. Every professional risk manager stress-tests portfolios against historical crises and hypothetical scenarios. If you haven't modeled how your portfolio behaves in a 2008-style financial crisis, a 2020-style pandemic shock, or a 2022-style rate shock, you're not managing risk — you're hoping risk doesn't manage you.</p>
+
+<h3>The Scenario Framework</h3>
+<div class="exhibit">
+<div class="exhibit-label">Three-Scenario Framework for Portfolio Stress Testing</div>
+<table class="fw-table">
+<thead><tr><th>Scenario</th><th>Probability Weight</th><th>Market Outcome</th><th>Your Portfolio Should...</th></tr></thead>
+<tbody>
+<tr><td><strong class="hl" style="color:var(--green)">Bull Case</strong></td><td>20–30%</td><td>S&P +20–30%, credit tightens, growth accelerates</td><td>Participate meaningfully; capture 70%+ of upside</td></tr>
+<tr><td><strong class="hl" style="color:var(--gold)">Base Case</strong></td><td>40–60%</td><td>S&P +5–15%, normal regime, modest volatility</td><td>Outperform through stock selection and factor awareness</td></tr>
+<tr><td><strong class="hl" style="color:var(--red)">Bear Case</strong></td><td>20–30%</td><td>S&P −20–40%, recession, credit stress</td><td>Decline less than market; maintain ability to deploy cash; no permanent loss</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>Historical Stress Tests</h3>
+<p>For each of the following historical crises, model your current portfolio's approximate exposure. How would your current holdings have performed?</p>
+<div class="exhibit">
+<div class="exhibit-label">Historical Crisis Impact by Portfolio Characteristic</div>
+<table class="fw-table">
+<thead><tr><th>Crisis</th><th>S&P 500 Decline</th><th>Most Vulnerable Positions</th><th>Most Resilient Positions</th></tr></thead>
+<tbody>
+<tr><td><strong class="hl">2008 Financial Crisis</strong></td><td>−56.8%</td><td>Financials (−83%), leveraged, cyclicals</td><td>Consumer staples (−29%), healthcare, cash</td></tr>
+<tr><td><strong class="hl">2020 COVID Crash</strong></td><td>−33.9%</td><td>Travel, energy, REITs, small-cap</td><td>Tech, healthcare, stay-at-home beneficiaries</td></tr>
+<tr><td><strong class="hl">2022 Rate Shock</strong></td><td>−25.4%</td><td>High-growth tech (−60%+), long-duration, crypto</td><td>Energy (+65%), value, low-duration, quality</td></tr>
+<tr><td><strong class="hl">2000 Tech Bust</strong></td><td>−49.1% (over 2.5 years)</td><td>Tech (−78%), speculative growth, no-earnings companies</td><td>Value stocks (+32% in 2000), dividends, bonds</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>The Pre-Mortem — Imagining Failure</h3>
+<p>Gary Klein's <strong class="hl">pre-mortem</strong> technique inverts the usual analysis: instead of asking "will this work?", assume the investment has failed and ask "why did it fail?" This forces identification of risks that optimism bias normally suppresses. For every position, complete this sentence: "This investment lost 50% because ___." Common completions reveal the true risk: "...because interest rates rose 300bp and the 50× P/E compressed to 20×" (overpayment risk), "...because Amazon entered the space and margins collapsed" (moat risk), "...because management loaded the balance sheet with debt before the recession" (leverage risk). Each completion maps to a Pillar: valuation (Pillar II), competitive dynamics (Pillar II), financial durability (Pillar II), macro regime (Pillar I), positioning unwind (Pillar III).</p>
+
+<div class="callout callout-cyan"><div class="callout-label">The Stress Test Imperative</div><p>"If you haven't modeled how your portfolio behaves in a crisis, you aren't managing risk — you're hoping." Stress testing is not pessimism — it's preparation. The investor who has already modeled a 2008-type scenario and confirmed their portfolio can survive a 40% market decline with a 25% portfolio decline will hold through the drawdown with conviction. The investor who hasn't done this work will panic when it happens — because the outcome is genuinely unknown to them. Knowledge is the antidote to panic.</p></div>
+
+<div class="callout callout-blue"><div class="callout-label">Beat Lynch Connection</div><p>Portfolio Intelligence includes a stress testing module that models your NIL portfolio against historical crisis scenarios. The system estimates drawdown impact by position based on factor exposure (Pillar III Lesson 21), liquidity profile (Pillar III Lesson 28), and correlation structure (Lesson 32). It identifies the single position contributing most to tail risk — often a surprise to investors who haven't analyzed their portfolio's crisis behavior.</p></div>
+</div>
+
+<!-- ===== LESSON 39 ===== -->
+<div class="lesson-card" onclick="toggleLesson(8)">
+<div class="lesson-num">39</div>
+<div><div class="lesson-title">Rebalancing — Systematic Discipline</div>
+<div class="lesson-desc">Calendar vs. threshold rebalancing, tax efficiency, drift tolerance, and the rebalancing bonus.</div></div>
+<div class="lesson-mp">25 MP</div>
+</div>
+<div class="lesson-detail" id="ld-8">
+<div class="tag-row"><span class="ctag">Calendar Rebalance</span><span class="ctag">Threshold Rebalance</span><span class="ctag">Tax Efficiency</span><span class="ctag">Drift Tolerance</span><span class="ctag">Rebalancing Bonus</span></div>
+
+<h3>Why Rebalancing Matters</h3>
+<p>Over time, portfolio allocations drift as winners grow and losers shrink. A position that starts at 5% and doubles becomes 10% without any action — significantly increasing concentration risk. A sector that underperforms shrinks from its target allocation, reducing exposure precisely when mean reversion (Pillar III Lesson 23) suggests it may be approaching opportunity. Rebalancing — systematically trimming winners and adding to underweights — imposes the discipline of <strong class="hl">selling high and buying low</strong> at the portfolio level. Research by Vanguard (2019) found that disciplined rebalancing adds 0.35–0.50% per year — the "rebalancing bonus" — by systematically harvesting mean reversion.</p>
+
+<h3>Two Rebalancing Approaches</h3>
+<div class="two-col">
+<div class="exhibit" style="margin:0;">
+<div class="exhibit-label" style="color:var(--green);">Calendar Rebalancing</div>
+<p style="font-size:13px;font-family:Arial,sans-serif;"><strong class="hl">Approach:</strong> Rebalance on a fixed schedule (quarterly, semi-annually, annually). <strong class="hl">Advantage:</strong> Simple, predictable, removes emotion from timing. <strong class="hl">Disadvantage:</strong> May rebalance when drift is minimal (unnecessary trading) or fail to act when drift is extreme between dates. <strong class="hl">Best for:</strong> Passive allocations, asset class-level rebalancing.</p>
+</div>
+<div class="exhibit" style="margin:0;">
+<div class="exhibit-label" style="color:var(--gold);">Threshold Rebalancing</div>
+<p style="font-size:13px;font-family:Arial,sans-serif;"><strong class="hl">Approach:</strong> Rebalance when any position drifts beyond a defined band (e.g., ±25% of target weight). <strong class="hl">Advantage:</strong> Trades only when meaningful drift occurs; captures larger mean reversion. <strong class="hl">Disadvantage:</strong> Requires monitoring; can trigger tax events at suboptimal times. <strong class="hl">Best for:</strong> Active portfolios, individual position management.</p>
+</div>
+</div>
+
+<h3>Rebalancing Within the Conviction Framework</h3>
+<p>Mechanical rebalancing treats all positions equally — but in a conviction-based portfolio, that's wrong. A position that has grown from 5% to 10% because the business is executing brilliantly and remains undervalued should NOT be trimmed back to 5% just because it drifted. The correct approach integrates rebalancing with Pillar II's re-evaluation: Has the thesis changed? Has the valuation become stretched? Has the stock's Mean Magic score declined? If the answer is no — if the business is better than when you bought it and the valuation is still attractive — then the position has <strong class="hl">earned</strong> its larger size. Trim only when valuation or thesis deterioration justifies it, or when the correlation constraint (Lesson 32) binds.</p>
+
+<div class="exhibit">
+<div class="exhibit-label">Rebalancing Decision Matrix</div>
+<table class="fw-table">
+<thead><tr><th>Position Has Grown Because...</th><th>Valuation Status</th><th>Action</th></tr></thead>
+<tbody>
+<tr><td>Business executing well, earnings growing</td><td>Still below fair value</td><td>Let it run; do not trim</td></tr>
+<tr><td>Business executing well</td><td>Approaching fair value</td><td>Trim modestly; take partial profits</td></tr>
+<tr><td>Multiple expansion (sentiment, not earnings)</td><td>Above fair value</td><td>Trim aggressively; redeploy to higher-conviction ideas</td></tr>
+<tr><td>Sector/factor rotation (not company-specific)</td><td>Above fair value</td><td>Trim; the drift is factor-driven, not business-driven</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout"><div class="callout-label">The Rebalancing Principle</div><p>"Rebalancing is the only strategy that mechanically enforces selling high and buying low — the thing every investor wants to do but almost nobody actually does." Left unmanaged, portfolios become increasingly concentrated in whatever has worked recently (recency bias). Rebalancing imposes the mean reversion discipline that Pillar III Lesson 23 taught at the security level, applied at the portfolio level. But it must be intelligent — thesis-aware, not purely mechanical."</p></div>
+
+<div class="callout callout-blue"><div class="callout-label">Beat Lynch Connection</div><p>Portfolio Intelligence monitors position drift and provides rebalancing alerts when positions exceed threshold bands. Crucially, the alerts integrate thesis status: if a position has drifted above its band but Mean Magic has improved (business getting better), the system distinguishes this from a position that has drifted above its band due to multiple expansion without earnings support. This prevents the most common rebalancing error: mechanically trimming your best-executing positions.</p></div>
+</div>
+
+<!-- ===== LESSON 40 ===== -->
+<div class="lesson-card" onclick="toggleLesson(9)">
+<div class="lesson-num">40</div>
+<div><div class="lesson-title">Synthesis — Building Your Risk Architecture</div>
+<div class="lesson-desc">Integrated risk framework, the capital preservation hierarchy, risk budgeting, and connecting to Pillar V.</div></div>
+<div class="lesson-mp">25 MP</div>
+</div>
+<div class="lesson-detail" id="ld-9">
+<div class="tag-row"><span class="ctag">Risk Budget</span><span class="ctag">Capital Preservation</span><span class="ctag">Architecture</span><span class="ctag">System Integration</span><span class="ctag">Regime-Adaptive</span></div>
+
+<h3>From Components to Architecture</h3>
+<p>Pillar IV has given you nine lessons spanning risk definition, correlation, sizing, construction, drawdowns, hedging, behavior, stress testing, and rebalancing. Individually, each is a tool. Together, they form the <strong class="hl">risk architecture</strong> — the structural engineering that converts Pillars I–III's analytical intelligence into a survivable, compoundable system. This lesson integrates all components into a single operational framework.</p>
+
+<h3>The Capital Preservation Hierarchy</h3>
+<div class="exhibit">
+<div class="exhibit-label">Risk Architecture — Defense in Depth</div>
+<div class="svg-wrap">
+<svg viewBox="0 0 650 220" xmlns="http://www.w3.org/2000/svg" style="max-width:630px;">
+<rect x="10" y="10" width="630" height="38" rx="6" fill="rgba(34,197,94,.08)" stroke="var(--green)" stroke-width="1.5"/>
+<text x="325" y="27" text-anchor="middle" font-family="Arial" font-size="10" font-weight="900" fill="var(--green)">LAYER 1: QUALITY BIAS — Own businesses that can withstand stress (Pillar II Mean Magic 6+)</text>
+<rect x="10" y="56" width="630" height="38" rx="6" fill="rgba(201,168,76,.08)" stroke="var(--gold)" stroke-width="1.5"/>
+<text x="325" y="73" text-anchor="middle" font-family="Arial" font-size="10" font-weight="900" fill="var(--gold)">LAYER 2: VALUATION MARGIN — Buy below intrinsic value to create margin of safety (Pillar II DCF)</text>
+<rect x="10" y="102" width="630" height="38" rx="6" fill="rgba(245,158,11,.08)" stroke="var(--orange)" stroke-width="1.5"/>
+<text x="325" y="119" text-anchor="middle" font-family="Arial" font-size="10" font-weight="900" fill="var(--orange)">LAYER 3: SIZING DISCIPLINE — No single position can destroy the portfolio (L33 framework)</text>
+<rect x="10" y="148" width="630" height="38" rx="6" fill="rgba(239,68,68,.08)" stroke="var(--red)" stroke-width="1.2"/>
+<text x="325" y="165" text-anchor="middle" font-family="Arial" font-size="10" font-weight="900" fill="var(--red)">LAYER 4: CORRELATION AWARENESS — Genuine diversification across factors and drivers (L32)</text>
+<rect x="10" y="194" width="630" height="22" rx="6" fill="rgba(168,85,247,.06)" stroke="var(--purple)" stroke-width="1"/>
+<text x="325" y="209" text-anchor="middle" font-family="Arial" font-size="9" font-weight="700" fill="var(--purple)">LAYER 5: BEHAVIORAL SYSTEM — Pre-commitment rules, circuit breakers, decision journal (L35, L37)</text>
+</svg>
+</div>
+<p style="font-family:Arial,sans-serif;font-size:11px;color:var(--muted);">Each layer provides independent protection. If Layer 1 fails (a quality company deteriorates), Layers 2–5 limit the damage. All five failing simultaneously is the only path to permanent capital destruction.</p>
+</div>
+
+<h3>Risk Budgeting — Allocating Your Capacity for Loss</h3>
+<p>Every portfolio has a <strong class="hl">risk budget</strong> — the maximum drawdown the investor can survive financially and psychologically. A conservative investor with near-term liquidity needs might have a 10% risk budget. An aggressive long-term investor might tolerate 25%. The risk budget determines everything: how many positions (Lesson 34), how large each is (Lesson 33), how much cash to hold (Lesson 34), and when circuit breakers trigger (Lesson 35). The architecture is not designed in a vacuum — it's designed for a specific risk budget, and that budget must be honest about both financial capacity and behavioral tolerance.</p>
+
+<div class="exhibit">
+<div class="exhibit-label">Risk Budget → Portfolio Architecture Mapping</div>
+<table class="fw-table">
+<thead><tr><th>Risk Budget (Max DD)</th><th>Equity Allocation</th><th>Cash/Bonds</th><th>Max Single Position</th><th># Positions</th><th>Regime Sensitivity</th></tr></thead>
+<tbody>
+<tr><td><strong class="hl" style="color:var(--green)">Conservative (10%)</strong></td><td>50–65%</td><td>35–50%</td><td>5%</td><td>15–25</td><td>High — reduce equity in elevated regimes</td></tr>
+<tr><td><strong class="hl" style="color:var(--gold)">Moderate (20%)</strong></td><td>70–85%</td><td>15–30%</td><td>8%</td><td>10–18</td><td>Moderate — adjust at extremes</td></tr>
+<tr><td><strong class="hl" style="color:var(--orange)">Aggressive (30%)</strong></td><td>85–100%</td><td>0–15%</td><td>12%</td><td>8–15</td><td>Lower — stay invested through cycles</td></tr>
+<tr><td><strong class="hl" style="color:var(--red)">Maximum (40%+)</strong></td><td>100%+</td><td>Minimal</td><td>15–20%</td><td>5–10</td><td>Minimal — conviction-only portfolio</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>The Regime-Adaptive Architecture</h3>
+<p>The final synthesis: risk architecture is not static — it adapts to the regime environment Pillar I reads, the valuation landscape Pillar II maps, and the structural conditions Pillar III monitors. In a normal regime with fair valuations and neutral sentiment, the baseline architecture applies. When Pillar I detects late-cycle stress, Pillar II reveals stretched valuations, and Pillar III shows extreme complacency — the architecture shifts: raise cash, tighten quality bar, reduce position sizes, consider tactical hedges. When Pillar I signals early-cycle recovery, Pillar II identifies widespread undervaluation, and Pillar III shows capitulation sentiment — the architecture shifts again: deploy cash, increase position sizes in highest-conviction ideas, reduce hedges. The system is alive — not a set-and-forget allocation.</p>
+
+<h3>Connecting Forward — From Architecture to Craft</h3>
+<p>Pillar IV taught you to survive and compound. Pillar V will teach you the professional <strong class="hl">craft</strong> — thesis writing, decision journaling, performance attribution, competitive moat analysis, catalyst mapping, and the integration of all five Pillars into the complete Beat Lynch system. The analytical depth of Pillars I–III, channeled through Pillar IV's architecture, becomes a professional practice through Pillar V's craft. The destination: not just understanding markets, but systematically outperforming them over a lifetime.</p>
+
+<div class="callout"><div class="callout-label">The Architecture Principle</div><p>"Risk architecture is not a constraint on returns — it is the mechanism that makes returns durable." Without architecture, even brilliant analysis produces volatile, unsustainable results. With architecture, even modest analytical skill compounds into substantial long-term wealth. The architecture is what separates investors who have one great year from investors who have great decades."</p></div>
+
+<div class="callout callout-blue"><div class="callout-label">Beat Lynch Connection</div><p>This lesson IS the Risk Vector synthesis layer. Quality bias (Mean Magic), valuation margin (valuation component), sizing discipline (Portfolio Intelligence), correlation awareness (factor overlap detection), and behavioral system (pre-commitment rules, decision journal prompts) — all five layers of the capital preservation hierarchy are implemented as system components. Students who understand the architecture behind Risk Vector will always manage risk more effectively than those who treat it as a simple red/yellow/green traffic light.</p></div>
+</div>
+
+</div><!-- end lesson-grid -->
+</div>
+
+<div class="section">
+<div class="section-title">Pillar IV Master Framework Summary</div>
+<table class="fw-table">
+<thead><tr><th>Framework</th><th>Core Principle</th><th>Beat Lynch / NIL Application</th></tr></thead>
+<tbody>
+<tr><td><strong class="hl">Risk Definition</strong></td><td>Permanent capital loss, not volatility. Losses compound asymmetrically.</td><td>Risk Vector: permanent loss source identification</td></tr>
+<tr><td><strong class="hl">Correlation</strong></td><td>True diversification = independent risk exposures, not stock count.</td><td>Portfolio Intelligence: factor overlap detection</td></tr>
+<tr><td><strong class="hl">Position Sizing</strong></td><td>Sizing impacts returns more than selection. Conviction × constraints = size.</td><td>Mean Magic + liquidity + correlation → sizing guidance</td></tr>
+<tr><td><strong class="hl">Portfolio Construction</strong></td><td>Engineered system with core, satellite, and cash — not a stock collection.</td><td>Core-satellite architecture for NIL competition</td></tr>
+<tr><td><strong class="hl">Drawdown Management</strong></td><td>Pre-commitment rules decided before stress. Separate broken from beaten.</td><td>Risk Vector drawdown diagnostics</td></tr>
+<tr><td><strong class="hl">Hedging</strong></td><td>Insurance, not speculation. Natural hedging > paid hedging in most regimes.</td><td>Market Brain regime-driven hedging guidance</td></tr>
+<tr><td><strong class="hl">Behavioral Risk</strong></td><td>You are your own biggest risk. Systems beat willpower.</td><td>Framework-based decisions override emotional overrides</td></tr>
+<tr><td><strong class="hl">Stress Testing</strong></td><td>Test your portfolio before the market does. Pre-mortems reveal hidden risk.</td><td>Portfolio Intelligence crisis scenario modeling</td></tr>
+<tr><td><strong class="hl">Rebalancing</strong></td><td>Systematic sell-high-buy-low discipline. Thesis-aware, not purely mechanical.</td><td>Drift alerts integrated with Mean Magic re-evaluation</td></tr>
+<tr><td><strong class="hl">Risk Architecture</strong></td><td>Five-layer defense adapts to regime. Quality → Valuation → Sizing → Correlation → Behavior.</td><td>Integrated Risk Vector synthesis</td></tr>
+</tbody>
+</table>
+</div>
+
+</div>
+</div>
+
+<!-- ===== EXAM TAB ===== -->
+<div class="tab-content" id="tab-exam">
+<div class="container">
+<div class="exam-wrap" id="exam-area">
+
+<div class="start-exam-wrap" id="exam-start">
+<h2>Pillar IV Final Exam</h2>
+<p>30 questions covering all 10 lessons — 3 questions per lesson. Requires genuine understanding of the material. 75% required to pass.</p>
+<div class="anti-game-notice">⚠ Answer positions and lengths are randomized each attempt. The longest or most detailed answer is frequently wrong. Short answers are often correct. Read each question carefully — pattern-matching will fail.</div>
+<div class="exam-rules">
+<div class="rule-card"><div class="r-num">30</div><div class="r-label">Questions</div></div>
+<div class="rule-card"><div class="r-num">23</div><div class="r-label">To Pass</div></div>
+<div class="rule-card"><div class="r-num">250</div><div class="r-label">MP Reward</div></div>
+<div class="rule-card"><div class="r-num">∞</div><div class="r-label">Retakes</div></div>
+</div>
+<button class="exam-btn" onclick="startExam()">BEGIN EXAM</button>
+</div>
+
+<div id="exam-live" style="display:none;">
+<div class="score-bar-wrap">
+<div><div class="score-big" id="score-display">0</div><div class="score-sub">Correct</div></div>
+<div style="flex:1;">
+<div style="display:flex;justify-content:space-between;font-family:Arial,sans-serif;font-size:11px;color:var(--muted);margin-bottom:6px;">
+<span>Progress</span><span id="progress-label">0 / 30</span>
+</div>
+<div class="progress-track"><div class="progress-fill" id="progress-bar" style="width:0%"></div></div>
+</div>
+</div>
+<div id="questions-container"></div>
+<div class="exam-result" id="exam-result">
+<div class="result-score" id="result-pct"></div>
+<div id="result-status" style="font-family:Arial,sans-serif;font-size:18px;font-weight:700;margin-bottom:8px;"></div>
+<div class="result-msg" id="result-msg"></div>
+<button class="exam-btn" onclick="retakeExam()">RETAKE EXAM</button>
+</div>
+</div>
+
+</div></div></div>
+
+<script>
+function showTab(t){document.querySelectorAll('.tab-content').forEach(el=>el.classList.remove('active'));document.querySelectorAll('.tab-btn').forEach(el=>el.classList.remove('active'));document.getElementById('tab-'+t).classList.add('active');document.querySelectorAll('.tab-btn').forEach(b=>{if((t==='curriculum'&&b.textContent.trim()==='CURRICULUM')||(t==='exam'&&b.textContent.trim()==='FINAL EXAM'))b.classList.add('active');});}
+function toggleLesson(i){var d=document.getElementById('ld-'+i);var c=d.previousElementSibling;var open=d.classList.contains('open');document.querySelectorAll('.lesson-detail').forEach(el=>el.classList.remove('open'));document.querySelectorAll('.lesson-card').forEach(el=>el.classList.remove('active-card'));if(!open){d.classList.add('open');c.classList.add('active-card');}}
+
+var Q_BANK=[
+// ===== L31: DEFINING RISK (Q1-3) =====
+{q:"Stock A drops 30% in a market panic, then fully recovers within a year. Stock B drops 30% because its main product became obsolete. According to Lesson 31, which stock experienced genuine 'risk'?",
+opts:[
+"Both — a 30% drop is a 30% drop regardless of why it happened",
+"Only Stock B — risk is permanent capital loss, not temporary price volatility",
+"Only Stock A — the faster the decline, the greater the risk since speed of loss signals structural fragility in the market",
+"Neither — risk only counts if you actually sell at the bottom"
+],ans:1,exp:"Lesson 31's foundational distinction: volatility ≠ risk. Stock A was volatile but not risky — the decline was temporary. Stock B experienced genuine risk — permanent impairment from business obsolescence. The same percentage decline carries completely different risk implications depending on WHY it happened."},
+
+{q:"A 50% portfolio loss requires what gain to break even?",
+opts:[
+"50% gain",
+"75% gain",
+"100% gain",
+"200% gain"
+],ans:2,exp:"Lesson 31's loss/recovery asymmetry: a 50% loss requires 1/(1−0.50)−1 = 100% gain to break even. This non-linearity is why large drawdowns are disproportionately destructive to compounding. A 50% loss followed by a 50% gain still leaves you down 25%."},
+
+{q:"Which of the following is NOT one of Lesson 31's five sources of permanent capital loss?",
+opts:[
+"Business destruction — competitive moat collapses permanently",
+"Overpayment — buying at a premium too large for even strong execution to justify",
+"Short-term volatility — prices moving up and down on a daily basis as part of normal market functioning",
+"Concentration blow-up — oversized position in a stock that declines 80%+"
+],ans:2,exp:"Lesson 31 identifies five sources of permanent loss: business destruction, overpayment, leverage destruction, forced selling, and concentration blow-up. Short-term volatility is explicitly NOT risk in the Pillar IV framework — it is temporary uncertainty, not permanent impairment."},
+
+// ===== L32: CORRELATION (Q4-6) =====
+{q:"In normal markets, average stock-to-stock correlation within the S&P 500 is about 0.30. What typically happens to that correlation during a crisis?",
+opts:[
+"It drops toward zero as stocks diverge in a flight to quality",
+"It stays roughly the same since correlation is a stable structural feature of the equity market that doesn't change meaningfully across different market environments",
+"It spikes toward 0.85+ as almost everything falls together — this is 'crisis convergence'",
+"It becomes perfectly negative as hedges offset equity losses"
+],ans:2,exp:"Lesson 32's central warning: crisis convergence. During the 2008 crisis, stock-to-stock correlations spiked from ~0.30 to 0.85+. In March 2020, the same pattern repeated. This means the diversification you think you have in calm markets is greater than what you actually have in crisis."},
+
+{q:"An investor owns 20 stocks across 7 sectors but all are high-P/E, high-growth, high-beta names. What is the core problem?",
+opts:[
+"The portfolio has too many positions and should be concentrated into fewer holdings for higher conviction and better return potential",
+"Despite sector variety, all positions share the same factor exposure — if growth/momentum factors rotate, all 20 decline together",
+"Seven sectors is insufficient; the investor needs all eleven GICS sectors represented to achieve adequate diversification",
+"There is no problem — 20 stocks across 7 sectors is excellent diversification by any reasonable standard"
+],ans:1,exp:"Lesson 32 teaches that diversification quality matters more than stock count or sector count. Twenty stocks sharing growth/momentum factor exposure behave as one bet during a factor rotation (as happened in 2022 when growth fell 60%+). Layer 3 (factor diversification) is required — not just Layers 1-2."},
+
+{q:"According to Lesson 32's five-layer diversification hierarchy, which layer is STRONGEST?",
+opts:[
+"Stock count — owning many individual stocks",
+"Sector diversification across industries",
+"Strategy diversification — combining long equity with trend-following or tail risk hedging",
+"Asset class diversification — equities plus bonds plus commodities"
+],ans:2,exp:"Lesson 32 ranks the layers: stock count (weakest) → sector → factor → asset class → strategy (strongest). Strategy diversification is strongest because different strategies profit from opposing market dynamics — when equities crash, tail risk hedges and trend-following systems can generate positive returns."},
+
+// ===== L33: POSITION SIZING (Q7-9) =====
+{q:"Full Kelly sizing maximizes long-term growth but produces 50–75% drawdowns. What does ¼ Kelly achieve?",
+opts:[
+"Approximately 50% of full Kelly's growth rate but only 12–20% drawdowns",
+"The same growth as full Kelly but with zero drawdowns because fractional Kelly eliminates all portfolio risk while preserving full return potential",
+"One-quarter of full Kelly's growth rate with one-quarter of the drawdowns",
+"¼ Kelly is only appropriate for beginners and provides no benefit to experienced investors who can tolerate higher volatility"
+],ans:0,exp:"Lesson 33's fractional Kelly tradeoff: ¼ Kelly captures ~50% of the growth rate while reducing maximum drawdown to 12–20%. This is the standard professional sizing approach because it sacrifices modest growth for dramatically improved behavioral tolerance and survival probability."},
+
+{q:"A stock has maximum conviction signals (Mean Magic 9, 4+ signal convergence, wide margin of safety) but trades only $3M per day. What limits the position size?",
+opts:[
+"Conviction — Mean Magic 9 isn't high enough for a large position",
+"Liquidity — limited daily volume means you can't exit under stress, capping the position regardless of conviction",
+"Correlation — all high-conviction positions are inherently correlated with each other",
+"Nothing — maximum conviction overrides all other constraints"
+],ans:1,exp:"Lesson 33's three sizing constraints: conviction, liquidity, and correlation — the most restrictive one binds. Here conviction is strong, but $3M daily volume (Pillar III L28 'Low' liquidity tier) caps the position at ~5%. A larger position would be unmovable during a crisis when you need to exit."},
+
+{q:"Why does Lesson 33 argue that position sizing has a larger impact on returns than stock selection?",
+opts:[
+"Because stock selection is random and unpredictable while sizing is completely within the investor's control and therefore has a deterministic impact on portfolio outcomes",
+"Because a 10% position in your best idea contributes far more to portfolio returns than a 3% position — the sizing gap exceeds the typical alpha gap between stock picks",
+"Because professional investors all pick the same stocks, so the only differentiation comes from how much capital they allocate to each shared position in their overlapping portfolios",
+"This argument is theoretical and has not been supported by actual investment performance data in practice"
+],ans:1,exp:"Lesson 33's core insight: if your best idea returns +40%, a 10% position contributes +4% to the portfolio while a 3% position contributes only +1.2%. That 2.8% sizing difference exceeds the typical alpha gap between your best and fifth-best stock pick. Sizing is the translation mechanism between being right and making money."},
+
+// ===== L34: PORTFOLIO CONSTRUCTION (Q10-12) =====
+{q:"In the core-satellite portfolio model, what role does the cash allocation (5–20%) serve?",
+opts:[
+"It serves no productive role and should be eliminated because holding cash creates an annual drag on returns that compounds into significant wealth destruction over multi-decade time horizons",
+"It provides strategic option value — the ability to buy during forced selling events when prices are dislocated from fair value",
+"It completely eliminates all portfolio drawdown risk",
+"It is required by brokerage regulations for margin accounts"
+],ans:1,exp:"Lesson 34 frames cash as a deliberate position with option value. The annual cost (~1% at 10% allocation) is the premium for the option to deploy during dislocations when forced selling creates asymmetric buying opportunities worth 10–15% incremental return over the cycle."},
+
+{q:"Going from 1 stock to 10 stocks eliminates ~75% of unsystematic risk. Going from 10 to 100 adds only ~18% more. What's the practical takeaway?",
+opts:[
+"Every portfolio should hold exactly 10 stocks",
+"After 10–15 positions, adding more stocks dilutes conviction without meaningfully reducing risk",
+"Diversification doesn't work at all beyond 10 positions and therefore any portfolio with more than 10 holdings is poorly constructed by definition",
+"You should hold 100+ stocks to capture the remaining 18%"
+],ans:1,exp:"Lesson 34's concentration frontier: diversification benefit follows a curve of steep initial gains then rapid diminishing returns. The sweet spot for active investors is 10–15 well-chosen, genuinely diversified positions. Beyond that, each addition dilutes conviction more than it reduces risk."},
+
+{q:"What is the difference between a 'collection of stocks' and a 'portfolio' according to Lesson 34?",
+opts:[
+"A portfolio has more than 20 positions while a collection has fewer",
+"A portfolio is an engineered system where each position has a defined role, factor exposure is intentional, and the whole is designed to survive stress",
+"There is no meaningful difference — any group of stocks an investor owns constitutes a portfolio regardless of how the positions were selected or sized or how they interact with each other",
+"A portfolio uses only fundamental analysis while a collection uses a mix of approaches"
+],ans:1,exp:"Lesson 34 defines a portfolio as an engineered system — not a random accumulation of opinions. Each position serves a role (core compounder vs. tactical satellite), the aggregate factor exposure is deliberate, the correlation structure is understood, and the whole is stress-tested to survive adverse conditions."},
+
+// ===== L35: DRAWDOWN MANAGEMENT (Q13-15) =====
+{q:"During a market-wide sell-off, your portfolio is down 22%. You review each holding and find all businesses are performing well — the decline is purely market-driven. Lesson 35 calls these positions:",
+opts:[
+"Broken — any stock down 20%+ has experienced fundamental impairment",
+"Beaten — the decline is temporary volatility with intact business theses",
+"Toxic — they should be sold immediately to prevent further losses regardless of underlying business performance",
+"Neutral — the 22% decline has no implications for future action"
+],ans:1,exp:"Lesson 35's 'broken vs. beaten' framework is the core drawdown diagnostic. Positions declining due to market-wide selling while business fundamentals remain intact are 'beaten' — temporary volatility, not permanent impairment. The correct response is to hold or add, not to sell into panic."},
+
+{q:"Pre-commitment circuit breaker rules should be established:",
+opts:[
+"During the drawdown itself, when you have the most information about market conditions and can make the most informed decisions about appropriate action",
+"After the drawdown, using hindsight to determine what the correct decisions would have been",
+"Before any drawdown occurs — during calm markets when emotional decision-making is not degrading judgment",
+"Circuit breakers are unnecessary for disciplined investors"
+],ans:2,exp:"Lesson 35's emotional cascade (anxiety → fear → shame → panic) progressively degrades decision quality during drawdowns. Pre-commitment rules established during calm markets replace emotional real-time decisions with pre-established protocols — they operate when the human cannot think clearly."},
+
+{q:"The S&P 500 has averaged −14.2% intra-year drawdowns since 1928, yet finished positive 73% of those years. What does this mean for investors?",
+opts:[
+"Significant intra-year declines are the normal cost of equity returns — selling during them converts temporary volatility into permanent loss",
+"All drawdowns recover quickly, so risk management is unnecessary",
+"This only applies to index investing and is irrelevant for individual stock portfolios since individual company stocks have entirely different characteristics than a broad market index",
+"The −14.2% average means any decline beyond that level signals a permanent bear market"
+],ans:0,exp:"Lesson 35 uses this data to show that drawdowns are the norm, not the exception. The danger isn't the drawdown itself — it's the behavioral response. Selling at the trough of an intra-year decline that the market eventually recovers from is the mechanism that converts temporary volatility into permanent loss."},
+
+// ===== L36: HEDGING (Q16-18) =====
+{q:"Continuously buying protective puts on a portfolio costs 3–8% annually. What does research show about this strategy's long-term impact?",
+opts:[
+"It significantly improves returns by preventing all losses",
+"It's value-destructive — the annual cost far exceeds the benefit because severe crashes are infrequent and implied volatility means insurance is overpriced",
+"It has no impact on returns because the protection premium exactly equals the expected loss from market declines over time, creating a perfectly neutral outcome in all scenarios",
+"It is the only reliable form of portfolio protection"
+],ans:1,exp:"Lesson 36 cites AQR research: permanent put-buying reduces returns by 5–7% annually while only reducing volatility by 30–40%. The cost vastly exceeds the benefit because severe crashes are rare and the volatility risk premium means investors systematically overpay for protection. Hedging should be tactical, not permanent."},
+
+{q:"During a market crash, VIX spikes to 45. An investor wants to buy put protection now. What's wrong with this timing?",
+opts:[
+"Nothing — protection is most important during crashes and should be purchased at any cost to prevent further losses",
+"Hedging is cheapest and most valuable when bought during calm markets (low VIX); buying during a crash means paying extreme premiums for insurance after the damage has already occurred",
+"VIX at 45 means puts are free because the premium is already embedded in the index level",
+"The VIX level is irrelevant to hedging decisions"
+],ans:1,exp:"Lesson 36's key timing insight: buy insurance when it's cheap (calm markets, low VIX) and deploy cash when insurance is expensive (crisis, high VIX). Buying puts at VIX 45 means paying panic-level premiums after the damage has occurred. In crisis, the better action is deploying cash into discounted assets — not buying overpriced insurance."},
+
+{q:"Lesson 36 states: 'The best hedge is a portfolio that doesn't need one.' What does this mean?",
+opts:[
+"Hedging is always unnecessary and investors should never consider any form of portfolio protection under any market conditions whatsoever",
+"If you follow proper construction principles — correlation awareness, sizing discipline, quality bias, cash position — the need for expensive direct hedging is dramatically reduced",
+"Only portfolios with fewer than 5 positions need hedges",
+"Natural hedging is free and provides complete protection"
+],ans:1,exp:"Lesson 36's insurance principle: natural hedging through portfolio construction (factor diversification, cash position, quality bias, bond allocation) provides approximately 80% of the protection at 20% of the cost. A well-constructed portfolio minimizes the need for expensive options-based hedging."},
+
+// ===== L37: BEHAVIORAL RISK (Q19-21) =====
+{q:"Dalbar research shows the average fund investor earns 3–4% LESS per year than the funds they invest in. What is the primary cause?",
+opts:[
+"High management fees and expense ratios charged by mutual fund companies",
+"Investors buy after rallies (chasing performance) and sell after declines (panic selling) — entering high and exiting low",
+"Poor fund selection — investors consistently pick the worst-performing funds due to inadequate research and analysis",
+"Tax drag from frequent fund distributions"
+],ans:1,exp:"Lesson 37 identifies the 'behavior gap' as caused by timing errors driven by recency bias and loss aversion. Investors systematically chase recent winners (buying high) and flee recent losers (selling low). Over 30 years, this 3–4% annual gap compounds to a 60–70% reduction in terminal wealth."},
+
+{q:"You bought a stock at $100. It has fallen to $60 with no change in business fundamentals. You find yourself reluctant to sell but also unable to think clearly about the position. What bias is likely operating?",
+opts:[
+"Anchoring — you're fixated on the $100 purchase price instead of asking what the stock is actually worth today",
+"No bias is present — holding a stock with unchanged fundamentals is always the correct and rational decision by definition",
+"Confirmation bias — you're seeking information that confirms your original purchase decision was correct",
+"Sunk cost fallacy — but only if you plan to hold for more than 12 months"
+],ans:0,exp:"Lesson 37 identifies this as anchoring bias: the $100 purchase price is an irrelevant reference point. The correct question is 'what is this stock worth today?' not 'what did I pay?' If fair value is $100 and fundamentals are intact, the stock at $60 is actually a buy — but anchoring to the purchase price clouds this analysis."},
+
+{q:"What does Lesson 37 identify as the single most effective tool for overcoming behavioral biases?",
+opts:[
+"Willpower and emotional discipline",
+"A decision journal that records thesis, assumptions, and expected outcomes — then compares them to actual results over time",
+"Avoiding all financial news to reduce emotional triggers",
+"Following a professional advisor's recommendations without question"
+],ans:1,exp:"Lesson 37 identifies the decision journal as the most effective debiasing tool. It makes invisible biases visible by creating a record of predictions vs. outcomes. Over time, patterns emerge: if your losers all share a trait you ignored, that's disposition effect. If entries cluster after rallies, that's recency bias. Measurement beats willpower."},
+
+// ===== L38: STRESS TESTING (Q22-24) =====
+{q:"Gary Klein's 'pre-mortem' technique asks you to imagine an investment has already failed, then explain why. What is the purpose?",
+opts:[
+"To discourage all risk-taking by focusing exclusively on negative outcomes",
+"To force identification of specific risks that optimism bias normally hides — you can't fix risks you haven't identified",
+"To calculate exact probabilities of failure for insurance pricing purposes",
+"To provide justification for selling positions you already want to sell"
+],ans:1,exp:"Lesson 38's pre-mortem inverts the usual optimistic analysis. By assuming failure first and working backward, investors identify specific risk pathways (overpayment, moat erosion, leverage risk) that optimism bias would normally suppress. Each identified risk maps to a Pillar's diagnostic framework."},
+
+{q:"An investor's portfolio is 80% high-growth tech stocks. During the 2022 rate shock, the S&P 500 fell ~25% but high-growth tech fell ~60%. Roughly what portfolio drawdown would this investor have experienced?",
+opts:[
+"About −25%, in line with the overall market",
+"About −52% — the weighted sum of 80% at −60% plus 20% of remaining assets at roughly −20%",
+"About −60% — the entire portfolio would match the sector decline",
+"About −40% — diversification within the tech sector would limit the damage below the pure sector decline"
+],ans:1,exp:"Lesson 38's stress testing math: 80% × −60% = −48%, plus 20% × roughly −20% = −4%, totaling approximately −52%. This exceeds the critical −50% threshold (requiring +100% to recover per Lesson 31). A simple pre-crisis stress test would have revealed this catastrophic concentration."},
+
+{q:"Your stress test reveals that a 2008-type crisis would produce a 45% drawdown in your current portfolio. What is the correct response?",
+opts:[
+"Accept it — crises are rare enough that the risk is tolerable",
+"Adjust the portfolio now — reduce position sizes, raise cash, improve factor diversification until the stress-tested worst case fits within your risk budget",
+"Sell everything immediately and hold 100% cash indefinitely",
+"Run the stress test again with different assumptions until the result looks more favorable"
+],ans:1,exp:"Lesson 38's imperative: if the stress-tested worst case exceeds your risk budget (Lesson 40), adjust the architecture now — before the crisis arrives. This means reducing concentration, increasing cash, diversifying factor exposure, and raising quality standards until the modeled worst case falls within tolerable limits."},
+
+// ===== L39: REBALANCING (Q25-27) =====
+{q:"A position grew from 5% to 10% of your portfolio because the company's earnings doubled and the stock followed. Valuation is still below fair value. Should you trim it back to 5%?",
+opts:[
+"Yes — any position that drifts from its target must be rebalanced immediately to maintain disciplined allocation weights at all times",
+"No — the position earned its size through genuine business execution while remaining undervalued. Trim only when valuation stretches or thesis deteriorates.",
+"Sell it entirely — the stock has already doubled and further gains are unlikely",
+"It depends entirely on the sector weighting relative to the benchmark"
+],ans:1,exp:"Lesson 39's thesis-aware rebalancing: a position that grew because of genuine earnings growth (not just multiple expansion) and remains below fair value has earned its larger allocation. Mechanically trimming it would be selling a winner that's still cheap. The decision matrix says: business executing + below fair value = let it run."},
+
+{q:"Disciplined rebalancing adds approximately how much to annual returns according to Vanguard's research?",
+opts:[
+"0.35–0.50% per year — the 'rebalancing bonus' from systematically selling high and buying low",
+"3–5% per year because rebalancing is the primary driver of portfolio alpha and significantly more impactful than any other investment decision or strategy",
+"Zero — rebalancing is purely a risk management tool with no return benefit whatsoever",
+"It varies too much to estimate reliably"
+],ans:0,exp:"Lesson 39 cites Vanguard (2019): disciplined rebalancing adds 0.35–0.50% annually — the 'rebalancing bonus.' This comes from systematically buying assets that have declined (relatively cheaper) and selling those that have risen (relatively expensive), mechanically harvesting mean reversion at the portfolio level."},
+
+{q:"What distinguishes Lesson 39's 'thesis-aware rebalancing' from purely mechanical rebalancing?",
+opts:[
+"Thesis-aware rebalancing never trims any position under any circumstances as long as the investor still believes in the original purchase thesis",
+"It checks WHY a position drifted before deciding: business execution with attractive valuation may warrant keeping the larger size, while multiple expansion without earnings support warrants trimming",
+"Thesis-aware rebalancing only applies to core positions, while satellite positions should always be mechanically rebalanced on a strict calendar schedule",
+"There is no meaningful difference — all rebalancing approaches produce identical outcomes regardless of methodology"
+],ans:1,exp:"Lesson 39's key distinction: mechanical rebalancing treats all drift equally, but thesis-aware rebalancing asks WHY the position grew. Business execution + still undervalued = let it run. Multiple expansion without earnings support = trim. The thesis context determines whether drift is earned (keep) or speculative (trim)."},
+
+// ===== L40: SYNTHESIS / CROSS-PILLAR (Q28-30) =====
+{q:"[CROSS-PILLAR] Pillar I shows late-cycle stress. Pillar II shows market P/E at 90th percentile. Pillar III shows VIX at 12 and AAII bullish at 58%. How should Pillar IV's risk architecture respond?",
+opts:[
+"No change needed — portfolio architecture should remain static regardless of market conditions to avoid the documented costs of market timing attempts",
+"Sell everything and hold 100% cash until all signals normalize",
+"Shift defensively: increase cash toward the top of its range, raise quality bar for holdings, reduce satellite sizing, consider tactical hedges",
+"Increase equity exposure aggressively since late-cycle environments produce the best momentum returns before the inevitable correction finally arrives"
+],ans:2,exp:"This capstone integrates all four Pillars. Late-cycle stress (P-I) + extreme valuations (P-II) + complacency indicators (P-III low VIX, extreme bullish sentiment) = Pillar IV's regime-adaptive architecture shifts defensively. Not panic selling — measured, pre-planned risk reduction within the framework."},
+
+{q:"[CROSS-PILLAR] You find a Mean Magic 9 stock, 30% below fair value, with positive momentum, low crowding, and early-cycle macro support. Your portfolio has 12 existing positions. What Pillar IV constraints must you check before sizing?",
+opts:[
+"Only conviction level matters — Mean Magic 9 means maximum position size, and checking anything else would be overthinking a clearly compelling setup",
+"Conviction (L33), correlation with existing positions (L32), liquidity for exit-ability (L28/P-III), and whether adding it improves portfolio construction (L34) — all constraints apply",
+"Only risk of permanent loss (L31) — if permanent loss risk is low, everything else is secondary",
+"Only the current cash balance — if you have cash available, deploy it fully into this opportunity"
+],ans:1,exp:"Even a near-perfect setup must pass ALL sizing constraints: conviction supports large size (L33), but does it correlate highly with existing positions (L32)? Can you exit it under stress given its liquidity (P-III L28)? Does adding it improve or degrade overall portfolio construction (L34)? The most restrictive constraint determines the actual size."},
+
+{q:"[CROSS-PILLAR] Your NIL portfolio is down 28%. You review all positions: businesses are healthy, declines are market-wide. You feel a powerful urge to sell everything. What does the integrated Pillar IV framework prescribe?",
+opts:[
+"Sell the worst-performing positions immediately to stop the losses from getting worse",
+"Positions are beaten, not broken (L35). The urge to sell is loss aversion from the emotional cascade (L37). Follow pre-commitment circuit breakers (L35) — hold intact theses, deploy cash into highest-conviction names, and record the experience in your decision journal (L37).",
+"Do nothing under any circumstances — making any decision during a drawdown is always a mistake regardless of what the analysis shows about individual positions or the broader market environment",
+"A 28% drawdown means the portfolio was badly constructed and all positions should be replaced once the market stabilizes and a full post-mortem analysis can be conducted with the benefit of hindsight"
+],ans:1,exp:"This capstone integrates the 'broken vs. beaten' diagnostic (L35), behavioral bias recognition (L37 — loss aversion, emotional cascade), and the pre-commitment system (L35 circuit breakers override emotional impulses). The correct response is systematic: diagnose the positions, recognize the behavioral trap, follow the pre-established plan, and document everything for future learning."}
+];
+
+function shuffleArray(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+var Q=[];
+function prepareQuestions(){
+Q=[];
+for(var i=0;i<Q_BANK.length;i++){
+var qb=Q_BANK[i];
+var indexed=qb.opts.map(function(o,idx){return{text:o,origIdx:idx};});
+shuffleArray(indexed);
+var newAns=-1;
+for(var j=0;j<indexed.length;j++){if(indexed[j].origIdx===qb.ans){newAns=j;break;}}
+Q.push({q:qb.q,opts:indexed.map(function(x){return x.text;}),ans:newAns,exp:qb.exp});
+}}
+var answered=0,correct=0,TOTAL=30;
+function startExam(){prepareQuestions();document.getElementById('exam-start').style.display='none';document.getElementById('exam-live').style.display='block';renderQuestions();}
+function renderQuestions(){var c=document.getElementById('questions-container');c.innerHTML='';Q.forEach(function(q,i){var h='<div class="q-block" id="qb-'+i+'"><div class="q-num">Question '+(i+1)+' of '+TOTAL+(i>=27?' · CROSS-PILLAR SYNTHESIS':'')+'</div><div class="q-text">'+q.q+'</div><div class="q-options">';var L=['A','B','C','D'];q.opts.forEach(function(o,j){h+='<button class="q-opt" id="qo-'+i+'-'+j+'" onclick="answer('+i+','+j+')"><span class="opt-letter">'+L[j]+'</span><span>'+o+'</span></button>';});h+='</div><div class="q-feedback" id="qf-'+i+'"></div></div>';c.innerHTML+=h;});}
+function answer(qi,oi){var q=Q[qi],bl=document.getElementById('qb-'+qi),fb=document.getElementById('qf-'+qi);if(bl.classList.contains('answered-correct')||bl.classList.contains('answered-wrong'))return;var btns=bl.querySelectorAll('.q-opt');btns.forEach(function(b){b.disabled=true;});answered++;if(oi===q.ans){correct++;btns[oi].classList.add('correct');bl.classList.add('answered-correct');fb.className='q-feedback correct';fb.innerHTML='<strong>Correct.</strong> '+q.exp;}else{btns[oi].classList.add('wrong');btns[q.ans].classList.add('reveal-correct');bl.classList.add('answered-wrong');fb.className='q-feedback wrong';fb.innerHTML='<strong>Incorrect.</strong> '+q.exp;}fb.style.display='block';document.getElementById('score-display').textContent=correct;document.getElementById('progress-label').textContent=answered+' / '+TOTAL;document.getElementById('progress-bar').style.width=(answered/TOTAL*100)+'%';if(answered===TOTAL)showResult();}
+function showResult(){var r=document.getElementById('exam-result');r.style.display='block';var pct=Math.round(correct/TOTAL*100);document.getElementById('result-pct').textContent=pct+'%';var s=document.getElementById('result-status');var m=document.getElementById('result-msg');if(correct>=23){s.innerHTML='<span class="result-pass">PASSED — '+correct+'/'+TOTAL+'</span>';m.textContent='Congratulations. You\'ve earned 250 Mastery Points and completed Pillar IV: Risk & Portfolio Architecture. Proceed to Pillar V: Professional Craft & System Integration.';}else{s.innerHTML='<span class="result-fail">NOT YET — '+correct+'/'+TOTAL+'</span>';m.textContent='You need 23/30 (75%) to pass. Review the lessons where you struggled and retake when ready. Risk architecture rewards understanding, not memorization.';}r.scrollIntoView({behavior:'smooth'});}
+function retakeExam(){answered=0;correct=0;document.getElementById('score-display').textContent='0';document.getElementById('progress-label').textContent='0 / '+TOTAL;document.getElementById('progress-bar').style.width='0%';document.getElementById('exam-result').style.display='none';prepareQuestions();renderQuestions();document.getElementById('exam-live').scrollIntoView({behavior:'smooth'});}
+</script>
+</body>
+</html>

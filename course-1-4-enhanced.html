@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Course 1.4 — Financial Literacy for Investors</title>
+<style>
+:root{--gold:#C9A84C;--dark:#0D0F14;--panel:#13161E;--border:#1E2330;--text:#E8EAF0;--muted:#7A8099;--accent:#3B82F6;--green:#22C55E;--red:#EF4444;--purple:#a855f7;--orange:#f59e0b;--cyan:#06b6d4;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--dark);color:var(--text);font-family:'Georgia',serif;font-size:16px;line-height:1.75;}
+.top-bar{background:var(--panel);border-bottom:1px solid var(--border);padding:12px 32px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:100;flex-wrap:wrap;}
+.logo{font-family:Arial,sans-serif;font-weight:900;font-size:18px;color:var(--gold);letter-spacing:2px;}
+.pill{background:var(--gold);color:var(--dark);font-family:Arial,sans-serif;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:1px;}
+.pill-tier{background:var(--accent);color:#fff;}
+.tab-nav{display:flex;gap:4px;margin-left:auto;}
+.tab-btn{background:none;border:1px solid var(--border);color:var(--muted);font-family:Arial,sans-serif;font-size:12px;font-weight:700;padding:6px 16px;border-radius:6px;cursor:pointer;transition:all .2s;letter-spacing:.5px;}
+.tab-btn.active{background:var(--gold);color:var(--dark);border-color:var(--gold);}
+.tab-btn:hover:not(.active){border-color:var(--gold);color:var(--gold);}
+.hero{background:linear-gradient(135deg,#0D0F14,#13161E,#0a0c10);border-bottom:1px solid var(--border);padding:56px 32px 40px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:500px;height:500px;background:radial-gradient(circle,rgba(201,168,76,.06) 0%,transparent 70%);pointer-events:none;}
+.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.3;}
+.course-label{font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:12px;}
+.hero h1{font-size:clamp(26px,4vw,44px);font-weight:400;color:#fff;margin-bottom:12px;line-height:1.2;}
+.hero-sub{font-size:17px;color:var(--muted);max-width:680px;margin:0 auto 28px;}
+.meta-row{display:flex;justify-content:center;gap:28px;flex-wrap:wrap;}
+.meta-item{text-align:center;}
+.meta-num{font-family:Arial,sans-serif;font-size:26px;font-weight:700;color:var(--gold);}
+.meta-label{font-family:Arial,sans-serif;font-size:10px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-top:2px;}
+.container{max-width:960px;margin:0 auto;padding:40px 24px;}
+.section{margin-bottom:52px;}
+.section-title{font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:20px;padding-bottom:10px;border-bottom:1px solid var(--border);}
+h2{font-size:22px;color:#fff;font-weight:400;margin-bottom:10px;}
+h3{font-family:Arial,sans-serif;font-size:12px;font-weight:700;color:var(--gold);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;margin-top:22px;}
+p{color:#BEC3D4;margin-bottom:14px;}
+strong.hl{color:#fff;}
+.tab-content{display:none;}.tab-content.active{display:block;}
+.lesson-grid{display:flex;flex-direction:column;border:1px solid var(--border);border-radius:12px;overflow:hidden;}
+.lesson-card{background:var(--panel);border-bottom:1px solid var(--border);padding:18px 22px;display:grid;grid-template-columns:46px 1fr auto;gap:14px;align-items:start;cursor:pointer;transition:background .2s;}
+.lesson-card:last-child{border-bottom:none;}
+.lesson-card:hover,.lesson-card.active-card{background:#1a1e2a;}
+.lesson-card.active-card{border-left:3px solid var(--gold);}
+.lesson-num{font-family:Arial,sans-serif;font-size:20px;font-weight:700;color:var(--gold);line-height:1;}
+.lesson-title{font-size:16px;color:#fff;margin-bottom:3px;}
+.lesson-desc{font-family:Arial,sans-serif;font-size:12px;color:var(--muted);line-height:1.5;}
+.lesson-mp{font-family:Arial,sans-serif;font-size:12px;font-weight:700;color:var(--gold);background:rgba(201,168,76,.1);padding:3px 10px;border-radius:20px;white-space:nowrap;align-self:center;}
+.lesson-detail{background:#0e1018;border-top:1px solid var(--border);padding:28px;display:none;}
+.lesson-detail.open{display:block;}
+.fw-table{width:100%;border-collapse:collapse;margin:12px 0 20px;}
+.fw-table th{background:rgba(201,168,76,.08);font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);padding:10px 14px;text-align:left;border-bottom:1px solid var(--border);}
+.fw-table td{padding:12px 14px;border-bottom:1px solid var(--border);font-family:Arial,sans-serif;font-size:13px;color:#BEC3D4;vertical-align:top;}
+.fw-table tr:last-child td{border-bottom:none;}
+.fw-table tr:hover td{background:rgba(255,255,255,.02);}
+.callout{background:rgba(201,168,76,.05);border-left:3px solid var(--gold);padding:16px 20px;border-radius:0 8px 8px 0;margin:18px 0;}
+.callout-label{font-family:Arial,sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;}
+.callout p{color:var(--text);margin:0;font-size:14px;}
+.callout-blue{border-left-color:var(--accent);background:rgba(59,130,246,.05);}.callout-blue .callout-label{color:var(--accent);}
+.callout-red{border-left-color:var(--red);background:rgba(239,68,68,.05);}.callout-red .callout-label{color:var(--red);}
+.callout-green{border-left-color:var(--green);background:rgba(34,197,94,.05);}.callout-green .callout-label{color:var(--green);}
+.callout-purple{border-left-color:var(--purple);background:rgba(168,85,247,.05);}.callout-purple .callout-label{color:var(--purple);}
+.callout-cyan{border-left-color:var(--cyan);background:rgba(6,182,212,.05);}.callout-cyan .callout-label{color:var(--cyan);}
+.callout-orange{border-left-color:var(--orange);background:rgba(245,158,11,.05);}.callout-orange .callout-label{color:var(--orange);}
+/* Real-World Spotlight */
+.spotlight{background:linear-gradient(135deg,rgba(168,85,247,.06),rgba(59,130,246,.04));border:1px solid rgba(168,85,247,.25);border-left:3px solid var(--purple);padding:18px 22px;border-radius:0 10px 10px 0;margin:20px 0;position:relative;overflow:hidden;}
+.spotlight::before{content:'';position:absolute;top:0;right:0;width:80px;height:80px;background:radial-gradient(circle,rgba(168,85,247,.08),transparent);pointer-events:none;}
+.spotlight-header{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.spotlight-icon{font-size:18px;}
+.spotlight-label{font-family:Arial,sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;color:var(--purple);text-transform:uppercase;}
+.spotlight-company{font-family:Arial,sans-serif;font-size:14px;font-weight:700;color:#fff;margin-bottom:6px;}
+.spotlight p{color:#BEC3D4;margin:0;font-size:13px;line-height:1.7;}
+/* Key Takeaway */
+.key-takeaway{background:linear-gradient(135deg,rgba(201,168,76,.08),rgba(201,168,76,.03));border:1px solid rgba(201,168,76,.3);border-radius:12px;padding:20px 24px;margin:24px 0;position:relative;}
+.key-takeaway::before{content:'🔑';position:absolute;top:-12px;left:20px;font-size:20px;background:var(--dark);padding:0 6px;}
+.key-takeaway-title{font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:8px;}
+.key-takeaway p{color:var(--text);margin:0;font-size:14px;line-height:1.7;}
+
+.exhibit{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:22px;margin:18px 0;}
+.exhibit-label{font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:14px;}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0;}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:16px 0;}
+@media(max-width:640px){.two-col,.three-col{grid-template-columns:1fr;}.top-bar{padding:10px 14px;gap:8px;}}
+.stat-card{background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.2);border-radius:10px;padding:18px;text-align:center;}
+.stat-num{font-family:Arial,sans-serif;font-size:28px;font-weight:900;color:var(--gold);line-height:1;margin-bottom:4px;}
+.stat-label{font-family:Arial,sans-serif;font-size:11px;color:var(--muted);line-height:1.4;}
+.tag-row{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 14px;}
+.ctag{font-family:Arial,sans-serif;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;letter-spacing:.5px;background:rgba(201,168,76,.15);color:var(--gold);border:1px solid rgba(201,168,76,.3);}
+.divider{border:none;border-top:1px solid var(--border);margin:36px 0;}
+.completion-badge{background:linear-gradient(135deg,rgba(201,168,76,.1),rgba(59,130,246,.06));border:1px solid rgba(201,168,76,.35);border-radius:16px;padding:32px;text-align:center;margin:24px 0;}
+/* Waterfall chart */
+.waterfall{margin:16px 0 20px;font-family:Arial,sans-serif;}
+.wf-row{display:grid;grid-template-columns:140px 1fr 90px;align-items:center;gap:8px;margin-bottom:3px;}
+.wf-label{font-size:12px;color:#BEC3D4;text-align:right;padding-right:8px;}
+.wf-bar-wrap{height:26px;position:relative;}
+.wf-bar{height:26px;border-radius:4px;position:absolute;top:0;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;min-width:2px;transition:width .6s ease;}
+.wf-val{font-size:12px;font-weight:700;color:var(--gold);text-align:left;padding-left:4px;}
+.wf-divider{border:none;border-top:1px dashed rgba(201,168,76,.25);margin:6px 0;grid-column:1/-1;}
+/* Stacked bar for balance sheet */
+.stack-chart{margin:16px 0;font-family:Arial,sans-serif;}
+.stack-row{margin-bottom:14px;}
+.stack-title{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+.stack-bar{height:36px;border-radius:6px;overflow:hidden;display:flex;position:relative;}
+.stack-seg{display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;min-width:24px;transition:width .6s ease;}
+.stack-legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:8px;}
+.stack-legend-item{display:flex;align-items:center;gap:5px;font-size:11px;color:#BEC3D4;}
+.stack-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0;}
+/* Flow diagram */
+.flow-diagram{display:flex;flex-direction:column;gap:0;margin:16px 0;font-family:Arial,sans-serif;}
+.flow-node{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;position:relative;transition:all .3s;}
+.flow-node:hover{border-color:rgba(201,168,76,.4);background:rgba(201,168,76,.03);}
+.flow-node-label{font-size:13px;color:#BEC3D4;}
+.flow-node-val{font-size:14px;font-weight:700;}
+.flow-arrow{text-align:center;color:var(--gold);font-size:18px;line-height:1;padding:2px 0;}
+.flow-node.highlight{border-color:var(--gold);background:rgba(201,168,76,.06);}
+.flow-node.highlight .flow-node-label{color:#fff;}
+/* Sankey-style connection diagram */
+.connect-grid{display:grid;grid-template-columns:1fr 60px 1fr 60px 1fr;align-items:center;gap:0;margin:16px 0;font-family:Arial,sans-serif;}
+.connect-box{border-radius:10px;padding:16px;text-align:center;transition:transform .2s;}
+.connect-box:hover{transform:translateY(-2px);}
+.connect-arrow{text-align:center;color:var(--gold);font-size:22px;}
+.connect-label{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;}
+.connect-desc{font-size:12px;color:#BEC3D4;line-height:1.5;}
+/* Gauge / meter */
+.gauge-row{display:flex;gap:16px;margin:16px 0;flex-wrap:wrap;}
+.gauge-card{flex:1;min-width:140px;background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:16px;text-align:center;transition:border-color .3s;}
+.gauge-card:hover{border-color:rgba(201,168,76,.3);}
+.gauge-track{height:8px;background:rgba(255,255,255,.06);border-radius:4px;margin:10px auto 8px;overflow:hidden;max-width:160px;}
+.gauge-fill{height:100%;border-radius:4px;transition:width .8s ease;}
+.gauge-num{font-family:Arial,sans-serif;font-size:22px;font-weight:900;line-height:1;}
+.gauge-label{font-family:Arial,sans-serif;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-top:2px;}
+/* Pulse animation for key numbers */
+@keyframes glow-pulse{0%,100%{box-shadow:0 0 0 0 rgba(201,168,76,0);}50%{box-shadow:0 0 12px 2px rgba(201,168,76,.15);}}
+.pulse-gold{animation:glow-pulse 3s ease-in-out infinite;}
+/* Formula box */
+.formula-box{background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.25);border-radius:10px;padding:20px;text-align:center;margin:18px 0;position:relative;}
+.formula-box .formula{font-family:Arial,sans-serif;font-size:20px;font-weight:700;color:var(--gold);letter-spacing:1px;}
+.formula-box .formula-note{font-family:Arial,sans-serif;font-size:11px;color:var(--muted);margin-top:6px;}
+/* Mini comparison cards */
+.vs-grid{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:center;margin:16px 0;}
+.vs-card{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:16px;text-align:center;transition:border-color .3s;}
+.vs-card:hover{border-color:rgba(201,168,76,.3);}
+.vs-divider{font-family:Arial,sans-serif;font-size:16px;font-weight:900;color:var(--muted);}
+.vs-name{font-family:Arial,sans-serif;font-size:13px;font-weight:700;color:#fff;margin-bottom:4px;}
+.vs-detail{font-family:Arial,sans-serif;font-size:11px;color:var(--muted);line-height:1.5;}
+/* Timeline */
+.timeline{position:relative;padding-left:28px;margin:16px 0;}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:rgba(201,168,76,.2);}
+.tl-item{position:relative;margin-bottom:16px;padding-left:16px;}
+.tl-item::before{content:'';position:absolute;left:-24px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--gold);border:2px solid var(--dark);}
+.tl-year{font-family:Arial,sans-serif;font-size:11px;font-weight:700;color:var(--gold);letter-spacing:1px;}
+.tl-text{font-family:Arial,sans-serif;font-size:13px;color:#BEC3D4;line-height:1.6;}
+/* Exam */
+.exam-wrap{max-width:800px;margin:0 auto;}
+.start-exam-wrap{text-align:center;padding:40px 20px;}
+.start-exam-wrap h2{color:#fff;margin-bottom:12px;}
+.start-exam-wrap p{color:var(--muted);max-width:500px;margin:0 auto 24px;}
+.exam-rules{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin:24px 0;text-align:left;}
+.rule-card{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:14px;}
+.rule-card .r-num{font-family:Arial,sans-serif;font-size:22px;font-weight:900;color:var(--gold);}
+.rule-card .r-label{font-family:Arial,sans-serif;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;}
+.score-bar-wrap{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:20px 28px;margin-bottom:28px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;}
+.score-big{font-size:42px;font-weight:900;color:var(--gold);line-height:1;font-family:Arial,sans-serif;}
+.score-sub{font-size:12px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;font-family:Arial,sans-serif;}
+.progress-track{flex:1;min-width:200px;background:rgba(255,255,255,.06);border-radius:8px;height:12px;overflow:hidden;}
+.progress-fill{height:100%;background:linear-gradient(90deg,rgba(201,168,76,.5),var(--gold));border-radius:8px;transition:width .5s ease;}
+.q-block{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:22px;margin-bottom:14px;transition:border-color .3s;}
+.q-block.answered-correct{border-color:var(--green);}
+.q-block.answered-wrong{border-color:var(--red);}
+.q-num{font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:8px;}
+.q-text{font-size:15px;color:#fff;margin-bottom:16px;line-height:1.6;}
+.q-options{display:flex;flex-direction:column;gap:8px;}
+.q-opt{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:8px;padding:11px 15px;font-family:Arial,sans-serif;font-size:14px;color:#BEC3D4;cursor:pointer;transition:all .2s;text-align:left;display:flex;gap:12px;align-items:flex-start;}
+.q-opt:hover:not(:disabled){background:rgba(201,168,76,.06);border-color:rgba(201,168,76,.4);color:#fff;}
+.q-opt:disabled{cursor:default;}
+.q-opt.correct{background:rgba(34,197,94,.1);border-color:var(--green);color:var(--green);}
+.q-opt.wrong{background:rgba(239,68,68,.1);border-color:var(--red);color:var(--red);}
+.q-opt.reveal-correct{background:rgba(34,197,94,.07);border-color:rgba(34,197,94,.4);color:var(--green);}
+.opt-letter{font-weight:700;flex-shrink:0;width:18px;}
+.q-feedback{margin-top:10px;padding:11px 15px;border-radius:8px;font-family:Arial,sans-serif;font-size:13px;line-height:1.5;display:none;}
+.q-feedback.correct{background:rgba(34,197,94,.08);color:var(--green);border:1px solid rgba(34,197,94,.2);}
+.q-feedback.wrong{background:rgba(239,68,68,.08);color:#f87171;border:1px solid rgba(239,68,68,.2);}
+.exam-result{background:linear-gradient(135deg,rgba(201,168,76,.07),rgba(59,130,246,.04));border:1px solid rgba(201,168,76,.3);border-radius:16px;padding:40px;text-align:center;margin-top:32px;display:none;}
+.result-score{font-family:Arial,sans-serif;font-size:64px;font-weight:900;color:var(--gold);line-height:1;margin-bottom:8px;}
+.exam-btn{background:var(--gold);color:var(--dark);font-family:Arial,sans-serif;font-weight:700;font-size:14px;letter-spacing:1px;padding:12px 28px;border-radius:8px;border:none;cursor:pointer;margin:4px;transition:transform .15s;}
+.exam-btn:hover{transform:translateY(-1px);}
+.exam-btn.secondary{background:transparent;color:var(--gold);border:1px solid var(--gold);}
+.result-pass{color:var(--green);}.result-fail{color:var(--red);}
+.result-msg{color:var(--muted);max-width:520px;margin:0 auto 24px;font-size:15px;}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+<span class="logo">BEAT LYNCH</span>
+<span class="pill">INFINITE ALPHA</span>
+<span class="pill pill-tier">TIER 1</span>
+<span style="font-family:Arial;font-size:13px;color:var(--muted);margin-left:4px">Financial Literacy for Investors</span>
+<div class="tab-nav">
+<button class="tab-btn active" onclick="switchTab('curriculum',this)">Curriculum</button>
+<button class="tab-btn" onclick="switchTab('exam',this)">Final Exam</button>
+</div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+<div class="course-label">Infinite Alpha · Tier 1: Investor Foundations · Course 4 of 4</div>
+<h1>Financial Literacy for Investors</h1>
+<p class="hero-sub">Every stock is a claim on a real business. Before you can judge whether that claim is worth buying, you need to read the three documents every public company is required to publish — and understand the single question that ties them all together: what is this business actually worth?</p>
+<div class="meta-row">
+<div class="meta-item"><div class="meta-num">5</div><div class="meta-label">Lessons</div></div>
+<div class="meta-item"><div class="meta-num">100</div><div class="meta-label">Mastery Points</div></div>
+<div class="meta-item"><div class="meta-num">80%</div><div class="meta-label">Pass Threshold</div></div>
+<div class="meta-item"><div class="meta-num">~3 hrs</div><div class="meta-label">Study Time</div></div>
+</div>
+</div>
+
+<!-- CURRICULUM TAB -->
+<div id="tab-curriculum" class="tab-content active">
+<div class="container">
+
+<div class="section">
+<div class="section-title">Course Curriculum</div>
+<div class="lesson-grid">
+
+<!-- ============================================================ -->
+<!-- LESSON 1: THE INCOME STATEMENT -->
+<!-- ============================================================ -->
+<div class="lesson-card" onclick="toggleLesson('d1',this)">
+<div class="lesson-num">1</div>
+<div><div class="lesson-title">The Income Statement</div><div class="lesson-desc">Revenue, expenses, and the path to profit — how a company keeps score over time.</div></div>
+<div class="lesson-mp">+20 MP</div>
+</div>
+<div class="lesson-detail" id="d1">
+<div class="tag-row">
+<span class="ctag">Revenue</span>
+<span class="ctag">Net Income</span>
+<span class="ctag">Margins</span>
+<span class="ctag">Earnings Per Share</span>
+<span class="ctag">Profitability</span>
+</div>
+
+<p>In 2023, Apple reported $383 billion in revenue. That number sounds enormous — and it is — but revenue alone tells you almost nothing about whether Apple is a good investment. A company can have enormous revenue and still lose money. Uber generated $31.8 billion in revenue in 2023 but spent years posting net losses. The income statement exists to answer the question that revenue alone cannot: <strong class="hl">how much of what a company earns does it actually get to keep?</strong></p>
+
+<h3>What the Income Statement Shows</h3>
+<p>The income statement — also called the <strong class="hl">profit and loss statement (P&L)</strong> — measures a company's financial performance <strong class="hl">over a period of time</strong>, typically a quarter (three months) or a fiscal year. Think of it like a movie, not a photograph. It captures flow: money coming in, costs going out, and the profit (or loss) left over.</p>
+
+<p>The structure follows a logical cascade from the top line (revenue) to the bottom line (net income). Each step subtracts a different category of cost, and each subtotal reveals something important about the business. There is an old saying that captures this perfectly: <strong class="hl">"Revenue is vanity, profit is sanity, cash is reality."</strong></p>
+
+<div class="exhibit">
+<div class="exhibit-label">Exhibit 1.1 — The Income Statement Waterfall: Apple FY2023 (Simplified, $B)</div>
+<div class="waterfall">
+<div class="wf-row"><div class="wf-label">Revenue</div><div class="wf-bar-wrap"><div class="wf-bar" style="left:0;width:100%;background:linear-gradient(90deg,var(--accent),#60a5fa);border-radius:4px;">$383.3B</div></div><div class="wf-val"></div></div>
+<div class="wf-row"><div class="wf-label" style="color:var(--red)">− COGS</div><div class="wf-bar-wrap"><div class="wf-bar" style="left:0;width:55.8%;background:rgba(239,68,68,.35);">−$214.1B</div></div><div class="wf-val"></div></div>
+<div class="wf-divider"></div>
+<div class="wf-row"><div class="wf-label" style="color:var(--green)">Gross Profit</div><div class="wf-bar-wrap"><div class="wf-bar" style="left:0;width:44.2%;background:linear-gradient(90deg,rgba(34,197,94,.5),var(--green));">$169.1B</div></div><div class="wf-val" style="color:var(--green)">44.1% margin</div></div>
+<div class="wf-row"><div class="wf-label" style="color:var(--red)">− Operating Exp.</div><div class="wf-bar-wrap"><div class="wf-bar" style="left:0;width:14.7%;background:rgba(239,68,68,.35);">−$56.3B</div></div><div class="wf-val"></div></div>
+<div class="wf-divider"></div>
+<div class="wf-row"><div class="wf-label" style="color:var(--gold)">Operating Income</div><div class="wf-bar-wrap"><div class="wf-bar" style="left:0;width:29.4%;background:linear-gradient(90deg,rgba(201,168,76,.5),var(--gold));">$114.3B</div></div><div class="wf-val" style="color:var(--gold)">29.8% margin</div></div>
+<div class="wf-row"><div class="wf-label" style="color:var(--red)">− Tax & Other</div><div class="wf-bar-wrap"><div class="wf-bar" style="left:0;width:4.6%;background:rgba(239,68,68,.35);">−$17.5B</div></div><div class="wf-val"></div></div>
+<div class="wf-divider"></div>
+<div class="wf-row"><div class="wf-label" style="color:#fff;font-weight:700">Net Income</div><div class="wf-bar-wrap"><div class="wf-bar" style="left:0;width:25.3%;background:linear-gradient(90deg,rgba(201,168,76,.7),#e2c564);font-weight:900;">$97.0B</div></div><div class="wf-val" style="color:#fff;font-weight:900">25.3% margin</div></div>
+</div>
+<p style="font-family:Arial;font-size:11px;color:var(--muted);margin-top:8px;">Read from top to bottom. Each row subtracts a cost category. The percentage on the right is the margin — the portion of revenue surviving at each step.</p>
+</div>
+
+<h3>The Key Line Items</h3>
+<p><strong class="hl">Revenue</strong> (the "top line") is the total amount a company earns from selling its products or services before any costs are deducted. <strong class="hl">Cost of goods sold (COGS)</strong> represents the direct costs of producing what was sold — for Apple, this includes components, manufacturing, and shipping. Subtracting COGS from revenue gives you <strong class="hl">gross profit</strong> — how much the company keeps after paying for the thing it sells.</p>
+
+<p><strong class="hl">Operating expenses</strong> include research and development (R&D), sales and marketing, and general administration — the costs of running the business beyond just making the product. Subtract these and you get <strong class="hl">operating income</strong>, the profit from the company's core operations. Finally, after taxes and interest, you arrive at <strong class="hl">net income</strong> — the "bottom line." This is the profit that belongs to shareholders.</p>
+
+<div class="formula-box">
+<div class="formula">Gross Margin = Gross Profit ÷ Revenue</div>
+<div class="formula-note">Expressed as a percentage. Apple: $169.1B ÷ $383.3B = 44.1% gross margin</div>
+</div>
+
+<h3>Margins: The Ratios That Matter</h3>
+<p>Raw dollar amounts are useful, but <strong class="hl">margins</strong> — profits expressed as a percentage of revenue — let you compare companies of different sizes and track a company's efficiency over time. A company with $1 billion in revenue and $200 million in net income has a 20% net margin. A company with $100 million in revenue and $30 million in net income has a 30% net margin. The smaller company is more efficient at turning revenue into profit — margins tell you that instantly.</p>
+
+<div class="exhibit">
+<div class="exhibit-label">Exhibit 1.2 — Margin Comparison: Three Business Models (FY2023)</div>
+<div class="gauge-row">
+<div class="gauge-card">
+<div style="font-family:Arial;font-size:11px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px">APPLE</div>
+<div style="font-family:Arial;font-size:10px;color:var(--muted);margin-bottom:4px">Hardware + Services</div>
+<div class="gauge-num" style="color:var(--green)">44.1%</div>
+<div class="gauge-label">Gross Margin</div>
+<div class="gauge-track"><div class="gauge-fill" style="width:44.1%;background:var(--green)"></div></div>
+<div class="gauge-num" style="color:var(--gold);margin-top:10px">25.3%</div>
+<div class="gauge-label">Net Margin</div>
+<div class="gauge-track"><div class="gauge-fill" style="width:25.3%;background:var(--gold)"></div></div>
+</div>
+<div class="gauge-card">
+<div style="font-family:Arial;font-size:11px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px">COSTCO</div>
+<div style="font-family:Arial;font-size:10px;color:var(--muted);margin-bottom:4px">High Volume, Low Markup</div>
+<div class="gauge-num" style="color:var(--green)">12.3%</div>
+<div class="gauge-label">Gross Margin</div>
+<div class="gauge-track"><div class="gauge-fill" style="width:12.3%;background:var(--green)"></div></div>
+<div class="gauge-num" style="color:var(--gold);margin-top:10px">2.6%</div>
+<div class="gauge-label">Net Margin</div>
+<div class="gauge-track"><div class="gauge-fill" style="width:2.6%;background:var(--gold)"></div></div>
+</div>
+<div class="gauge-card">
+<div style="font-family:Arial;font-size:11px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px">VISA</div>
+<div style="font-family:Arial;font-size:10px;color:var(--muted);margin-bottom:4px">Capital-Light Toll Booth</div>
+<div class="gauge-num" style="color:var(--green)">79.7%</div>
+<div class="gauge-label">Gross Margin</div>
+<div class="gauge-track"><div class="gauge-fill" style="width:79.7%;background:var(--green)"></div></div>
+<div class="gauge-num" style="color:var(--gold);margin-top:10px">52.9%</div>
+<div class="gauge-label">Net Margin</div>
+<div class="gauge-track"><div class="gauge-fill" style="width:52.9%;background:var(--gold)"></div></div>
+</div>
+</div>
+</div>
+
+<p>These three companies are all enormously successful, yet their margin profiles look completely different. <strong class="hl">Costco operates on razor-thin margins by design</strong> — its business model is high volume, low markup, with most profit coming from membership fees. Costco's 2.6% net margin is not a sign of failure; it's the plan. <strong class="hl">Visa runs a nearly pure toll-booth model</strong>: it processes payments and keeps a sliver of each transaction, with almost no cost of goods sold. Every additional transaction flows almost entirely to profit. Apple sits in between, combining hardware (lower margin) with its growing Services segment like the App Store and Apple Music (higher margin). <strong class="hl">The income statement reveals the business model.</strong></p>
+
+<div class="spotlight">
+<div class="spotlight-header"><span class="spotlight-icon">🔍</span><span class="spotlight-label">Real-World Spotlight</span></div>
+<div class="spotlight-company">Salesforce — How a SaaS Company's Margins Evolve</div>
+<p>Salesforce, the cloud software giant, had a gross margin of ~74% in FY2023 — typical for software-as-a-service (SaaS) companies where the "product" is code that costs very little to replicate. But its net margin was only ~4% for years because Salesforce invested aggressively in sales teams and acquisitions. By FY2024, as the company matured and cut costs, net margin jumped to ~15%. This shows how margins shift as companies progress from growth mode to profitability mode — a pattern you'll see repeatedly as an investor.</p>
+</div>
+
+<h3>Earnings Per Share</h3>
+<p>You'll frequently see companies report <strong class="hl">earnings per share (EPS)</strong> — net income divided by the number of shares outstanding. EPS translates the entire company's profit down to a per-share basis, which is essential when you're deciding whether one share is worth buying at a given price.</p>
+
+<div class="formula-box">
+<div class="formula">EPS = Net Income ÷ Shares Outstanding</div>
+<div class="formula-note">Apple FY2023: ~$97B ÷ ~15.8B shares = ~$6.13 EPS</div>
+</div>
+
+<p>In Course 1.2, you learned that valuation is ultimately about comparing what you pay to what you receive. EPS is the foundation of that comparison. When you hear analysts say a stock trades at "31 times earnings," they're dividing the stock price by EPS — a concept we'll formalize in Lesson 5.</p>
+
+<div class="callout">
+<div class="callout-label">Beat Lynch Connection</div>
+<p>Beat Lynch's Stock Analyzer pulls income statement data for every scored company. When you see a Growth Quality or Moat Strength score, the engine is examining revenue trends, margin stability, and earnings consistency — exactly the line items you just learned to read. No margin data, no score.</p>
+</div>
+
+<div class="callout callout-orange">
+<div class="callout-label">Watch Out — One-Time Gains Can Distort Earnings</div>
+<p>Net income can be manipulated through one-time gains, accounting choices, and timing. A single quarter's earnings can look great because the company sold a building, received a legal settlement, or took a tax benefit. These are <strong>non-recurring items</strong> — they inflate earnings temporarily but don't reflect the company's ongoing earning power. That's why investors never evaluate a company on one period alone — and why the cash flow statement (Lesson 3) exists as a reality check.</p>
+</div>
+
+<div class="key-takeaway">
+<div class="key-takeaway-title">Lesson 1 Key Takeaway</div>
+<p>The income statement tells you how efficiently a company converts revenue into profit over a period of time. Revenue is the top line, net income is the bottom line, and margins let you compare efficiency across any company regardless of size. Different business models produce vastly different margins — low margins don't mean failure, and high margins don't guarantee success. Always look for recurring, sustainable earnings rather than one-time gains.</p>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- LESSON 2: THE BALANCE SHEET -->
+<!-- ============================================================ -->
+<div class="lesson-card" onclick="toggleLesson('d2',this)">
+<div class="lesson-num">2</div>
+<div><div class="lesson-title">The Balance Sheet</div><div class="lesson-desc">Assets, liabilities, and equity — a snapshot of financial strength at a single moment.</div></div>
+<div class="lesson-mp">+20 MP</div>
+</div>
+<div class="lesson-detail" id="d2">
+<div class="tag-row">
+<span class="ctag">Assets</span>
+<span class="ctag">Liabilities</span>
+<span class="ctag">Shareholders' Equity</span>
+<span class="ctag">Book Value</span>
+<span class="ctag">Leverage</span>
+</div>
+
+<p>In 2008, Lehman Brothers reported $639 billion in assets. Weeks later, it was bankrupt. The income statement said the firm was profitable. The balance sheet, properly read, told a different story: Lehman was leveraged roughly 30-to-1, meaning for every dollar of equity, it owed thirty dollars in debt. When asset values fell just a few percent, there was nothing left. <strong class="hl">The balance sheet answers the question the income statement can't: how sturdy is this company?</strong></p>
+
+<h3>The Fundamental Equation</h3>
+<p>Every balance sheet obeys one unbreakable rule — the <strong class="hl">accounting equation</strong>:</p>
+
+<div class="formula-box pulse-gold">
+<div class="formula">Assets = Liabilities + Shareholders' Equity</div>
+<div class="formula-note">This must always balance. Equity = Assets − Liabilities (the residual claim for owners).</div>
+</div>
+
+<p><strong class="hl">Assets</strong> are everything the company owns: cash, inventory, equipment, patents, buildings. <strong class="hl">Liabilities</strong> are everything it owes: debt, unpaid bills, lease obligations. <strong class="hl">Shareholders' equity</strong> is the residual — what's left for owners after all debts are paid. If a company has $800 million in assets and $500 million in liabilities, shareholders' equity is $300 million. Unlike the income statement, which covers a period, the balance sheet is a <strong class="hl">snapshot at a single point in time</strong> — December 31, or the end of a fiscal quarter.</p>
+
+<div class="exhibit">
+<div class="exhibit-label">Exhibit 2.1 — Apple Balance Sheet Structure: FY2023 ($B)</div>
+<div class="stack-chart">
+<div class="stack-row">
+<div class="stack-title">What Apple Owns (Total Assets: $352.6B)</div>
+<div class="stack-bar">
+<div class="stack-seg" style="width:18.6%;background:var(--accent);" title="Cash & Short-Term: $65.5B">19%</div>
+<div class="stack-seg" style="width:34.6%;background:var(--cyan);" title="Marketable Securities: $121.9B">35%</div>
+<div class="stack-seg" style="width:16.7%;background:var(--green);" title="Receivables: $58.8B">17%</div>
+<div class="stack-seg" style="width:12.1%;background:var(--purple);" title="PP&E: $42.7B">12%</div>
+<div class="stack-seg" style="width:18%;background:var(--muted);" title="Other: $63.7B">18%</div>
+</div>
+<div class="stack-legend">
+<div class="stack-legend-item"><div class="stack-dot" style="background:var(--accent)"></div>Cash $65.5B</div>
+<div class="stack-legend-item"><div class="stack-dot" style="background:var(--cyan)"></div>Securities $121.9B</div>
+<div class="stack-legend-item"><div class="stack-dot" style="background:var(--green)"></div>Receivables $58.8B</div>
+<div class="stack-legend-item"><div class="stack-dot" style="background:var(--purple)"></div>PP&E $42.7B</div>
+<div class="stack-legend-item"><div class="stack-dot" style="background:var(--muted)"></div>Other $63.7B</div>
+</div>
+</div>
+<div class="stack-row" style="margin-top:20px;">
+<div class="stack-title">How It's Funded (Liabilities + Equity: $352.6B)</div>
+<div class="stack-bar">
+<div class="stack-seg" style="width:30.8%;background:var(--red);" title="Current Liabilities: $108.6B">31%</div>
+<div class="stack-seg" style="width:53.6%;background:var(--orange);" title="Non-Current Liabilities: $189.1B">54%</div>
+<div class="stack-seg" style="width:15.6%;background:var(--gold);" title="Equity: $62.1B">16%</div>
+</div>
+<div class="stack-legend">
+<div class="stack-legend-item"><div class="stack-dot" style="background:var(--red)"></div>Current Liabilities $108.6B</div>
+<div class="stack-legend-item"><div class="stack-dot" style="background:var(--orange)"></div>Long-Term Liabilities $189.1B</div>
+<div class="stack-legend-item"><div class="stack-dot" style="background:var(--gold)"></div>Shareholders' Equity $62.1B</div>
+</div>
+</div>
+</div>
+<p style="font-family:Arial;font-size:11px;color:var(--muted);margin-top:8px;">Both bars represent the same $352.6B — the top bar shows what Apple owns, the bottom shows how it's funded. They must be equal (Assets = Liabilities + Equity).</p>
+</div>
+
+<p>Notice something striking about Apple's balance sheet: equity is only about 16% of total assets. Apple is heavily funded by liabilities. But unlike Lehman Brothers, Apple's liabilities are manageable because its cash generation is extraordinary — it produces over $110 billion in operating cash flow annually. <strong class="hl">Leverage isn't inherently dangerous — it's dangerous when the underlying business can't support it.</strong></p>
+
+<h3>Current vs. Non-Current</h3>
+<p>Balance sheet items are split into <strong class="hl">current</strong> (expected to convert to cash or come due within one year) and <strong class="hl">non-current</strong> (longer than one year). Current assets include cash, accounts receivable (money customers owe), and inventory. Non-current assets include property, plant, and equipment (PP&E), patents, and goodwill (the premium paid in acquisitions — for example, when Microsoft acquired Activision Blizzard for $69 billion in 2023, a large portion of the price above Activision's book value was recorded as goodwill on Microsoft's balance sheet). On the liability side, current liabilities include accounts payable and short-term debt, while non-current liabilities include long-term debt and lease obligations.</p>
+
+<div class="spotlight">
+<div class="spotlight-header"><span class="spotlight-icon">🔍</span><span class="spotlight-label">Real-World Spotlight</span></div>
+<div class="spotlight-company">WeWork — A Balance Sheet Disaster in Plain Sight</div>
+<p>When WeWork filed for its IPO in 2019, its balance sheet revealed massive lease obligations (liabilities), shrinking cash reserves, and mounting losses. The company was signing long-term leases for buildings (creating enormous future liabilities) and renting desks on short-term contracts (generating uncertain, cancellable revenue). The balance sheet showed a company burning through billions with no clear path to covering its obligations. Investors who read the balance sheet saw the danger before the IPO was eventually pulled. WeWork filed for bankruptcy in 2023.</p>
+</div>
+
+<h3>The Debt-to-Equity Ratio and Net Debt</h3>
+<p>The <strong class="hl">debt-to-equity ratio</strong> (total debt ÷ total equity) measures leverage — how much a company relies on borrowed money relative to owner money. But this ratio needs context. A company with high debt may also hold enormous cash reserves, making the debt less threatening.</p>
+
+<div class="formula-box">
+<div class="formula">Debt-to-Equity = Total Debt ÷ Shareholders' Equity</div>
+<div class="formula-note">Net Debt = Total Debt − Cash & Marketable Securities. Negative net debt = "net cash positive" (a strength signal).</div>
+</div>
+
+<div class="exhibit">
+<div class="exhibit-label">Exhibit 2.2 — Leverage Comparison: Three Companies</div>
+<table class="fw-table">
+<thead><tr><th>Metric</th><th>Apple</th><th>Microsoft</th><th>Tesla</th></tr></thead>
+<tbody>
+<tr><td><strong class="hl">Total Debt</strong></td><td>$111.1B</td><td>$59.9B</td><td>$5.7B</td></tr>
+<tr><td><strong class="hl">Total Equity</strong></td><td>$62.1B</td><td>$206.2B</td><td>$43.1B</td></tr>
+<tr><td><strong class="hl">Debt-to-Equity Ratio</strong></td><td style="color:var(--orange)">1.79x</td><td style="color:var(--green)">0.29x</td><td style="color:var(--green)">0.13x</td></tr>
+<tr><td><strong class="hl">Cash & Securities</strong></td><td>$187.4B</td><td>$111.3B</td><td>$26.1B</td></tr>
+<tr><td><strong class="hl">Net Debt (Debt − Cash)</strong></td><td style="color:var(--green)">−$76.3B</td><td style="color:var(--green)">−$51.4B</td><td style="color:var(--green)">−$20.4B</td></tr>
+</tbody>
+</table>
+<p style="font-family:Arial;font-size:11px;color:var(--muted);margin-top:8px;">All three are "net cash positive" — they hold more cash than they owe. Negative net debt is a sign of balance sheet strength. Apple's D/E looks alarming until you see the cash context.</p>
+</div>
+
+<p>Apple's debt-to-equity ratio looks alarming at 1.79x until you see its cash position. Apple holds more cash and marketable securities ($187.4B) than it owes in total debt ($111.1B) — it is <strong class="hl">"net cash positive"</strong> to the tune of $76.3 billion. The debt-to-equity ratio needs context. Benjamin Graham, whom you studied in Course 1.1, considered the balance sheet the most important financial statement because it reveals whether a company can survive a downturn.</p>
+
+<h3>Book Value and What It Means</h3>
+<p><strong class="hl">Book value</strong> is another name for shareholders' equity — the accounting value of what owners theoretically own. <strong class="hl">Book value per share</strong> divides this by shares outstanding. Graham famously looked for stocks trading below book value, reasoning that you were paying less than the liquidation value of the company's assets. Today, many great companies (especially tech) trade far above book value because their most valuable assets — brands, software, network effects — don't fully appear on the balance sheet. Alphabet (Google) trades at multiples of its book value because its search engine monopoly, YouTube, and AI capabilities aren't balance sheet line items.</p>
+
+<div class="callout callout-red">
+<div class="callout-label">Risk Insight — Why Leverage Kills</div>
+<p>At Lehman's 30:1 leverage, equity was only about 3% of assets. A mere 3–4% decline in asset values erased all equity and rendered the company insolvent. When Howard Marks warns about risk, he's often talking about balance sheet risk. A company can be profitable on the income statement and still go bankrupt if it can't pay debts when they come due. This is why Beat Lynch's Risk Vector dimension examines not just profitability, but financial structure — the balance sheet is where survival is determined.</p>
+</div>
+
+<div class="callout">
+<div class="callout-label">Beat Lynch Connection</div>
+<p>Beat Lynch's Stock Analyzer scores every company's balance sheet health. Debt ratios, cash positions, and leverage metrics feed directly into the Risk Vector and Moat Strength dimensions. A company with deteriorating balance sheet quality will see its scores decline — even if earnings look fine today.</p>
+</div>
+
+<div class="key-takeaway">
+<div class="key-takeaway-title">Lesson 2 Key Takeaway</div>
+<p>The balance sheet is a snapshot of what a company owns (assets), owes (liabilities), and the residual value for owners (equity) at a single point in time. The accounting equation (Assets = Liabilities + Equity) must always balance. Leverage (measured by debt-to-equity) isn't inherently dangerous — it's dangerous when cash generation can't support it. Always check net debt (debt minus cash) for the full picture, and remember that book value often understates the true value of modern companies with intangible assets.</p>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- LESSON 3: THE CASH FLOW STATEMENT -->
+<!-- ============================================================ -->
+<div class="lesson-card" onclick="toggleLesson('d3',this)">
+<div class="lesson-num">3</div>
+<div><div class="lesson-title">The Cash Flow Statement</div><div class="lesson-desc">Cash is reality — why profitable companies can still run out of money.</div></div>
+<div class="lesson-mp">+20 MP</div>
+</div>
+<div class="lesson-detail" id="d3">
+<div class="tag-row">
+<span class="ctag">Operating Cash Flow</span>
+<span class="ctag">Investing Cash Flow</span>
+<span class="ctag">Financing Cash Flow</span>
+<span class="ctag">Free Cash Flow</span>
+<span class="ctag">Accrual vs. Cash</span>
+</div>
+
+<p>In 2001, Enron reported $111 billion in revenue and appeared consistently profitable. It was also generating negative operating cash flow. The income statement said "profitable." The cash flow statement said "running out of money." Within months, Enron was the largest bankruptcy in American history at that time. The lesson: <strong class="hl">earnings are an opinion; cash flow is a fact.</strong></p>
+
+<div class="spotlight">
+<div class="spotlight-header"><span class="spotlight-icon">🔍</span><span class="spotlight-label">Real-World Spotlight</span></div>
+<div class="spotlight-company">WorldCom (2002) — The Income Statement Lied, Cash Flow Told the Truth</div>
+<p>WorldCom, the telecom giant, inflated its income statement by improperly classifying $3.8 billion in operating expenses as capital expenditures — making costs disappear from the P&L and boosting reported earnings. But the cash flow statement couldn't hide the truth: the money was still being spent. Operating cash flow was deteriorating even as earnings looked strong. Investors who tracked cash flow spotted the divergence. WorldCom's fraud was eventually uncovered, leading to the largest bankruptcy filing in U.S. history at that time ($107 billion in assets). This is why professional investors treat the cash flow statement as the ultimate reality check.</p>
+</div>
+
+<h3>Why Cash Flow Exists: Accrual vs. Cash Accounting</h3>
+<p>The income statement uses <strong class="hl">accrual accounting</strong> — it records revenue when earned and expenses when incurred, regardless of when cash actually changes hands. If Apple ships $10 billion in iPhones to carriers in December but doesn't collect payment until February, the income statement records the revenue in December. The cash doesn't arrive until February. This gap between "earned" and "received" is why the cash flow statement exists. It tracks <strong class="hl">actual cash moving in and out</strong> of the business — no opinions, no estimates, just bank account reality.</p>
+
+<h3>Three Sections</h3>
+<p>The cash flow statement divides all cash movement into three categories, each answering a distinct question about the business.</p>
+
+<div class="exhibit">
+<div class="exhibit-label">Exhibit 3.1 — The Three Sections of Cash Flow: Apple FY2023</div>
+<div class="flow-diagram">
+<div class="flow-node highlight">
+<div class="flow-node-label"><strong class="hl">Operating Cash Flow (OCF)</strong><br><span style="font-size:11px;color:var(--muted)">"Is the core business generating cash?"</span></div>
+<div class="flow-node-val" style="color:var(--green)">+$110.5B</div>
+</div>
+<div class="flow-arrow">▼</div>
+<div class="flow-node">
+<div class="flow-node-label"><strong class="hl">Investing Cash Flow (ICF)</strong><br><span style="font-size:11px;color:var(--muted)">"Is the company investing in its future?"</span></div>
+<div class="flow-node-val" style="color:var(--red)">−$3.7B</div>
+</div>
+<div class="flow-arrow">▼</div>
+<div class="flow-node">
+<div class="flow-node-label"><strong class="hl">Financing Cash Flow</strong><br><span style="font-size:11px;color:var(--muted)">"How is capital being returned or raised?"</span></div>
+<div class="flow-node-val" style="color:var(--red)">−$108.5B</div>
+</div>
+<div class="flow-arrow">▼</div>
+<div class="flow-node" style="border-color:var(--gold);">
+<div class="flow-node-label"><strong style="color:var(--gold)">Net Change in Cash</strong></div>
+<div class="flow-node-val" style="color:var(--gold)">−$1.7B</div>
+</div>
+</div>
+<p style="font-family:Arial;font-size:11px;color:var(--muted);margin-top:6px;">Apple generated massive operating cash, spent little on capex (net), and returned over $108B to shareholders via buybacks and dividends. The company's cash position barely changed — nearly all operating cash went back to shareholders.</p>
+</div>
+
+<p><strong class="hl">Operating cash flow (OCF)</strong> starts with net income and adjusts for non-cash charges (like depreciation — the gradual expense recognition of assets like equipment) and changes in working capital. It measures the cash generated by the business itself. <strong class="hl">Investing cash flow (ICF)</strong> captures capital expenditures (buying equipment, factories, data centers), acquisitions, and investment purchases or sales. <strong class="hl">Financing cash flow</strong> tracks cash from issuing or repaying debt, issuing or buying back stock, and paying dividends.</p>
+
+<h3>Free Cash Flow — The Investor's Metric</h3>
+<p>The single most important number many professional investors look at is <strong class="hl">free cash flow (FCF)</strong>:</p>
+
+<div class="formula-box pulse-gold">
+<div class="formula">Free Cash Flow = Operating Cash Flow − Capital Expenditures</div>
+<div class="formula-note">This is the cash left over after the company has funded operations and maintained/grown its asset base. It's "owner's money."</div>
+</div>
+
+<p>Free cash flow is "owner's money" — it can be used to pay dividends, buy back shares, reduce debt, or fund acquisitions. A company that consistently generates positive free cash flow has real choices. A company burning through cash has to keep begging for more from lenders or investors.</p>
+
+<div class="exhibit">
+<div class="exhibit-label">Exhibit 3.2 — Net Income vs. Free Cash Flow: Who's Really Generating Cash?</div>
+<table class="fw-table">
+<thead><tr><th>Company</th><th>Net Income</th><th>Oper. Cash Flow</th><th>CapEx</th><th>Free Cash Flow</th><th>FCF vs. NI</th></tr></thead>
+<tbody>
+<tr><td><strong class="hl">Apple</strong></td><td>$97.0B</td><td>$110.5B</td><td>$11.0B</td><td style="color:var(--green)">$99.6B</td><td style="color:var(--green)">FCF > NI ✓</td></tr>
+<tr><td><strong class="hl">Amazon</strong></td><td>$30.4B</td><td>$84.9B</td><td>$52.7B</td><td style="color:var(--green)">$32.2B</td><td style="color:var(--green)">FCF ≈ NI</td></tr>
+<tr><td><strong class="hl">Tesla</strong></td><td>$15.0B</td><td>$13.3B</td><td>$8.9B</td><td style="color:var(--orange)">$4.4B</td><td style="color:var(--orange)">FCF < NI ⚠</td></tr>
+</tbody>
+</table>
+<p style="font-family:Arial;font-size:11px;color:var(--muted);margin-top:8px;">Apple's FCF exceeds net income — a hallmark of high earnings quality. Tesla's FCF is far below NI due to heavy capital spending on Gigafactories. Amazon's massive CapEx ($52.7B in warehouses and data centers) still leaves healthy FCF.</p>
+</div>
+
+<p>Apple's free cash flow actually exceeds its net income — a sign of extremely high earnings quality (OCF > NI because depreciation, a non-cash charge, is added back). Tesla's free cash flow is far below net income, partly because of its heavy capital spending on new Gigafactories. Amazon spends enormously on infrastructure but generates so much operating cash that FCF remains healthy. <strong class="hl">The gap between net income and free cash flow tells you how capital-intensive the business is and how reliable the "earnings" really are.</strong></p>
+
+<div class="spotlight">
+<div class="spotlight-header"><span class="spotlight-icon">🔍</span><span class="spotlight-label">Real-World Spotlight</span></div>
+<div class="spotlight-company">Netflix — Profitable On Paper, Burning Cash for Years</div>
+<p>Between 2015 and 2019, Netflix reported positive and growing net income every year. But its free cash flow was deeply negative — burning $3+ billion in cash annually to fund original content production. The income statement showed a profitable company; the cash flow statement showed a company bleeding money. Netflix had to constantly raise debt to fund the gap. Only by 2020 did Netflix finally turn FCF positive as content costs stabilized. This is a textbook case of why you must read the cash flow statement alongside the income statement.</p>
+</div>
+
+<div class="two-col">
+<div style="background:rgba(34,197,94,.06);border:1px solid rgba(34,197,94,.2);border-radius:8px;padding:16px;">
+<div style="font-family:Arial;font-size:12px;font-weight:700;color:var(--green);margin-bottom:8px;letter-spacing:1px;">HEALTHY CASH FLOW SIGNS</div>
+<div style="font-family:Arial;font-size:12px;color:#BEC3D4;line-height:1.9;">OCF consistently exceeds net income<br>FCF is positive and growing<br>CapEx is disciplined relative to OCF<br>Company can self-fund growth<br>Cash conversion is reliable year after year</div>
+</div>
+<div style="background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.2);border-radius:8px;padding:16px;">
+<div style="font-family:Arial;font-size:12px;font-weight:700;color:var(--red);margin-bottom:8px;letter-spacing:1px;">WARNING SIGNS</div>
+<div style="font-family:Arial;font-size:12px;color:#BEC3D4;line-height:1.9;">Net income positive, OCF negative<br>Growing gap between NI and OCF<br>Constantly raising new debt or equity<br>FCF negative for multiple consecutive years<br>Rising revenue but flat or declining cash flow</div>
+</div>
+</div>
+
+<div class="callout callout-green">
+<div class="callout-label">Buffett's Lens</div>
+<p>Warren Buffett's concept of "owner earnings" — which you learned in Course 1.1 — is essentially free cash flow with an adjustment for maintenance capital expenditures. When Beat Lynch calculates Moat Strength, free cash flow consistency is a core input. A company that generates durable free cash flow year after year demonstrates the kind of economic moat Buffett prizes.</p>
+</div>
+
+<div class="callout">
+<div class="callout-label">Beat Lynch Connection</div>
+<p>The cash flow statement feeds multiple Beat Lynch scoring dimensions. Growth Quality examines OCF trends. Risk Vector checks whether cash flow can cover obligations. ROIC Screening Logic (Greenblatt's lens) depends on capital expenditures to calculate invested capital. Without cash flow data, no composite score can be trusted.</p>
+</div>
+
+<div class="key-takeaway">
+<div class="key-takeaway-title">Lesson 3 Key Takeaway</div>
+<p>"Earnings are an opinion; cash flow is a fact." The cash flow statement tracks actual money moving in and out, divided into operating (core business), investing (assets and acquisitions), and financing (debt and shareholder returns). Free cash flow (OCF minus CapEx) is the investor's key metric — it's the real money available to shareholders. When net income and operating cash flow diverge, investigate immediately. Companies like Enron, WorldCom, and early Netflix prove that reported profits can mask cash reality.</p>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- LESSON 4: CONNECTING THE THREE STATEMENTS -->
+<!-- ============================================================ -->
+<div class="lesson-card" onclick="toggleLesson('d4',this)">
+<div class="lesson-num">4</div>
+<div><div class="lesson-title">Connecting the Three Statements</div><div class="lesson-desc">How the income statement, balance sheet, and cash flow statement form one integrated system.</div></div>
+<div class="lesson-mp">+20 MP</div>
+</div>
+<div class="lesson-detail" id="d4">
+<div class="tag-row">
+<span class="ctag">Integration</span>
+<span class="ctag">Retained Earnings</span>
+<span class="ctag">Reconciliation</span>
+<span class="ctag">Three Lenses</span>
+<span class="ctag">Financial Health</span>
+</div>
+
+<p>A common mistake among beginners is treating each financial statement as a standalone document. In reality, the three statements are <strong class="hl">deeply interconnected</strong> — like three cameras filming the same business from different angles. The income statement shows profitability. The balance sheet shows financial position. The cash flow statement shows liquidity. Together, they tell the complete story. Separately, each one can mislead you.</p>
+
+<h3>How They Link</h3>
+
+<div class="exhibit">
+<div class="exhibit-label">Exhibit 4.1 — The Three-Statement Connection Map</div>
+<div class="connect-grid">
+<div class="connect-box" style="background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.3);">
+<div class="connect-label" style="color:var(--accent)">Income Statement</div>
+<div class="connect-desc">"How profitable was the business this period?"<br><br><strong style="color:#fff">Key output:</strong> Net Income</div>
+</div>
+<div class="connect-arrow">→</div>
+<div class="connect-box" style="background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.3);">
+<div class="connect-label" style="color:var(--gold)">Balance Sheet</div>
+<div class="connect-desc">"What does the company own and owe right now?"<br><br><strong style="color:#fff">Key link:</strong> Net income flows into retained earnings (equity)</div>
+</div>
+<div class="connect-arrow">→</div>
+<div class="connect-box" style="background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.3);">
+<div class="connect-label" style="color:var(--green)">Cash Flow Statement</div>
+<div class="connect-desc">"Where did the cash actually go?"<br><br><strong style="color:#fff">Key link:</strong> Ending cash ties back to balance sheet cash line</div>
+</div>
+</div>
+</div>
+
+<p>The connections work like this: <strong class="hl">Net income</strong> from the income statement flows into <strong class="hl">retained earnings</strong> on the balance sheet — this is the portion of shareholders' equity that accumulates profits not paid out as dividends. Retained earnings grow by net income minus any dividends paid each period. The cash flow statement starts with net income and reconciles it to actual cash, with the ending cash balance matching the cash line on the balance sheet. When a company buys equipment (CapEx), it appears on the cash flow statement as an investing outflow and on the balance sheet as a new PP&E asset. When a company borrows money, it appears on the cash flow statement as a financing inflow and on the balance sheet as a new liability.</p>
+
+<div class="exhibit">
+<div class="exhibit-label">Exhibit 4.2 — Tracing a $1B Equipment Purchase Across All Three Statements</div>
+<table class="fw-table">
+<thead><tr><th>Statement</th><th>Where It Appears</th><th>Impact</th></tr></thead>
+<tbody>
+<tr><td><strong class="hl">Income Statement</strong></td><td>Depreciation expense (spread over useful life)</td><td>Reduces net income by ~$100M/year over 10 years</td></tr>
+<tr><td><strong class="hl">Balance Sheet</strong></td><td>PP&E increases by $1B; cash decreases by $1B</td><td>Total assets unchanged — it's an <strong class="hl">asset swap</strong> (one asset traded for another)</td></tr>
+<tr><td><strong class="hl">Cash Flow Statement</strong></td><td>CapEx of $1B in investing section; depreciation add-back in operating section</td><td>Operating cash flow adds back non-cash depreciation; investing cash flow shows $1B outflow</td></tr>
+</tbody>
+</table>
+<p style="font-family:Arial;font-size:11px;color:var(--muted);margin-top:8px;">This is why total assets don't change when cash buys equipment — it's an asset swap. Cash goes down, PP&E goes up by the same amount.</p>
+</div>
+
+<h3>The Three Lenses Framework</h3>
+<p>Think of the three statements as answering three different questions about the same company. To truly understand a business, you need all three answers.</p>
+
+<div class="exhibit">
+<div class="exhibit-label">Exhibit 4.3 — Three Lenses, Three Questions</div>
+<div class="three-col">
+<div style="background:rgba(59,130,246,.06);border:1px solid rgba(59,130,246,.2);border-radius:8px;padding:16px;text-align:center;">
+<div style="font-family:Arial;font-size:32px;margin-bottom:8px;">📊</div>
+<div style="font-family:Arial;font-size:12px;font-weight:700;color:var(--accent);letter-spacing:1px;margin-bottom:6px;">INCOME STATEMENT</div>
+<div style="font-family:Arial;font-size:13px;color:#fff;font-weight:700;margin-bottom:6px;">"Is it profitable?"</div>
+<div style="font-family:Arial;font-size:12px;color:#BEC3D4;line-height:1.6;">Measures performance <strong style="color:#fff">over a period</strong>. Revenue growth, margin health, earnings quality.</div>
+</div>
+<div style="background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.2);border-radius:8px;padding:16px;text-align:center;">
+<div style="font-family:Arial;font-size:32px;margin-bottom:8px;">🏛️</div>
+<div style="font-family:Arial;font-size:12px;font-weight:700;color:var(--gold);letter-spacing:1px;margin-bottom:6px;">BALANCE SHEET</div>
+<div style="font-family:Arial;font-size:13px;color:#fff;font-weight:700;margin-bottom:6px;">"Is it strong?"</div>
+<div style="font-family:Arial;font-size:12px;color:#BEC3D4;line-height:1.6;">Snapshot of financial position <strong style="color:#fff">at a point in time</strong>. Asset quality, debt load, equity cushion.</div>
+</div>
+<div style="background:rgba(34,197,94,.06);border:1px solid rgba(34,197,94,.2);border-radius:8px;padding:16px;text-align:center;">
+<div style="font-family:Arial;font-size:32px;margin-bottom:8px;">💵</div>
+<div style="font-family:Arial;font-size:12px;font-weight:700;color:var(--green);letter-spacing:1px;margin-bottom:6px;">CASH FLOW STATEMENT</div>
+<div style="font-family:Arial;font-size:13px;color:#fff;font-weight:700;margin-bottom:6px;">"Is it real?"</div>
+<div style="font-family:Arial;font-size:12px;color:#BEC3D4;line-height:1.6;">Tracks actual cash movement <strong style="color:#fff">over a period</strong>. Earnings quality, cash generation, capital allocation.</div>
+</div>
+</div>
+</div>
+
+<h3>When the Statements Disagree</h3>
+<p>The most important analytical moments come when the three statements tell <strong class="hl">different stories</strong>. A company reporting growing earnings (income statement) while operating cash flow declines (cash flow statement) may be using aggressive accounting. A company with thin profits but a fortress balance sheet (lots of cash, little debt) may be more resilient than its income statement suggests. Learning to spot these contradictions is what separates professional analysis from surface-level reading.</p>
+
+<div class="exhibit">
+<div class="exhibit-label">Exhibit 4.4 — Red Flags: When Statements Tell Conflicting Stories</div>
+<table class="fw-table">
+<thead><tr><th>Pattern</th><th>What It Might Mean</th><th>Real-World Example</th></tr></thead>
+<tbody>
+<tr><td><strong class="hl">NI ↑ but OCF ↓</strong></td><td>Earnings quality deteriorating; possible aggressive revenue recognition</td><td><strong>Enron (2000–2001)</strong> — reported rising earnings while cash flow collapsed, leading to bankruptcy</td></tr>
+<tr><td><strong class="hl">NI positive, equity shrinking</strong></td><td>Company returning more to shareholders than it earns (buybacks exceed earnings)</td><td><strong>Apple</strong> — has had negative book value in some periods due to over $600B in cumulative buybacks</td></tr>
+<tr><td><strong class="hl">Revenue ↑, FCF flat</strong></td><td>Growth is capital-intensive; each dollar of revenue requires heavy reinvestment</td><td><strong>Amazon (2012–2016)</strong> — warehouse and AWS data center build-out consumed most cash generated</td></tr>
+<tr><td><strong class="hl">NI low, OCF high</strong></td><td>Non-cash charges (depreciation, amortization) depress earnings but cash is strong</td><td><strong>AT&T, Delta Airlines</strong> — asset-heavy firms where depreciation is enormous but cash flow is healthy</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="spotlight">
+<div class="spotlight-header"><span class="spotlight-icon">🔍</span><span class="spotlight-label">Real-World Spotlight</span></div>
+<div class="spotlight-company">General Electric Under Jack Welch — When All Three Statements Looked Perfect (But Weren't)</div>
+<p>During the 1990s and 2000s, GE was considered the gold standard of American business. Revenue grew steadily, margins held, and the balance sheet appeared strong. But GE's financial arm (GE Capital) was obscuring enormous risks. Insurance liabilities were underestimated, asset quality was deteriorating, and earnings were being "smoothed" through reserve manipulations. It took years for the truth to emerge, but when it did, GE's stock fell from $60 to under $7. The lesson: even when all three statements look clean, professional investors dig into the footnotes and ask whether the numbers are too perfect. Genuine businesses have messy quarters — suspiciously smooth performance over decades should raise questions, not inspire confidence.</p>
+</div>
+
+<div class="callout callout-purple">
+<div class="callout-label">Second-Level Thinking</div>
+<p>Howard Marks would say: "Everyone reads the income statement. Second-level thinkers read all three statements together and look for contradictions." The income statement is the most followed and the most easily manipulated. The cash flow statement is the hardest to fake. The balance sheet reveals who survives a storm. Reading them together is how professionals think.</p>
+</div>
+
+<div class="callout">
+<div class="callout-label">Beat Lynch Connection</div>
+<p>Beat Lynch's Mean Magic composite score synthesizes data from all three financial statements simultaneously. No single statement powers any dimension alone. The Stock Analyzer visually flags when statements are telling inconsistent stories — a feature you'll learn to read in Tier 2. For now, remember: one statement can lie, but three statements together reveal the truth.</p>
+</div>
+
+<div class="key-takeaway">
+<div class="key-takeaway-title">Lesson 4 Key Takeaway</div>
+<p>The three financial statements are not standalone documents — they are one integrated system. Net income flows from the income statement into retained earnings on the balance sheet. The cash flow statement reconciles net income to actual cash, and its ending balance matches the balance sheet's cash line. When the statements tell conflicting stories — rising earnings with declining cash flow, or thin profits with a fortress balance sheet — that's where the most important analytical insights live. One statement can mislead; three statements together reveal the truth.</p>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- LESSON 5: INTRODUCTION TO VALUATION THINKING -->
+<!-- ============================================================ -->
+<div class="lesson-card" onclick="toggleLesson('d5',this)">
+<div class="lesson-num">5</div>
+<div><div class="lesson-title">Introduction to Valuation Thinking</div><div class="lesson-desc">Every stock has a price. The real question is whether that price reflects value — and how to begin thinking about the difference.</div></div>
+<div class="lesson-mp">+20 MP</div>
+</div>
+<div class="lesson-detail" id="d5">
+<div class="tag-row">
+<span class="ctag">Intrinsic Value</span>
+<span class="ctag">Price vs. Value</span>
+<span class="ctag">P/E Ratio</span>
+<span class="ctag">Margin of Safety</span>
+<span class="ctag">Valuation Multiples</span>
+</div>
+
+<p>On January 3, 2022, Apple's stock closed at $182.01 per share, valuing the company at roughly $3 trillion. Twelve months later, the stock was $125.07 — a 31% decline. Apple's revenue had barely changed. Its margins held steady. Its products were the same. What moved wasn't the business; <strong class="hl">what moved was the market's opinion of what that business was worth.</strong> Understanding the gap between price and value is the single most important concept in all of investing.</p>
+
+<h3>Price vs. Value</h3>
+<p><strong class="hl">Price</strong> is what you pay. It's determined by supply and demand in the market — by what the last buyer was willing to pay and the last seller was willing to accept. Prices can be driven by emotion, momentum, panic, or euphoria. <strong class="hl">Intrinsic value</strong> is what a business is actually worth — the present value of all the cash it will generate in the future. Intrinsic value is not a single number; it's an estimate, a range, a judgment call. But it's grounded in the fundamentals you've learned in this course: earnings, cash flow, assets, growth.</p>
+
+<p>Benjamin Graham, the father of value investing from Course 1.1, framed this perfectly with his allegory of <strong class="hl">Mr. Market</strong>: imagine a business partner who shows up every day and offers to buy your shares or sell you his — sometimes at absurdly high prices, sometimes absurdly low. Your job as an investor is to take advantage of his mood swings, not be infected by them.</p>
+
+<div class="spotlight">
+<div class="spotlight-header"><span class="spotlight-icon">🔍</span><span class="spotlight-label">Real-World Spotlight</span></div>
+<div class="spotlight-company">Cisco Systems, March 2000 — When Price Completely Disconnected From Value</div>
+<p>At the peak of the dot-com bubble, Cisco traded at a P/E of over 150x and was briefly the most valuable company in the world at ~$555 billion. Investors were paying $150 for every $1 of earnings. Even if Cisco's earnings had doubled — then doubled again — the stock was still overpriced. Cisco was (and remains) an excellent company. But the price had so far exceeded any reasonable estimate of intrinsic value that investors who bought at the peak waited over 20 years just to break even. The business was fine. The price was insane. This is why valuation matters.</p>
+</div>
+
+<div class="exhibit">
+<div class="exhibit-label">Exhibit 5.1 — Price vs. Estimated Intrinsic Value: Conceptual Illustration</div>
+<div style="position:relative;height:240px;margin:12px 0 16px;font-family:Arial,sans-serif;">
+<!-- Value band -->
+<div style="position:absolute;top:70px;left:0;right:0;height:50px;background:rgba(201,168,76,.1);border-top:2px dashed var(--gold);border-bottom:2px dashed var(--gold);display:flex;align-items:center;justify-content:center;">
+<span style="font-size:11px;color:var(--gold);font-weight:700;letter-spacing:1px;">ESTIMATED INTRINSIC VALUE RANGE</span>
+</div>
+<!-- Price line simulation -->
+<svg viewBox="0 0 800 240" style="width:100%;height:100%;" preserveAspectRatio="none">
+<path d="M0,130 Q50,140 100,120 T200,60 T300,30 T400,100 T500,150 T600,180 T700,120 T800,90" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linecap="round"/>
+<text x="30" y="17" fill="var(--accent)" font-size="12" font-family="Arial" font-weight="700">MARKET PRICE</text>
+<!-- Overvalued zone -->
+<rect x="220" y="15" width="120" height="50" rx="4" fill="rgba(34,197,94,.08)" stroke="rgba(34,197,94,.3)" stroke-width="1"/>
+<text x="245" y="35" fill="var(--green)" font-size="11" font-family="Arial" font-weight="700">OVERVALUED</text>
+<text x="237" y="52" fill="var(--muted)" font-size="9" font-family="Arial">Price above value</text>
+<!-- Undervalued zone -->
+<rect x="470" y="170" width="130" height="50" rx="4" fill="rgba(239,68,68,.08)" stroke="rgba(239,68,68,.3)" stroke-width="1"/>
+<text x="492" y="190" fill="var(--red)" font-size="11" font-family="Arial" font-weight="700">UNDERVALUED</text>
+<text x="485" y="207" fill="var(--muted)" font-size="9" font-family="Arial">Price below value</text>
+<!-- Connecting lines -->
+<line x1="280" y1="65" x2="280" y2="30" stroke="var(--green)" stroke-width="1" stroke-dasharray="3"/>
+<line x1="535" y1="170" x2="535" y2="125" stroke="var(--red)" stroke-width="1" stroke-dasharray="3"/>
+<!-- Margin of safety label -->
+<text x="600" y="150" fill="var(--gold)" font-size="9" font-family="Arial" font-weight="700">← BUY ZONE</text>
+</svg>
+</div>
+<p style="font-family:Arial;font-size:11px;color:var(--muted);text-align:center;">Conceptual illustration. Price oscillates around intrinsic value over time. Skilled investors buy when price falls below the value range (creating a margin of safety) and avoid buying when it's above.</p>
+</div>
+
+<h3>The P/E Ratio: Your First Valuation Tool</h3>
+<p>The <strong class="hl">price-to-earnings ratio (P/E)</strong> is the most widely quoted valuation metric in finance. It answers a simple question: <strong class="hl">how many dollars are investors paying for each dollar of annual earnings?</strong></p>
+
+<div class="formula-box pulse-gold">
+<div class="formula">P/E Ratio = Stock Price ÷ Earnings Per Share</div>
+<div class="formula-note">A P/E of 20x means investors pay $20 for every $1 of annual earnings.</div>
+</div>
+
+<p>If a stock trades at $150 and earns $10 per share, its P/E is 15x. You're paying $15 for every $1 of earnings. A higher P/E generally means investors expect faster future growth — they're willing to pay more today for each dollar of current earnings because they believe those earnings will grow rapidly. A lower P/E might indicate a bargain, or it might indicate a company in decline with shrinking future earnings. Critical insight: <strong class="hl">a low stock price does not mean a stock is cheap, and a high stock price does not mean a stock is expensive.</strong> "Cheap" and "expensive" depend entirely on the relationship between price and earnings (or other fundamentals), not on the dollar amount of the share price alone.</p>
+
+<div class="exhibit">
+<div class="exhibit-label">Exhibit 5.2 — P/E Ratios Across Business Types (Approximate, FY2023)</div>
+<table class="fw-table">
+<thead><tr><th>Company</th><th>Stock Price</th><th>EPS</th><th>P/E Ratio</th><th>What It Implies</th></tr></thead>
+<tbody>
+<tr><td><strong class="hl">Nvidia</strong></td><td>~$495</td><td>$11.93</td><td style="color:var(--orange)">~41x</td><td>Sky-high growth expectations (AI boom); if earnings double, effective P/E drops to ~20x</td></tr>
+<tr><td><strong class="hl">Apple</strong></td><td>~$192</td><td>$6.13</td><td style="color:var(--accent)">~31x</td><td>Premium brand, steady growth, pricing power, loyal ecosystem</td></tr>
+<tr><td><strong class="hl">JPMorgan</strong></td><td>~$170</td><td>$16.23</td><td style="color:var(--green)">~10x</td><td>Mature bank, cyclical earnings, lower growth expected</td></tr>
+<tr><td><strong class="hl">Ford</strong></td><td>~$12</td><td>$1.76</td><td style="color:var(--green)">~7x</td><td>Cyclical, capital-heavy, uncertain EV transition</td></tr>
+</tbody>
+</table>
+<p style="font-family:Arial;font-size:11px;color:var(--muted);margin-top:8px;">Ford's $12 share price looks "cheap" — but at 7x earnings it may reflect genuine uncertainty. Nvidia at $495 looks "expensive" — but 41x may be justified if AI-driven earnings keep compounding. Price alone tells you nothing about value.</p>
+</div>
+
+<h3>The Limitations of P/E</h3>
+<p>The P/E ratio is useful but deeply limited. It doesn't work for companies with negative earnings (you can't divide by a loss). It can be distorted by one-time charges, accounting choices, or different tax rates. Most importantly, it ignores growth rates entirely — a company growing earnings at 30% per year arguably deserves a higher P/E than one growing at 5%, because today's earnings are a fraction of what's coming.</p>
+
+<p>Peter Lynch, from Course 1.1, addressed this with the <strong class="hl">PEG ratio</strong> (P/E divided by the earnings growth rate). A PEG of 1.0 means the P/E equals the growth rate — roughly "fair value" in Lynch's framework. A PEG below 1.0 suggests you're getting growth at a reasonable price. Nvidia at 41x P/E with 50%+ earnings growth would have a PEG below 1.0 — suggesting the high P/E might actually be justified. These and other valuation refinements will be explored in depth in later tiers.</p>
+
+<h3>Margin of Safety</h3>
+<p>Benjamin Graham's most enduring contribution to investing is the concept of <strong class="hl">margin of safety</strong>: the gap between the price you pay and your estimate of intrinsic value. If you believe a stock is worth $100 and you buy it at $70, your margin of safety is 30%. This buffer protects you from errors in your own analysis, unforeseen problems, and bad luck. Graham insisted on it because <strong class="hl">the future is inherently uncertain</strong> — every estimate of intrinsic value is just that, an estimate.</p>
+
+<div class="two-col">
+<div class="stat-card pulse-gold">
+<div class="stat-num">30%</div>
+<div class="stat-label">Graham's typical minimum margin of safety — buy at least 30% below estimated intrinsic value to create a buffer against error</div>
+</div>
+<div class="stat-card">
+<div class="stat-num">~16x</div>
+<div class="stat-label">Historical average P/E of the S&P 500 — a useful baseline for context, not a rigid rule for any individual stock</div>
+</div>
+</div>
+
+<div class="spotlight">
+<div class="spotlight-header"><span class="spotlight-icon">🔍</span><span class="spotlight-label">Real-World Spotlight</span></div>
+<div class="spotlight-company">Peloton — When Hype Destroys Margin of Safety</div>
+<p>In January 2021, Peloton traded at ~$155 per share — over 30x revenue (not earnings — it was losing money). The stock had soared during COVID lockdowns. There was no margin of safety; the price baked in years of optimistic growth that never materialized. By 2023, Peloton traded below $6. Investors who paid $155 lost over 96% of their investment. If they had demanded a margin of safety — asking "what is this business actually worth based on sustainable cash flow?" — they would have recognized the price was disconnected from any reasonable estimate of value. Graham's margin of safety exists specifically to prevent this kind of catastrophic loss.</p>
+</div>
+
+<div class="callout">
+<div class="callout-label">Beat Lynch Connection</div>
+<p>Every dimension in Beat Lynch's Mean Magic scoring system ultimately serves one purpose: helping you determine whether a stock's price reflects its intrinsic value. Growth Quality estimates future earnings power. Moat Strength assesses durability. Risk Vector evaluates downside. The composite score is a structured way to think about valuation — the very concept you've just begun to learn. In Tier 2, you'll apply these tools. For now, understand this: price tells you nothing about value. The financial statements you've learned to read in this course are the foundation for figuring out value yourself.</p>
+</div>
+
+<div class="key-takeaway">
+<div class="key-takeaway-title">Lesson 5 Key Takeaway</div>
+<p>Price is what you pay; value is what you get. The P/E ratio (Price ÷ EPS) is your first tool for comparing price to earnings — a low P/E may signal a bargain or a company in decline, while a high P/E may reflect justified growth expectations or dangerous overvaluation. A low share price does not mean a stock is cheap. The PEG ratio (P/E ÷ Growth Rate) adjusts for growth. Graham's margin of safety — buying significantly below estimated intrinsic value — is the investor's primary defense against uncertainty. Everything you've learned in this course (income statements, balance sheets, cash flow) exists to help you answer one question: what is this business actually worth?</p>
+</div>
+
+<div class="completion-badge">
+<div style="font-size:32px;margin-bottom:10px">🏛️</div>
+<div style="font-family:Arial;font-size:12px;font-weight:700;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:6px">Financial Literacy for Investors — Curriculum Complete</div>
+<div style="font-family:Arial;font-size:22px;font-weight:900;color:#fff;margin-bottom:8px">Ready for the Final Exam</div>
+<div style="font-family:Arial;font-size:13px;color:var(--muted);max-width:520px;margin:0 auto;">You can now read the three core financial statements, understand how they connect, and think about valuation. These skills form the bedrock for every analytical framework in Tier 2. Complete the exam to earn your 100 Mastery Points and finish Tier 1: Investor Foundations.</div>
+</div>
+</div>
+
+</div><!-- /lesson-grid -->
+</div><!-- /section -->
+</div><!-- /container -->
+</div><!-- /tab-curriculum -->
+
+<!-- ============================================================ -->
+<!-- EXAM TAB -->
+<!-- ============================================================ -->
+<div id="tab-exam" class="tab-content">
+<div class="container"><div class="exam-wrap">
+<div id="exam-start">
+<div class="start-exam-wrap">
+<div class="course-label">Tier 1 · Financial Literacy for Investors · Final Exam</div>
+<h2>Course 1.4 Final Exam</h2>
+<p>15 questions across 5 lessons. Score 80% to earn 100 Mastery Points and complete Tier 1: Investor Foundations.</p>
+<div class="exam-rules">
+<div class="rule-card"><div class="r-num">15</div><div class="r-label">Questions</div></div>
+<div class="rule-card"><div class="r-num">80%</div><div class="r-label">Pass Threshold</div></div>
+<div class="rule-card"><div class="r-num">100</div><div class="r-label">MP on Pass</div></div>
+<div class="rule-card"><div class="r-num">5</div><div class="r-label">Lessons Covered</div></div>
+</div>
+<button class="exam-btn" onclick="startExam()">Begin Exam</button>
+</div>
+</div>
+<div id="exam-body" style="display:none">
+<div class="score-bar-wrap" id="scoreBar">
+<div><div class="score-big" id="scoreFrac">0/0</div><div class="score-sub">Correct</div></div>
+<div style="flex:1;min-width:160px;"><div class="progress-track"><div class="progress-fill" id="progFill" style="width:0%"></div></div><div style="font-family:Arial;font-size:11px;color:var(--muted);margin-top:4px;display:flex;justify-content:space-between;"><span id="progLabel">0 of 15</span><span id="pctLabel">0%</span></div></div>
+</div>
+<div id="qContainer"></div>
+<div class="exam-result" id="examResult"></div>
+</div>
+</div></div>
+</div>
+
+<script>
+var Q=[
+// L1 — Income Statement (3 questions)
+{lesson:"The Income Statement",q:"A company reports $500 million in revenue and $200 million in cost of goods sold. Its gross profit is $300 million. What is the gross margin?",opts:["40%","60%","150%","$300 million — margins are expressed in dollars, not percentages"],ans:1,exp:"Gross margin = Gross profit ÷ Revenue = $300M ÷ $500M = 60%. Margins are always expressed as percentages, which allows comparison across companies of different sizes. 40% is the COGS-to-revenue ratio, not the gross margin. The lesson explicitly states: Gross Margin = Gross Profit ÷ Revenue."},
+{lesson:"The Income Statement",q:"Costco has a net margin of roughly 2.6% while Visa's net margin exceeds 50%. Based on what you learned about business models, which statement best explains this difference?",opts:["Costco is a failing business because its margins are too low","Visa has higher revenue than Costco, so its margins are higher","Costco's low-margin, high-volume model is by design, while Visa operates a capital-light toll-booth model","Visa is overcharging its customers and will face margin compression"],ans:2,exp:"Different business models produce different margin profiles. Costco deliberately operates on thin margins to offer low prices and earns most profit from membership fees — its 2.6% net margin is the plan, not a problem. Visa's toll-booth network model has minimal cost of goods sold; every additional transaction flows almost entirely to profit. Low margins don't indicate failure — Costco is enormously successful."},
+{lesson:"The Income Statement",q:"A company's net income jumped 40% in one quarter due to the sale of a corporate headquarters building. An investor who buys the stock based on this earnings surge is making what mistake?",opts:["Confusing revenue with profit","Ignoring the balance sheet entirely","Failing to distinguish between recurring operating earnings and one-time gains","Overweighting the P/E ratio"],ans:2,exp:"One-time gains (like asset sales) are non-recurring items — they inflate net income temporarily but don't reflect the company's ongoing earning power. The lesson warns that 'a single quarter's earnings can look great because the company sold a building, received a legal settlement, or took a tax benefit.' Smart investors distinguish between operating earnings (repeatable) and non-recurring items."},
+// L2 — Balance Sheet (3 questions)
+{lesson:"The Balance Sheet",q:"The fundamental accounting equation is Assets = Liabilities + Shareholders' Equity. If a company has $800 million in assets and $500 million in liabilities, what is its shareholders' equity?",opts:["$1.3 billion","$300 million","$500 million","Cannot be determined without additional information"],ans:1,exp:"Shareholders' equity = Assets − Liabilities = $800M − $500M = $300M. This equation must always balance — hence the name 'balance sheet.' Equity is the residual claim — what owners would theoretically receive if all assets were sold and all debts paid. This exact example is given in the lesson text."},
+{lesson:"The Balance Sheet",q:"Lehman Brothers had a debt-to-equity ratio of approximately 30:1 before its collapse. Why does extreme leverage create existential risk?",opts:["High leverage always means a company is committing fraud","A small decline in asset values can wipe out all equity, leaving the company unable to pay creditors","Leverage is only risky for banks, not for other types of companies","High debt-to-equity ratios always cause stock prices to decline immediately"],ans:1,exp:"At 30:1 leverage, equity is only about 3% of assets. A mere 3–4% decline in asset values erases all equity and renders the company insolvent. The lesson states this explicitly. Leverage amplifies both gains and losses. The key lesson from Graham and Marks: leverage is not inherently bad, but extreme leverage leaves no room for error."},
+{lesson:"The Balance Sheet",q:"A company reports $200 million in total debt but also holds $350 million in cash and marketable securities. This company is best described as:",opts:["Dangerously leveraged because it has $200M in debt","Net cash positive, meaning its liquid assets exceed its total debt","Insolvent because its equity must be negative","Risk-free because it holds more cash than debt"],ans:1,exp:"Net debt = Total debt − Cash = $200M − $350M = −$150M (net cash positive). The company holds more liquid assets than it owes in debt — a sign of balance sheet strength. Apple is a real-world example: $187.4B in cash and securities vs. $111.1B in debt. However, 'risk-free' goes too far — no investment is risk-free."},
+// L3 — Cash Flow Statement (3 questions)
+{lesson:"The Cash Flow Statement",q:"A company reports $50 million in net income but negative $20 million in operating cash flow. Which interpretation is most accurate?",opts:["The company is performing well because net income is positive","This is a red flag — earnings are not being supported by actual cash generation","Negative operating cash flow is normal for all companies","The company must be committing accounting fraud"],ans:1,exp:"When net income is positive but operating cash flow is negative, it suggests the company's reported profits aren't translating into real cash. This was the pattern at Enron before its collapse. The lesson states: 'earnings are an opinion; cash flow is a fact.' It doesn't necessarily mean fraud — it could reflect aggressive revenue recognition or working capital issues — but it demands investigation."},
+{lesson:"The Cash Flow Statement",q:"Free cash flow (FCF) is calculated as operating cash flow minus capital expenditures. Why do investors often prefer FCF over net income when evaluating a company?",opts:["FCF is always higher than net income, making the company look better","FCF measures actual cash available to shareholders after the business has maintained and invested in its assets","FCF ignores depreciation, which makes it simpler to calculate","FCF is required by SEC regulations while net income is optional"],ans:1,exp:"FCF represents the cash left over after funding operations and maintaining/growing the asset base — it's 'owner's money.' Unlike net income, which includes non-cash items and can be influenced by accounting choices, FCF shows what's actually available for dividends, buybacks, debt reduction, or acquisitions. Buffett's 'owner earnings' concept is essentially FCF. The lesson explicitly defines FCF as the investor's key metric."},
+{lesson:"The Cash Flow Statement",q:"Company A has net income of $80M, OCF of $95M, and CapEx of $15M. Company B has net income of $80M, OCF of $60M, and CapEx of $40M. Which company demonstrates stronger cash generation?",opts:["They are equal because both have $80M in net income","Company A, because its OCF exceeds net income and its FCF ($80M) far exceeds Company B's FCF ($20M)","Company B, because higher CapEx means it is investing more in growth","Neither — you cannot compare companies using cash flow metrics alone"],ans:1,exp:"Company A: FCF = $95M − $15M = $80M, with OCF exceeding net income (high earnings quality). Company B: FCF = $60M − $40M = $20M, with OCF below net income (lower earnings quality). Higher CapEx isn't automatically good — it means more cash is consumed, leaving less for shareholders. The lesson teaches that 'the gap between net income and free cash flow tells you how capital-intensive the business is and how reliable the earnings really are.'"},
+// L4 — Connecting the Three Statements (3 questions)
+{lesson:"Connecting the Three Statements",q:"Net income from the income statement flows into which line item on the balance sheet?",opts:["Total assets","Cash and cash equivalents","Retained earnings (a component of shareholders' equity)","Accounts payable"],ans:2,exp:"Net income increases retained earnings, which is part of shareholders' equity on the balance sheet. The lesson states: 'Retained earnings grow by net income minus any dividends paid each period.' This is one of the primary links connecting the income statement to the balance sheet. Cash is reconciled through the cash flow statement, not directly from net income."},
+{lesson:"Connecting the Three Statements",q:"A company reports rising net income over three years, but its operating cash flow has been declining. According to the three-statement framework, what should an investor conclude?",opts:["The company is performing well — net income is the most important metric","The declining OCF relative to rising net income is a red flag for deteriorating earnings quality","The statements are contradicting each other due to an accounting error","Cash flow doesn't matter as long as the income statement shows growth"],ans:1,exp:"When net income and operating cash flow diverge — especially when NI rises while OCF falls — it suggests the company may be using aggressive accounting or that its 'profits' aren't generating real cash. This pattern is listed explicitly in Exhibit 4.4 as a red flag ('NI ↑ but OCF ↓ = earnings quality deteriorating'). It was the pattern at Enron before its collapse. As Marks teaches, second-level thinkers read all three statements together to catch these contradictions."},
+{lesson:"Connecting the Three Statements",q:"A company purchases $1 billion in new manufacturing equipment using cash. On the balance sheet, total assets remain unchanged. Why?",opts:["The purchase wasn't recorded yet due to accounting lag","Cash decreased by $1B while PP&E increased by $1B — it was an asset swap","The company must have also borrowed $1B to offset the purchase","Equipment purchases don't appear on the balance sheet"],ans:1,exp:"When a company uses cash to buy equipment, one asset (cash) decreases while another asset (PP&E) increases by the same amount. Total assets are unchanged — this is an asset swap. The lesson's Exhibit 4.2 traces this exact scenario, showing the balance sheet impact as 'PP&E increases by $1B; cash decreases by $1B — Total assets unchanged (asset swap).'"},
+// L5 — Valuation Thinking (3 questions)
+{lesson:"Introduction to Valuation Thinking",q:"A stock trades at $100 per share and earns $5 per share in annual earnings. Its P/E ratio is 20x. If another stock trades at $25 per share with $5 in EPS, its P/E ratio is 5x. Which stock is 'cheaper' in valuation terms?",opts:["The $25 stock, because its share price is lower","The $100 stock, because it has the same EPS at a higher price, indicating more value","The $25 stock, because its P/E of 5x means investors pay less per dollar of earnings","They are equally valued because both earn $5 per share"],ans:2,exp:"'Cheap' in investing means a low price relative to earnings (or other fundamentals), not a low share price. At 5x P/E, you pay $5 for every $1 of earnings. At 20x, you pay $20 for every $1. The $25 stock is cheaper in valuation terms. The lesson explicitly states: 'a low stock price does not mean a stock is cheap, and a high stock price does not mean a stock is expensive.'"},
+{lesson:"Introduction to Valuation Thinking",q:"Benjamin Graham's 'margin of safety' concept means:",opts:["Buying stocks that have recently declined in price","Purchasing a stock at a price significantly below your estimate of its intrinsic value to create a buffer against errors and uncertainty","Investing only in companies with no debt on their balance sheet","Diversifying across at least 20 different stocks"],ans:1,exp:"Margin of safety is the gap between price paid and estimated intrinsic value. The lesson states: 'If you believe a stock is worth $100 and you buy it at $70, your margin of safety is 30%. This buffer protects you from errors in your own analysis, unforeseen problems, and bad luck.' It's not about price declines or debt levels — it's specifically about paying less than intrinsic value."},
+{lesson:"Introduction to Valuation Thinking",q:"Nvidia trades at approximately 41x earnings while JPMorgan trades at approximately 10x earnings. A first-level thinker might conclude Nvidia is 'overpriced.' Why might a second-level thinker disagree?",opts:["Because higher stock prices always indicate better companies","Because Nvidia's rapid earnings growth driven by AI demand may justify a higher P/E — the ratio reflects growth expectations, not just current earnings","Because P/E ratios are meaningless and should never be used in valuation","Because banks are always undervalued relative to technology companies"],ans:1,exp:"P/E ratios embed growth expectations. Nvidia's 41x P/E reflects investors pricing in rapid future earnings growth from AI. The lesson explains: 'if Nvidia's earnings double in two years, the effective P/E on today's price drops to ~20x.' JPMorgan's 10x reflects slower, cyclical growth. A high P/E isn't automatically 'overpriced' — it depends on whether future growth justifies the premium. This is exactly the nuance Lynch's PEG ratio captures."}
+];
+
+var answered=0,correct=0,total=Q.length;
+
+function switchTab(id,btn){
+document.querySelectorAll('.tab-content').forEach(function(t){t.classList.remove('active')});
+document.getElementById('tab-'+id).classList.add('active');
+document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active')});
+btn.classList.add('active');
+}
+
+function toggleLesson(id,card){
+var d=document.getElementById(id);
+var open=d.classList.contains('open');
+document.querySelectorAll('.lesson-detail').forEach(function(x){x.classList.remove('open')});
+document.querySelectorAll('.lesson-card').forEach(function(x){x.classList.remove('active-card')});
+if(!open){d.classList.add('open');card.classList.add('active-card');d.scrollIntoView({behavior:'smooth',block:'nearest'});}
+}
+
+function startExam(){
+document.getElementById('exam-start').style.display='none';
+document.getElementById('exam-body').style.display='block';
+answered=0;correct=0;
+var h='';
+Q.forEach(function(q,i){
+h+='<div class="q-block" id="qb'+i+'"><div class="q-num">Question '+(i+1)+' of '+total+' · '+q.lesson+'</div><div class="q-text">'+q.q+'</div><div class="q-options">';
+var letters=['A','B','C','D'];
+q.opts.forEach(function(o,j){
+h+='<button class="q-opt" id="o'+i+'_'+j+'" onclick="answer('+i+','+j+')"><span class="opt-letter">'+letters[j]+'</span><span>'+o+'</span></button>';
+});
+h+='</div><div class="q-feedback" id="fb'+i+'"></div></div>';
+});
+document.getElementById('qContainer').innerHTML=h;
+document.getElementById('examResult').style.display='none';
+updateScore();
+}
+
+function answer(qi,oi){
+var q=Q[qi];
+var opts=document.querySelectorAll('#qb'+qi+' .q-opt');
+if(opts[0].disabled)return;
+opts.forEach(function(o,j){
+o.disabled=true;
+if(j===q.ans)o.classList.add(oi===q.ans?'correct':'reveal-correct');
+if(j===oi&&oi!==q.ans)o.classList.add('wrong');
+});
+var fb=document.getElementById('fb'+qi);
+var isCorrect=oi===q.ans;
+if(isCorrect){correct++;fb.className='q-feedback correct';fb.innerHTML='✓ Correct. '+q.exp;document.getElementById('qb'+qi).classList.add('answered-correct');}
+else{fb.className='q-feedback wrong';fb.innerHTML='✗ Incorrect. '+q.exp;document.getElementById('qb'+qi).classList.add('answered-wrong');}
+fb.style.display='block';
+answered++;
+updateScore();
+if(answered===total)setTimeout(showResult,600);
+}
+
+function updateScore(){
+document.getElementById('scoreFrac').textContent=correct+'/'+answered;
+document.getElementById('progLabel').textContent=answered+' of '+total;
+var pct=answered?Math.round(correct/answered*100):0;
+document.getElementById('pctLabel').textContent=pct+'%';
+document.getElementById('progFill').style.width=Math.round(answered/total*100)+'%';
+}
+
+function showResult(){
+var pct=Math.round(correct/total*100);
+var pass=pct>=80;
+var r=document.getElementById('examResult');
+r.innerHTML='<div class="result-score">'+pct+'%</div>'
++'<div style="font-family:Arial;font-size:22px;font-weight:700;margin-bottom:6px;" class="'+(pass?'result-pass':'result-fail')+'">'+(pass?'PASSED':'NOT YET')+'</div>'
++'<div class="result-msg">'+(pass?'You scored '+correct+'/'+total+'. You have earned 100 Mastery Points and completed Tier 1: Investor Foundations. You are now an Infinite Alpha Initiate — ready for Tier 2: Competitive Readiness.':'You scored '+correct+'/'+total+'. You need 80% (12/15) to pass. Review the lessons and try again — mastery requires patience.')+'</div>'
++(pass?'<div style="font-family:Arial;font-size:13px;color:var(--gold);font-weight:700;margin-bottom:16px;letter-spacing:1px;">+100 MASTERY POINTS · TIER 1 COMPLETE · 400/400 MP</div>':'')
++'<button class="exam-btn'+(pass?' secondary':'')+'" onclick="retakeExam()">Retake Exam</button>';
+r.style.display='block';
+r.scrollIntoView({behavior:'smooth'});
+}
+
+function retakeExam(){
+document.getElementById('exam-body').style.display='none';
+document.getElementById('exam-start').style.display='block';
+answered=0;correct=0;
+}
+</script>
+</body>
+</html>

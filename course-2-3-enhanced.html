@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Course 2.3 — Portfolio Construction Fundamentals</title>
+<style>
+:root{--gold:#C9A84C;--dark:#0D0F14;--panel:#13161E;--border:#1E2330;--text:#E8EAF0;--muted:#7A8099;--accent:#3B82F6;--green:#22C55E;--red:#EF4444;--purple:#a855f7;--orange:#f59e0b;--cyan:#06b6d4;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--dark);color:var(--text);font-family:'Georgia',serif;font-size:16px;line-height:1.75;}
+.top-bar{background:var(--panel);border-bottom:1px solid var(--border);padding:12px 32px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:100;}
+.logo{font-family:Arial,sans-serif;font-weight:900;font-size:18px;color:var(--gold);letter-spacing:2px;}
+.pill{background:var(--gold);color:var(--dark);font-family:Arial,sans-serif;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:1px;}
+.pill-tier{background:var(--accent);color:#fff;}
+.tab-nav{display:flex;gap:4px;margin-left:auto;}
+.tab-btn{background:none;border:1px solid var(--border);color:var(--muted);font-family:Arial,sans-serif;font-size:12px;font-weight:700;padding:6px 16px;border-radius:6px;cursor:pointer;transition:all .2s;letter-spacing:.5px;}
+.tab-btn.active{background:var(--gold);color:var(--dark);border-color:var(--gold);}
+.tab-btn:hover:not(.active){border-color:var(--gold);color:var(--gold);}
+.hero{background:linear-gradient(135deg,#0D0F14,#13161E,#0a0c10);border-bottom:1px solid var(--border);padding:56px 32px 40px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:500px;height:500px;background:radial-gradient(circle,rgba(201,168,76,.06) 0%,transparent 70%);pointer-events:none;}
+.course-label{font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:12px;}
+.hero h1{font-size:clamp(26px,4vw,44px);font-weight:400;color:#fff;margin-bottom:12px;line-height:1.2;}
+.hero-sub{font-size:17px;color:var(--muted);max-width:680px;margin:0 auto 28px;}
+.meta-row{display:flex;justify-content:center;gap:28px;flex-wrap:wrap;}
+.meta-item{text-align:center;}
+.meta-num{font-family:Arial,sans-serif;font-size:26px;font-weight:700;color:var(--gold);}
+.meta-label{font-family:Arial,sans-serif;font-size:10px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-top:2px;}
+.container{max-width:960px;margin:0 auto;padding:40px 24px;}
+.section{margin-bottom:52px;}
+.section-title{font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:20px;padding-bottom:10px;border-bottom:1px solid var(--border);}
+h2{font-size:22px;color:#fff;font-weight:400;margin-bottom:10px;}
+h3{font-family:Arial,sans-serif;font-size:12px;font-weight:700;color:var(--gold);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;margin-top:22px;}
+p{color:#BEC3D4;margin-bottom:14px;}
+strong.hl{color:#fff;}
+.tab-content{display:none;}.tab-content.active{display:block;}
+.lesson-grid{display:flex;flex-direction:column;border:1px solid var(--border);border-radius:12px;overflow:hidden;}
+.lesson-card{background:var(--panel);border-bottom:1px solid var(--border);padding:18px 22px;display:grid;grid-template-columns:46px 1fr auto;gap:14px;align-items:start;cursor:pointer;transition:background .2s;}
+.lesson-card:last-child{border-bottom:none;}
+.lesson-card:hover,.lesson-card.active-card{background:#1a1e2a;}
+.lesson-card.active-card{border-left:3px solid var(--gold);}
+.lesson-num{font-family:Arial,sans-serif;font-size:20px;font-weight:700;color:var(--gold);line-height:1;}
+.lesson-title{font-size:16px;color:#fff;margin-bottom:3px;}
+.lesson-desc{font-family:Arial,sans-serif;font-size:12px;color:var(--muted);line-height:1.5;}
+.lesson-mp{font-family:Arial,sans-serif;font-size:12px;font-weight:700;color:var(--gold);background:rgba(201,168,76,.1);padding:3px 10px;border-radius:20px;white-space:nowrap;align-self:center;}
+.lesson-detail{background:#0e1018;border-top:1px solid var(--border);padding:28px;display:none;}
+.lesson-detail.open{display:block;}
+.fw-table{width:100%;border-collapse:collapse;margin:12px 0 20px;}
+.fw-table th{background:rgba(201,168,76,.08);font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);padding:10px 14px;text-align:left;border-bottom:1px solid var(--border);}
+.fw-table td{padding:12px 14px;border-bottom:1px solid var(--border);font-family:Arial,sans-serif;font-size:13px;color:#BEC3D4;vertical-align:top;}
+.fw-table tr:last-child td{border-bottom:none;}
+.fw-table tr:hover td{background:rgba(255,255,255,.02);}
+.callout{background:rgba(201,168,76,.05);border-left:3px solid var(--gold);padding:16px 20px;border-radius:0 8px 8px 0;margin:18px 0;}
+.callout-label{font-family:Arial,sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;}
+.callout p{color:var(--text);margin:0;font-size:14px;}
+.callout-blue{border-left-color:var(--accent);background:rgba(59,130,246,.05);}.callout-blue .callout-label{color:var(--accent);}
+.callout-red{border-left-color:var(--red);background:rgba(239,68,68,.05);}.callout-red .callout-label{color:var(--red);}
+.callout-green{border-left-color:var(--green);background:rgba(34,197,94,.05);}.callout-green .callout-label{color:var(--green);}
+.callout-purple{border-left-color:var(--purple);background:rgba(168,85,247,.05);}.callout-purple .callout-label{color:var(--purple);}
+.callout-cyan{border-left-color:var(--cyan);background:rgba(6,182,212,.05);}.callout-cyan .callout-label{color:var(--cyan);}
+.callout-orange{border-left-color:var(--orange);background:rgba(245,158,11,.05);}.callout-orange .callout-label{color:var(--orange);}
+.exhibit{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:22px;margin:18px 0;}
+.exhibit-label{font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:14px;}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0;}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:16px 0;}
+@media(max-width:640px){.two-col,.three-col{grid-template-columns:1fr;}}
+.stat-card{background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.2);border-radius:10px;padding:18px;text-align:center;}
+.stat-num{font-family:Arial,sans-serif;font-size:28px;font-weight:900;color:var(--gold);line-height:1;margin-bottom:4px;}
+.stat-label{font-family:Arial,sans-serif;font-size:11px;color:var(--muted);line-height:1.4;}
+.tag-row{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 14px;}
+.ctag{font-family:Arial,sans-serif;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;letter-spacing:.5px;background:rgba(201,168,76,.15);color:var(--gold);border:1px solid rgba(201,168,76,.3);}
+.divider{border:none;border-top:1px solid var(--border);margin:36px 0;}
+.completion-badge{background:linear-gradient(135deg,rgba(201,168,76,.1),rgba(59,130,246,.06));border:1px solid rgba(201,168,76,.35);border-radius:16px;padding:32px;text-align:center;margin:24px 0;}
+.exam-wrap{max-width:800px;margin:0 auto;}
+.start-exam-wrap{text-align:center;padding:40px 20px;}
+.start-exam-wrap h2{color:#fff;margin-bottom:12px;}
+.start-exam-wrap p{color:var(--muted);max-width:500px;margin:0 auto 24px;}
+.exam-rules{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin:24px 0;text-align:left;}
+.rule-card{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:14px;}
+.rule-card .r-num{font-family:Arial,sans-serif;font-size:22px;font-weight:900;color:var(--gold);}
+.rule-card .r-label{font-family:Arial,sans-serif;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;}
+.score-bar-wrap{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:20px 28px;margin-bottom:28px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;}
+.score-big{font-size:42px;font-weight:900;color:var(--gold);line-height:1;}
+.score-sub{font-size:12px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;}
+.progress-track{flex:1;min-width:200px;background:rgba(255,255,255,.06);border-radius:8px;height:12px;overflow:hidden;}
+.progress-fill{height:100%;background:linear-gradient(90deg,rgba(201,168,76,.5),var(--gold));border-radius:8px;transition:width .5s ease;}
+.q-block{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:22px;margin-bottom:14px;transition:border-color .3s;}
+.q-block.answered-correct{border-color:var(--green);}
+.q-block.answered-wrong{border-color:var(--red);}
+.q-num{font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:8px;}
+.q-text{font-size:15px;color:#fff;margin-bottom:16px;line-height:1.6;}
+.q-options{display:flex;flex-direction:column;gap:8px;}
+.q-opt{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:8px;padding:11px 15px;font-family:Arial,sans-serif;font-size:14px;color:#BEC3D4;cursor:pointer;transition:all .2s;text-align:left;display:flex;gap:12px;align-items:flex-start;}
+.q-opt:hover:not(:disabled){background:rgba(201,168,76,.06);border-color:rgba(201,168,76,.4);color:#fff;}
+.q-opt:disabled{cursor:default;}
+.q-opt.correct{background:rgba(34,197,94,.1);border-color:var(--green);color:var(--green);}
+.q-opt.wrong{background:rgba(239,68,68,.1);border-color:var(--red);color:var(--red);}
+.q-opt.reveal-correct{background:rgba(34,197,94,.07);border-color:rgba(34,197,94,.4);color:var(--green);}
+.opt-letter{font-weight:700;flex-shrink:0;width:18px;}
+.q-feedback{margin-top:10px;padding:11px 15px;border-radius:8px;font-family:Arial,sans-serif;font-size:13px;line-height:1.5;display:none;}
+.q-feedback.correct{background:rgba(34,197,94,.08);color:var(--green);border:1px solid rgba(34,197,94,.2);}
+.q-feedback.wrong{background:rgba(239,68,68,.08);color:#f87171;border:1px solid rgba(239,68,68,.2);}
+.exam-result{background:linear-gradient(135deg,rgba(201,168,76,.07),rgba(59,130,246,.04));border:1px solid rgba(201,168,76,.3);border-radius:16px;padding:40px;text-align:center;margin-top:32px;display:none;}
+.result-score{font-family:Arial,sans-serif;font-size:64px;font-weight:900;color:var(--gold);line-height:1;margin-bottom:8px;}
+.exam-btn{background:var(--gold);color:var(--dark);font-family:Arial,sans-serif;font-weight:700;font-size:14px;letter-spacing:1px;padding:12px 28px;border-radius:8px;border:none;cursor:pointer;margin:4px;}
+.exam-btn.secondary{background:transparent;color:var(--gold);border:1px solid var(--gold);}
+.result-pass{color:var(--green);}.result-fail{color:var(--red);}
+.result-msg{color:var(--muted);max-width:520px;margin:0 auto 24px;font-size:15px;}
+.chart-wrap{margin:16px 0;padding:0;}
+.bar-chart{display:flex;flex-direction:column;gap:10px;margin:12px 0;}
+.bar-row{display:grid;grid-template-columns:110px 1fr 50px;gap:10px;align-items:center;font-family:Arial,sans-serif;font-size:12px;}
+.bar-label{color:var(--muted);text-align:right;}
+.bar-track{height:22px;background:rgba(255,255,255,.04);border-radius:4px;overflow:hidden;position:relative;}
+.bar-fill{height:100%;border-radius:4px;transition:width .6s ease;}
+.bar-val{color:var(--gold);font-weight:700;}
+.waterfall-chart{display:flex;align-items:flex-end;gap:6px;height:180px;padding:0 4px;margin:16px 0;}
+.wf-bar-wrap{display:flex;flex-direction:column;align-items:center;flex:1;height:100%;justify-content:flex-end;}
+.wf-bar{width:100%;border-radius:4px 4px 0 0;min-height:4px;transition:height .5s ease;}
+.wf-label{font-family:Arial,sans-serif;font-size:10px;color:var(--muted);margin-top:6px;text-align:center;line-height:1.2;}
+.wf-val{font-family:Arial,sans-serif;font-size:11px;font-weight:700;margin-bottom:4px;}
+.portfolio-strip{display:flex;height:36px;border-radius:8px;overflow:hidden;margin:12px 0;}
+.portfolio-strip div{display:flex;align-items:center;justify-content:center;font-family:Arial,sans-serif;font-size:10px;font-weight:700;color:var(--dark);transition:width .4s ease;}
+.timeline{position:relative;padding-left:28px;margin:16px 0;}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:var(--border);}
+.tl-item{position:relative;margin-bottom:18px;}
+.tl-item::before{content:'';position:absolute;left:-24px;top:6px;width:12px;height:12px;border-radius:50%;border:2px solid var(--gold);background:var(--dark);}
+.tl-title{font-family:Arial,sans-serif;font-size:13px;font-weight:700;color:var(--gold);margin-bottom:2px;}
+.tl-desc{font-family:Arial,sans-serif;font-size:12px;color:var(--muted);line-height:1.5;}
+.case-study{background:linear-gradient(135deg,rgba(201,168,76,.04),rgba(168,85,247,.04));border:1px solid rgba(201,168,76,.25);border-radius:12px;padding:20px;margin:18px 0;position:relative;overflow:hidden;}
+.case-study::before{content:'';position:absolute;top:0;right:0;width:80px;height:80px;background:radial-gradient(circle,rgba(201,168,76,.08),transparent);pointer-events:none;}
+.cs-header{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.cs-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:Arial,sans-serif;font-size:16px;font-weight:900;flex-shrink:0;}
+.cs-title{font-family:Arial,sans-serif;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;}
+.cs-body{font-family:Arial,sans-serif;font-size:13px;color:#BEC3D4;line-height:1.6;}
+.cs-body strong{color:#fff;}
+.cs-takeaway{margin-top:10px;padding:10px 14px;background:rgba(201,168,76,.06);border-radius:6px;font-family:Arial,sans-serif;font-size:12px;color:var(--gold);line-height:1.5;}
+.cs-takeaway::before{content:'⟶ TAKEAWAY: ';font-weight:700;letter-spacing:1px;}
+.patr-flow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:14px 0;justify-content:center;}
+.patr-box{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:12px 16px;text-align:center;min-width:100px;}
+.patr-box .pb-num{font-family:Arial,sans-serif;font-size:20px;font-weight:900;line-height:1;}
+.patr-box .pb-label{font-family:Arial,sans-serif;font-size:10px;color:var(--muted);letter-spacing:.5px;text-transform:uppercase;margin-top:2px;}
+.patr-arrow{font-family:Arial,sans-serif;font-size:18px;color:var(--muted);}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <div class="logo">BEAT LYNCH</div>
+  <span class="pill pill-tier">TIER 2</span>
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="switchTab('curriculum')">CURRICULUM</button>
+    <button class="tab-btn" onclick="switchTab('exam')">FINAL EXAM</button>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="course-label">Infinite Alpha · Tier 2: Competitive Readiness · Course 3 of 4</div>
+  <h1>Portfolio Construction Fundamentals</h1>
+  <p class="hero-sub">Transform individual stock analysis into a disciplined, structured portfolio. Learn the sizing, diversification, and management systems that separate serious competitors from stock pickers.</p>
+  <div class="meta-row">
+    <div class="meta-item"><div class="meta-num">5</div><div class="meta-label">Lessons</div></div>
+    <div class="meta-item"><div class="meta-num">125</div><div class="meta-label">Mastery Points</div></div>
+    <div class="meta-item"><div class="meta-num">80%</div><div class="meta-label">Pass Threshold</div></div>
+    <div class="meta-item"><div class="meta-num">20</div><div class="meta-label">Exam Questions</div></div>
+  </div>
+</div>
+
+<!-- ========== CURRICULUM TAB ========== -->
+<div class="tab-content active" id="tab-curriculum">
+<div class="container">
+
+<div class="section">
+  <div class="section-title">Course Lessons</div>
+  <div class="lesson-grid">
+
+<!-- ===================== LESSON 1 ===================== -->
+<div class="lesson-card" onclick="toggleLesson(0)">
+  <div class="lesson-num">01</div>
+  <div><div class="lesson-title">From Stock Picking to Portfolio Thinking</div>
+  <div class="lesson-desc">Why a collection of great stocks can lose to a well-constructed portfolio of average ones — and the system that makes the difference.</div></div>
+  <div class="lesson-mp">25 MP</div>
+</div>
+<div class="lesson-detail" id="ld-0">
+  <div class="tag-row">
+    <span class="ctag">Portfolio System</span><span class="ctag">Concentration vs. Diversification</span><span class="ctag">Sizing = Selection</span><span class="ctag">Process Discipline</span>
+  </div>
+
+  <h3>The Stock Picker's Trap</h3>
+  <p>Every student who finishes Course 2.1 has the same instinct: find great companies, buy them. It feels right. But the graveyard of portfolio performance is filled with investors who picked excellent stocks and still lost money. The gap between stock selection and portfolio construction is where most competitive investors fail — not because they chose wrong, but because they assembled wrong.</p>
+  <p>Consider two hypothetical NIL competitors. Investor A picks ten stocks that each return 12% individually. Investor B picks ten stocks averaging only 9% individually. But Investor A concentrates 40% in two correlated tech names that both drop 30% mid-tournament during a sector rotation. Investor B, properly sized and diversified, finishes ahead — with lower PATR drawdown penalties to boot. <strong class="hl">Good stocks do not automatically produce a good portfolio.</strong></p>
+
+  <div class="case-study">
+    <div class="cs-header">
+      <div class="cs-icon" style="background:rgba(239,68,68,.15);color:var(--red);">A</div>
+      <div class="cs-title" style="color:var(--red);">Real-World Case — ARK Invest (Cathie Wood), 2021–2022</div>
+    </div>
+    <div class="cs-body">Cathie Wood's ARK Innovation ETF (ARKK) became the symbol of the stock picker's trap. Her stock picks included <strong>Tesla, Roku, Zoom, Block, and Coinbase</strong> — companies many considered individually excellent. But the portfolio was extremely concentrated in a single factor: high-growth, unprofitable technology. When the Fed began raising rates in 2022, these names were highly correlated on the way down. ARKK fell roughly <strong>75% from its February 2021 peak</strong> despite holding "great" companies. The portfolio was not diversified — it was a single leveraged bet on growth-at-any-price.</div>
+    <div class="cs-takeaway">Outstanding stock picking does not save a portfolio from fatal construction flaws. ARK's concentration in correlated, high-duration growth names turned a portfolio of individual winners into a system-level catastrophe when the environment shifted.</div>
+  </div>
+
+  <div class="exhibit">
+    <div class="exhibit-label">Exhibit 1.1 — The Assembly Problem: Same Stocks, Different Outcomes</div>
+    <div class="two-col">
+      <div>
+        <p style="font-family:Arial,sans-serif;font-size:12px;font-weight:700;color:var(--red);letter-spacing:1px;margin-bottom:8px;">PORTFOLIO A — CONCENTRATED</p>
+        <div class="portfolio-strip">
+          <div style="width:25%;background:#EF4444;">NVDA 25%</div>
+          <div style="width:20%;background:#F87171;">MSFT 20%</div>
+          <div style="width:15%;background:#3B82F6;">AMZN 15%</div>
+          <div style="width:10%;background:#60A5FA;">JPM 10%</div>
+          <div style="width:8%;background:#22C55E;">UNH 8%</div>
+          <div style="width:7%;background:#4ADE80;">PG 7%</div>
+          <div style="width:5%;background:#a855f7;">XOM 5%</div>
+          <div style="width:4%;background:#c084fc;">NEE 4%</div>
+          <div style="width:3%;background:#f59e0b;">AMT 3%</div>
+          <div style="width:3%;background:#fbbf24;">GLD 3%</div>
+        </div>
+        <p style="font-family:Arial,sans-serif;font-size:12px;color:var(--muted);margin-top:6px;">45% in two correlated mega-cap tech names. Top 3 = 60%.</p>
+        <div class="bar-chart" style="margin-top:12px;">
+          <div class="bar-row"><span class="bar-label">Return</span><div class="bar-track"><div class="bar-fill" style="width:62%;background:var(--green);"></div></div><span class="bar-val">+18.6%</span></div>
+          <div class="bar-row"><span class="bar-label">Max Drawdown</span><div class="bar-track"><div class="bar-fill" style="width:78%;background:var(--red);"></div></div><span class="bar-val">–23.4%</span></div>
+          <div class="bar-row"><span class="bar-label">PATR Penalty</span><div class="bar-track"><div class="bar-fill" style="width:45%;background:var(--orange);"></div></div><span class="bar-val">–8.4%</span></div>
+          <div class="bar-row"><span class="bar-label" style="color:var(--gold);">Final PATR</span><div class="bar-track"><div class="bar-fill" style="width:34%;background:var(--gold);"></div></div><span class="bar-val" style="color:var(--gold);">+10.2%</span></div>
+        </div>
+      </div>
+      <div>
+        <p style="font-family:Arial,sans-serif;font-size:12px;font-weight:700;color:var(--green);letter-spacing:1px;margin-bottom:8px;">PORTFOLIO B — BALANCED</p>
+        <div class="portfolio-strip">
+          <div style="width:13%;background:#3B82F6;">NVDA 13%</div>
+          <div style="width:12%;background:#60A5FA;">MSFT 12%</div>
+          <div style="width:11%;background:#22C55E;">UNH 11%</div>
+          <div style="width:10%;background:#4ADE80;">JPM 10%</div>
+          <div style="width:10%;background:#a855f7;">PG 10%</div>
+          <div style="width:10%;background:#c084fc;">XOM 10%</div>
+          <div style="width:9%;background:#f59e0b;">AMZN 9%</div>
+          <div style="width:9%;background:#fbbf24;">NEE 9%</div>
+          <div style="width:8%;background:#06b6d4;">AMT 8%</div>
+          <div style="width:8%;background:#22d3ee;">GLD 8%</div>
+        </div>
+        <p style="font-family:Arial,sans-serif;font-size:12px;color:var(--muted);margin-top:6px;">No position above 13%. Sector balance across 6 GICS sectors.</p>
+        <div class="bar-chart" style="margin-top:12px;">
+          <div class="bar-row"><span class="bar-label">Return</span><div class="bar-track"><div class="bar-fill" style="width:50%;background:var(--green);"></div></div><span class="bar-val">+14.9%</span></div>
+          <div class="bar-row"><span class="bar-label">Max Drawdown</span><div class="bar-track"><div class="bar-fill" style="width:35%;background:var(--red);"></div></div><span class="bar-val">–10.5%</span></div>
+          <div class="bar-row"><span class="bar-label">PATR Penalty</span><div class="bar-track"><div class="bar-fill" style="width:0%;background:var(--orange);"></div></div><span class="bar-val">0%</span></div>
+          <div class="bar-row"><span class="bar-label" style="color:var(--gold);">Final PATR</span><div class="bar-track"><div class="bar-fill" style="width:50%;background:var(--gold);"></div></div><span class="bar-val" style="color:var(--gold);">+14.9%</span></div>
+        </div>
+      </div>
+    </div>
+    <p style="font-family:Arial,sans-serif;font-size:12px;color:var(--gold);margin-top:14px;font-weight:700;">KEY INSIGHT: Portfolio B had lower raw return (+14.9% vs +18.6%) but HIGHER PATR (+14.9% vs +10.2%) because disciplined construction avoided the drawdown penalty. In PATR-scored competition, how you build matters as much as what you pick.</p>
+  </div>
+
+  <h3>What a Portfolio System Actually Is</h3>
+  <p>A portfolio is not a list — it is a <strong class="hl">system of interacting positions</strong>. Every holding relates to every other holding through sector overlap, factor exposure, correlation, and sizing. The system has emergent properties that no individual stock analysis reveals: aggregate drawdown behavior, correlation clustering under stress, and exposure tilts you never intended.</p>
+  <p>Portfolio thinking means asking different questions. Not just "Is this a good stock?" but "What does this stock do to my portfolio?" Not "What's my best idea?" but "How much of my best idea can I afford to be wrong about?" The transition from stock picker to portfolio builder is the single biggest leap in competitive readiness.</p>
+
+  <div class="exhibit">
+    <div class="exhibit-label">Exhibit 1.2 — Stock Thinking vs. Portfolio Thinking</div>
+    <table class="fw-table">
+      <thead><tr><th>Stock Picker Asks</th><th>Portfolio Builder Asks</th><th>Why It Matters</th></tr></thead>
+      <tbody>
+        <tr><td>"Is this a great company?"</td><td>"What does adding this do to my overall risk?"</td><td>A great company can worsen a portfolio if it duplicates existing exposures</td></tr>
+        <tr><td>"What's the upside?"</td><td>"What happens if I'm wrong, at this size?"</td><td>Sizing controls damage from errors — a 5% loss on a 5% position costs 0.25%, but 5% on a 20% position costs 1%</td></tr>
+        <tr><td>"What should I buy next?"</td><td>"What exposure am I missing?"</td><td>Gaps matter as much as picks — missing defensive ballast can sink your PATR during drawdowns</td></tr>
+        <tr><td>"My best idea deserves the most capital"</td><td>"How correlated is this to my other top holdings?"</td><td>Concentrated conviction can cluster — like ARK's growth-tech stack, highly correlated bets amplify losses</td></tr>
+        <tr><td>"I'll sell when the story breaks"</td><td>"What are my rebalancing rules?"</td><td>Systems beat reactions — pre-set rules prevent emotional selling during drawdowns</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>The Concentration-Diversification Spectrum</h3>
+  <p>There is no universally correct number of holdings. Buffett has argued for concentration ("put your eggs in one basket and watch it carefully"), while Marks emphasizes the humility of diversification. The NIL framework gives you the structural answer: minimum 5 holdings, maximum 20% in any single position. Within those bounds, you choose your point on the spectrum based on conviction strength and correlation awareness.</p>
+  <p>The key insight is that <strong class="hl">sizing is selection</strong>. A 15% position is a fundamentally different decision than a 5% position in the same stock. Sizing declares your conviction, your risk tolerance, and your margin for error simultaneously. Two investors can hold identical stocks and produce wildly different returns based on sizing alone.</p>
+
+  <div class="case-study">
+    <div class="cs-header">
+      <div class="cs-icon" style="background:rgba(59,130,246,.15);color:var(--accent);">B</div>
+      <div class="cs-title" style="color:var(--accent);">Real-World Contrast — Buffett vs. Peter Lynch</div>
+    </div>
+    <div class="cs-body">Warren Buffett's Berkshire Hathaway often holds <strong>40–50% of its public equity portfolio in just one stock</strong> (Apple comprised ~49% in early 2024). This extreme concentration reflects decades of conviction and a permanent capital base. Peter Lynch, managing Fidelity Magellan, sometimes held <strong>over 1,000 stocks</strong> — but with huge dispersion in sizing, where his top 10 ideas drove the majority of returns. Both generated legendary performance. The lesson: <strong>the "right" number of positions depends on your conviction quality, your time horizon, and your ability to tolerate being wrong.</strong> In NIL's 90-day tournament windows, you do not have Buffett's decades-long horizon to recover from a concentrated mistake.</div>
+    <div class="cs-takeaway">NIL tournaments reward the Lynch approach more than the Buffett approach — broader diversification with conviction-weighted sizing protects your PATR in compressed time windows where you cannot afford to wait for recovery.</div>
+  </div>
+
+  <div class="callout">
+    <div class="callout-label">Beat Lynch Connection</div>
+    <p>The Portfolio Lab evaluates your construction as a system — not just your stock picks. It scores concentration risk, sector balance, correlation exposure, and factor tilts. Every metric you learn in this course maps directly to a Portfolio Lab diagnostic. The Lab does not care how smart your picks are; it cares whether they work together.</p>
+  </div>
+
+  <div class="callout callout-orange">
+    <div class="callout-label">Discipline Check</div>
+    <p>The most dangerous moment for a new competitor is after their first great stock pick pays off. The instinct is to concentrate harder on the next "best idea." Resist. Your portfolio is not a ranking of conviction — it is an engineered structure designed to compound through every environment, including the ones where your conviction is dead wrong.</p>
+  </div>
+</div>
+
+<!-- ===================== LESSON 2 ===================== -->
+<div class="lesson-card" onclick="toggleLesson(1)">
+  <div class="lesson-num">02</div>
+  <div><div class="lesson-title">Diversification: What It Is and What It Isn't</div>
+  <div class="lesson-desc">True diversification is about correlation, not count. Twenty tech stocks aren't diversified. Five uncorrelated positions might be.</div></div>
+  <div class="lesson-mp">25 MP</div>
+</div>
+<div class="lesson-detail" id="ld-1">
+  <div class="tag-row">
+    <span class="ctag">Correlation</span><span class="ctag">Sector Balance</span><span class="ctag">Stress Clustering</span><span class="ctag">Protective Structure</span>
+  </div>
+
+  <h3>The Correlation Illusion</h3>
+  <p>Most beginning investors think diversification means owning many different stocks. It does not. Diversification means owning stocks that <strong class="hl">behave differently from each other</strong> — especially when markets fall. A portfolio of twenty technology stocks is not diversified. A portfolio of five stocks spanning healthcare, energy, consumer staples, financials, and tech — selected for low correlation — can be far more protected.</p>
+  <p>Correlation measures how two assets move together on a scale from –1.0 to +1.0. A correlation of <strong class="hl">+1.0</strong> means they move in perfect lockstep — zero diversification benefit. A correlation of <strong class="hl">0</strong> means no relationship. <strong class="hl">Negative correlation</strong> means they tend to move in opposite directions. You do not need negative correlations to diversify (those are rare among equities), but you need meaningfully low positive correlations — typically <strong class="hl">below 0.5</strong> — to get genuine protective benefit.</p>
+
+  <div class="exhibit">
+    <div class="exhibit-label">Exhibit 2.1 — Correlation Heatmap: Why "20 Tech Stocks" Fails</div>
+    <p style="font-family:Arial,sans-serif;font-size:12px;color:var(--muted);margin-bottom:12px;">Approximate 3-year rolling correlations. Higher = more correlated = less diversification benefit.</p>
+    <div style="overflow-x:auto;">
+      <table class="fw-table" style="text-align:center;font-size:12px;">
+        <thead><tr><th></th><th>NVDA</th><th>MSFT</th><th>AMZN</th><th>UNH</th><th>XOM</th><th>PG</th></tr></thead>
+        <tbody>
+          <tr><td style="color:var(--gold);font-weight:700;">NVDA</td>
+            <td style="background:rgba(239,68,68,.35);color:#fff;font-weight:700;">1.00</td>
+            <td style="background:rgba(239,68,68,.25);color:#fff;">0.82</td>
+            <td style="background:rgba(239,68,68,.22);color:#fff;">0.78</td>
+            <td style="background:rgba(59,130,246,.12);color:#BEC3D4;">0.31</td>
+            <td style="background:rgba(34,197,94,.08);color:#BEC3D4;">0.12</td>
+            <td style="background:rgba(34,197,94,.12);color:#BEC3D4;">0.08</td></tr>
+          <tr><td style="color:var(--gold);font-weight:700;">MSFT</td>
+            <td style="background:rgba(239,68,68,.25);color:#fff;">0.82</td>
+            <td style="background:rgba(239,68,68,.35);color:#fff;font-weight:700;">1.00</td>
+            <td style="background:rgba(239,68,68,.22);color:#fff;">0.76</td>
+            <td style="background:rgba(59,130,246,.15);color:#BEC3D4;">0.35</td>
+            <td style="background:rgba(34,197,94,.10);color:#BEC3D4;">0.15</td>
+            <td style="background:rgba(59,130,246,.08);color:#BEC3D4;">0.22</td></tr>
+          <tr><td style="color:var(--gold);font-weight:700;">AMZN</td>
+            <td style="background:rgba(239,68,68,.22);color:#fff;">0.78</td>
+            <td style="background:rgba(239,68,68,.22);color:#fff;">0.76</td>
+            <td style="background:rgba(239,68,68,.35);color:#fff;font-weight:700;">1.00</td>
+            <td style="background:rgba(59,130,246,.12);color:#BEC3D4;">0.29</td>
+            <td style="background:rgba(34,197,94,.06);color:#BEC3D4;">0.10</td>
+            <td style="background:rgba(59,130,246,.08);color:#BEC3D4;">0.18</td></tr>
+          <tr><td style="color:var(--gold);font-weight:700;">UNH</td>
+            <td style="background:rgba(59,130,246,.12);color:#BEC3D4;">0.31</td>
+            <td style="background:rgba(59,130,246,.15);color:#BEC3D4;">0.35</td>
+            <td style="background:rgba(59,130,246,.12);color:#BEC3D4;">0.29</td>
+            <td style="background:rgba(239,68,68,.35);color:#fff;font-weight:700;">1.00</td>
+            <td style="background:rgba(59,130,246,.10);color:#BEC3D4;">0.20</td>
+            <td style="background:rgba(59,130,246,.15);color:#BEC3D4;">0.38</td></tr>
+          <tr><td style="color:var(--gold);font-weight:700;">XOM</td>
+            <td style="background:rgba(34,197,94,.08);color:#BEC3D4;">0.12</td>
+            <td style="background:rgba(34,197,94,.10);color:#BEC3D4;">0.15</td>
+            <td style="background:rgba(34,197,94,.06);color:#BEC3D4;">0.10</td>
+            <td style="background:rgba(59,130,246,.10);color:#BEC3D4;">0.20</td>
+            <td style="background:rgba(239,68,68,.35);color:#fff;font-weight:700;">1.00</td>
+            <td style="background:rgba(59,130,246,.08);color:#BEC3D4;">0.18</td></tr>
+          <tr><td style="color:var(--gold);font-weight:700;">PG</td>
+            <td style="background:rgba(34,197,94,.12);color:#BEC3D4;">0.08</td>
+            <td style="background:rgba(59,130,246,.08);color:#BEC3D4;">0.22</td>
+            <td style="background:rgba(59,130,246,.08);color:#BEC3D4;">0.18</td>
+            <td style="background:rgba(59,130,246,.15);color:#BEC3D4;">0.38</td>
+            <td style="background:rgba(59,130,246,.08);color:#BEC3D4;">0.18</td>
+            <td style="background:rgba(239,68,68,.35);color:#fff;font-weight:700;">1.00</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-family:Arial,sans-serif;font-size:12px;color:var(--muted);margin-top:8px;"><span style="display:inline-block;width:12px;height:12px;background:rgba(239,68,68,.25);border-radius:2px;vertical-align:middle;margin-right:4px;"></span> High correlation (0.7+) = minimal diversification &nbsp;&nbsp; <span style="display:inline-block;width:12px;height:12px;background:rgba(59,130,246,.12);border-radius:2px;vertical-align:middle;margin-right:4px;"></span> Moderate (0.2–0.5) &nbsp;&nbsp; <span style="display:inline-block;width:12px;height:12px;background:rgba(34,197,94,.10);border-radius:2px;vertical-align:middle;margin-right:4px;"></span> Low (&lt;0.2) = strong diversification</p>
+    <p style="font-family:Arial,sans-serif;font-size:12px;color:var(--gold);margin-top:6px;font-weight:700;">NOTICE: NVDA, MSFT, and AMZN form a correlation cluster — all above 0.76 with each other. Owning all three at size is effectively a single bet on mega-cap tech. XOM and PG show low correlation to tech — these are the positions that provide genuine diversification.</p>
+  </div>
+
+  <h3>Sector Diversification as a Starting Framework</h3>
+  <p>The simplest diversification tool is GICS sector allocation — the eleven-sector classification you learned in Course 1.3. A well-constructed NIL portfolio should hold positions in <strong class="hl">at least 4–5 different GICS sectors</strong>. This does not guarantee low correlation (two defensive sectors may move together in a risk-off event), but it is the essential first filter against unintended concentration.</p>
+  <p>Sector diversification protects you from the most common competitive mistake: <strong class="hl">building a portfolio that is secretly a single bet</strong>. Owning NVDA, MSFT, GOOGL, META, and AMZN is not a five-stock portfolio — it is a single bet on mega-cap technology earnings growth. When that bet fails, it fails everywhere simultaneously.</p>
+
+  <div class="exhibit">
+    <div class="exhibit-label">Exhibit 2.2 — Sector Exposure: Hidden Concentration vs. True Diversification</div>
+    <div class="two-col">
+      <div>
+        <p style="font-family:Arial,sans-serif;font-size:12px;font-weight:700;color:var(--red);margin-bottom:10px;">PORTFOLIO X — "DIVERSIFIED" (10 stocks, 2 sectors)</p>
+        <svg viewBox="0 0 200 200" width="180" style="display:block;margin:0 auto;">
+          <circle cx="100" cy="100" r="80" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="30"/>
+          <circle cx="100" cy="100" r="80" fill="none" stroke="#EF4444" stroke-width="30" stroke-dasharray="376.8 125.6" stroke-dashoffset="0" transform="rotate(-90 100 100)"/>
+          <circle cx="100" cy="100" r="80" fill="none" stroke="#3B82F6" stroke-width="30" stroke-dasharray="125.6 376.8" stroke-dashoffset="-376.8" transform="rotate(-90 100 100)"/>
+          <text x="100" y="95" text-anchor="middle" font-family="Arial" font-size="11" font-weight="700" fill="#EF4444">Tech 75%</text>
+          <text x="100" y="112" text-anchor="middle" font-family="Arial" font-size="11" font-weight="700" fill="#3B82F6">Comm 25%</text>
+        </svg>
+        <p style="font-family:Arial,sans-serif;font-size:11px;color:var(--muted);text-align:center;margin-top:4px;">10 stocks, but effectively one bet</p>
+      </div>
+      <div>
+        <p style="font-family:Arial,sans-serif;font-size:12px;font-weight:700;color:var(--green);margin-bottom:10px;">PORTFOLIO Y — TRULY DIVERSIFIED (10 stocks, 6 sectors)</p>
+        <svg viewBox="0 0 200 200" width="180" style="display:block;margin:0 auto;">
+          <circle cx="100" cy="100" r="80" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="30"/>
+          <circle cx="100" cy="100" r="80" fill="none" stroke="#3B82F6" stroke-width="30" stroke-dasharray="100.5 401.9" stroke-dashoffset="0" transform="rotate(-90 100 100)"/>
+          <circle cx="100" cy="100" r="80" fill="none" stroke="#22C55E" stroke-width="30" stroke-dasharray="83.7 418.7" stroke-dashoffset="-100.5" transform="rotate(-90 100 100)"/>
+          <circle cx="100" cy="100" r="80" fill="none" stroke="#a855f7" stroke-width="30" stroke-dasharray="83.7 418.7" stroke-dashoffset="-184.2" transform="rotate(-90 100 100)"/>
+          <circle cx="100" cy="100" r="80" fill="none" stroke="#f59e0b" stroke-width="30" stroke-dasharray="83.7 418.7" stroke-dashoffset="-267.9" transform="rotate(-90 100 100)"/>
+          <circle cx="100" cy="100" r="80" fill="none" stroke="#06b6d4" stroke-width="30" stroke-dasharray="75.3 427.1" stroke-dashoffset="-351.7" transform="rotate(-90 100 100)"/>
+          <circle cx="100" cy="100" r="80" fill="none" stroke="#EF4444" stroke-width="30" stroke-dasharray="75.3 427.1" stroke-dashoffset="-427.0" transform="rotate(-90 100 100)"/>
+          <text x="100" y="105" text-anchor="middle" font-family="Arial" font-size="11" font-weight="700" fill="#fff">6 Sectors</text>
+        </svg>
+        <p style="font-family:Arial,sans-serif;font-size:11px;color:var(--muted);text-align:center;margin-top:4px;">True structural protection</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>Stress Correlation: The Hidden Enemy</h3>
+  <p>Here is the most important thing about correlation that textbooks understate: <strong class="hl">correlations rise during market stress</strong>. Assets that appear uncorrelated in normal markets start moving together during selloffs. This means your diversification strategy must be stress-tested, not just measured in calm markets. Ask: "If the S&P 500 drops 15% in a month, how many of my ten holdings would also fall?" If the answer is eight or more, you are less diversified than your sector breakdown suggests.</p>
+  <p>The structural defense is holding positions with genuinely different business drivers — a utility with regulated revenue, a consumer staple with pricing power, an energy producer benefiting from the same inflation that hurts growth stocks.</p>
+
+  <div class="case-study">
+    <div class="cs-header">
+      <div class="cs-icon" style="background:rgba(239,68,68,.15);color:var(--red);">!</div>
+      <div class="cs-title" style="color:var(--red);">Real-World Case — Archegos Capital (Bill Hwang), March 2021</div>
+    </div>
+    <div class="cs-body">Bill Hwang's Archegos Capital held massively concentrated, highly correlated positions in <strong>ViacomCBS, Discovery, Baidu, and a handful of other media/tech names</strong> — all using leveraged total return swaps. The positions were all correlated to the same factor: speculative growth media. When ViacomCBS announced a stock offering and the price dropped, it triggered margin calls across the entire portfolio simultaneously. Because every position was correlated, every position fell at the same time. Archegos lost an estimated <strong>$20 billion in approximately two days</strong>. Prime brokers Goldman Sachs and Morgan Stanley lost billions in the fallout.</div>
+    <div class="cs-takeaway">Archegos is the extreme case of what correlation clustering does during stress. Positions that seemed "diversified" across different ticker symbols were actually a single concentrated bet. When one fell, they all fell together — and the damage was total.</div>
+  </div>
+
+  <div class="case-study">
+    <div class="cs-header">
+      <div class="cs-icon" style="background:rgba(245,158,11,.15);color:var(--orange);">C</div>
+      <div class="cs-title" style="color:var(--orange);">Real-World Case — COVID Crash, March 2020: Stress Correlation in Action</div>
+    </div>
+    <div class="cs-body">In the March 2020 COVID crash, the S&P 500 fell ~34% in roughly five weeks. During this panic, <strong>nearly every equity sector dropped simultaneously</strong> — even "defensive" sectors like utilities and consumer staples fell 25–30%. Normal-market correlations that ranged from 0.1 to 0.5 spiked toward 0.8–0.9 during the worst days. The only reliable diversifiers were Treasury bonds and cash. For equity-only portfolios like NIL competition, this means your diversification provides <strong>partial</strong> protection — it dampens the blow but does not eliminate it.</div>
+    <div class="cs-takeaway">During genuine market panics, equity-to-equity correlations spike dramatically. Your diversification will not save you from all drawdown — but it will determine whether you lose 15% (survivable, within PATR buffer) or 30%+ (portfolio-killing with massive PATR penalties). That difference is construction quality.</div>
+  </div>
+
+  <div class="callout callout-blue">
+    <div class="callout-label">Portfolio Intelligence</div>
+    <p>The Portfolio Lab runs correlation analysis across your holdings and flags "correlation clusters" — groups of positions that would likely move together under stress. When the Lab shows a cluster warning, it means your effective diversification is lower than your position count suggests. This is one of the most important diagnostics to watch in tournament play.</p>
+  </div>
+
+  <div class="callout callout-red">
+    <div class="callout-label">Red Flag</div>
+    <p>If more than 50% of your portfolio sits in a single GICS sector, or if your top three positions are all in the same sector, you are carrying hidden concentration risk regardless of how many total positions you hold. The NIL 20% maximum position rule does not protect you from sector concentration — that is your responsibility.</p>
+  </div>
+</div>
+
+<!-- ===================== LESSON 3 ===================== -->
+<div class="lesson-card" onclick="toggleLesson(2)">
+  <div class="lesson-num">03</div>
+  <div><div class="lesson-title">Position Sizing & Conviction</div>
+  <div class="lesson-desc">How much to put in each holding — the decision that determines more of your return than which stock you pick.</div></div>
+  <div class="lesson-mp">25 MP</div>
+</div>
+<div class="lesson-detail" id="ld-2">
+  <div class="tag-row">
+    <span class="ctag">Position Sizing</span><span class="ctag">Conviction Weighting</span><span class="ctag">NIL 20% Max</span><span class="ctag">Risk Budget</span>
+  </div>
+
+  <h3>Sizing Is the Real Decision</h3>
+  <p>Ask a hundred amateur investors what matters most, and they say stock selection. Ask a hundred professional portfolio managers, and most say position sizing. The difference between a 5% position and a 15% position in the same stock is not a nuance — it is a <strong class="hl">fundamentally different risk-return decision</strong>. If that stock drops 40%, a 5% position costs you 2% of portfolio value. A 15% position costs 6%. In a PATR-scored tournament, that difference can be the gap between first place and twentieth.</p>
+  <p>Druckenmiller's decision hierarchy from Course 1.1 applies here directly: direction first, then magnitude. How much you allocate is the magnitude decision. Getting the stock right but the size wrong is nearly as costly as getting the stock wrong at the right size.</p>
+
+  <div class="case-study">
+    <div class="cs-header">
+      <div class="cs-icon" style="background:rgba(34,197,94,.15);color:var(--green);">D</div>
+      <div class="cs-title" style="color:var(--green);">Real-World Case — Druckenmiller's "Bet Big When You're Right"</div>
+    </div>
+    <div class="cs-body">Stanley Druckenmiller, who generated 30%+ annualized returns over 30 years with no losing year, famously said: <strong>"The way to build long-term returns is through preservation of capital and home runs."</strong> When working with George Soros at Quantum Fund, Druckenmiller made the call to short the British pound in 1992 — but it was Soros who told him to size the position at $10 billion, not the $1 billion Druckenmiller had planned. That sizing decision turned a good trade into a legendary one ("breaking the Bank of England"). The insight: when conviction is highest and supported by evidence, the size of the bet matters more than the bet itself.</div>
+    <div class="cs-takeaway">Druckenmiller's lesson cuts both ways for NIL competitors. Size up when your conviction is highest and research is deepest — but recognize that in a 90-day tournament, you lack the flexibility to recover from an oversized mistake. The NIL 20% cap exists to protect you from yourself.</div>
+  </div>
+
+  <div class="exhibit">
+    <div class="exhibit-label">Exhibit 3.1 — Impact of Position Sizing on Portfolio Damage</div>
+    <p style="font-family:Arial,sans-serif;font-size:12px;color:var(--muted);margin-bottom:12px;">If a single holding drops 40%, here's the damage at different position sizes:</p>
+    <div class="waterfall-chart" style="height:200px;align-items:flex-end;">
+      <div class="wf-bar-wrap">
+        <div class="wf-val" style="color:var(--green);">–2.0%</div>
+        <div class="wf-bar" style="height:28px;background:linear-gradient(180deg,var(--green),rgba(34,197,94,.4));width:100%;"></div>
+        <div class="wf-label">5%<br>position</div>
+      </div>
+      <div class="wf-bar-wrap">
+        <div class="wf-val" style="color:var(--accent);">–3.2%</div>
+        <div class="wf-bar" style="height:44px;background:linear-gradient(180deg,var(--accent),rgba(59,130,246,.4));width:100%;"></div>
+        <div class="wf-label">8%<br>position</div>
+      </div>
+      <div class="wf-bar-wrap">
+        <div class="wf-val" style="color:var(--orange);">–4.0%</div>
+        <div class="wf-bar" style="height:56px;background:linear-gradient(180deg,var(--orange),rgba(245,158,11,.4));width:100%;"></div>
+        <div class="wf-label">10%<br>position</div>
+      </div>
+      <div class="wf-bar-wrap">
+        <div class="wf-val" style="color:var(--red);">–6.0%</div>
+        <div class="wf-bar" style="height:84px;background:linear-gradient(180deg,var(--red),rgba(239,68,68,.4));width:100%;"></div>
+        <div class="wf-label">15%<br>position</div>
+      </div>
+      <div class="wf-bar-wrap">
+        <div class="wf-val" style="color:#ff3333;">–8.0%</div>
+        <div class="wf-bar" style="height:112px;background:linear-gradient(180deg,#ff3333,rgba(239,68,68,.6));width:100%;"></div>
+        <div class="wf-label">20%<br>(NIL max)</div>
+      </div>
+    </div>
+    <p style="font-family:Arial,sans-serif;font-size:12px;color:var(--muted);margin-top:8px;">A 20% max-sized position losing 40% costs you 8% of total portfolio — potentially triggering PATR drawdown penalties if it pushes you past the 15% buffer. Size accordingly.</p>
+  </div>
+
+  <h3>Conviction-Weighted vs. Equal-Weighted</h3>
+  <p>There are two basic sizing philosophies. <strong class="hl">Equal-weight</strong> gives every position the same allocation (10% each in a 10-stock portfolio). It is humble — it admits you cannot reliably predict which idea will perform best. It protects against overconfidence by ensuring no single mistake dominates the portfolio. <strong class="hl">Conviction-weight</strong> gives more capital to your highest-confidence ideas and less to lower-conviction positions. It is expressive — it captures the signal in your own research quality.</p>
+  <p>Neither is objectively better. Equal-weight protects you from overconfidence and ensures no single mistake dominates. Conviction-weight lets your best research drive returns and is the approach most professional managers use. For NIL competition, most successful competitors use a <strong class="hl">constrained conviction approach</strong>: conviction-weighted but with hard guardrails — no position above 15–18% (staying under the 20% NIL cap with room for price appreciation), no position below 4–5% (below that, the position doesn't meaningfully contribute to returns).</p>
+
+  <div class="exhibit">
+    <div class="exhibit-label">Exhibit 3.2 — Sizing Frameworks: Equal-Weight vs. Conviction-Weighted</div>
+    <div class="two-col">
+      <div>
+        <p style="font-family:Arial,sans-serif;font-size:12px;font-weight:700;color:var(--accent);margin-bottom:8px;">EQUAL-WEIGHT (10 × 10%)</p>
+        <svg viewBox="0 0 260 30" width="100%" style="display:block;">
+          <rect x="0" y="0" width="25" height="30" rx="2" fill="#3B82F6"/><rect x="26" y="0" width="25" height="30" rx="2" fill="#60A5FA"/><rect x="52" y="0" width="25" height="30" rx="2" fill="#22C55E"/><rect x="78" y="0" width="25" height="30" rx="2" fill="#4ADE80"/><rect x="104" y="0" width="25" height="30" rx="2" fill="#a855f7"/><rect x="130" y="0" width="25" height="30" rx="2" fill="#c084fc"/><rect x="156" y="0" width="25" height="30" rx="2" fill="#f59e0b"/><rect x="182" y="0" width="25" height="30" rx="2" fill="#fbbf24"/><rect x="208" y="0" width="25" height="30" rx="2" fill="#06b6d4"/><rect x="234" y="0" width="25" height="30" rx="2" fill="#22d3ee"/>
+        </svg>
+        <p style="font-family:Arial,sans-serif;font-size:11px;color:var(--muted);margin-top:8px;"><strong style="color:var(--green);">Pros:</strong> Simple, protects from overconfidence, no single-stock blow-up risk<br><strong style="color:var(--red);">Cons:</strong> Best ideas underweighted, worst ideas overweighted, leaves alpha on the table</p>
+      </div>
+      <div>
+        <p style="font-family:Arial,sans-serif;font-size:12px;font-weight:700;color:var(--gold);margin-bottom:8px;">CONVICTION-WEIGHTED</p>
+        <svg viewBox="0 0 260 30" width="100%" style="display:block;">
+          <rect x="0" y="0" width="44" height="30" rx="2" fill="#C9A84C"/><rect x="45" y="0" width="36" height="30" rx="2" fill="#dbb960"/><rect x="82" y="0" width="32" height="30" rx="2" fill="#3B82F6"/><rect x="115" y="0" width="28" height="30" rx="2" fill="#60A5FA"/><rect x="144" y="0" width="26" height="30" rx="2" fill="#22C55E"/><rect x="171" y="0" width="22" height="30" rx="2" fill="#a855f7"/><rect x="194" y="0" width="18" height="30" rx="2" fill="#f59e0b"/><rect x="213" y="0" width="16" height="30" rx="2" fill="#06b6d4"/><rect x="230" y="0" width="15" height="30" rx="2" fill="#c084fc"/><rect x="246" y="0" width="13" height="30" rx="2" fill="#22d3ee"/>
+        </svg>
+        <p style="font-family:Arial,sans-serif;font-size:11px;color:var(--muted);margin-top:8px;"><strong style="color:var(--green);">Pros:</strong> Best ideas drive returns, reflects research quality, used by most pros<br><strong style="color:var(--red);">Cons:</strong> Overconfidence risk, requires honest conviction assessment, top-heavy blowup exposure</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>A Practical Sizing Framework for NIL</h3>
+  <p>Here is a concrete approach. Assign each position a conviction tier before allocating capital. <strong class="hl">High conviction</strong> (2–3 positions): 12–18% each. You have deep research, a clear catalyst, strong risk/reward, and differentiated insight. <strong class="hl">Core conviction</strong> (4–5 positions): 7–11% each. Solid analysis, good businesses, but less edge or more uncertainty. <strong class="hl">Starter/satellite</strong> (2–3 positions): 4–6% each. Emerging ideas, diversification plays, or early-stage research. Total must reach 100% of deployed capital (which itself must meet the NIL 70% minimum exposure rule for half the tournament window).</p>
+
+  <div class="exhibit">
+    <div class="exhibit-label">Exhibit 3.3 — NIL Position Sizing Template (10-Position Portfolio on $1M Capital)</div>
+    <table class="fw-table">
+      <thead><tr><th>Tier</th><th>Positions</th><th>Size Each</th><th>Total Allocation</th><th>Conviction Characteristics</th></tr></thead>
+      <tbody>
+        <tr><td><strong class="hl" style="color:var(--gold);">High</strong></td><td>2–3</td><td>12–18%</td><td>30–45%</td><td>Deep research, clear catalyst, variant perception, strong risk/reward</td></tr>
+        <tr><td><strong class="hl" style="color:var(--accent);">Core</strong></td><td>4–5</td><td>7–11%</td><td>35–45%</td><td>Solid analysis, quality business, reasonable valuation, good diversification</td></tr>
+        <tr><td><strong class="hl" style="color:var(--muted);">Starter</strong></td><td>2–3</td><td>4–6%</td><td>10–18%</td><td>Emerging idea, sector balance, early research, or hedge-like position</td></tr>
+      </tbody>
+    </table>
+    <p style="font-family:Arial,sans-serif;font-size:12px;color:var(--muted);margin-top:6px;">Example: 3 × 15% + 4 × 9% + 3 × 5% = 45% + 36% + 15% = 96% deployed, 4% cash reserve. All within NIL rules.</p>
+  </div>
+
+  <div class="callout">
+    <div class="callout-label">Beat Lynch Connection</div>
+    <p>The NIL enforces a 20% maximum position size <strong style="color:#fff;">at the time of purchase</strong> — you cannot buy or add to a position if doing so would push it above 20%. However, if a position grows past 20% through price appreciation alone, it is <em>not</em> a rule violation and does not trigger a forced sell. That said, smart competitors still treat ~15% as their practical ceiling at purchase. Why? A position that drifts to 25%+ through appreciation creates severe concentration risk — one bad earnings report could cost you 5%+ of total portfolio value and blow through your PATR drawdown buffer, even if no rule is broken.</p>
+  </div>
+
+  <div class="callout callout-orange">
+    <div class="callout-label">Discipline Check</div>
+    <p>Never ignore a position that has grown well above 20% through appreciation. While the NIL 20% cap applies only at the time of purchase — meaning a position that drifts above 20% is not a rule violation — it is still a concentration risk you chose to accept through inaction. A stock rising from 12% to 25% of your portfolio is not the market "confirming your thesis" — it is concentration risk building in real time. Trimming winners is not a lack of conviction; it is portfolio discipline. The pros call it "harvesting" — you are harvesting the very gains that made the position oversized.</p>
+  </div>
+</div>
+
+<!-- ===================== LESSON 4 ===================== -->
+<div class="lesson-card" onclick="toggleLesson(3)">
+  <div class="lesson-num">04</div>
+  <div><div class="lesson-title">Managing a Portfolio Over Time</div>
+  <div class="lesson-desc">Rebalancing triggers, sell discipline, the winner's dilemma, and how cash functions as a deliberate position — not a leftover.</div></div>
+  <div class="lesson-mp">25 MP</div>
+</div>
+<div class="lesson-detail" id="ld-3">
+  <div class="tag-row">
+    <span class="ctag">Rebalancing</span><span class="ctag">Sell Discipline</span><span class="ctag">Cash Management</span><span class="ctag">Emotional Control</span>
+  </div>
+
+  <h3>The Portfolio Is Alive</h3>
+  <p>Building a portfolio is the beginning, not the end. The moment you deploy capital, your carefully calibrated sizing starts changing. Winners grow, losers shrink, correlations shift, and new information arrives daily. A portfolio that was perfectly balanced on Day 1 can become dangerously concentrated by Day 30 if left unattended. Managing a portfolio over time requires a system — not a set of ad hoc reactions to price moves.</p>
+
+  <div class="exhibit">
+    <div class="exhibit-label">Exhibit 4.1 — Portfolio Drift: How Sizing Changes Without Any Action</div>
+    <p style="font-family:Arial,sans-serif;font-size:12px;color:var(--muted);margin-bottom:12px;">Starting portfolio vs. same portfolio after 60 days of market movement, no trades:</p>
+    <table class="fw-table">
+      <thead><tr><th>Holding</th><th>Day 1 Weight</th><th>Stock Move</th><th>Day 60 Weight</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>NVDA</td><td>15.0%</td><td>+42%</td><td><strong style="color:var(--orange);">20.8%</strong></td><td><span style="color:var(--orange);">⚠ Concentration risk — no rule breach (20% cap is at purchase only), but consider trimming</span></td></tr>
+        <tr><td>MSFT</td><td>12.0%</td><td>+15%</td><td>13.5%</td><td>Moderate growth</td></tr>
+        <tr><td>UNH</td><td>10.0%</td><td>+8%</td><td>10.6%</td><td>Stable</td></tr>
+        <tr><td>JPM</td><td>10.0%</td><td>+5%</td><td>10.3%</td><td>Stable</td></tr>
+        <tr><td>PG</td><td>9.0%</td><td>–2%</td><td>8.6%</td><td>Slight decline</td></tr>
+        <tr><td>XOM</td><td>9.0%</td><td>–8%</td><td>8.1%</td><td>Underperforming</td></tr>
+        <tr><td>AMZN</td><td>8.0%</td><td>+20%</td><td>9.4%</td><td>Growing</td></tr>
+        <tr><td>LLY</td><td>8.0%</td><td>+25%</td><td>9.8%</td><td>Growing</td></tr>
+        <tr><td>NEE</td><td>5.0%</td><td>–12%</td><td>4.3%</td><td>Shrinking</td></tr>
+        <tr><td>Cash</td><td>14.0%</td><td>—</td><td>4.6%</td><td><span style="color:var(--orange);">⚠ Diluted by winners</span></td></tr>
+      </tbody>
+    </table>
+    <p style="font-family:Arial,sans-serif;font-size:12px;color:var(--muted);margin-top:6px;">Without action: NVDA has drifted above 20% (not a rule breach — the 20% cap applies at purchase only — but a serious concentration risk), cash cushion evaporated (as a % of AUM), and tech concentration has increased to 44% of portfolio. This portfolio needs rebalancing.</p>
+  </div>
+
+  <h3>Rebalancing: When and How</h3>
+  <p>Rebalancing means adjusting positions back toward your target sizing. There are two triggers: <strong class="hl">threshold-based</strong> (rebalance when any position drifts more than 3–5 percentage points from target) and <strong class="hl">calendar-based</strong> (review every 1–2 weeks in a tournament window). Professional managers and NIL competitors should use both. Check weekly. Act when thresholds are breached.</p>
+  <p>Rebalancing is psychologically difficult because it means selling winners and potentially adding to losers. This feels wrong — but it is the structural discipline that prevents concentration risk from building silently. You are not "giving up" on winners; you are maintaining the portfolio architecture that protects your entire capital base.</p>
+
+  <h3>When to Sell: The Four Valid Reasons</h3>
+  <p>Amateur investors sell for emotional reasons — panic after a drop, boredom, or chasing the next shiny idea. Professional investors sell for structural reasons. There are exactly <strong class="hl">four valid reasons</strong> to sell a position in your portfolio:</p>
+
+  <div class="exhibit">
+    <div class="exhibit-label">Exhibit 4.2 — The Four Valid Sell Triggers</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+      <div class="stat-card" style="text-align:left;background:rgba(34,197,94,.06);border-color:rgba(34,197,94,.2);">
+        <div style="font-family:Arial,sans-serif;font-size:11px;font-weight:700;color:var(--green);margin-bottom:6px;">1. THESIS BROKEN</div>
+        <p style="font-family:Arial,sans-serif;font-size:12px;color:#BEC3D4;margin:0;line-height:1.5;">The original reason you bought no longer holds. Management change, competitive moat eroded, regulation killed the growth story. This is the cleanest sell signal. <strong style="color:#fff;">Note:</strong> A price drop alone does NOT break a thesis — the business fundamentals must have changed.</p>
+      </div>
+      <div class="stat-card" style="text-align:left;background:rgba(59,130,246,.06);border-color:rgba(59,130,246,.2);">
+        <div style="font-family:Arial,sans-serif;font-size:11px;font-weight:700;color:var(--accent);margin-bottom:6px;">2. VALUATION TARGET HIT</div>
+        <p style="font-family:Arial,sans-serif;font-size:12px;color:#BEC3D4;margin:0;line-height:1.5;">The stock reached your estimated fair value. Risk/reward is now unfavorable. Graham's margin of safety has evaporated. Discipline means taking the win.</p>
+      </div>
+      <div class="stat-card" style="text-align:left;background:rgba(245,158,11,.06);border-color:rgba(245,158,11,.2);">
+        <div style="font-family:Arial,sans-serif;font-size:11px;font-weight:700;color:var(--orange);margin-bottom:6px;">3. BETTER OPPORTUNITY</div>
+        <p style="font-family:Arial,sans-serif;font-size:12px;color:#BEC3D4;margin:0;line-height:1.5;">You found a new idea with significantly better risk/reward. Opportunity cost is real. Your portfolio has limited slots — the lowest-conviction holding should yield to the better idea.</p>
+      </div>
+      <div class="stat-card" style="text-align:left;background:rgba(168,85,247,.06);border-color:rgba(168,85,247,.2);">
+        <div style="font-family:Arial,sans-serif;font-size:11px;font-weight:700;color:var(--purple);margin-bottom:6px;">4. PORTFOLIO STRUCTURE</div>
+        <p style="font-family:Arial,sans-serif;font-size:12px;color:#BEC3D4;margin:0;line-height:1.5;">The position has grown too large (approaching 20% NIL cap), correlation risk has increased, or sector concentration needs correcting. This is not about the stock — it's about the system.</p>
+      </div>
+    </div>
+    <p style="font-family:Arial,sans-serif;font-size:12px;color:var(--red);margin-top:12px;font-weight:700;">⚠ INVALID SELL REASONS: Stock dropped 10% from purchase price (that's emotion, not structure), boredom, panic after a bad headline, chasing a "hot tip." None of these are valid reasons to sell.</p>
+  </div>
+
+  <div class="case-study">
+    <div class="cs-header">
+      <div class="cs-icon" style="background:rgba(34,197,94,.15);color:var(--green);">1</div>
+      <div class="cs-title" style="color:var(--green);">Thesis Broken Example — Intel (INTC), 2020–2024</div>
+    </div>
+    <div class="cs-body">For years, the bull case for Intel was its <strong>dominant position in x86 PC and server chips, its manufacturing advantage (owning its own fabs), and its pricing power</strong>. By 2021–2023, every pillar of that thesis had cracked: AMD and Apple's ARM chips took massive market share, Intel's manufacturing process fell behind TSMC by two generations, and its data center revenue declined. The original thesis — manufacturing moat + market dominance — was broken. Investors who sold on thesis breach avoided Intel's continued decline from ~$60 to under $25. Those who held hoping for a comeback were anchored to a thesis that no longer existed.</div>
+    <div class="cs-takeaway">Sell when the "why you bought" no longer applies. Intel investors who wrote a thesis at purchase and checked it against reality had a clean exit signal. Those who held on hope watched the thesis — and the stock — disintegrate.</div>
+  </div>
+
+  <div class="case-study">
+    <div class="cs-header">
+      <div class="cs-icon" style="background:rgba(59,130,246,.15);color:var(--accent);">≠</div>
+      <div class="cs-title" style="color:var(--accent);">Thesis Intact Example — Netflix (NFLX), April 2022</div>
+    </div>
+    <div class="cs-body">In April 2022, Netflix reported its first subscriber loss in a decade. The stock crashed <strong>35% in a single day</strong>, falling from ~$350 to ~$225. Panic sellers exited en masse. But was the thesis broken? Netflix still had 220+ million subscribers, dominant content spending, and was introducing an ad-supported tier + password-sharing crackdowns — catalysts that would take time to play out. The fundamental business model (streaming dominance, global TAM) was intact. Investors who held through the panic — or added — saw Netflix recover to over $700 within 18 months.</div>
+    <div class="cs-takeaway">A 35% price drop looks terrifying but did not break Netflix's thesis. The correct action was to review fundamentals, not react to price. This is the difference between thesis-driven selling (disciplined) and panic selling (emotional).</div>
+  </div>
+
+  <h3>Cash as a Deliberate Position</h3>
+  <p>Cash is not a leftover — it is a position. Holding cash is an active decision that says: "I do not see enough risk/reward in the current market to deploy this capital." In NIL tournaments, the rules cap cash at 75% (you must deploy at least 25% immediately) and require 70% exposure for half the tournament window. Within those bounds, cash allocation is a strategic tool.</p>
+  <p>Howard Marks teaches that markets swing between fear and greed like a pendulum, spending almost no time at the equilibrium center. <strong class="hl">Your cash allocation should reflect where the pendulum sits.</strong> At greed extremes (late-cycle, elevated valuations), raise cash — this is an expression of second-level thinking that says the market is offering prices that do not compensate for risk. At fear extremes, deploy it. In NIL competition, the competitor who has cash available when others are fully invested during a market dislocation has a structural advantage — they can buy the fear while others are trapped in drawdowns.</p>
+
+  <div class="callout">
+    <div class="callout-label">Beat Lynch Connection</div>
+    <p>The Portfolio Lab tracks your sell discipline as a diagnostic metric. It distinguishes between thesis-driven sells (good), panic sells within 48 hours of a drawdown (poor), and forced sells from NIL rule breaches (very poor). Your sell pattern is a signal of portfolio management maturity — and it affects how the system evaluates your overall process quality.</p>
+  </div>
+
+  <div class="callout callout-purple">
+    <div class="callout-label">Marks' Pendulum in Practice</div>
+    <p>Think of it this way: if you deploy 100% of capital at market highs, you have no ammunition when prices become attractive. Maintaining a 15–25% tactical cash reserve within NIL exposure rules gives you optionality. When the market corrects, you can deploy that cash into quality names at discount prices — buying the fear while over-invested competitors are trapped watching their positions fall with no ability to act.</p>
+  </div>
+</div>
+
+<!-- ===================== LESSON 5 ===================== -->
+<div class="lesson-card" onclick="toggleLesson(4)">
+  <div class="lesson-num">05</div>
+  <div><div class="lesson-title">Building Your First Competition Portfolio</div>
+  <div class="lesson-desc">Capstone lesson: construct a 10-position NIL-ready portfolio from scratch. PATR mechanics, the Two-Week Rule, allocation, sizing, diversification check, and thesis per position.</div></div>
+  <div class="lesson-mp">25 MP</div>
+</div>
+<div class="lesson-detail" id="ld-4">
+  <div class="tag-row">
+    <span class="ctag">Capstone Build</span><span class="ctag">NIL Rules</span><span class="ctag">PATR Mechanics</span><span class="ctag">Two-Week Rule</span><span class="ctag">Construction Checklist</span>
+  </div>
+
+  <h3>Understanding PATR: How Your Portfolio Is Actually Scored</h3>
+  <p>Before you build your competition portfolio, you need to understand exactly how it will be judged. NIL tournaments use <strong class="hl">PATR (Performance After Total Risk)</strong> — a scoring system that rewards returns but penalizes excessive drawdowns. PATR is not simply your total return. It is your total return minus a penalty for any drawdown that exceeds a defined buffer above the benchmark.</p>
+
+  <div class="exhibit">
+    <div class="exhibit-label">Exhibit 5.0 — How PATR Scoring Works</div>
+    <p style="font-family:Arial,sans-serif;font-size:13px;color:#BEC3D4;line-height:1.7;margin-bottom:14px;">PATR starts with your raw portfolio return. If your maximum drawdown stays within <strong style="color:#fff;">15 percentage points above the benchmark's drawdown</strong> (the "PATR buffer"), you pay no penalty — your PATR equals your total return. If your drawdown exceeds that buffer, you pay a penalty that reduces your effective score.</p>
+    <div class="patr-flow">
+      <div class="patr-box"><div class="pb-num" style="color:var(--green);">+16.2%</div><div class="pb-label">Your Return</div></div>
+      <div class="patr-arrow">−</div>
+      <div class="patr-box"><div class="pb-num" style="color:var(--red);">?%</div><div class="pb-label">Drawdown Penalty</div></div>
+      <div class="patr-arrow">=</div>
+      <div class="patr-box" style="border-color:var(--gold);"><div class="pb-num" style="color:var(--gold);">PATR</div><div class="pb-label">Final Score</div></div>
+    </div>
+    <div class="two-col" style="margin-top:14px;">
+      <div class="stat-card" style="text-align:left;background:rgba(34,197,94,.06);border-color:rgba(34,197,94,.2);">
+        <div style="font-family:Arial,sans-serif;font-size:11px;font-weight:700;color:var(--green);margin-bottom:6px;">COMPETITOR A — Disciplined Construction</div>
+        <p style="font-family:Arial,sans-serif;font-size:12px;color:#BEC3D4;margin:0;line-height:1.6;">Return: +16.2% · Max drawdown: 11% · Drawdown within 15% buffer → <strong style="color:var(--green);">No penalty</strong><br><strong style="color:var(--green);">PATR = +16.2%</strong> (4 trades total, disciplined rebalancing)</p>
+      </div>
+      <div class="stat-card" style="text-align:left;background:rgba(239,68,68,.06);border-color:rgba(239,68,68,.2);">
+        <div style="font-family:Arial,sans-serif;font-size:11px;font-weight:700;color:var(--red);margin-bottom:6px;">COMPETITOR B — Reckless Construction</div>
+        <p style="font-family:Arial,sans-serif;font-size:12px;color:#BEC3D4;margin:0;line-height:1.6;">Return: +16.2% · Max drawdown: 24% · Exceeds 15% buffer → <strong style="color:var(--red);">Significant penalty</strong><br><strong style="color:var(--red);">PATR ≈ +8–10%</strong> (38 trades, panic selling during drawdown)</p>
+      </div>
+    </div>
+    <p style="font-family:Arial,sans-serif;font-size:12px;color:var(--gold);margin-top:12px;font-weight:700;">KEY INSIGHT: Same return, dramatically different PATR scores. Portfolio construction discipline (sizing, diversification, correlation management) is what keeps your drawdown within the buffer. PATR rewards process, not just outcomes. The number of trades is irrelevant to scoring — only returns and drawdowns matter.</p>
+  </div>
+
+  <h3>The Two-Week Rule: Why Deployment Speed Matters</h3>
+  <p>The NIL <strong class="hl">Two-Week Rule</strong> requires competitors to construct a full portfolio — meeting minimum holdings and exposure requirements — within <strong class="hl">14 days of tournament start</strong>. You must have at least 5 positions and deploy at least 25% of capital by Day 1, then reach your full target allocation (meeting the 70% minimum exposure rule for half the window) within two weeks.</p>
+  <p>This rule exists for a critical portfolio construction reason: it prevents competitors from sitting in cash while waiting for "perfect" entry points, which is a form of market timing that avoids genuine risk-taking. NIL tournaments are designed to test your ability to <strong class="hl">build and manage a complete, diversified portfolio under real market conditions</strong> — not your ability to wait on the sidelines. Just as a professional portfolio manager who receives a new mandate from a client cannot wait months to deploy, NIL competitors must demonstrate the ability to construct a portfolio with the market as it is, not as they wish it were.</p>
+  <p>The Two-Week Rule also tests a core portfolio construction skill: <strong class="hl">building a complete, thoughtfully diversified portfolio under time pressure</strong> with whatever the current market environment presents. This is a realistic simulation of professional portfolio management.</p>
+
+  <div class="callout callout-cyan">
+    <div class="callout-label">Two-Week Rule in Practice</div>
+    <p>Smart competitors pre-build their target portfolio during the days before the tournament opens, using the seven-step process below. When the window starts, they already know their 10 positions, target sizes, and deployment sequence. They execute Day 1, then fine-tune over the remaining 13 days. Competitors who start thinking about what to buy on Day 1 almost always underperform those who arrive with a plan.</p>
+  </div>
+
+  <h3>The Seven-Step Portfolio Build Process</h3>
+  <p>Everything in this course converges here. You have learned portfolio thinking, diversification, sizing, and management. Now you assemble them into a repeatable build process. This is the exact workflow you will use before every NIL tournament — and the discipline that separates competitors who build portfolios from those who accumulate stocks.</p>
+
+  <div class="exhibit">
+    <div class="exhibit-label">Exhibit 5.1 — The Seven-Step Competition Portfolio Build</div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-title">Step 1 — Define Your Universe</div>
+        <div class="tl-desc">Start with 25–40 companies from your research pipeline. Use the Stock Analyzer to filter by Growth Quality, Moat Strength, and Financial Durability. Eliminate anything with a red-flag earnings quality issue (Course 2.1, Lesson 4).</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-title">Step 2 — Read the Environment</div>
+        <div class="tl-desc">Check Market Brain regime. Is this risk-on or risk-off? Early cycle or late cycle? Which sectors and factors are favored? (Course 2.2, Lessons 3–5.) Your portfolio should align with — or deliberately counter — the current environment. In a risk-off, rising-rate regime, reduce unprofitable growth and add quality/value names with pricing power.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-title">Step 3 — Select 10–12 Candidates</div>
+        <div class="tl-desc">Narrow to your best ideas. Ensure sector diversity: at least 4 GICS sectors represented. Check correlations: no more than 3 positions should be highly correlated (0.7+). Remember: positions with correlation above 0.7 function as a single bet.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-title">Step 4 — Assign Conviction Tiers</div>
+        <div class="tl-desc">Rank each position: High (12–18%), Core (7–11%), or Starter (4–6%). Be honest about where you have genuine edge vs. where you are following consensus.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-title">Step 5 — Size and Allocate</div>
+        <div class="tl-desc">Allocate capital across $1M. Verify: no position exceeds 20% (use 15% as practical ceiling), total deployment meets the 70% minimum exposure requirement, cash is under 75%. Leave a 2–5% cash buffer for tactical opportunities.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-title">Step 6 — Stress Test</div>
+        <div class="tl-desc">Ask: "If the S&P 500 drops 15%, what happens to my portfolio?" Calculate your worst-case drawdown. If it exceeds the PATR 15% buffer above benchmark, you are sized too aggressively or too concentrated. Reduce high-beta positions and add defensive or uncorrelated names until expected drawdown falls within the buffer.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-title">Step 7 — Document the Thesis</div>
+        <div class="tl-desc">Write one sentence per position: why you own it, what the catalyst is, and at what price you would sell. This is your accountability system. Without a written thesis, you have no sell discipline — and no way to distinguish a "thesis broken" sell (valid) from a panic sell (invalid).</div>
+      </div>
+    </div>
+  </div>
+
+  <h3>A Complete Build Example</h3>
+  <p>Let us walk through a concrete portfolio construction. The environment: Market Brain indicates mid-cycle expansion, risk-on, with breadth broadening beyond mega-cap tech. The factor tilt favors quality and moderate growth. Interest rates are stable. The Sector Map shows leadership in industrials, healthcare, and financials.</p>
+
+  <div class="exhibit">
+    <div class="exhibit-label">Exhibit 5.2 — Sample NIL Competition Portfolio ($1M Capital)</div>
+    <table class="fw-table">
+      <thead><tr><th>Position</th><th>Sector</th><th>Conviction</th><th>Weight</th><th>$ Amount</th><th>One-Line Thesis</th></tr></thead>
+      <tbody>
+        <tr><td><strong class="hl">UNH</strong></td><td>Healthcare</td><td style="color:var(--gold);">High</td><td>15%</td><td>$150,000</td><td>Dominant managed care moat, consistent 13–15% EPS growth, defensive earnings in any environment</td></tr>
+        <tr><td><strong class="hl">MSFT</strong></td><td>Technology</td><td style="color:var(--gold);">High</td><td>14%</td><td>$140,000</td><td>Cloud + AI secular growth, 40%+ operating margins, pricing power across enterprise stack</td></tr>
+        <tr><td><strong class="hl">JPM</strong></td><td>Financials</td><td style="color:var(--gold);">High</td><td>12%</td><td>$120,000</td><td>Best-in-class bank, benefits from rate environment, ROIC consistently above cost of capital</td></tr>
+        <tr><td><strong class="hl">CAT</strong></td><td>Industrials</td><td style="color:var(--accent);">Core</td><td>10%</td><td>$100,000</td><td>Infrastructure super-cycle beneficiary, pricing power, strong backlog visibility</td></tr>
+        <tr><td><strong class="hl">V</strong></td><td>Financials</td><td style="color:var(--accent);">Core</td><td>9%</td><td>$90,000</td><td>Duopoly moat, 65%+ operating margins, secular shift from cash to digital payments</td></tr>
+        <tr><td><strong class="hl">LLY</strong></td><td>Healthcare</td><td style="color:var(--accent);">Core</td><td>8%</td><td>$80,000</td><td>GLP-1 franchise catalyst, massive TAM expansion, pipeline optionality</td></tr>
+        <tr><td><strong class="hl">PG</strong></td><td>Cons. Staples</td><td style="color:var(--accent);">Core</td><td>8%</td><td>$80,000</td><td>Defensive anchor with pricing power, portfolio ballast in risk-off scenarios</td></tr>
+        <tr><td><strong class="hl">XOM</strong></td><td>Energy</td><td style="color:var(--muted);">Starter</td><td>6%</td><td>$60,000</td><td>Inflation hedge, strong FCF yield, uncorrelated to tech-heavy positioning</td></tr>
+        <tr><td><strong class="hl">AMT</strong></td><td>Real Estate</td><td style="color:var(--muted);">Starter</td><td>5%</td><td>$50,000</td><td>5G tower infrastructure play, contracted revenue, rate sensitivity as diversifier</td></tr>
+        <tr><td><strong class="hl">NEE</strong></td><td>Utilities</td><td style="color:var(--muted);">Starter</td><td>5%</td><td>$50,000</td><td>Clean energy growth within defensive sector, regulated earnings base</td></tr>
+        <tr><td style="color:var(--muted);"><em>Cash</em></td><td>—</td><td>—</td><td>8%</td><td>$80,000</td><td>Tactical reserve for opportunity or drawdown management</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="exhibit">
+    <div class="exhibit-label">Exhibit 5.3 — Portfolio Construction Diagnostics</div>
+    <div class="three-col">
+      <div class="stat-card">
+        <div class="stat-num">7</div>
+        <div class="stat-label">GICS Sectors<br>Represented</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">15%</div>
+        <div class="stat-label">Largest Position<br>(Under 20% cap)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">92%</div>
+        <div class="stat-label">Capital Deployed<br>(Above 70% min)</div>
+      </div>
+    </div>
+    <div class="three-col">
+      <div class="stat-card" style="background:rgba(59,130,246,.06);border-color:rgba(59,130,246,.2);">
+        <div class="stat-num" style="color:var(--accent);">0.38</div>
+        <div class="stat-label">Avg. Pairwise<br>Correlation</div>
+      </div>
+      <div class="stat-card" style="background:rgba(34,197,94,.06);border-color:rgba(34,197,94,.2);">
+        <div class="stat-num" style="color:var(--green);">41%</div>
+        <div class="stat-label">Top 3 Concentration<br>(Healthy range)</div>
+      </div>
+      <div class="stat-card" style="background:rgba(168,85,247,.06);border-color:rgba(168,85,247,.2);">
+        <div class="stat-num" style="color:var(--purple);">10</div>
+        <div class="stat-label">Positions<br>(Above 5 min)</div>
+      </div>
+    </div>
+  </div>
+
+  <h3>The Pre-Flight Checklist</h3>
+  <p>Before submitting your portfolio for any NIL tournament, run this final check. Every "No" is a construction flaw that needs correcting before deployment.</p>
+
+  <div class="exhibit">
+    <div class="exhibit-label">Exhibit 5.4 — NIL Portfolio Pre-Flight Checklist</div>
+    <table class="fw-table">
+      <thead><tr><th>Check</th><th>Rule / Target</th><th>Pass Criteria</th></tr></thead>
+      <tbody>
+        <tr><td>Minimum holdings</td><td>≥ 5 positions</td><td><span style="color:var(--green);">✓ At least 5 stocks held</span></td></tr>
+        <tr><td>Maximum position size</td><td>≤ 20% at time of purchase</td><td><span style="color:var(--green);">✓ No position above 20% at entry (use 15% as practical ceiling)</span></td></tr>
+        <tr><td>Maximum cash</td><td>≤ 75% cash</td><td><span style="color:var(--green);">✓ At least 25% deployed</span></td></tr>
+        <tr><td>Exposure requirement</td><td>≥ 70% for half the window</td><td><span style="color:var(--green);">✓ Plan meets exposure floor</span></td></tr>
+        <tr><td>Sector diversification</td><td>≥ 4 GICS sectors</td><td><span style="color:var(--green);">✓ No hidden single-sector bet</span></td></tr>
+        <tr><td>Correlation check</td><td>No 3+ highly correlated cluster</td><td><span style="color:var(--green);">✓ Stress correlations reviewed</span></td></tr>
+        <tr><td>Thesis documented</td><td>Written for every position</td><td><span style="color:var(--green);">✓ Buy reason + sell trigger recorded</span></td></tr>
+        <tr><td>Two-Week Rule ready</td><td>Full portfolio within 14 days</td><td><span style="color:var(--green);">✓ Deployment plan covers first 14 days</span></td></tr>
+        <tr><td>Stress test passed</td><td>Expected drawdown within PATR 15% buffer</td><td><span style="color:var(--green);">✓ Worst-case drawdown reviewed and acceptable</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout">
+    <div class="callout-label">Beat Lynch Connection</div>
+    <p>When you open the Portfolio Lab and load your competition portfolio, every diagnostic in Exhibit 5.3 is calculated automatically. The Lab scores your construction quality before a single day of trading occurs. A portfolio that passes the pre-flight checklist will have a strong Portfolio Intelligence score from Day 1 — giving you structural edge before the market even opens.</p>
+  </div>
+
+  <div class="completion-badge">
+    <div style="font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:8px;">Course 2.3 Complete</div>
+    <div style="font-size:22px;color:#fff;margin-bottom:6px;">Portfolio Construction Fundamentals</div>
+    <p style="color:var(--muted);font-size:14px;max-width:500px;margin:0 auto 16px;">You now have the framework to build, size, diversify, and manage a competition-ready portfolio. Take the Final Exam to earn your 125 Mastery Points.</p>
+    <div class="meta-row" style="justify-content:center;">
+      <div class="meta-item"><div class="meta-num">125</div><div class="meta-label">Mastery Points Available</div></div>
+    </div>
+  </div>
+</div>
+
+  </div>
+</div>
+</div>
+</div>
+
+<!-- ========== EXAM TAB ========== -->
+<div class="tab-content" id="tab-exam">
+<div class="container">
+<div class="exam-wrap">
+
+<div id="exam-start" class="start-exam-wrap">
+  <h2>Final Exam — Portfolio Construction Fundamentals</h2>
+  <p>20 scenario-driven questions covering all five lessons. You need 80% (16/20) to pass and earn 125 Mastery Points.</p>
+  <div class="exam-rules">
+    <div class="rule-card"><div class="r-num">20</div><div class="r-label">Questions</div></div>
+    <div class="rule-card"><div class="r-num">80%</div><div class="r-label">Pass Threshold</div></div>
+    <div class="rule-card"><div class="r-num">125</div><div class="r-label">Mastery Points</div></div>
+    <div class="rule-card"><div class="r-num">∞</div><div class="r-label">Retakes</div></div>
+  </div>
+  <button class="exam-btn" onclick="startExam()">BEGIN EXAM</button>
+</div>
+
+<div id="exam-live" style="display:none;">
+  <div class="score-bar-wrap">
+    <div><div class="score-big" id="score-num">0</div><div class="score-sub">of 20 correct</div></div>
+    <div class="progress-track"><div class="progress-fill" id="progress-bar" style="width:0%"></div></div>
+    <div style="text-align:right;"><div class="score-big" id="score-pct">0%</div><div class="score-sub">score</div></div>
+  </div>
+  <div id="q-container"></div>
+  <div class="exam-result" id="exam-result">
+    <div class="result-score" id="result-score-val"></div>
+    <div id="result-status" style="font-family:Arial,sans-serif;font-size:20px;font-weight:700;margin-bottom:12px;"></div>
+    <p class="result-msg" id="result-msg"></p>
+    <div id="result-badge" style="margin-bottom:20px;"></div>
+    <button class="exam-btn secondary" onclick="retakeExam()">RETAKE EXAM</button>
+  </div>
+</div>
+
+</div>
+</div>
+</div>
+
+<script>
+function switchTab(t){
+  document.querySelectorAll('.tab-content').forEach(e=>e.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(e=>e.classList.remove('active'));
+  document.getElementById('tab-'+t).classList.add('active');
+  document.querySelectorAll('.tab-btn').forEach(e=>{if((t==='curriculum'&&e.textContent==='CURRICULUM')||(t==='exam'&&e.textContent==='FINAL EXAM'))e.classList.add('active');});
+}
+function toggleLesson(i){
+  var d=document.getElementById('ld-'+i),c=d.previousElementSibling;
+  var isOpen=d.classList.contains('open');
+  document.querySelectorAll('.lesson-detail').forEach(e=>e.classList.remove('open'));
+  document.querySelectorAll('.lesson-card').forEach(e=>e.classList.remove('active-card'));
+  if(!isOpen){d.classList.add('open');c.classList.add('active-card');d.scrollIntoView({behavior:'smooth',block:'start'});}
+}
+
+var Q=[
+{q:"A competitor holds ten stocks, each individually expected to return 12%. However, seven of the ten are highly correlated mega-cap tech names. During a sector rotation, the portfolio drops 22%. What is the primary construction failure?",opts:["Poor stock selection — should have picked better companies","Insufficient position count — needs at least 15 holdings","Hidden concentration risk — high correlation means low effective diversification","Too much cash drag — should have been 100% invested"],ans:2,ex:"Holding ten stocks does not guarantee diversification (Lesson 2). When seven positions are highly correlated, the portfolio behaves like a concentrated bet on a single factor — just like ARK Invest's correlated growth-tech portfolio that fell 75%. The failure is correlation-driven concentration, not stock selection quality."},
+{q:"An investor's portfolio has positions in NVDA (18%), MSFT (16%), GOOGL (14%), AMZN (12%), and six other tech/communication stocks at 5–8% each. They claim the portfolio is diversified because it holds ten positions. What is the most accurate assessment?",opts:["The portfolio is adequately diversified with ten positions","The portfolio is concentrated — it's essentially a single-sector bet on mega-cap technology","The portfolio needs more positions but is otherwise sound","The portfolio only needs to reduce the top position below 20%"],ans:1,ex:"Ten positions across 1–2 sectors is not diversification (Lesson 2). As taught in the lesson: owning NVDA, MSFT, GOOGL, META, and AMZN is not a five-stock portfolio — it is a single bet on mega-cap technology earnings growth. True diversification requires positions across at least 4–5 GICS sectors with different business drivers."},
+{q:"Correlation between two stocks is measured at 0.85. What does this tell you about using both in the same portfolio?",opts:["They will produce similar returns, so picking either one is fine","They offer almost no diversification benefit and will likely fall together during stress","The higher-return stock should be kept and the lower one sold","They are perfectly correlated and should never be held together"],ans:1,ex:"A correlation of 0.85 means the two stocks move very similarly (Lesson 2). In a portfolio context, holding both provides minimal diversification — during a selloff, both will likely decline together. It is not perfect correlation (1.0), but at 0.85 it is too high to provide meaningful protective structure. You need correlations below 0.5 for genuine diversification benefit."},
+{q:"A competitor builds a portfolio with 15% in NVDA, 15% in a semiconductor ETF, and 12% in AMD. All three have correlation above 0.80 with each other. What percentage of the portfolio is effectively concentrated in a single bet?",opts:["15% — only the largest position matters","27% — add NVDA and AMD only","42% — all three move together, so their combined weight is the true concentration","0% — ETFs provide automatic diversification"],ans:2,ex:"All three positions are highly correlated (0.80+), meaning they function as a single 42% bet on semiconductors (Lesson 2). The ETF does not provide diversification when it holds the same exposures as your individual stocks. The Archegos case study shows how correlated positions create systemic risk — when one falls, they all fall together."},
+{q:"Which of the following best describes why \"sizing is selection\" in portfolio construction?",opts:["Because position sizes are randomly assigned after stock selection","Because a 5% position and a 15% position in the same stock represent fundamentally different risk/return decisions","Because larger positions always outperform smaller ones","Because the NIL rules require specific position sizes for each stock"],ans:1,ex:"As taught in Lessons 1 and 3: a 5% position risks only 2% of portfolio if the stock drops 40%, while a 15% position risks 6%. They are the same stock but completely different decisions. The size declares your conviction, risk tolerance, and margin for error — making sizing as important as the pick itself."},
+{q:"In the conviction-weighted sizing framework, a \"Core\" position typically represents:",opts:["2–4% allocation for speculative ideas you're still researching","7–11% allocation for solid analysis with good business quality but less differentiated edge","15–20% allocation reserved for your absolute highest conviction ideas","Equal weight regardless of conviction, to maintain humility"],ans:1,ex:"The Core tier (7–11%) represents positions with solid analysis and quality businesses where you have good but not exceptional conviction (Lesson 3, Exhibit 3.3). High conviction (12–18%) is for your best ideas with clear catalysts and variant perception. Starter positions (4–6%) are for emerging ideas or diversification plays."},
+{q:"A competitor starts a tournament with a 15% position in stock XYZ. Over six weeks, XYZ rises 45%. Without any rebalancing, what is the approximate new weight, and what risk does this create?",opts:["~22% — this breaches the NIL 20% purchase cap and is a rule violation requiring a forced sale","~22% — while not a rule violation (the 20% cap applies at purchase only), this creates dangerous concentration risk that could amplify drawdowns and damage PATR","~15% — position weight stays constant regardless of price movement","~30% — the position has doubled in weight"],ans:1,ex:"A 15% position rising 45% grows to approximately 21–22% of the portfolio (Lesson 4, Exhibit 4.1 shows this scenario with NVDA). Critically, this is NOT a rule violation — the NIL 20% cap applies only at the time of purchase, not to subsequent price appreciation. However, it is still dangerous concentration risk. A single position above 20% means one bad earnings report could cost you 4–5% of total portfolio value and potentially push your drawdown past the PATR buffer. Smart competitors treat ~15% as their purchase ceiling and trim ('harvest') positions that drift well above 20% — not because they must, but because concentration risk threatens their PATR score."},
+{q:"Which of the following is NOT one of the four valid sell triggers described in portfolio management discipline?",opts:["The original investment thesis has broken","The stock hit your predetermined valuation target","The stock dropped 10% from your purchase price","You found a significantly better opportunity requiring the capital"],ans:2,ex:"A 10% price drop alone is not a valid sell reason — it is an emotional trigger, not a structural one (Lesson 4, Exhibit 4.2). The four valid sell triggers are: (1) thesis broken, (2) valuation target hit, (3) better opportunity found, and (4) portfolio structure correction. The Netflix case study shows how a 35% price drop did NOT break the thesis — investors who panic-sold missed a recovery to $700+."},
+{q:"Howard Marks teaches that cash allocation should reflect where the market pendulum sits. In an NIL tournament during a late-cycle environment with elevated valuations and narrow breadth, what is the most appropriate cash strategy?",opts:["Minimize cash to zero — you need maximum exposure to compete on returns","Hold near the 75% cash maximum and wait for a crash","Maintain a larger-than-normal cash position (15–25%) as tactical reserve, within NIL exposure rules","Cash management doesn't matter — only stock selection drives PATR"],ans:2,ex:"In a late-cycle, overvalued environment, Marks' pendulum is at the greed extreme (Lesson 4). Maintaining tactical cash reserve (15–25%) gives you optionality to deploy during a correction while still meeting the NIL 70% minimum exposure rule for half the window. Zero cash is reckless; 75% likely breaches exposure rules. Cash is a position, not a leftover."},
+{q:"A portfolio holds positions in: Technology (28%), Healthcare (22%), Financials (18%), Consumer Staples (12%), Energy (10%), Utilities (10%). What does this allocation suggest about its diversification quality?",opts:["Poor — too many sectors, should concentrate in fewer","Strong — six sectors with no single sector above 30%, providing genuine structural diversity","Weak — any portfolio with technology as largest sector is poorly diversified","Neutral — sector counts don't matter, only position count matters"],ans:1,ex:"Six GICS sectors with no sector above 30% represents strong structural diversity (Lesson 2). The technology weighting at 28% is significant but not dominant, and the defensive positions (staples, utilities, healthcare) provide ballast against growth-factor selloffs. This meets the minimum 4-sector requirement with room to spare."},
+{q:"A competitor's portfolio has an average pairwise correlation of 0.72 across all ten positions. During a market downturn, they experience a 19% drawdown — well above the 15% PATR buffer. What was the root cause?",opts:["They owned too many stocks, which reduced returns","The high average correlation meant the portfolio behaved like a concentrated position during stress, amplifying drawdown","They should have held more cash to offset the drawdown","Their individual stock picks were poor quality"],ans:1,ex:"Average pairwise correlation of 0.72 is dangerously high (Lesson 2). During stress, correlations increase further — a portfolio already at 0.72 in normal markets behaves nearly like a single position during a selloff. This explains why drawdown exceeded the PATR buffer. The COVID crash case study shows how correlations spike toward 0.8–0.9 during panics."},
+{q:"In the equal-weight vs. conviction-weight sizing debate, what is the primary advantage of equal-weighting?",opts:["It always produces higher returns than conviction-weighting","It protects against overconfidence by ensuring no single mistake dominates the portfolio","It is required by NIL tournament rules","It reduces the total number of positions needed"],ans:1,ex:"Equal-weighting's core advantage is humility — it acknowledges you cannot reliably predict which idea will perform best (Lesson 3). By giving each position the same weight, you ensure no single error creates outsized portfolio damage. It does not always produce higher returns — that's the tradeoff for protection against overconfidence."},
+{q:"A competitor's stress test shows that if the S&P 500 drops 15%, their portfolio would likely drop 21%. Their tournament uses a 15% drawdown buffer above the benchmark for PATR scoring. What should they do before the tournament begins?",opts:["Accept the risk — higher risk means higher potential returns","Reduce position sizes in their highest-beta holdings and add defensive positions to lower expected drawdown below the PATR buffer","Switch entirely to defensive stocks to minimize any possible drawdown","Hold 60% cash to ensure they never breach the drawdown buffer"],ans:1,ex:"The stress test reveals the portfolio would breach the PATR buffer during a benchmark-level drawdown, incurring penalties (Lesson 5, Step 6). The correct action is to reduce high-beta concentration and add defensive or uncorrelated positions to bring expected drawdown within the buffer. Going fully defensive or heavily cash sacrifices return potential unnecessarily."},
+{q:"A competitor holds a stock that has dropped 25% from purchase. The original thesis — a new product launch catalyst — has not yet played out, management is executing well, and the valuation has become more attractive. What is the correct portfolio management action?",opts:["Sell immediately — a 25% loss proves the thesis was wrong","Hold the position — the thesis is intact and the risk/reward has improved","Double the position size to average down aggressively","Sell half to \"reduce risk\" and hold the rest"],ans:1,ex:"With the thesis intact, management executing, and valuation more attractive, the 25% decline is price noise, not a thesis-breaking event (Lesson 4). The Netflix case study is directly analogous: a 35% crash that did NOT break the thesis, and investors who held saw recovery to $700+. Sell when the thesis breaks, not when the price drops. A price drop alone is an invalid sell reason."},
+{q:"The NIL Two-Week Rule requires a full portfolio to be constructed within 14 days of tournament start. Why does this rule exist from a portfolio construction perspective?",opts:["To ensure competitors trade frequently for entertainment value","To prevent competitors from sitting in cash while waiting for perfect entry points, ensuring genuine portfolio construction and risk-taking from the start","To guarantee that all competitors buy the same stocks","To create maximum trading volume in the first two weeks"],ans:1,ex:"The Two-Week Rule exists to test genuine portfolio construction skill (Lesson 5). It prevents competitors from avoiding risk by sitting in cash waiting for \"perfect\" conditions. Just as a professional portfolio manager receiving a new mandate must deploy capital with the market as it is, NIL competitors must demonstrate the ability to build a complete, diversified portfolio under time pressure with real market conditions."},
+{q:"A properly constructed NIL competition portfolio should have all of the following characteristics EXCEPT:",opts:["At least 5 positions with no single position above 20%","Representation across at least 4 GICS sectors","A written thesis and sell trigger for every position","Maximum concentration in a single high-conviction sector to maximize alpha"],ans:3,ex:"Maximum concentration in a single sector directly contradicts sound portfolio construction (Lessons 1–2, Pre-Flight Checklist in Lesson 5). The other three — minimum position count with size caps, sector diversification across 4+ GICS sectors, and documented theses — are all essential elements taught throughout this course. Sector concentration is uncompensated risk, not conviction."},
+{q:"[SYNTHESIS] A competitor is building their tournament portfolio. Market Brain shows a risk-off regime with rising rates. Their best stock ideas are all in high-growth technology with no current earnings. How should environment reading (Course 2.2) influence their portfolio construction decisions?",opts:["Ignore the environment — stock picking skill overrides macro conditions","Build the tech-heavy portfolio anyway but add one defensive stock for balance","Reduce technology allocation, add quality/value positions with pricing power, and include rate-beneficiary sectors like financials — aligning construction with the environment","Wait for the regime to change before entering the tournament"],ans:2,ex:"This integrates Course 2.2 environment reading with portfolio construction (Lesson 5, Step 2). In a risk-off, rising-rate regime, unprofitable growth tech faces the strongest headwinds — higher discount rates crush future-earnings valuations (this is exactly what happened to ARK Invest in 2022). Sound construction means aligning with the regime: reducing growth-tech exposure, adding quality businesses with current earnings and pricing power, and including rate beneficiaries like financials."},
+{q:"[SYNTHESIS] A competitor's portfolio shows: average pairwise correlation 0.65, top position at 19%, three positions in Technology totaling 48%, and 8% cash. The Portfolio Lab flags multiple warnings. Which combination of actions would most improve the portfolio's construction quality?",opts:["Reduce the top position to 15% only — that fixes the concentration flag","Trim all tech positions proportionally to below 35% combined, redistribute to uncorrelated sectors (energy, utilities, staples), which lowers correlation, reduces sector concentration, and maintains deployment","Sell everything and start over with an equal-weighted 20-stock portfolio","Add two more tech stocks to lower the average position size"],ans:1,ex:"This requires integrating Lessons 1–4. The core problems are: high correlation (0.65), sector concentration (48% tech — recall the Red Flag: over 50% in one sector is dangerous), and borderline top position (19%). Trimming tech and redistributing to uncorrelated sectors addresses all three simultaneously. More tech stocks would worsen correlation. Equal-weighting 20 stocks is an overreaction that ignores conviction."},
+{q:"[SYNTHESIS] Two competitors finish an NIL tournament with identical total returns of +16.2%. Competitor A had a maximum drawdown of 11% and made 4 trades total. Competitor B had a maximum drawdown of 24% and made 38 trades. Under PATR scoring with a 15% drawdown buffer, who scores better and why?",opts:["They tie — same return means same PATR","Competitor B wins — more trades show more active management skill","Competitor A wins — their 11% drawdown stayed within the 15% buffer (no penalty), while Competitor B's 24% drawdown triggers a significant PATR penalty that reduces their effective score","Cannot be determined without knowing the benchmark return"],ans:2,ex:"PATR = Total Return minus excess drawdown penalties (Lesson 5, Exhibit 5.0 teaches this exact comparison). Competitor A's 11% drawdown stays within the 15% buffer — no penalty, so PATR ≈ +16.2%. Competitor B's 24% drawdown exceeds the buffer, incurring a substantial penalty reducing PATR to roughly +8–10%. The number of trades is irrelevant to PATR scoring. This demonstrates the core Course 2.3 principle: disciplined construction protects PATR by limiting drawdowns."},
+{q:"You are reviewing your portfolio on Day 30 of a 90-day tournament. Your original 10% position in LLY has grown to 17% after strong earnings, and your 8% position in NEE has shrunk to 4% after a sector rotation. Your overall portfolio is up 9%. What is the correct portfolio management response?",opts:["Do nothing — never sell a winner during a tournament","Sell LLY entirely to lock in profits and double NEE to buy the dip","Trim LLY back toward 12–14% (harvesting gains while maintaining conviction), reassess NEE's thesis — if intact, hold or add slightly; if broken, replace with a better opportunity","Rebalance everything back to Day 1 weights exactly"],ans:2,ex:"This tests rebalancing and sell discipline from Lesson 4. LLY at 17% creates concentration risk and should be trimmed ('harvested') to a comfortable conviction-weighted level (12–14%), not eliminated. NEE at 4% requires thesis review: if intact, the decline may be an opportunity; if the thesis has broken (valid sell trigger #1), replace it. Exact rebalancing to Day 1 ignores updated information. Doing nothing lets portfolio drift build risk unchecked."}
+];
+
+var answered=0,correct=0,total=Q.length;
+
+function startExam(){
+  document.getElementById('exam-start').style.display='none';
+  document.getElementById('exam-live').style.display='block';
+  var c=document.getElementById('q-container');c.innerHTML='';
+  answered=0;correct=0;updateScore();
+  Q.forEach(function(q,i){
+    var h='<div class="q-block" id="qb-'+i+'"><div class="q-num">Question '+(i+1)+' of '+total+'</div><div class="q-text">'+q.q+'</div><div class="q-options">';
+    var L=['A','B','C','D'];
+    q.opts.forEach(function(o,j){h+='<button class="q-opt" id="qo-'+i+'-'+j+'" onclick="answer('+i+','+j+')"><span class="opt-letter">'+L[j]+'</span><span>'+o+'</span></button>';});
+    h+='</div><div class="q-feedback" id="qf-'+i+'"></div></div>';
+    c.insertAdjacentHTML('beforeend',h);
+  });
+}
+
+function answer(qi,oi){
+  var q=Q[qi],bl=document.getElementById('qb-'+qi),fb=document.getElementById('qf-'+qi);
+  var opts=bl.querySelectorAll('.q-opt');
+  if(opts[0].disabled)return;
+  opts.forEach(function(o,j){
+    o.disabled=true;
+    if(j===q.ans)o.classList.add(j===oi?'correct':'reveal-correct');
+    if(j===oi&&j!==q.ans)o.classList.add('wrong');
+  });
+  answered++;
+  if(oi===q.ans){correct++;bl.classList.add('answered-correct');fb.className='q-feedback correct';fb.innerHTML='<strong>Correct.</strong> '+q.ex;}
+  else{bl.classList.add('answered-wrong');fb.className='q-feedback wrong';fb.innerHTML='<strong>Incorrect.</strong> '+q.ex;}
+  fb.style.display='block';
+  updateScore();
+  if(answered===total)showResult();
+}
+
+function updateScore(){
+  document.getElementById('score-num').textContent=correct;
+  var p=answered?Math.round(correct/answered*100):0;
+  document.getElementById('score-pct').textContent=p+'%';
+  document.getElementById('progress-bar').style.width=(answered/total*100)+'%';
+}
+
+function showResult(){
+  var r=document.getElementById('exam-result');r.style.display='block';
+  var p=Math.round(correct/total*100);
+  document.getElementById('result-score-val').textContent=p+'%';
+  var pass=correct>=16;
+  document.getElementById('result-status').innerHTML=pass?'<span class="result-pass">PASSED</span>':'<span class="result-fail">NOT YET</span>';
+  document.getElementById('result-msg').textContent=pass?'Congratulations. You have earned 125 Mastery Points and demonstrated portfolio construction competence. You are ready for Course 2.4 — NIL Competition Primer.':'You scored '+correct+'/'+total+'. You need 16/20 (80%) to pass. Review the lessons and retake when ready.';
+  document.getElementById('result-badge').innerHTML=pass?'<div style="display:inline-block;background:rgba(201,168,76,.15);border:1px solid var(--gold);border-radius:12px;padding:12px 24px;"><span style="font-family:Arial,sans-serif;font-size:28px;font-weight:900;color:var(--gold);">125 MP</span><br><span style="font-family:Arial,sans-serif;font-size:11px;color:var(--muted);letter-spacing:1px;">MASTERY POINTS EARNED</span></div>':'';
+  r.scrollIntoView({behavior:'smooth'});
+}
+
+function retakeExam(){
+  document.getElementById('exam-result').style.display='none';
+  startExam();
+  document.querySelector('.score-bar-wrap').scrollIntoView({behavior:'smooth'});
+}
+</script>
+</body>
+</html>
