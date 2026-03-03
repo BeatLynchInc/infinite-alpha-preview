@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Infinite Alpha Curriculum</title>
+<style>
+:root{--gold:#C9A84C;--dark:#0D0F14;--panel:#13161E;--border:#1E2330;--text:#E8EAF0;--muted:#7A8099;--accent:#3B82F6;--green:#22C55E;--red:#EF4444;--purple:#a855f7;--orange:#f59e0b;--cyan:#06b6d4;}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--dark);color:var(--text);font-family:'Georgia',serif;font-size:16px;line-height:1.75;}
+a{text-decoration:none;color:inherit;}
+.top-bar{background:var(--panel);border-bottom:1px solid var(--border);padding:12px 32px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:100;flex-wrap:wrap;}
+.logo{font-family:Arial,sans-serif;font-weight:900;font-size:18px;color:var(--gold);letter-spacing:2px;}
+.pill{background:var(--gold);color:var(--dark);font-family:Arial,sans-serif;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:1px;}
+.top-note{margin-left:auto;font-family:Arial,sans-serif;font-size:11px;font-weight:700;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;}
+.hero{background:linear-gradient(135deg,#0D0F14,#13161E,#0a0c10);border-bottom:1px solid var(--border);padding:56px 32px 40px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:500px;height:500px;background:radial-gradient(circle,rgba(201,168,76,.08) 0%,transparent 70%);pointer-events:none;}
+.course-label{font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:12px;position:relative;z-index:1;}
+.hero h1{font-size:clamp(30px,4vw,48px);font-weight:400;color:#fff;margin-bottom:12px;line-height:1.15;position:relative;z-index:1;}
+.hero-sub{font-size:17px;color:var(--muted);max-width:760px;margin:0 auto 28px;position:relative;z-index:1;}
+.stats-row{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;position:relative;z-index:1;}
+.stats-row span{font-family:Arial,sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;color:var(--gold);text-transform:uppercase;}
+.stats-row span+span::before{content:'|';color:var(--border);margin-right:14px;}
+.container{max-width:1180px;margin:0 auto;padding:40px 24px 56px;}
+.section{margin-bottom:52px;}
+.section-title{font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:20px;padding-bottom:10px;border-bottom:1px solid var(--border);}
+.course-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;}
+.course-card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:20px 22px;display:flex;flex-direction:column;min-height:100%;transition:transform .2s ease,border-color .2s ease,background .2s ease,box-shadow .2s ease;position:relative;overflow:hidden;}
+.course-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,rgba(201,168,76,.85),rgba(201,168,76,0));opacity:.9;}
+.course-card:hover{transform:translateY(-2px);border-color:rgba(201,168,76,.45);background:#171b24;box-shadow:0 18px 40px rgba(0,0,0,.25);}
+.course-meta{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;}
+.course-number{font-family:Arial,sans-serif;font-size:18px;font-weight:700;color:var(--gold);letter-spacing:.5px;line-height:1;}
+.course-status{font-family:Arial,sans-serif;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);border:1px solid rgba(122,128,153,.3);border-radius:20px;padding:4px 10px;white-space:nowrap;}
+.course-title{font-size:22px;color:#fff;font-weight:400;line-height:1.25;margin-bottom:8px;}
+.course-desc{color:#BEC3D4;font-size:15px;line-height:1.6;margin-bottom:18px;flex:1;}
+.course-link{font-family:Arial,sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);display:inline-flex;align-items:center;gap:8px;}
+.course-link .arrow{font-size:14px;line-height:1;}
+.callout{background:rgba(201,168,76,.05);border-left:3px solid var(--gold);padding:16px 20px;border-radius:0 8px 8px 0;margin:18px 0;}
+.callout-label{font-family:Arial,sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;}
+.callout p{color:var(--text);margin:0;font-size:14px;}
+@media(max-width:900px){.course-grid{grid-template-columns:1fr;}}
+@media(max-width:640px){
+  .top-bar{padding:12px 18px;gap:10px;}
+  .top-note{margin-left:0;width:100%;}
+  .hero{padding:48px 20px 32px;}
+  .hero-sub{font-size:16px;}
+  .stats-row{gap:10px;}
+  .stats-row span{font-size:11px;}
+  .stats-row span+span::before{margin-right:10px;}
+  .container{padding:32px 18px 48px;}
+  .course-card{padding:18px;}
+  .course-title{font-size:20px;}
+  .course-desc{font-size:14px;}
+}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="logo">BEAT LYNCH</div>
+  <span class="pill">INFINITE ALPHA</span>
+  <div class="top-note">Feedback Preview</div>
+</div>
+
+<div class="hero">
+  <div class="course-label">Beat Lynch Education Platform</div>
+  <h1>Infinite Alpha Curriculum</h1>
+  <p class="hero-sub">The complete investing mastery journey. From first principles to professional craft.</p>
+  <div class="stats-row" aria-label="Curriculum stats">
+    <span>14 Courses</span>
+    <span>3 Tiers</span>
+    <span>5 Pillars</span>
+  </div>
+</div>
+
+<div class="container">
+  <section class="section" aria-labelledby="tier-0">
+    <div class="section-title" id="tier-0">TIER 0: WELCOME</div>
+    <div class="course-grid">
+      <a class="course-card" href="courses/tier-0/0-1-intro.html">
+        <div class="course-meta">
+          <div class="course-number">0.1</div>
+        </div>
+        <h2 class="course-title">Introduction to Investing &amp; Beat Lynch</h2>
+        <p class="course-desc">What investing really is, why mastery is learnable, and the journey ahead of you.</p>
+        <div class="course-link">Open course <span class="arrow" aria-hidden="true">&rarr;</span></div>
+      </a>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="tier-1">
+    <div class="section-title" id="tier-1">TIER 1: FOUNDATIONS</div>
+    <div class="course-grid">
+      <a class="course-card" href="courses/tier-1/1-1-masters-101.html">
+        <div class="course-meta">
+          <div class="course-number">1.1</div>
+        </div>
+        <h2 class="course-title">Masters 101</h2>
+        <p class="course-desc">Meet the ten investors whose frameworks power professional decision-making and Beat Lynch's scoring engine. Each legend offers a distinct lens on markets. Together, they form the most complete operating system for investing ever assembled.</p>
+        <div class="course-link">Open course <span class="arrow" aria-hidden="true">&rarr;</span></div>
+      </a>
+
+      <a class="course-card" href="courses/tier-1/1-2-investors-mindset.html">
+        <div class="course-meta">
+          <div class="course-number">1.2</div>
+        </div>
+        <h2 class="course-title">The Investor's Mindset</h2>
+        <p class="course-desc">Before you study a single stock, you must understand yourself. The greatest threat to your wealth is not a bad market &mdash; it is a bad decision. This course rewires how you think about money, risk, and time.</p>
+        <div class="course-link">Open course <span class="arrow" aria-hidden="true">&rarr;</span></div>
+      </a>
+
+      <a class="course-card" href="courses/tier-1/1-3-how-markets-work.html">
+        <div class="course-meta">
+          <div class="course-number">1.3</div>
+        </div>
+        <h2 class="course-title">How Markets Work</h2>
+        <p class="course-desc">Before you can beat a market, you must understand what a market is &mdash; who participates, how prices form, what moves them, and how to read the scoreboard.</p>
+        <div class="course-link">Open course <span class="arrow" aria-hidden="true">&rarr;</span></div>
+      </a>
+
+      <a class="course-card" href="courses/tier-1/1-4-financial-literacy.html">
+        <div class="course-meta">
+          <div class="course-number">1.4</div>
+        </div>
+        <h2 class="course-title">Financial Literacy for Investors</h2>
+        <p class="course-desc">Every stock is a claim on a real business. Before you can judge whether that claim is worth buying, you need to read the three documents every public company is required to publish &mdash; and understand the single question that ties them all together: what is this business actually worth?</p>
+        <div class="course-link">Open course <span class="arrow" aria-hidden="true">&rarr;</span></div>
+      </a>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="tier-2">
+    <div class="section-title" id="tier-2">TIER 2: APPLIED ANALYSIS</div>
+    <div class="course-grid">
+      <a class="course-card" href="courses/tier-2/2-1-company-analysis.html">
+        <div class="course-meta">
+          <div class="course-number">2.1</div>
+        </div>
+        <h2 class="course-title">Applied Company Analysis</h2>
+        <p class="course-desc">Move from reading financial statements to evaluating businesses. Learn repeatable frameworks for assessing revenue quality, profitability, financial health, earnings integrity, and building investment cases with real company data.</p>
+        <div class="course-link">Open course <span class="arrow" aria-hidden="true">&rarr;</span></div>
+      </a>
+
+      <a class="course-card" href="courses/tier-2/2-2-sector-dynamics.html">
+        <div class="course-meta">
+          <div class="course-number">2.2</div>
+        </div>
+        <h2 class="course-title">Sector Dynamics &amp; Macro Context</h2>
+        <p class="course-desc">Move beyond individual stocks. Learn how sectors, interest rates, economic cycles, and market regimes shape every investment decision you make.</p>
+        <div class="course-link">Open course <span class="arrow" aria-hidden="true">&rarr;</span></div>
+      </a>
+
+      <a class="course-card" href="courses/tier-2/2-3-portfolio-construction.html">
+        <div class="course-meta">
+          <div class="course-number">2.3</div>
+        </div>
+        <h2 class="course-title">Portfolio Construction Fundamentals</h2>
+        <p class="course-desc">Transform individual stock analysis into a disciplined, structured portfolio. Learn the sizing, diversification, and management systems that separate serious competitors from stock pickers.</p>
+        <div class="course-link">Open course <span class="arrow" aria-hidden="true">&rarr;</span></div>
+      </a>
+
+      <a class="course-card" href="courses/tier-2/2-4-nil-competition-primer.html">
+        <div class="course-meta">
+          <div class="course-number">2.4</div>
+        </div>
+        <h2 class="course-title">NIL Competition Primer</h2>
+        <p class="course-desc">Master the mechanics, scoring, rules, and strategy of NIL tournaments &mdash; the competitive arena where your analysis skills become performance.</p>
+        <div class="course-link">Open course <span class="arrow" aria-hidden="true">&rarr;</span></div>
+      </a>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="tier-3">
+    <div class="section-title" id="tier-3">TIER 3: PILLARS OF MASTERY</div>
+    <div class="course-grid">
+      <a class="course-card" href="courses/tier-3/pillar-1-market-finance.html">
+        <div class="course-meta">
+          <div class="course-number">P1</div>
+        </div>
+        <h2 class="course-title">Market &amp; Finance Foundations</h2>
+        <p class="course-desc">How financial markets actually work &mdash; the mechanics, forces, and structural realities that determine where capital flows, how prices form, and why understanding the machine is prerequisite to everything that follows.</p>
+        <div class="course-link">Open course <span class="arrow" aria-hidden="true">&rarr;</span></div>
+      </a>
+
+      <a class="course-card" href="courses/tier-3/pillar-2-accounting-valuation.html">
+        <div class="course-meta">
+          <div class="course-number">P2</div>
+          <div class="course-status">(Coming Soon)</div>
+        </div>
+        <h2 class="course-title">Accounting &amp; Valuation</h2>
+        <p class="course-desc">How to read the numbers, connect accounting to economics, and value a business with enough precision to judge whether the market is mispricing it.</p>
+        <div class="course-link">Open course <span class="arrow" aria-hidden="true">&rarr;</span></div>
+      </a>
+
+      <a class="course-card" href="courses/tier-3/pillar-3-market-structure.html">
+        <div class="course-meta">
+          <div class="course-number">P3</div>
+          <div class="course-status">(Coming Soon)</div>
+        </div>
+        <h2 class="course-title">Market Structure &amp; Return Mechanics</h2>
+        <p class="course-desc">How market structure, execution realities, and the mechanics of return generation shape what investors can actually capture in the real world.</p>
+        <div class="course-link">Open course <span class="arrow" aria-hidden="true">&rarr;</span></div>
+      </a>
+
+      <a class="course-card" href="courses/tier-3/pillar-4-risk-architecture.html">
+        <div class="course-meta">
+          <div class="course-number">P4</div>
+        </div>
+        <h2 class="course-title">Risk &amp; Portfolio Architecture</h2>
+        <p class="course-desc">How to construct, size, protect, and stress-test portfolios that survive the inevitable drawdowns, behavioral traps, and regime shocks that destroy most investors &mdash; so your compounding machine never breaks.</p>
+        <div class="course-link">Open course <span class="arrow" aria-hidden="true">&rarr;</span></div>
+      </a>
+
+      <a class="course-card" href="courses/tier-3/pillar-5-professional-craft.html">
+        <div class="course-meta">
+          <div class="course-number">P5</div>
+        </div>
+        <h2 class="course-title">Professional Craft &amp; System Integration</h2>
+        <p class="course-desc">How to write investment theses that survive contact with reality, build repeatable process, attribute performance honestly, and integrate all five Pillars into the complete Beat Lynch system &mdash; the professional craft that converts knowledge into a lifetime of compounding.</p>
+        <div class="course-link">Open course <span class="arrow" aria-hidden="true">&rarr;</span></div>
+      </a>
+    </div>
+  </section>
+
+  <div class="callout">
+    <div class="callout-label">Feedback</div>
+    <p>This is a preview build. We'd love your feedback.</p>
+  </div>
+</div>
+
+</body>
+</html>
