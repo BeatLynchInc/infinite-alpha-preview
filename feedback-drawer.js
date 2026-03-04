@@ -1,6 +1,11 @@
 (function () {
   var FORM_BASE_URL = "https://forms.clickup.com/9017585237/f/8cquvjn-1937/6Y7VJRORF82NXFX6EP";
-  var PREFILL_FIELD_NAME = "Course / Module";
+  var PREFILL_FIELD_NAMES = [
+    "Course / Module",
+    "Course/Module",
+    "course_module",
+    "course-module",
+  ];
 
   var COURSE_ALIASES = [
     {
@@ -59,6 +64,10 @@
       aliases: ["pillar-5-professional-craft", "pillar-v", "pillar-5-professional-craft-system-integration"],
       value: "P5 Professional Craft & System Integration",
     },
+    {
+      aliases: ["masters-deep-dive"],
+      value: "Masters Deep Dive",
+    },
   ];
 
   function normalizePathStem(pathname) {
@@ -76,6 +85,22 @@
     return stem;
   }
 
+  function normalizeText(text) {
+    return (text || "")
+      .toLowerCase()
+      .replace(/&/g, "and")
+      .replace(/[’']/g, "")
+      .replace(/[^a-z0-9]+/g, " ")
+      .trim();
+  }
+
+  function stripCoursePrefix(value) {
+    return value
+      .replace(/^[0-9]+\.[0-9]+\s+/, "")
+      .replace(/^p[0-9]\s+/i, "")
+      .trim();
+  }
+
   function findCourseForPage(pathname) {
     var normalizedStem = normalizePathStem(pathname);
 
@@ -91,11 +116,38 @@
     return null;
   }
 
+  function findCourseFromDocument() {
+    var heading = document.querySelector("h1");
+    var titleText = heading ? heading.textContent : document.title;
+    var normalizedTitle = normalizeText(titleText);
+
+    if (!normalizedTitle) {
+      return null;
+    }
+
+    for (var i = 0; i < COURSE_ALIASES.length; i += 1) {
+      var entry = COURSE_ALIASES[i];
+      var normalizedValue = normalizeText(entry.value);
+      var normalizedShortValue = normalizeText(stripCoursePrefix(entry.value));
+
+      if (
+        normalizedTitle === normalizedValue ||
+        normalizedTitle === normalizedShortValue
+      ) {
+        return entry.value;
+      }
+    }
+
+    return null;
+  }
+
   function buildFormUrl(courseTitle) {
     var url = new URL(FORM_BASE_URL);
 
     if (courseTitle) {
-      url.searchParams.set(PREFILL_FIELD_NAME, courseTitle);
+      for (var i = 0; i < PREFILL_FIELD_NAMES.length; i += 1) {
+        url.searchParams.set(PREFILL_FIELD_NAMES[i], courseTitle);
+      }
     }
 
     return url.toString();
@@ -108,7 +160,7 @@
     button.setAttribute("aria-controls", "feedback-drawer");
     button.setAttribute("aria-expanded", "false");
     button.innerHTML =
-      '<span class="feedback-trigger-icon" aria-hidden="true">+</span><span>Feedback</span>';
+      '<span class="feedback-trigger-icon" aria-hidden="true">+</span><span>Press to Give Feedback</span>';
 
     var backdrop = document.createElement("div");
     backdrop.className = "feedback-backdrop";
@@ -189,7 +241,8 @@
       return;
     }
 
-    var courseTitle = findCourseForPage(window.location.pathname);
+    var courseTitle =
+      findCourseForPage(window.location.pathname) || findCourseFromDocument();
     var elements = createDrawerMarkup(courseTitle);
     attachDrawerBehavior(elements);
   });
