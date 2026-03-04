@@ -8,7 +8,7 @@
 :root{--gold:#C9A84C;--dark:#0D0F14;--panel:#13161E;--border:#1E2330;--text:#E8EAF0;--muted:#7A8099;--accent:#3B82F6;--green:#22C55E;--red:#EF4444;--purple:#a855f7;--orange:#f59e0b;--cyan:#06b6d4;}
 *{box-sizing:border-box;margin:0;padding:0;}
 body{background:var(--dark);color:var(--text);font-family:'Georgia',serif;font-size:16px;line-height:1.75;}
-.top-bar{background:var(--panel);border-top:2px solid rgba(201,168,76,.45);border-bottom:1px solid var(--border);padding:12px 32px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:100;flex-wrap:wrap;}
+.top-bar{background:var(--panel);border-bottom:1px solid var(--border);padding:12px 32px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:100;flex-wrap:wrap;}
 .logo{font-family:Arial,sans-serif;font-weight:900;font-size:18px;color:var(--gold);letter-spacing:2px;}
 .pill{background:var(--gold);color:var(--dark);font-family:Arial,sans-serif;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:1px;}
 .pill-tier{background:var(--accent);color:#fff;}
@@ -17,16 +17,11 @@ body{background:var(--dark);color:var(--text);font-family:'Georgia',serif;font-s
 .tab-btn{background:none;border:1px solid var(--border);color:var(--muted);font-family:Arial,sans-serif;font-size:12px;font-weight:700;padding:6px 16px;border-radius:6px;cursor:pointer;transition:all .2s;letter-spacing:.5px;}
 .tab-btn.active{background:var(--gold);color:var(--dark);border-color:var(--gold);}
 .tab-btn:hover:not(.active){border-color:var(--gold);color:var(--gold);}
-.hero{background:
-linear-gradient(180deg,rgba(8,12,20,.9),rgba(8,11,18,.92)),
-repeating-linear-gradient(90deg,transparent 0 44px,rgba(59,130,246,.025) 44px 88px,transparent 88px 132px),
-linear-gradient(135deg,#0D0F14,#13161E,#0a0c10);
-border-bottom:1px solid var(--border);padding:56px 32px 40px;text-align:center;position:relative;overflow:hidden;}
-.hero::before{content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:540px;height:540px;background:radial-gradient(circle,rgba(201,168,76,.08) 0%,rgba(59,130,246,.03) 38%,transparent 72%);pointer-events:none;}
-.hero>*{position:relative;z-index:1;}
+.hero{background:linear-gradient(135deg,#0D0F14,#13161E,#0a0c10);border-bottom:1px solid var(--border);padding:56px 32px 40px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:500px;height:500px;background:radial-gradient(circle,rgba(201,168,76,.06) 0%,transparent 70%);pointer-events:none;}
 .course-label{font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:12px;}
 .hero h1{font-size:clamp(26px,4vw,44px);font-weight:400;color:#fff;margin-bottom:12px;line-height:1.2;}
-.hero-sub{font-size:17px;color:var(--muted);max-width:760px;margin:0 auto 28px;}
+.hero-sub{font-size:17px;color:var(--muted);max-width:720px;margin:0 auto 28px;}
 .meta-row{display:flex;justify-content:center;gap:28px;flex-wrap:wrap;}
 .meta-item{text-align:center;}
 .meta-num{font-family:Arial,sans-serif;font-size:26px;font-weight:700;color:var(--gold);}
@@ -35,11 +30,12 @@ border-bottom:1px solid var(--border);padding:56px 32px 40px;text-align:center;p
 .section{margin-bottom:52px;}
 .section-title{font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:20px;padding-bottom:10px;border-bottom:1px solid var(--border);}
 h2{font-size:22px;color:#fff;font-weight:400;margin-bottom:10px;}
+h3{font-family:Arial,sans-serif;font-size:12px;font-weight:700;color:var(--gold);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;margin-top:22px;}
 p{color:#BEC3D4;margin-bottom:14px;}
 strong.hl{color:#fff;}
-.tab-content{display:none;}
-.tab-content.active{display:block;}
+.tab-content{display:none;}.tab-content.active{display:block;}
 .principle-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0 32px;}
+@media(max-width:640px){.principle-grid{grid-template-columns:1fr;}}
 .principle-card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:20px;border-top:3px solid var(--gold);}
 .principle-num{font-family:Arial,sans-serif;font-size:11px;font-weight:700;color:var(--gold);letter-spacing:2px;margin-bottom:6px;}
 .principle-title{font-size:16px;color:#fff;margin-bottom:6px;}
@@ -47,89 +43,91 @@ strong.hl{color:#fff;}
 .lesson-grid{display:flex;flex-direction:column;border:1px solid var(--border);border-radius:12px;overflow:hidden;}
 .lesson-card{background:var(--panel);border-bottom:1px solid var(--border);padding:18px 22px;display:grid;grid-template-columns:46px 1fr auto;gap:14px;align-items:start;cursor:pointer;transition:background .2s;}
 .lesson-card:last-child{border-bottom:none;}
-.lesson-card:hover,.lesson-card.active-card{background:#171b26;}
+.lesson-card:hover,.lesson-card.active-card{background:#1a1e2a;}
 .lesson-card.active-card{border-left:3px solid var(--gold);}
 .lesson-num{font-family:Arial,sans-serif;font-size:20px;font-weight:700;color:var(--gold);line-height:1;}
 .lesson-title{font-size:16px;color:#fff;margin-bottom:3px;}
 .lesson-desc{font-family:Arial,sans-serif;font-size:12px;color:var(--muted);line-height:1.5;}
 .lesson-mp{font-family:Arial,sans-serif;font-size:12px;font-weight:700;color:var(--gold);background:rgba(201,168,76,.1);padding:3px 10px;border-radius:20px;white-space:nowrap;align-self:center;}
-.lesson-detail{background:#0e1018;border-top:1px solid var(--border);padding:24px 28px;display:none;}
+.lesson-detail{background:#0e1018;border-top:1px solid var(--border);padding:28px;display:none;}
 .lesson-detail.open{display:block;}
-.lesson-detail h3{font-family:Arial,sans-serif;font-size:12px;font-weight:700;color:var(--gold);letter-spacing:1px;text-transform:uppercase;margin:18px 0 10px;}
-.tag-row{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px;}
-.ctag{font-family:Arial,sans-serif;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;letter-spacing:.5px;background:rgba(201,168,76,.15);color:var(--gold);border:1px solid rgba(201,168,76,.3);}
+.fw-table{width:100%;border-collapse:collapse;margin:12px 0 20px;}
+.fw-table th{background:rgba(201,168,76,.08);font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);padding:10px 14px;text-align:left;border-bottom:1px solid var(--border);}
+.fw-table td{padding:12px 14px;border-bottom:1px solid var(--border);font-family:Arial,sans-serif;font-size:13px;color:#BEC3D4;vertical-align:top;}
+.fw-table tr:last-child td{border-bottom:none;}
+.fw-table tr:hover td{background:rgba(255,255,255,.02);}
 .callout{background:rgba(201,168,76,.05);border-left:3px solid var(--gold);padding:16px 20px;border-radius:0 8px 8px 0;margin:18px 0;}
 .callout-label{font-family:Arial,sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;}
 .callout p{color:var(--text);margin:0;font-size:14px;}
 .callout p+p{margin-top:8px;}
-.callout-blue{border-left-color:var(--accent);background:rgba(59,130,246,.06);}
-.callout-blue .callout-label{color:var(--accent);}
-.callout-red{border-left-color:var(--red);background:rgba(239,68,68,.06);}
-.callout-red .callout-label{color:#f87171;}
-.callout-purple{border-left-color:var(--purple);background:rgba(168,85,247,.06);}
-.callout-purple .callout-label{color:var(--purple);}
+.callout-blue{border-left-color:var(--accent);background:rgba(59,130,246,.05);}.callout-blue .callout-label{color:var(--accent);}
+.callout-red{border-left-color:var(--red);background:rgba(239,68,68,.05);}.callout-red .callout-label{color:var(--red);}
+.callout-green{border-left-color:var(--green);background:rgba(34,197,94,.05);}.callout-green .callout-label{color:var(--green);}
+.callout-purple{border-left-color:var(--purple);background:rgba(168,85,247,.05);}.callout-purple .callout-label{color:var(--purple);}
+.callout-cyan{border-left-color:var(--cyan);background:rgba(6,182,212,.05);}.callout-cyan .callout-label{color:var(--cyan);}
+.callout-orange{border-left-color:var(--orange);background:rgba(245,158,11,.05);}.callout-orange .callout-label{color:var(--orange);}
 .exhibit{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:22px;margin:18px 0;}
 .exhibit-label{font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:14px;}
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0;}
-.detail-card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:18px;}
-.detail-card-title{font-family:Arial,sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;}
-.detail-card-green{border-color:rgba(34,197,94,.18);}
-.detail-card-green .detail-card-title{color:var(--green);}
-.detail-card-red{border-color:rgba(239,68,68,.18);}
-.detail-card-red .detail-card-title{color:#f87171;}
-.detail-card ul{margin:0;padding-left:16px;}
-.detail-card li{color:#BEC3D4;font-family:Arial,sans-serif;font-size:13px;line-height:1.7;margin:0 0 6px;}
-.formula-box{background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.25);border-radius:10px;padding:18px 24px;text-align:center;margin:14px 0;}
-.formula-main{font-family:Arial,sans-serif;font-size:16px;font-weight:900;color:var(--gold);letter-spacing:.8px;}
-.formula-sub{font-family:Arial,sans-serif;font-size:11px;color:var(--muted);letter-spacing:.4px;margin-top:6px;}
-.fine-print{font-family:Arial,sans-serif;font-size:11px;color:var(--muted);line-height:1.6;margin-top:10px;}
-.text-green{color:var(--green);font-weight:700;}
-.text-red{color:#f87171;font-weight:700;}
-.bar-chart-wrap{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:18px;margin:14px 0;}
-.bar-chart-label{font-family:Arial,sans-serif;font-size:11px;color:var(--muted);width:148px;flex-shrink:0;}
-.bar-chart-row{display:flex;align-items:center;gap:10px;margin:8px 0;}
-.bar-chart-track{flex:1;height:20px;background:rgba(255,255,255,.05);border-radius:4px;overflow:hidden;}
-.bar-chart-fill{height:100%;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;font-family:Arial,sans-serif;font-size:10px;font-weight:700;color:#fff;border-radius:4px;}
-.fill-green{background:linear-gradient(90deg,#22C55E,#4ade80);}
-.fill-lime{background:linear-gradient(90deg,#16a34a,#22c55e);}
-.fill-gold{background:linear-gradient(90deg,#b48a19,#C9A84C);}
-.fill-orange{background:linear-gradient(90deg,#d97706,#f59e0b);}
-.fill-red{background:linear-gradient(90deg,#dc2626,#ef4444);}
-.table-wrap{overflow-x:auto;}
-.fw-table{width:100%;border-collapse:collapse;margin:12px 0 0;min-width:760px;}
-.fw-table th{background:rgba(201,168,76,.08);font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);padding:12px 14px;text-align:left;border-bottom:1px solid var(--border);}
-.fw-table td{padding:14px;border-bottom:1px solid var(--border);font-family:Arial,sans-serif;font-size:13px;color:#BEC3D4;vertical-align:top;}
-.fw-table td:first-child{color:#fff;font-weight:700;}
-.fw-table td.tier-1{color:var(--green);}
-.fw-table td.tier-2{color:#68d391;}
-.fw-table td.tier-3{color:var(--gold);}
-.fw-table td.tier-4{color:#fbbf24;}
-.fw-table td.tier-5{color:#f87171;}
-.fw-table tr:last-child td{border-bottom:none;}
-.value-good{background:rgba(34,197,94,.08);color:var(--green);font-weight:700;}
-.value-warn{background:rgba(201,168,76,.08);color:var(--gold);font-weight:700;}
-.value-bad{background:rgba(239,68,68,.08);color:#f87171;font-weight:700;}
-.value-neutral{background:rgba(255,255,255,.02);color:#E8EAF0;}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:16px 0;}
+@media(max-width:640px){.two-col,.three-col{grid-template-columns:1fr;}}
+.stat-card{background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.2);border-radius:10px;padding:18px;text-align:center;}
+.stat-num{font-family:Arial,sans-serif;font-size:28px;font-weight:900;color:var(--gold);line-height:1;margin-bottom:4px;}
+.stat-label{font-family:Arial,sans-serif;font-size:11px;color:var(--muted);line-height:1.4;}
+.tag-row{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 14px;}
+.ctag{font-family:Arial,sans-serif;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;letter-spacing:.5px;background:rgba(201,168,76,.15);color:var(--gold);border:1px solid rgba(201,168,76,.3);}
+.divider{border:none;border-top:1px solid var(--border);margin:36px 0;}
+.formula-box{background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.25);border-radius:10px;padding:20px 24px;text-align:center;margin:16px 0;font-family:Arial,sans-serif;}
+.formula-main{font-size:20px;font-weight:900;color:var(--gold);letter-spacing:1px;margin-bottom:6px;}
+.formula-sub{font-size:12px;color:var(--muted);letter-spacing:.5px;}
+.bar-chart-row{display:flex;align-items:center;gap:10px;margin:6px 0;}
+.bar-chart-label{font-family:Arial,sans-serif;font-size:12px;color:var(--muted);width:140px;text-align:right;flex-shrink:0;}
+.bar-chart-track{flex:1;background:rgba(255,255,255,.04);border-radius:4px;height:22px;position:relative;overflow:hidden;}
+.bar-chart-fill{height:100%;border-radius:4px;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;font-family:Arial,sans-serif;font-size:11px;font-weight:700;color:#fff;min-width:30px;}
+.sensitivity-grid{display:grid;grid-template-columns:auto repeat(5,1fr);gap:1px;background:var(--border);border-radius:8px;overflow:hidden;margin:12px 0;}
+.sensitivity-grid div{background:var(--panel);padding:8px 6px;font-family:Arial,sans-serif;font-size:11px;text-align:center;color:#BEC3D4;}
+.sensitivity-grid .sg-header{background:rgba(201,168,76,.08);color:var(--gold);font-weight:700;font-size:10px;letter-spacing:.5px;}
+.sensitivity-grid .sg-row-header{background:rgba(59,130,246,.06);color:var(--accent);font-weight:700;text-align:right;padding-right:10px;}
+.sensitivity-grid .sg-highlight{background:rgba(34,197,94,.08);color:var(--green);font-weight:700;}
+.sensitivity-grid .sg-danger{background:rgba(239,68,68,.06);color:var(--red);}
 .svg-wrap{display:flex;justify-content:center;margin:18px 0;}
 .svg-wrap svg{max-width:100%;height:auto;}
 .exam-wrap{max-width:800px;margin:0 auto;}
 .start-exam-wrap{text-align:center;padding:40px 20px;}
 .start-exam-wrap h2{color:#fff;margin-bottom:12px;}
-.start-exam-wrap p{color:var(--muted);max-width:560px;margin:0 auto 24px;}
+.start-exam-wrap p{color:var(--muted);max-width:500px;margin:0 auto 24px;}
 .exam-rules{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin:24px 0;text-align:left;}
 .rule-card{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:14px;}
 .rule-card .r-num{font-family:Arial,sans-serif;font-size:22px;font-weight:900;color:var(--gold);}
 .rule-card .r-label{font-family:Arial,sans-serif;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;}
-@media(max-width:640px){
-.top-bar{padding:12px 16px;}
-.hero{padding:48px 16px 34px;}
-.container{padding:32px 16px;}
-.principle-grid{grid-template-columns:1fr;}
-.two-col{grid-template-columns:1fr;}
-.lesson-card{grid-template-columns:42px 1fr;grid-template-areas:"num title" "num meta";align-items:center;}
-.lesson-mp{grid-column:2;justify-self:start;}
-.lesson-detail{padding:20px 18px;}
-}
+.score-bar-wrap{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:20px 28px;margin-bottom:28px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;}
+.score-big{font-size:42px;font-weight:900;color:var(--gold);line-height:1;}
+.score-sub{font-size:12px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;}
+.progress-track{flex:1;min-width:200px;background:rgba(255,255,255,.06);border-radius:8px;height:12px;overflow:hidden;}
+.progress-fill{height:100%;background:linear-gradient(90deg,rgba(201,168,76,.5),var(--gold));border-radius:8px;transition:width .5s ease;}
+.q-block{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:22px;margin-bottom:14px;transition:border-color .3s;}
+.q-block.answered-correct{border-color:var(--green);}
+.q-block.answered-wrong{border-color:var(--red);}
+.q-num{font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:8px;}
+.q-text{font-size:15px;color:#fff;margin-bottom:16px;line-height:1.6;}
+.q-options{display:flex;flex-direction:column;gap:8px;}
+.q-opt{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:8px;padding:11px 15px;font-family:Arial,sans-serif;font-size:14px;color:#BEC3D4;cursor:pointer;transition:all .2s;text-align:left;display:flex;gap:12px;align-items:flex-start;}
+.q-opt:hover:not(:disabled){background:rgba(201,168,76,.06);border-color:rgba(201,168,76,.4);color:#fff;}
+.q-opt:disabled{cursor:default;}
+.q-opt.correct{background:rgba(34,197,94,.1);border-color:var(--green);color:var(--green);}
+.q-opt.wrong{background:rgba(239,68,68,.1);border-color:var(--red);color:var(--red);}
+.q-opt.reveal-correct{background:rgba(34,197,94,.07);border-color:rgba(34,197,94,.4);color:var(--green);}
+.opt-letter{font-weight:700;flex-shrink:0;width:18px;}
+.q-feedback{margin-top:10px;padding:11px 15px;border-radius:8px;font-family:Arial,sans-serif;font-size:13px;line-height:1.5;display:none;}
+.q-feedback.correct{background:rgba(34,197,94,.08);color:var(--green);border:1px solid rgba(34,197,94,.2);}
+.q-feedback.wrong{background:rgba(239,68,68,.08);color:#f87171;border:1px solid rgba(239,68,68,.2);}
+.exam-result{background:linear-gradient(135deg,rgba(201,168,76,.07),rgba(59,130,246,.04));border:1px solid rgba(201,168,76,.3);border-radius:16px;padding:40px;text-align:center;margin-top:32px;display:none;}
+.result-score{font-family:Arial,sans-serif;font-size:64px;font-weight:900;color:var(--gold);line-height:1;margin-bottom:8px;}
+.exam-btn{background:var(--gold);color:var(--dark);font-family:Arial,sans-serif;font-weight:700;font-size:14px;letter-spacing:1px;padding:12px 28px;border-radius:8px;border:none;cursor:pointer;margin:4px;}
+.exam-btn:hover{opacity:.9;}
+.result-pass{color:var(--green);}.result-fail{color:var(--red);}
+.result-msg{color:var(--muted);max-width:520px;margin:0 auto 24px;font-size:15px;}
+.anti-game-notice{background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.2);border-radius:8px;padding:14px 18px;margin:18px 0;font-family:Arial,sans-serif;font-size:12px;color:var(--red);line-height:1.5;text-align:center;}
 </style>
 </head>
 <body>
@@ -148,7 +146,7 @@ strong.hl{color:#fff;}
 
 <div class="hero">
 <div class="course-label">Infinite Alpha · Pillar II of V</div>
-<h1>Accounting &amp; Valuation</h1>
+<h1>Accounting & Valuation</h1>
 <p class="hero-sub">The language of business and the math of value — professional-grade financial analysis and the valuation frameworks that determine what any business is actually worth.</p>
 <div class="meta-row">
 <div class="meta-item"><div class="meta-num">10</div><div class="meta-label">Lessons</div></div>
@@ -159,6 +157,7 @@ strong.hl{color:#fff;}
 </div>
 </div>
 
+<!-- ===== CURRICULUM TAB ===== -->
 <div class="tab-content active" id="tab-curriculum">
 <div class="container">
 
@@ -169,54 +168,38 @@ strong.hl{color:#fff;}
 <div class="exhibit">
 <div class="exhibit-label">System Integration — Pillar II in the Infinite Alpha Architecture</div>
 <div class="svg-wrap">
-<svg viewBox="0 0 720 220" xmlns="http://www.w3.org/2000/svg" style="max-width:720px;">
-<rect x="12" y="20" width="696" height="42" rx="6" fill="none" stroke="rgba(201,168,76,.15)" stroke-width="1" stroke-dasharray="4,4"/>
-<text x="360" y="42" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">Pillar II provides the valuation engine that determines what any business is actually worth</text>
-
-<rect x="12" y="78" width="120" height="60" rx="8" fill="rgba(59,130,246,.08)" stroke="#3B82F6" stroke-width="1"/>
-<text x="72" y="103" text-anchor="middle" font-family="Arial" font-size="10" font-weight="700" fill="#3B82F6">PILLAR I</text>
-<text x="72" y="118" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">Market Machine</text>
-
-<line x1="132" y1="108" x2="157" y2="108" stroke="#C9A84C" stroke-width="1.2" marker-end="url(#ag)"/>
-
-<rect x="157" y="78" width="120" height="60" rx="8" fill="rgba(201,168,76,.1)" stroke="#C9A84C" stroke-width="1.5"/>
-<text x="217" y="103" text-anchor="middle" font-family="Arial" font-size="11" font-weight="700" fill="#C9A84C">PILLAR II</text>
-<text x="217" y="118" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">Valuation</text>
-
-<line x1="277" y1="108" x2="302" y2="108" stroke="#C9A84C" stroke-width="1.2" marker-end="url(#ag)"/>
-
-<rect x="302" y="78" width="100" height="60" rx="8" fill="rgba(168,85,247,.08)" stroke="#a855f7" stroke-width="1"/>
-<text x="352" y="103" text-anchor="middle" font-family="Arial" font-size="10" font-weight="700" fill="#a855f7">PILLAR III</text>
-<text x="352" y="118" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">Structure</text>
-
-<line x1="402" y1="108" x2="427" y2="108" stroke="#C9A84C" stroke-width="1.2" marker-end="url(#ag)"/>
-
-<rect x="427" y="78" width="100" height="60" rx="8" fill="rgba(239,68,68,.08)" stroke="#EF4444" stroke-width="1"/>
-<text x="477" y="103" text-anchor="middle" font-family="Arial" font-size="10" font-weight="700" fill="#EF4444">PILLAR IV</text>
-<text x="477" y="118" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">Risk</text>
-
-<line x1="527" y1="108" x2="552" y2="108" stroke="#C9A84C" stroke-width="1.2" marker-end="url(#ag)"/>
-
-<rect x="552" y="78" width="100" height="60" rx="8" fill="rgba(34,197,94,.08)" stroke="#22C55E" stroke-width="1"/>
-<text x="602" y="103" text-anchor="middle" font-family="Arial" font-size="10" font-weight="700" fill="#22C55E">PILLAR V</text>
-<text x="602" y="118" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">Craft</text>
-
-<line x1="652" y1="108" x2="662" y2="108" stroke="#C9A84C" stroke-width="1.2" marker-end="url(#ag)"/>
-
-<rect x="662" y="78" width="46" height="60" rx="8" fill="rgba(201,168,76,.15)" stroke="#C9A84C" stroke-width="1.5"/>
-<text x="685" y="99" text-anchor="middle" font-family="Arial" font-size="9" font-weight="700" fill="#C9A84C">BEAT</text>
-<text x="685" y="111" text-anchor="middle" font-family="Arial" font-size="9" font-weight="700" fill="#C9A84C">LYNCH</text>
-<text x="685" y="125" text-anchor="middle" font-family="Arial" font-size="8" fill="#7A8099">+ NIL</text>
-
-<rect x="94" y="164" width="532" height="34" rx="6" fill="rgba(201,168,76,.06)" stroke="rgba(201,168,76,.3)" stroke-width="1"/>
-<text x="360" y="185" text-anchor="middle" font-family="Arial" font-size="10" font-weight="700" fill="#C9A84C">Mean Magic · Growth Quality · Financial Durability · Moat Strength · Catalyst Vector</text>
-
-<line x1="217" y1="138" x2="217" y2="164" stroke="#C9A84C" stroke-width="1.2" stroke-dasharray="4,3"/>
-
+<svg viewBox="0 0 720 200" xmlns="http://www.w3.org/2000/svg" style="max-width:700px;">
+<rect x="10" y="70" width="120" height="60" rx="8" fill="rgba(59,130,246,.08)" stroke="#3B82F6" stroke-width="1"/>
+<text x="70" y="95" text-anchor="middle" font-family="Arial" font-size="10" font-weight="700" fill="#3B82F6">PILLAR I</text>
+<text x="70" y="110" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">Market Machine</text>
+<line x1="130" y1="100" x2="155" y2="100" stroke="#C9A84C" stroke-width="1.2" marker-end="url(#ag)"/>
+<rect x="155" y="70" width="120" height="60" rx="8" fill="rgba(201,168,76,.1)" stroke="#C9A84C" stroke-width="1.2"/>
+<text x="215" y="95" text-anchor="middle" font-family="Arial" font-size="11" font-weight="700" fill="#C9A84C">PILLAR II</text>
+<text x="215" y="112" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">Valuation</text>
+<line x1="275" y1="100" x2="300" y2="100" stroke="#C9A84C" stroke-width="1.2" marker-end="url(#ag)"/>
+<rect x="300" y="70" width="100" height="60" rx="8" fill="rgba(168,85,247,.08)" stroke="#a855f7" stroke-width="1"/>
+<text x="350" y="95" text-anchor="middle" font-family="Arial" font-size="10" font-weight="700" fill="#a855f7">PILLAR III</text>
+<text x="350" y="110" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">Structure</text>
+<line x1="400" y1="100" x2="425" y2="100" stroke="#C9A84C" stroke-width="1.2" marker-end="url(#ag)"/>
+<rect x="425" y="70" width="100" height="60" rx="8" fill="rgba(239,68,68,.08)" stroke="#EF4444" stroke-width="1"/>
+<text x="475" y="95" text-anchor="middle" font-family="Arial" font-size="10" font-weight="700" fill="#EF4444">PILLAR IV</text>
+<text x="475" y="110" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">Risk</text>
+<line x1="525" y1="100" x2="550" y2="100" stroke="#C9A84C" stroke-width="1.2" marker-end="url(#ag)"/>
+<rect x="550" y="70" width="100" height="60" rx="8" fill="rgba(34,197,94,.08)" stroke="#22C55E" stroke-width="1"/>
+<text x="600" y="95" text-anchor="middle" font-family="Arial" font-size="10" font-weight="700" fill="#22C55E">PILLAR V</text>
+<text x="600" y="110" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">Craft</text>
+<line x1="650" y1="100" x2="660" y2="100" stroke="#C9A84C" stroke-width="1.2" marker-end="url(#ag)"/>
+<rect x="660" y="70" width="50" height="60" rx="8" fill="rgba(201,168,76,.15)" stroke="#C9A84C" stroke-width="1.5"/>
+<text x="685" y="92" text-anchor="middle" font-family="Arial" font-size="9" font-weight="700" fill="#C9A84C">BEAT</text>
+<text x="685" y="104" text-anchor="middle" font-family="Arial" font-size="9" font-weight="700" fill="#C9A84C">LYNCH</text>
+<text x="685" y="118" text-anchor="middle" font-family="Arial" font-size="8" fill="#7A8099">+ NIL</text>
+<rect x="90" y="155" width="560" height="34" rx="6" fill="rgba(201,168,76,.06)" stroke="rgba(201,168,76,.3)" stroke-width="1"/>
+<text x="370" y="176" text-anchor="middle" font-family="Arial" font-size="10" font-weight="700" fill="#C9A84C">Mean Magic · Growth Quality · Financial Durability · Moat Strength · Catalyst Vector</text>
+<line x1="215" y1="130" x2="215" y2="155" stroke="#C9A84C" stroke-width="1.2" stroke-dasharray="4,3"/>
+<text x="360" y="28" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">Pillar II provides the valuation engine that determines what any business is actually worth</text>
+<rect x="10" y="15" width="700" height="40" rx="6" fill="none" stroke="rgba(201,168,76,.15)" stroke-width="1" stroke-dasharray="4,4"/>
 <defs>
-<marker id="ag" markerWidth="8" markerHeight="6" refX="4" refY="3" orient="auto">
-<path d="M0,6 L4,0 L8,6" fill="none" stroke="#C9A84C" stroke-width="1"/>
-</marker>
+<marker id="ag" markerWidth="8" markerHeight="6" refX="4" refY="3" orient="auto"><path d="M0,6 L4,0 L8,6" fill="none" stroke="#C9A84C" stroke-width="1"/></marker>
 </defs>
 </svg>
 </div>
@@ -233,7 +216,7 @@ strong.hl{color:#fff;}
 </div>
 <div class="principle-card">
 <div class="principle-num">PRINCIPLE II</div>
-<div class="principle-title">Earnings Quality &gt; Earnings Level</div>
+<div class="principle-title">Earnings Quality > Earnings Level</div>
 <div class="principle-desc">$5/share in high-quality, recurring, cash-backed earnings is worth far more than $5/share from accounting choices and one-time events.</div>
 </div>
 <div class="principle-card">
@@ -253,575 +236,1023 @@ strong.hl{color:#fff;}
 <div class="section-title">Pillar II Lessons</div>
 <div class="lesson-grid">
 
+<!-- ===== LESSON 11 ===== -->
 <div class="lesson-card" onclick="toggleLesson(0)">
 <div class="lesson-num">11</div>
-<div><div class="lesson-title">Advanced Income Statement Analysis</div><div class="lesson-desc">Revenue quality, margin sustainability, and the gap between reported and economic earnings.</div></div>
+<div><div class="lesson-title">Advanced Income Statement Analysis</div>
+<div class="lesson-desc">Revenue quality, margin sustainability, and the gap between reported and economic earnings.</div></div>
 <div class="lesson-mp">25 MP</div>
 </div>
 <div class="lesson-detail" id="ld-0">
 <div class="tag-row"><span class="ctag">Revenue Quality</span><span class="ctag">Gross Margin</span><span class="ctag">Operating Leverage</span><span class="ctag">GAAP vs. Non-GAAP</span><span class="ctag">SBC</span></div>
 
-<h3>Revenue Quality - When Revenue Is "Real"</h3>
-<p>In Tier 1 you learned to read the income statement's top line. Now we go deeper. Revenue is not created equal. A dollar of recurring subscription revenue is fundamentally more valuable than a dollar of one-time project revenue, and professional analysts price this difference into valuation multiples.</p>
-<p>Revenue recognition determines when revenue appears on the income statement, and aggressive recognition is the most common form of earnings manipulation. Channel stuffing, bill-and-hold recognition, and pulling forward future demand can all flatter results while the underlying business deteriorates. The professional reads reported growth alongside the underlying durability of that revenue stream.</p>
-<p>The quality spectrum runs from highest to lowest: recurring subscription revenue, long-term contracted revenue, repeat-product revenue, transactional product revenue, and one-time project revenue. The market assigns higher multiples to higher-quality revenue because predictability reduces uncertainty.</p>
+<h3>Revenue Quality — When Revenue Is "Real"</h3>
+<p>In Tier 1 you learned to read the income statement's top line. Now we go deeper. Revenue is not created equal. A dollar of recurring subscription revenue is fundamentally more valuable than a dollar of one-time project revenue — and professional analysts price this difference into valuation multiples.</p>
+<p>Revenue recognition determines <strong class="hl">when</strong> revenue appears on the income statement, and aggressive recognition is the most common form of earnings manipulation. Channel stuffing — shipping excess inventory to distributors to book revenue early — inflated Sunbeam's revenue by an estimated $60 million in 1997 before the SEC forced restatements. Valeant Pharmaceuticals' specialty pharmacy channel (Philidor) shipped product that was never truly "sold" to end patients. In both cases, the income statement showed growth while the business was deteriorating.</p>
+<p>The quality spectrum runs from highest to lowest: recurring subscription revenue (e.g., Salesforce's $31.4 billion ARR in FY2024), long-term contracted revenue (defense contractors like Lockheed Martin with $156 billion backlog), repeat product revenue (Apple's iPhone upgrade cycle), transactional product revenue (fashion retailers), and one-time project revenue (construction, consulting engagements). The market assigns higher multiples to higher-quality revenue because predictability reduces uncertainty.</p>
 
 <div class="exhibit">
 <div class="exhibit-label">Revenue Quality Spectrum</div>
-<div class="table-wrap">
 <table class="fw-table">
-<thead>
-<tr><th>Quality Tier</th><th>Example Company</th><th>Characteristics</th><th>Typical EV/Revenue</th></tr>
-</thead>
+<thead><tr><th>Quality Tier</th><th>Example Company</th><th>Characteristics</th><th>Typical EV/Revenue</th></tr></thead>
 <tbody>
-<tr><td class="tier-1">Tier 1: Recurring Subscription</td><td>Salesforce, Adobe, Microsoft 365</td><td>Auto-renewing, high retention, predictable</td><td>8-15x</td></tr>
-<tr><td class="tier-2">Tier 2: Long-Term Contract</td><td>Lockheed Martin, Waste Mgmt</td><td>Multi-year commitments, high visibility</td><td>3-6x</td></tr>
-<tr><td class="tier-3">Tier 3: Repeat Product</td><td>Apple, Coca-Cola, P&amp;G</td><td>Strong repurchase cycles, brand loyalty</td><td>4-8x</td></tr>
-<tr><td class="tier-4">Tier 4: Transactional Product</td><td>Nike (wholesale), Best Buy</td><td>No contractual obligation, cyclical demand</td><td>1-3x</td></tr>
-<tr><td class="tier-5">Tier 5: One-Time Project</td><td>Accenture, Fluor Corp</td><td>Must re-win each engagement, lumpy</td><td>0.5-2x</td></tr>
+<tr><td><strong class="hl" style="color:var(--green)">Tier 1: Recurring Subscription</strong></td><td>Salesforce, Adobe, Microsoft 365</td><td>Auto-renewing, 90%+ retention, predictable</td><td>8–15×</td></tr>
+<tr><td><strong class="hl" style="color:var(--green)">Tier 2: Long-Term Contract</strong></td><td>Lockheed Martin, Waste Mgmt</td><td>Multi-year commitments, high visibility</td><td>3–6×</td></tr>
+<tr><td><strong class="hl" style="color:var(--gold)">Tier 3: Repeat Product</strong></td><td>Apple, Coca-Cola, P&G</td><td>Strong repurchase cycles, brand loyalty</td><td>4–8×</td></tr>
+<tr><td><strong class="hl" style="color:var(--orange)">Tier 4: Transactional Product</strong></td><td>Nike (wholesale), Best Buy</td><td>No contractual obligation, cyclical demand</td><td>1–3×</td></tr>
+<tr><td><strong class="hl" style="color:var(--red)">Tier 5: One-Time Project</strong></td><td>Accenture, Fluor Corp</td><td>Must re-win each engagement, lumpy</td><td>0.5–2×</td></tr>
 </tbody>
 </table>
 </div>
-</div>
 
-<h3>Gross Margin - The Structural Competitive Indicator</h3>
-<p>Gross margin is the single best indicator of competitive positioning. A company with structurally high gross margins can survive pricing pressure, invest in innovation, and absorb cyclical shocks better than a low-margin operator. More important than the absolute level is the <strong class="hl">direction</strong> of gross margins over time: expansion often signals strengthening competitive position, while compression signals intensifying competition or cost pressure.</p>
-<p>Watch for companies that maintain high gross margins but show declining operating margins. That usually means SG&amp;A or R&amp;D is growing faster than revenue, which may be strategic investment or it may be the early sign of deteriorating operating leverage.</p>
+<h3>Gross Margin — The Structural Competitive Indicator</h3>
+<p>Gross margin is the single best indicator of competitive positioning. A company with 75% gross margins (e.g., Visa at 79.6% in 2023) can survive pricing pressure, invest in innovation, and weather downturns. A company at 20% gross margins (grocery retail) has almost no cushion. More importantly, the <strong class="hl">direction</strong> of gross margins tells you about moat dynamics: expanding margins signal strengthening competitive position; compressing margins signal intensifying competition or cost pressure.</p>
+<p>Watch for companies that maintain high gross margins but show declining operating margins — this usually means SG&A or R&D is growing faster than revenue, which may be investment (good) or loss of operating leverage (bad). Tesla's gross margin compression from 28.5% in Q1 2022 to 17.9% in Q3 2023 reflected both price cuts and increasing competition — a structural signal the market priced severely.</p>
 
-<h3>Operating Leverage - The Double-Edged Sword</h3>
-<p>Operating leverage describes how a company's cost structure amplifies revenue changes into larger earnings changes. High fixed costs plus low variable costs create powerful earnings expansion on the way up and painful compression on the way down.</p>
+<h3>Operating Leverage — The Double-Edged Sword</h3>
+<p>Operating leverage describes how a company's cost structure amplifies revenue changes into larger earnings changes. High fixed costs + low variable costs = high operating leverage. This is wonderful on the way up and devastating on the way down.</p>
 
 <div class="formula-box">
-<div class="formula-main">DOL = % Change in EBIT / % Change in Revenue</div>
-<div class="formula-sub">Degree of operating leverage measures earnings amplification from revenue changes.</div>
+<div class="formula-main">DOL = % Change in EBIT ÷ % Change in Revenue</div>
+<div class="formula-sub">Degree of Operating Leverage — measures earnings amplification from revenue changes</div>
 </div>
+<p style="font-family:Arial,sans-serif;font-size:12px;color:var(--muted);margin-top:-8px;"><strong class="hl">Worked Example — Software Company:</strong> Revenue grows 10% from $1B to $1.1B. COGS (variable) grows 10% from $200M to $220M. Fixed costs (engineering, sales, G&A) stay at $600M. EBIT goes from $200M to $280M — a 40% increase. DOL = 40% ÷ 10% = 4.0×. In decline: revenue drops 10% → EBIT drops 40%. Same leverage, opposite direction.</p>
 
-<p class="fine-print"><strong class="hl">Worked Example - Software Company:</strong> Revenue grows 10% from $1B to $1.1B. COGS grows 10% from $200M to $220M. Fixed costs stay at $600M. EBIT rises from $200M to $280M, a 40% increase. DOL = 40% / 10% = 4.0x. In reverse, if revenue drops 10%, EBIT can contract roughly 40%.</p>
-
-<h3>Non-GAAP vs. GAAP - When Adjustments Clarify and When They Obscure</h3>
-<p>Companies increasingly report "adjusted" or non-GAAP metrics alongside GAAP results. Some adjustments are legitimate: excluding one-time restructuring charges, legal settlements not expected to recur, or natural disaster impacts. But stock-based compensation is the most abused recurring adjustment because the dilution is economically real even when management wants investors to ignore it.</p>
-<p>The professional question is simple: does the adjustment remove a genuinely non-recurring distortion, or is it stripping out a normal cost of doing business? Any adjustment that appears every quarter is not really an adjustment. It is part of the economics of the business.</p>
+<h3>Non-GAAP vs. GAAP — When Adjustments Clarify and When They Obscure</h3>
+<p>Companies increasingly report "adjusted" or non-GAAP metrics alongside GAAP results. Some adjustments are legitimate: excluding a one-time restructuring charge or a legal settlement helps show ongoing run-rate profitability. But stock-based compensation (SBC) is the most egregious recurring "adjustment." In 2023, Meta paid $14.0 billion in SBC, Alphabet paid $22.5 billion, and Amazon paid $24.5 billion. Excluding SBC treats employee compensation as if it's not a real cost — while the dilution it creates is very real.</p>
 
 <div class="two-col">
-<div class="detail-card detail-card-green">
-<div class="detail-card-title">Legitimate Adjustments</div>
-<ul>
-<li>One-time restructuring charges tied to a discrete event.</li>
-<li>Legal settlements not expected to repeat.</li>
-<li>Acquisition-related integration fees.</li>
-<li>Natural disaster or pandemic impacts.</li>
-<li>Discontinued operations.</li>
-</ul>
+<div class="exhibit" style="margin:0;">
+<div class="exhibit-label" style="color:var(--green);">✓ Legitimate Adjustments</div>
+<p style="font-size:13px;font-family:Arial,sans-serif;">One-time restructuring charges (plant closures, layoffs). Legal settlements not expected to recur. Acquisition-related costs (integration, deal fees). Natural disaster or pandemic impacts. Discontinued operations.</p>
 </div>
-<div class="detail-card detail-card-red">
-<div class="detail-card-title">Suspicious Adjustments</div>
-<ul>
-<li>Stock-based compensation that recurs every quarter.</li>
-<li>"Restructuring" charges appearing year after year.</li>
-<li>Excluding amortization of acquired intangibles while keeping acquired revenue.</li>
-<li>Adjusting for investments in growth to hide cash burn.</li>
-<li>Any adjustment recurring three or more consecutive years.</li>
-</ul>
+<div class="exhibit" style="margin:0;">
+<div class="exhibit-label" style="color:var(--red);">✗ Suspicious Adjustments</div>
+<p style="font-size:13px;font-family:Arial,sans-serif;">Stock-based compensation (recurring, real dilution). "Restructuring" charges appearing every year. Excluding amortization of acquired intangibles while keeping acquired revenue. Adjusting for "investments in growth" to hide cash burn. Any adjustment recurring 3+ consecutive years.</p>
 </div>
 </div>
 
-<div class="callout">
-<div class="callout-label">Core Principle</div>
-<p>"Revenue is vanity, profit is sanity, cash is reality." This lesson reveals the vanity. Lesson 13's cash flow analysis reveals the reality. Between reported revenue and actual cash sits the full landscape of accounting judgment, and the professional investor must navigate every layer.</p>
+<div class="callout"><div class="callout-label">Core Principle</div><p>"Revenue is vanity, profit is sanity, cash is reality." This lesson reveals the vanity. Lesson 13's cash flow analysis reveals the reality. Between reported revenue and actual cash sits the entire landscape of accounting judgment — and the professional investor must navigate every layer.</p></div>
+
+<div class="callout callout-blue"><div class="callout-label">Beat Lynch Connection</div><p>Growth Quality Score in Beat Lynch weights recurring revenue and margin trajectory. SaaS-type revenue earns higher quality scores than project-based revenue, directly reflecting the quality spectrum above. The scoring engine separates "growing revenue" from "growing high-quality revenue" — and values the latter far more in Mean Magic calculations.</p></div>
 </div>
 
-<div class="callout callout-blue">
-<div class="callout-label">Beat Lynch Connection</div>
-<p>Growth Quality Score in Beat Lynch weights recurring revenue and margin trajectory. SaaS-type revenue earns higher quality scores than project-based revenue, directly reflecting the quality spectrum above. The scoring engine separates "growing revenue" from "growing high-quality revenue" and values the latter far more in Mean Magic calculations.</p>
-</div>
-</div>
-
+<!-- ===== LESSON 12 ===== -->
 <div class="lesson-card" onclick="toggleLesson(1)">
 <div class="lesson-num">12</div>
-<div><div class="lesson-title">Advanced Balance Sheet Analysis</div><div class="lesson-desc">Debt structure, working capital, ROIC, and what the income statement hides.</div></div>
+<div><div class="lesson-title">Advanced Balance Sheet Analysis</div>
+<div class="lesson-desc">Debt structure, working capital, ROIC, and what the income statement hides.</div></div>
 <div class="lesson-mp">25 MP</div>
 </div>
 <div class="lesson-detail" id="ld-1">
 <div class="tag-row"><span class="ctag">Debt Structure</span><span class="ctag">Working Capital</span><span class="ctag">ROIC</span><span class="ctag">Goodwill</span><span class="ctag">Off-Balance-Sheet</span></div>
 
-<h3>The Balance Sheet Reveals What The Income Statement Hides</h3>
-<p>Income statements are forward-looking projections of profitability. Balance sheets are snapshots of cumulative reality. When a company's income statement tells one story but its balance sheet tells another, the balance sheet almost always reveals more truth. A business can report growing profits while debt rises, receivables stretch, inventory builds, and equity quality deteriorates.</p>
+<h3>The Balance Sheet Reveals What the Income Statement Hides</h3>
+<p>Income statements are forward-looking projections of profitability. Balance sheets are snapshots of cumulative reality. When a company's income statement tells one story (growing profits) but its balance sheet tells another (rising debt, growing receivables, deteriorating asset quality), the balance sheet is almost always more honest. Enron reported four consecutive years of revenue growth before collapse — but its balance sheet revealed $38 billion in debt, much of it hidden in off-balance-sheet Special Purpose Entities.</p>
 
-<h3>Debt Structure Analysis - The Architecture Of Fragility</h3>
-<p>Total debt is less important than <strong class="hl">debt structure</strong>. A company with $5 billion in debt maturing over 15 years at fixed rates faces a different risk profile than one with $5 billion due inside 18 months at floating rates. The professional breaks debt down by maturity schedule, fixed versus floating exposure, covenant risk, and refinancing dependency.</p>
-<p>Off-balance-sheet obligations matter just as much. Lease obligations, pensions, supplier financing, and special purpose vehicles can all hide real leverage from a casual reader. The filing often reveals what management's adjusted EBITDA narrative is trying to conceal.</p>
+<h3>Debt Structure Analysis — The Architecture of Fragility</h3>
+<p>Total debt is less important than debt <strong class="hl">structure</strong>. A company with $5 billion in debt maturing over 15 years at fixed 4% rates faces very different risks than one with $5 billion maturing in 18 months at floating rates. The critical analysis points: maturity schedule (when must debt be repaid or refinanced?), fixed vs. floating rate mix (Pillar I Lesson 3 taught how rates move — here's where it hits corporate balance sheets), covenants (what triggers accelerate repayment?), and refinancing risk (can the company access capital markets when needed?).</p>
+<p>WeWork's balance sheet before its failed 2019 IPO showed $47 billion in future lease obligations against just $3 billion in revenue — a structural mismatch that no amount of "community-adjusted EBITDA" could fix. The S-1 filing revealed the balance sheet reality that management's income statement narrative had obscured.</p>
 
-<h3>Working Capital Dynamics - The Operational Pulse</h3>
-<p>Changes in working capital reveal operational health or deterioration faster than earnings. Rising Days Sales Outstanding (DSO) can signal aggressive revenue recognition or weakening collections. Rising inventory days can indicate demand weakness or channel stuffing. Falling Days Payable Outstanding (DPO) often means suppliers are tightening terms before equity investors notice the stress.</p>
+<h3>Working Capital Dynamics — The Operational Pulse</h3>
+<p>Changes in working capital (receivables, inventory, payables) reveal operational health or deterioration faster than earnings. Rising Days Sales Outstanding (DSO) — receivables growing faster than revenue — can signal aggressive revenue recognition, collection difficulties, or customer distress. Rising inventory Days on Hand (DOH) signals either demand weakness or channel stuffing. Falling Days Payable Outstanding (DPO) suggests suppliers are tightening terms — they see risk you might not.</p>
 
 <div class="exhibit">
 <div class="exhibit-label">Balance Sheet Health Checklist</div>
-<div class="table-wrap">
 <table class="fw-table">
-<thead>
-<tr><th>Item</th><th><span class="text-green">Green Flag</span></th><th><span class="text-red">Red Flag</span></th></tr>
-</thead>
+<thead><tr><th>Item</th><th style="color:var(--green)">Green Flag</th><th style="color:var(--red)">Red Flag</th></tr></thead>
 <tbody>
-<tr><td>Net Debt / EBITDA</td><td>&lt; 2.0x</td><td>&gt; 4.0x or rising rapidly</td></tr>
-<tr><td>Interest Coverage (EBIT / Interest)</td><td>&gt; 6.0x</td><td>&lt; 3.0x or declining</td></tr>
+<tr><td>Net Debt / EBITDA</td><td>&lt; 2.0×</td><td>&gt; 4.0× or rising rapidly</td></tr>
+<tr><td>Interest Coverage (EBIT/Interest)</td><td>&gt; 6.0×</td><td>&lt; 3.0× or declining</td></tr>
 <tr><td>Debt Maturity Profile</td><td>Well-laddered, no wall within 2 years</td><td>&gt; 30% maturing within 12 months</td></tr>
 <tr><td>Fixed vs. Floating Rate Mix</td><td>&gt; 70% fixed-rate</td><td>&gt; 50% floating with rates rising</td></tr>
 <tr><td>DSO Trend (YoY)</td><td>Stable or declining</td><td>Rising 10%+ faster than revenue</td></tr>
 <tr><td>Inventory / Revenue Trend</td><td>Stable or declining</td><td>Rising without corresponding sales growth</td></tr>
 <tr><td>Goodwill / Total Assets</td><td>&lt; 20%</td><td>&gt; 40%, especially post-acquisitions</td></tr>
-<tr><td>Current Ratio</td><td>&gt; 1.5x</td><td>&lt; 1.0x (potential liquidity crisis)</td></tr>
+<tr><td>Current Ratio</td><td>&gt; 1.5×</td><td>&lt; 1.0× (potential liquidity crisis)</td></tr>
 <tr><td>Tangible Book Value Trend</td><td>Growing steadily</td><td>Declining while earnings grow</td></tr>
-<tr><td>Off-Balance-Sheet Obligations</td><td>Minimal, well-disclosed</td><td>Large operating leases, pensions underfunded, material hidden obligations</td></tr>
+<tr><td>Off-Balance-Sheet Obligations</td><td>Minimal, well-disclosed</td><td>Large operating leases, pensions underfunded &gt;20%</td></tr>
 </tbody>
 </table>
 </div>
-</div>
 
-<h3>ROIC - The Single Most Important Profitability Metric</h3>
-<p>In Tier 1's Masters 101, you learned that Joel Greenblatt built his "Magic Formula" around Return on Invested Capital. Now we formalize it. ROIC measures how efficiently a company converts capital into profit: the connection between the income statement's returns and the balance sheet's deployed capital.</p>
+<h3>ROIC — The Single Most Important Profitability Metric</h3>
+<p>In Tier 1's Masters 101, you learned that Joel Greenblatt built his entire "Magic Formula" around Return on Invested Capital. Now we formalize it. ROIC measures how efficiently a company converts capital into profit — the connection between the income statement (returns) and the balance sheet (capital deployed).</p>
 
 <div class="formula-box">
 <div class="formula-main">ROIC = NOPAT ÷ Invested Capital</div>
-<div class="formula-sub">NOPAT = Operating Income × (1 - Tax Rate) | Invested Capital = Total Equity + Total Debt - Excess Cash</div>
+<div class="formula-sub">NOPAT = Operating Income × (1 − Tax Rate) | Invested Capital = Total Equity + Total Debt − Excess Cash</div>
+</div>
+<p style="font-family:Arial,sans-serif;font-size:12px;color:var(--muted);margin-top:-8px;">A company earning 25% ROIC doubles its invested capital every ~3 years through reinvestment alone. At 8% ROIC, the same doubling takes ~9 years. This is why ROIC is the engine behind compounding — and why Pillar V's "Supercompounder" designation requires sustained ROIC above 15%.</p>
+
+<div class="exhibit">
+<div class="exhibit-label">ROIC by Industry — Structural Differences</div>
+<div class="bar-chart-row"><div class="bar-chart-label">Software (Visa, MSFT)</div><div class="bar-chart-track"><div class="bar-chart-fill" style="width:85%;background:var(--green);">35%+</div></div></div>
+<div class="bar-chart-row"><div class="bar-chart-label">Consumer Brands (NKE)</div><div class="bar-chart-track"><div class="bar-chart-fill" style="width:65%;background:var(--green);">22–30%</div></div></div>
+<div class="bar-chart-row"><div class="bar-chart-label">Industrials (CAT, HON)</div><div class="bar-chart-track"><div class="bar-chart-fill" style="width:45%;background:var(--gold);">12–18%</div></div></div>
+<div class="bar-chart-row"><div class="bar-chart-label">Utilities (NEE, DUK)</div><div class="bar-chart-track"><div class="bar-chart-fill" style="width:22%;background:var(--orange);">6–8%</div></div></div>
+<div class="bar-chart-row"><div class="bar-chart-label">Airlines (DAL, UAL)</div><div class="bar-chart-track"><div class="bar-chart-fill" style="width:12%;background:var(--red);">2–5%</div></div></div>
 </div>
 
-<p class="fine-print">A company earning 25% ROIC doubles its invested capital every ~3 years through reinvestment alone. At 8% ROIC, that same doubling takes closer to 9 years. This is why ROIC is the engine behind compounding and why Pillar V's "Supercompounder" designation requires sustained ROIC well above average.</p>
+<div class="callout callout-red"><div class="callout-label">Goodwill Warning — The Acquisition Trap</div><p>When a company acquires another at a premium to book value, the excess becomes "goodwill" on the balance sheet. Valeant Pharmaceuticals accumulated $33 billion in goodwill through aggressive acquisitions — more than its entire market cap at collapse. WeWork's "community-adjusted EBITDA" excluded basic building costs. When goodwill exceeds 40% of total assets, the company has paid more for acquisitions than the tangible assets are worth — and impairment charges (write-downs) become a ticking clock.</p></div>
 
-<div class="bar-chart-wrap">
-<div class="exhibit-label">ROIC by Industry - Structural Differences</div>
-<div class="bar-chart-row"><div class="bar-chart-label">Software (Visa, MSFT)</div><div class="bar-chart-track"><div class="bar-chart-fill fill-green" style="width:84%;">35%+</div></div></div>
-<div class="bar-chart-row"><div class="bar-chart-label">Consumer Brands (NKE)</div><div class="bar-chart-track"><div class="bar-chart-fill fill-lime" style="width:53%;">22-30%</div></div></div>
-<div class="bar-chart-row"><div class="bar-chart-label">Industrials (CAT, HON)</div><div class="bar-chart-track"><div class="bar-chart-fill fill-gold" style="width:36%;">12-18%</div></div></div>
-<div class="bar-chart-row"><div class="bar-chart-label">Utilities (NEE, DUK)</div><div class="bar-chart-track"><div class="bar-chart-fill fill-orange" style="width:20%;">6-8%</div></div></div>
-<div class="bar-chart-row"><div class="bar-chart-label">Airlines (DAL, UAL)</div><div class="bar-chart-track"><div class="bar-chart-fill fill-red" style="width:11%;">2-5%</div></div></div>
+<div class="callout callout-blue"><div class="callout-label">Beat Lynch Connection</div><p>Financial Durability Score incorporates balance sheet strength across debt ratios, working capital health, and ROIC consistency. ROIC is the core profitability metric behind Supercompounder classification — a stock can't earn Beat Lynch's highest designation without sustained ROIC above 15% for 5+ years.</p></div>
 </div>
 
-<div class="callout callout-red">
-<div class="callout-label">Goodwill Warning - The Acquisition Trap</div>
-<p>When a company acquires another at a premium to book value, the excess becomes goodwill on the balance sheet. Large goodwill balances are not automatically fatal, but when goodwill exceeds a large share of assets, the company may be carrying acquisition prices that the underlying economics cannot justify. That is how impairment charges become a delayed admission that management overpaid.</p>
-</div>
-
-<div class="callout callout-blue">
-<div class="callout-label">Beat Lynch Connection</div>
-<p>Financial Durability Score incorporates balance sheet strength across debt ratios, working capital health, and ROIC consistency. ROIC is the core profitability metric behind Supercompounder classification — a stock cannot earn Beat Lynch's highest designation without sustained high returns on invested capital.</p>
-</div>
-</div>
-
+<!-- ===== LESSON 13 ===== -->
 <div class="lesson-card" onclick="toggleLesson(2)">
 <div class="lesson-num">13</div>
-<div><div class="lesson-title">Cash Flow — The Truth Detector</div><div class="lesson-desc">Free cash flow, owner earnings, and why cash flow exposes what earnings conceal.</div></div>
+<div><div class="lesson-title">Cash Flow — The Truth Detector</div>
+<div class="lesson-desc">Free cash flow, owner earnings, and why cash flow exposes what earnings conceal.</div></div>
 <div class="lesson-mp">25 MP</div>
 </div>
 <div class="lesson-detail" id="ld-2">
 <div class="tag-row"><span class="ctag">Operating Cash Flow</span><span class="ctag">Free Cash Flow</span><span class="ctag">Cash Conversion</span><span class="ctag">Owner Earnings</span><span class="ctag">Maintenance Capex</span></div>
 
-<h3>Cash Flow Is The Hardest Statement To Manipulate</h3>
-<p>The income statement involves dozens of accounting judgments: revenue timing, expense capitalization, depreciation schedules, and one-time adjustments. The cash flow statement tracks actual cash movement. When reported earnings and cash flow diverge for extended periods, the analyst should assume the accrual earnings are the less trustworthy number until proven otherwise.</p>
-<p>The core question in this lesson is simple: <strong class="hl">are earnings converting to cash?</strong> If a company reports profits but generates little operating cash flow, the difference almost always lives in working capital swings, capitalized costs, or accounting choices. That gap matters enormously for valuation and durability.</p>
+<h3>Cash Flow Is the Hardest Statement to Manipulate</h3>
+<p>The income statement involves dozens of accounting judgments — revenue timing, expense capitalization, depreciation schedules, one-time adjustments. The cash flow statement tracks actual cash movements. When WorldCom capitalized $3.8 billion in operating expenses (booking them as capital expenditures), net income rose, but operating cash flow didn't change — the cash still left the building. Analysts watching cash flow would have caught the fraud years before the SEC did.</p>
+<p>The fundamental question Lesson 13 teaches you to ask: <strong class="hl">Are earnings converting to cash?</strong> If a company reports $5 per share in earnings but generates $2 per share in free cash flow, where did the other $3 go? The answer usually lives in working capital changes, capitalized costs, or accounting choices — and it matters enormously for valuation and durability.</p>
 
-<h3>Free Cash Flow - What The Business Actually Generates</h3>
-<p>Free Cash Flow (FCF) = Operating Cash Flow - Capital Expenditures. This is the cash available after maintaining and growing the business: the cash that can fund dividends, buybacks, acquisitions, or debt reduction. FCF is what you are actually buying when you buy a stock.</p>
+<h3>Free Cash Flow — What the Business Actually Generates</h3>
+<p>Free Cash Flow (FCF) = Operating Cash Flow − Capital Expenditures. This is the cash available after maintaining and growing the business — the cash that can fund dividends, buybacks, acquisitions, or debt repayment. FCF is what you're actually buying when you buy a stock.</p>
 
 <div class="two-col">
-<div class="detail-card">
-<div class="detail-card-title">Net Income -> Cash Flow Divergence Drivers</div>
-<ul>
-<li><strong class="hl">Depreciation &amp; Amortization:</strong> non-cash charge added back to OCF.</li>
-<li><strong class="hl">Stock-Based Compensation:</strong> non-cash expense, but real dilution.</li>
-<li><strong class="hl">Working Capital Changes:</strong> rising receivables can trap cash while earnings look fine.</li>
-<li><strong class="hl">Capitalized Expenses:</strong> cash spent but not immediately run through the income statement.</li>
-<li><strong class="hl">Restructuring Charges:</strong> often labeled one-time, sometimes recurring in practice.</li>
-</ul>
+<div class="exhibit" style="margin:0;">
+<div class="exhibit-label">Net Income → Cash Flow Divergence Drivers</div>
+<p style="font-size:13px;font-family:Arial,sans-serif;"><strong class="hl">Depreciation & Amortization:</strong> Non-cash charge. Added back to get OCF. <strong class="hl">Stock-Based Compensation:</strong> Non-cash expense. Added back — but creates real dilution. <strong class="hl">Working Capital Changes:</strong> Rising receivables = cash trapped. Rising payables = cash preserved. <strong class="hl">Capitalized Expenses:</strong> Cash spent but not on income statement (danger zone). <strong class="hl">Restructuring Charges:</strong> "Non-recurring" items that recur annually at some companies.</p>
 </div>
-<div class="detail-card detail-card-red">
-<div class="detail-card-title">Warning Signs: Persistent Divergence</div>
-<ul>
-<li>Three or more years of net income materially above operating cash flow.</li>
-<li>FCF negative while EPS grows.</li>
-<li>Growth funded by balance sheet expansion rather than operations.</li>
-<li>Rising capex as a percent of OCF without clear return evidence.</li>
-<li>Large "other" adjustments that management struggles to explain cleanly.</li>
-</ul>
+<div class="exhibit" style="margin:0;">
+<div class="exhibit-label" style="color:var(--red);">Warning Signs: Persistent Divergence</div>
+<p style="font-size:13px;font-family:Arial,sans-serif;"><strong class="hl">3+ years of Net Income > OCF:</strong> Earnings quality deteriorating. <strong class="hl">FCF negative while EPS grows:</strong> Growth funded by balance sheet, not operations. <strong class="hl">Rising capex as % of OCF:</strong> Business requiring more capital for same returns. <strong class="hl">Cash from operations declining while revenue grows:</strong> Collection or quality problem. <strong class="hl">Large "other" adjustments:</strong> Items management doesn't want to explain clearly.</p>
 </div>
 </div>
 
 <h3>Cash Conversion Quality</h3>
-<p>The Cash Conversion Ratio (FCF ÷ Net Income) measures how efficiently reported earnings convert into actual cash. Ratios above 100% usually indicate exceptionally high-quality businesses or favorable working-capital dynamics. Ratios in the 60-80% range demand investigation, and persistently low conversion is often the market's first forensic clue that the income statement is overstating reality.</p>
+<p>The Cash Conversion Ratio (FCF ÷ Net Income) measures how efficiently reported earnings convert to actual cash. A ratio above 100% means the company generates more cash than it reports in earnings — a hallmark of high-quality businesses. Visa's cash conversion ratio has averaged 110–120% over the past decade because its capital-light model requires minimal reinvestment. By contrast, General Electric's ratio averaged 60–70% in the 2015–2018 period, foreshadowing the restatements and write-downs that followed.</p>
 
 <div class="exhibit">
 <div class="exhibit-label">Cash Conversion Quality Grades</div>
-<div class="table-wrap">
 <table class="fw-table">
-<thead>
-<tr><th>Grade</th><th>FCF / Net Income</th><th>Signal</th><th>Example Companies</th></tr>
-</thead>
+<thead><tr><th>Grade</th><th>FCF / Net Income</th><th>Signal</th><th>Example Companies</th></tr></thead>
 <tbody>
-<tr><td class="tier-1">Excellent</td><td>&gt; 100%</td><td>Cash exceeds earnings; often negative working capital or capital-light model</td><td>Visa, Apple, Mastercard</td></tr>
-<tr><td class="tier-2">Good</td><td>80-100%</td><td>Healthy conversion; modest capex needs</td><td>Microsoft, J&amp;J, P&amp;G</td></tr>
-<tr><td class="tier-4">Concerning</td><td>60-80%</td><td>Meaningful gap; investigate working capital and capex trends</td><td>Amazon in heavy-capex years, select cyclical hardware names</td></tr>
-<tr><td class="tier-5">Red Flag</td><td>&lt; 60%</td><td>Earnings not backed by cash; investigate immediately</td><td>GE pre-restructure, Luckin Coffee pre-fraud</td></tr>
+<tr><td><strong class="hl" style="color:var(--green)">Excellent</strong></td><td>&gt; 100%</td><td>Cash exceeds earnings; negative working capital or capital-light model</td><td>Visa (115%), Apple (105%), Mastercard (110%)</td></tr>
+<tr><td><strong class="hl" style="color:var(--green)">Good</strong></td><td>80–100%</td><td>Healthy conversion; modest capex needs</td><td>Microsoft (95%), J&J (88%), P&G (92%)</td></tr>
+<tr><td><strong class="hl" style="color:var(--orange)">Concerning</strong></td><td>60–80%</td><td>Meaningful gap — investigate working capital and capex trends</td><td>Amazon (75%, heavy capex), Intel (65%)</td></tr>
+<tr><td><strong class="hl" style="color:var(--red)">Red Flag</strong></td><td>&lt; 60%</td><td>Earnings not backed by cash; investigate immediately</td><td>GE (2016–2018), Luckin Coffee pre-fraud</td></tr>
 </tbody>
 </table>
 </div>
-</div>
 
-<h3>Buffett's Owner Earnings - The True Measure</h3>
-<p>In Tier 1's Masters 101, you learned that Warren Buffett thinks in terms of "owner earnings" — what the business generates for its owners after maintaining its competitive position. Now we formalize the calculation by separating maintenance capex from growth capex.</p>
+<h3>Buffett's Owner Earnings — The True Measure</h3>
+<p>In Tier 1's Masters 101, you learned that Warren Buffett thinks in terms of "owner earnings" — what the business generates for its owners after maintaining its competitive position. Now we formalize the calculation:</p>
 
 <div class="formula-box">
-<div class="formula-main">Owner Earnings = Net Income + D&amp;A + Non-Cash - Maintenance Capex</div>
-<div class="formula-sub">The cash available to owners after maintaining — but not growing — the business.</div>
+<div class="formula-main">Owner Earnings = Net Income + D&A + Non-Cash − Maintenance Capex</div>
+<div class="formula-sub">The cash available to owners after maintaining — but not growing — the business</div>
+</div>
+<p style="font-family:Arial,sans-serif;font-size:12px;color:var(--muted);margin-top:-8px;"><strong class="hl">Worked Example (Hypothetical Industrial):</strong> Net Income = $500M. D&A = $200M. Other non-cash charges = $50M. Total Capex = $350M, of which $200M is maintenance and $150M is growth investment. Owner Earnings = $500M + $200M + $50M − $200M = $550M. Compare to reported FCF of $400M ($700M OCF − $350M total capex). Owner earnings is $150M higher because growth capex is optional.</p>
+
+<div class="callout callout-red"><div class="callout-label">The Cash Flow Truth</div><p>"When earnings tell a different story than cash flow, cash flow is telling the truth." This is the single most important forensic principle in financial analysis. Earnings are an opinion shaped by dozens of accounting choices. Cash flow is a fact shaped by bank statements. In every major accounting scandal of the past 30 years — Enron, WorldCom, Tyco, Luckin Coffee — cash flow diverged from earnings before the fraud was discovered.</p></div>
+
+<div class="callout callout-blue"><div class="callout-label">Beat Lynch Connection</div><p>Financial Durability Score requires earnings backed by cash. Cash conversion quality is a primary input — a company reporting strong EPS growth with declining cash conversion will see its Durability Score fall, even as headline numbers look strong. This protects NIL portfolios from earnings-quality traps.</p></div>
 </div>
 
-<p class="fine-print"><strong class="hl">Worked Example (Hypothetical Industrial):</strong> Net Income = $500M. D&amp;A = $200M. Other non-cash charges = $50M. Total Capex = $350M, of which $200M is maintenance and $150M is growth investment. Owner Earnings = $500M + $200M + $50M - $200M = $550M. Compare that to reported FCF of $400M if total capex were deducted with no distinction between maintenance and growth.</p>
-
-<div class="callout callout-red">
-<div class="callout-label">The Cash Flow Truth</div>
-<p>"When earnings tell a different story than cash flow, cash flow is telling the truth." This is one of the most important forensic principles in financial analysis. Earnings are shaped by accounting choices. Cash flow is shaped by bank statements. The largest frauds of the last 30 years all showed persistent cash-flow divergence before the market fully recognized the problem.</p>
-</div>
-
-<div class="callout callout-blue">
-<div class="callout-label">Beat Lynch Connection</div>
-<p>Financial Durability Score requires earnings backed by cash. Cash conversion quality is a primary input — a company reporting strong EPS growth while declining cash conversion will see its Durability Score fall even as headline numbers look strong. That protects NIL portfolios from earnings-quality traps.</p>
-</div>
-</div>
-
+<!-- ===== LESSON 14 ===== -->
 <div class="lesson-card" onclick="toggleLesson(3)">
 <div class="lesson-num">14</div>
-<div><div class="lesson-title">Forensic Accounting — Detecting Manipulation</div><div class="lesson-desc">The Beneish M-Score, red flag detection, and seeing fraud before it's obvious.</div></div>
+<div><div class="lesson-title">Forensic Accounting — Detecting Manipulation</div>
+<div class="lesson-desc">The Beneish M-Score, red flag detection, and seeing fraud before it's obvious.</div></div>
 <div class="lesson-mp">25 MP</div>
 </div>
 <div class="lesson-detail" id="ld-3">
 <div class="tag-row"><span class="ctag">Beneish M-Score</span><span class="ctag">Forensic Signals</span><span class="ctag">Earnings Manipulation</span><span class="ctag">Red Flags</span><span class="ctag">Management Credibility</span></div>
 
 <h3>Why Forensic Accounting Matters</h3>
-<p>You will never catch every fraud. The goal of forensic accounting is not omniscience — it is probability reduction. By systematically screening for quantitative red flags, you can avoid the majority of accounting disasters before the market fully prices them in. The objective is not to prove fraud in court. It is to recognize when the risk-reward has changed enough that avoidance becomes the rational decision.</p>
-<p>Enron, WorldCom, Tyco, Luckin Coffee, and Wirecard all had visible warning signs in public filings before collapse. Forensic analysis is what turns those signals into a disciplined screen rather than a hindsight story.</p>
+<p>You will never catch every fraud. The goal of forensic accounting is not omniscience — it's probability reduction. By systematically screening for quantitative red flags, you can avoid the <strong class="hl">majority</strong> of accounting disasters. Studies show that stocks flagged by the Beneish M-Score underperform by 10–15% annually in the years following detection, even without a formal fraud revelation. The market eventually sniffs out quality problems.</p>
+<p>Enron, WorldCom, Tyco, Luckin Coffee, Wirecard — each had quantifiable red flags visible in public filings <strong class="hl">before</strong> collapse. Forensic analysis wouldn't have told you "this company is committing fraud." It would have told you "the numbers here are unusual enough that the risk-reward doesn't justify the position." That's enough.</p>
 
-<h3>The Beneish M-Score - Statistical Fraud Detection</h3>
-<p>Professor Messod Beneish developed the M-score using eight financial ratios that statistically distinguish manipulators from non-manipulators. An M-score above roughly <strong class="hl">-1.78</strong> suggests elevated probability of earnings manipulation. It is not a verdict, but it is an effective triage tool for deciding which companies deserve much deeper skepticism.</p>
+<h3>The Beneish M-Score — Statistical Fraud Detection</h3>
+<p>Professor Messod Beneish developed the M-Score in 1999 using eight financial ratios that statistically distinguish manipulators from non-manipulators. An M-Score above −1.78 suggests a higher probability of earnings manipulation. The model correctly flagged Enron as a likely manipulator using publicly available financial data.</p>
 
 <div class="exhibit">
 <div class="exhibit-label">Beneish M-Score — Eight Components</div>
-<div class="table-wrap">
-<table class="fw-table">
-<thead>
-<tr><th>Component</th><th>What It Measures</th><th>Manipulation Signal</th><th>Threshold</th></tr>
-</thead>
-<tbody>
-<tr><td class="tier-2">DSRI</td><td>Days Sales in Receivables Index</td><td>Revenue recognized but not collected</td><td>&gt; 1.465</td></tr>
-<tr><td class="tier-2">GMI</td><td>Gross Margin Index</td><td>Deteriorating margins increase pressure to manipulate</td><td>&gt; 1.193</td></tr>
-<tr><td class="tier-2">AQI</td><td>Asset Quality Index</td><td>Increasing capitalization of expenses</td><td>&gt; 1.254</td></tr>
-<tr><td class="tier-2">SGI</td><td>Sales Growth Index</td><td>High growth companies face more pressure</td><td>&gt; 1.607</td></tr>
-<tr><td class="tier-2">DEPI</td><td>Depreciation Index</td><td>Slowing depreciation to inflate earnings</td><td>&gt; 1.077</td></tr>
-<tr><td class="tier-2">SGAI</td><td>SG&amp;A Expense Index</td><td>SG&amp;A rising disproportionately</td><td>&gt; 1.041</td></tr>
-<tr><td class="tier-2">TATA</td><td>Total Accruals to Total Assets</td><td>High accruals indicate more room for manipulation</td><td>&gt; 0.018</td></tr>
-<tr><td class="tier-2">LVGI</td><td>Leverage Index</td><td>Rising leverage increases manipulation incentive</td><td>&gt; 1.111</td></tr>
-</tbody>
-</table>
+<div class="sensitivity-grid" style="grid-template-columns:auto 1fr 1fr auto;">
+<div class="sg-header">Component</div><div class="sg-header">What It Measures</div><div class="sg-header">Manipulation Signal</div><div class="sg-header">Threshold</div>
+<div class="sg-row-header" style="text-align:center;">DSRI</div><div>Days Sales in Receivables Index</div><div>Revenue recognized but not collected</div><div>&gt; 1.465</div>
+<div class="sg-row-header" style="text-align:center;">GMI</div><div>Gross Margin Index</div><div>Deteriorating margins (pressure to manipulate)</div><div>&gt; 1.193</div>
+<div class="sg-row-header" style="text-align:center;">AQI</div><div>Asset Quality Index</div><div>Increasing capitalization of expenses</div><div>&gt; 1.254</div>
+<div class="sg-row-header" style="text-align:center;">SGI</div><div>Sales Growth Index</div><div>High growth companies face more pressure</div><div>&gt; 1.607</div>
+<div class="sg-row-header" style="text-align:center;">DEPI</div><div>Depreciation Index</div><div>Slowing depreciation to inflate earnings</div><div>&gt; 1.077</div>
+<div class="sg-row-header" style="text-align:center;">SGAI</div><div>SG&A Expense Index</div><div>SG&A increasing disproportionately</div><div>&gt; 1.041</div>
+<div class="sg-row-header" style="text-align:center;">TATA</div><div>Total Accruals to Total Assets</div><div>High accruals = more room for manipulation</div><div>&gt; 0.018</div>
+<div class="sg-row-header" style="text-align:center;">LVGI</div><div>Leverage Index</div><div>Rising leverage increases manipulation incentive</div><div>&gt; 1.111</div>
 </div>
 </div>
 
 <h3>The Ten Quantitative Red Flags</h3>
-<p>Beyond the M-score, analysts monitor a checklist of specific signals that often precede restatements and blowups. No single flag is definitive. Context matters. But when three or more appear together, the stock should often move from "potential investment" to "avoid until clarified."</p>
+<p>Beyond the M-Score, professional analysts monitor a checklist of specific signals that precede restatements and blowups. No single flag is definitive — context matters — but three or more flags appearing simultaneously should move a stock from "potential investment" to "avoid."</p>
 
 <div class="exhibit">
 <div class="exhibit-label">Forensic Accounting Red Flag Checklist</div>
-<div class="table-wrap">
 <table class="fw-table">
-<thead>
-<tr><th>#</th><th>Red Flag</th><th>What To Look For</th><th>Historical Example</th></tr>
-</thead>
+<thead><tr><th>#</th><th>Red Flag</th><th>What to Look For</th><th>Historical Example</th></tr></thead>
 <tbody>
-<tr><td>1</td><td>Revenue growth outpacing cash flow growth</td><td>OCF growth lagging revenue by 15%+ for several quarters</td><td>Luckin Coffee (2019)</td></tr>
+<tr><td>1</td><td>Revenue growth >> cash flow growth for 3+ quarters</td><td>OCF growth lagging revenue by 15%+</td><td>Luckin Coffee (2019)</td></tr>
 <tr><td>2</td><td>DSO rising faster than revenue</td><td>10%+ YoY DSO increase without model change</td><td>Sunbeam (1997)</td></tr>
-<tr><td>3</td><td>Inventory growing faster than sales</td><td>Inventory/revenue ratio expanding across multiple quarters</td><td>Cisco (2000), Peloton (2021)</td></tr>
-<tr><td>4</td><td>Recurring "one-time" charges</td><td>Restructuring or special charges in 3+ consecutive years</td><td>IBM (2014-2019)</td></tr>
-<tr><td>5</td><td>Auditor changes or qualified opinions</td><td>Switching firms, late filings, or going-concern language</td><td>Wirecard (2020)</td></tr>
+<tr><td>3</td><td>Inventory growing faster than sales</td><td>Inventory/revenue ratio expanding 2+ quarters</td><td>Cisco (2000), Peloton (2021)</td></tr>
+<tr><td>4</td><td>Recurring "one-time" charges</td><td>Restructuring charges in 3+ consecutive years</td><td>IBM (2014–2019)</td></tr>
+<tr><td>5</td><td>Auditor changes or qualified opinions</td><td>Switching from Big 4, late filings, going concern</td><td>Wirecard (2020)</td></tr>
 <tr><td>6</td><td>Complex related-party transactions</td><td>Material revenue from entities controlled by insiders</td><td>Enron SPEs</td></tr>
-<tr><td>7</td><td>SBC exceeding 15% of revenue</td><td>Massive recurring dilution hidden in "non-GAAP"</td><td>Palantir (2021-2022)</td></tr>
-<tr><td>8</td><td>Capitalizing operating expenses</td><td>Capex/revenue suddenly increasing without assets to match</td><td>WorldCom</td></tr>
-<tr><td>9</td><td>CFO or CEO departures labeled routine</td><td>Abrupt C-suite exits, especially finance leadership</td><td>Under Armour (2017)</td></tr>
-<tr><td>10</td><td>Margin expansion from expense timing</td><td>Delaying or capitalizing costs to future periods</td><td>Valeant (2015)</td></tr>
+<tr><td>7</td><td>SBC exceeding 15% of revenue</td><td>Massive recurring dilution hidden in "non-GAAP"</td><td>Palantir (2021–2022)</td></tr>
+<tr><td>8</td><td>Capitalizing operating expenses</td><td>Capex/revenue suddenly increasing without assets</td><td>WorldCom ($3.8B)</td></tr>
+<tr><td>9</td><td>CFO/CEO departures — "routine"</td><td>Abrupt C-suite exits, especially the CFO</td><td>Under Armour (2017)</td></tr>
+<tr><td>10</td><td>Margin expansion from expense timing</td><td>Delaying expenses to future periods</td><td>Valeant (2015)</td></tr>
 </tbody>
 </table>
 </div>
-</div>
 
 <h3>Management Credibility Assessment</h3>
-<p>Numbers do not exist in a vacuum — they are produced by people. Management credibility signals include consistency between public statements and reported results, willingness to discuss negative developments honestly, stable auditor relationships, compensation aligned with long-term value creation, and insider behavior that matches the narrative. When management language turns evasive, credibility degrades and the probability of accounting problems rises.</p>
+<p>Numbers don't exist in a vacuum — they're produced by people. Management credibility signals include: consistency between public statements and financial results, willingness to discuss negative developments honestly, stable auditor relationships, compensation aligned with long-term value creation, and insider buying vs. selling patterns. When management characterizes clearly negative results in positive language, or when guidance consistently requires "adjustments" to meet, credibility degrades — and the probability of accounting problems rises.</p>
 
-<div class="callout callout-red">
-<div class="callout-label">The Forensic Principle</div>
-<p>"You will never catch every fraud. But you can avoid most by asking: is cash flow confirming what earnings claim?" When the answer is repeatedly no, the burden of proof shifts from the skeptic to management. In investing, avoidance can be as powerful as selection.</p>
+<div class="callout callout-red"><div class="callout-label">The Forensic Principle</div><p>"You will never catch every fraud. But you can avoid most by asking: 'Is cash flow confirming what earnings claim?'" When the answer is "no" for multiple quarters, the burden of proof shifts from the skeptic to management. You don't need to prove fraud — you need to recognize that the risk-reward has changed. In investing, avoidance is as powerful as selection.</p></div>
+
+<div class="callout callout-blue"><div class="callout-label">Beat Lynch Connection</div><p>Financial Durability Score includes earnings quality analysis derived from these forensic signals. In NIL competition, accounting fraud blowups are catastrophic PATR events — a single position that restates earnings or faces SEC investigation can destroy months of portfolio performance. The forensic filter exists to prevent these catastrophic outcomes.</p></div>
 </div>
 
-<div class="callout callout-blue">
-<div class="callout-label">Beat Lynch Connection</div>
-<p>Financial Durability Score includes earnings-quality analysis derived from these forensic signals. In NIL competition, accounting blowups are catastrophic PATR events. A single position that restates earnings or faces SEC investigation can destroy months of portfolio progress, so the forensic filter exists to reduce that tail risk.</p>
-</div>
-</div>
-
+<!-- ===== LESSON 15 ===== -->
 <div class="lesson-card" onclick="toggleLesson(4)">
 <div class="lesson-num">15</div>
-<div><div class="lesson-title">Discounted Cash Flow — The Foundation of Intrinsic Value</div><div class="lesson-desc">DCF modeling, terminal value, WACC, and making assumptions explicit.</div></div>
+<div><div class="lesson-title">Discounted Cash Flow — The Foundation of Intrinsic Value</div>
+<div class="lesson-desc">DCF modeling, terminal value, WACC, and making assumptions explicit.</div></div>
 <div class="lesson-mp">25 MP</div>
 </div>
 <div class="lesson-detail" id="ld-4">
 <div class="tag-row"><span class="ctag">DCF</span><span class="ctag">Terminal Value</span><span class="ctag">WACC</span><span class="ctag">Sensitivity Analysis</span><span class="ctag">Intrinsic Value</span></div>
 
 <h3>The Core Insight: All Value Is Present Value</h3>
-<p>Discounted Cash Flow is the foundational valuation method because a business is worth the present value of all future cash it will generate for its owners. Multiples are shortcuts for this same logic. DCF simply forces the assumptions into the open: growth, margins, reinvestment, risk, and time.</p>
+<p>In Pillar I Lesson 3, you learned that interest rates set the discount rate for all assets and that PV = CF / (1+r)^n. That was the mechanical truth. Now we apply it. The Discounted Cash Flow model is the foundational valuation methodology: a business is worth the present value of all future cash flows it will generate for its owners. Every other valuation method — P/E ratios, EV/EBITDA multiples, comparable analysis — is ultimately a shortcut for this calculation.</p>
 
 <div class="formula-box">
-<div class="formula-main">EV = Σ (FCF<tspan style="font-size:12px;vertical-align:super;">t</tspan> / (1 + WACC)<tspan style="font-size:12px;vertical-align:super;">t</tspan>) + TV / (1 + WACC)<tspan style="font-size:12px;vertical-align:super;">n</tspan></div>
-<div class="formula-sub">Years 1-5 (or 1-10): explicit FCF forecast, discounted. Terminal value captures all cash flows beyond the forecast period.</div>
+<div class="formula-main">EV = Σ (FCF<sub>t</sub> / (1 + WACC)<sup>t</sup>) + TV / (1 + WACC)<sup>n</sup></div>
+<div class="formula-sub">Year 1–5 (or 1–10): Explicit FCF forecast, discounted. Terminal Value: All cash flows beyond the forecast period.</div>
 </div>
+<p style="font-family:Arial,sans-serif;font-size:12px;color:var(--muted);margin-top:-8px;">Terminal value typically comprises 60–80% of total DCF value — a critical and humbling fact. Most of a business's value lies in the distant future, which you fundamentally cannot predict with precision.</p>
 
-<p class="fine-print">Terminal value often comprises 60-80% of total DCF value. That is a humbling but important fact: most of a business's value sits in the distant future, which is why assumption discipline matters so much.</p>
+<h3>Building the Projection — Where Judgment Lives</h3>
+<p>The DCF math is simple. The judgment is in the assumptions: What will revenue grow at? Will margins expand, hold, or contract? How much capital reinvestment is required? What's the appropriate discount rate? Each assumption compounds across years, and small differences produce enormous differences in output. This is not a weakness of DCF — it's a feature. It forces you to make your beliefs explicit and testable.</p>
+<p>A responsible DCF builds three scenarios (bull, base, bear) with distinct assumptions for each. An Amazon DCF in 2012 that valued AWS separately from e-commerce (a sum-of-parts / DCF hybrid) would have produced dramatically higher values than consensus — because the market hadn't yet recognized cloud as a distinct, high-margin, high-growth business. Conversely, a Peloton DCF in early 2021 using pandemic-period growth rates as permanent would have produced a $100+ billion valuation that proved catastrophically wrong as growth normalized.</p>
 
-<h3>Building The Projection - Where Judgment Lives</h3>
-<p>The math is simple. The judgment is in the assumptions: what revenue will grow at, whether margins expand or compress, how much capital reinvestment is required, and what discount rate is appropriate. The DCF is not weak because it is assumption-sensitive. That sensitivity is the point. It forces you to make your beliefs explicit and testable.</p>
+<h3>WACC — The Discount Rate That Changes Everything</h3>
+<p>The Weighted Average Cost of Capital blends the cost of equity and cost of debt based on the company's capital structure. In Pillar I Lesson 3, you learned how rate changes ripple through asset prices. Here's the direct application: when the 10-year Treasury yield rose from 1.5% in late 2021 to 4.8% in October 2023, the WACC for growth companies increased by 200–300 basis points. Applied to a 10-year DCF projection, that increase alone reduced intrinsic value estimates by 25–40% — before any change in growth assumptions. This explains why ARK Innovation ETF fell 75% from its peak. The machine you learned about in Pillar I directly feeds the valuation math you're learning now.</p>
 
-<h3>WACC - The Discount Rate That Changes Everything</h3>
-<p>The Weighted Average Cost of Capital blends the cost of equity and cost of debt based on the company's capital structure. When rates rise, WACC rises, and long-duration assets become less valuable. That is why growth stocks can collapse in price even when near-term earnings remain healthy: the discount rate applied to distant cash flows changed.</p>
+<h3>Terminal Value — The Honest Uncertainty</h3>
+<p>Terminal value captures all cash flows beyond your explicit forecast period. Two methods: <strong class="hl">Perpetuity Growth</strong> (TV = Final Year FCF × (1+g) / (WACC − g)) assumes cash flows grow at a constant rate forever, typically 2–3% approximating long-run GDP growth. <strong class="hl">Exit Multiple</strong> (TV = Final Year EBITDA × Terminal Multiple) uses a market-based assumption. Terminal value comprising 60–80% of total DCF value is a feature, not a bug — it honestly reflects that most value lies in the uncertain future.</p>
 
-<h3>Terminal Value - The Honest Uncertainty</h3>
-<p>Terminal value captures all cash flows beyond the explicit forecast period. Two common approaches dominate: the perpetuity growth model and the exit multiple model. Both require judgment. The key is to remember that terminal value is not a bug in DCF. It is an honest admission that long-term value matters more than the next few quarters.</p>
-
-<h3>Sensitivity Analysis - Value Is A Range</h3>
-<p>The most important output of a DCF is rarely a single answer. It is the sensitivity table. That table shows how valuation changes under different growth and discount-rate assumptions and gives you a disciplined range instead of false precision.</p>
+<h3>Sensitivity Analysis — Value Is a Range</h3>
+<p>The most important output of any DCF is not the "answer" — it's the sensitivity table:</p>
 
 <div class="exhibit">
-<div class="exhibit-label">DCF Sensitivity Grid — Implied Share Price (Stock Trading At $105)</div>
-<div class="table-wrap">
-<table class="fw-table">
-<thead>
-<tr><th>Growth / WACC</th><th>8%</th><th>9%</th><th>10%</th><th>11%</th><th>12%</th></tr>
-</thead>
-<tbody>
-<tr><td>3%</td><td class="value-good">$142</td><td class="value-good">$118</td><td class="value-neutral">$99</td><td class="value-bad">$84</td><td class="value-bad">$72</td></tr>
-<tr><td>5%</td><td class="value-good">$168</td><td class="value-good">$137</td><td class="value-good">$113</td><td class="value-neutral">$95</td><td class="value-bad">$80</td></tr>
-<tr><td>7%</td><td class="value-good">$203</td><td class="value-good">$161</td><td class="value-good">$130</td><td class="value-neutral">$107</td><td class="value-neutral">$89</td></tr>
-<tr><td>10%</td><td class="value-good">$278</td><td class="value-good">$209</td><td class="value-good">$163</td><td class="value-good">$130</td><td class="value-neutral">$106</td></tr>
-<tr><td>12%</td><td class="value-good">$352</td><td class="value-good">$254</td><td class="value-good">$192</td><td class="value-good">$149</td><td class="value-good">$119</td></tr>
-</tbody>
-</table>
+<div class="exhibit-label">DCF Sensitivity Grid — Implied Share Price (Stock trading at $105)</div>
+<div class="sensitivity-grid">
+<div class="sg-header">Growth ↓ / WACC →</div><div class="sg-header">8%</div><div class="sg-header">9%</div><div class="sg-header">10%</div><div class="sg-header">11%</div><div class="sg-header">12%</div>
+<div class="sg-row-header">3%</div><div class="sg-highlight">$142</div><div class="sg-highlight">$118</div><div>$99</div><div class="sg-danger">$84</div><div class="sg-danger">$72</div>
+<div class="sg-row-header">5%</div><div class="sg-highlight">$168</div><div class="sg-highlight">$137</div><div class="sg-highlight">$113</div><div>$95</div><div class="sg-danger">$80</div>
+<div class="sg-row-header">7%</div><div class="sg-highlight">$203</div><div class="sg-highlight">$161</div><div class="sg-highlight">$130</div><div>$107</div><div>$89</div>
+<div class="sg-row-header">10%</div><div class="sg-highlight">$278</div><div class="sg-highlight">$209</div><div class="sg-highlight">$163</div><div class="sg-highlight">$130</div><div>$106</div>
+<div class="sg-row-header">12%</div><div class="sg-highlight">$352</div><div class="sg-highlight">$254</div><div class="sg-highlight">$192</div><div class="sg-highlight">$149</div><div class="sg-highlight">$119</div>
 </div>
-<p class="fine-print">Green values imply upside versus the current $105 price. At 10% WACC and 5% growth, intrinsic value is about $113, which is not enough margin of safety for most professional frameworks.</p>
+<p style="font-family:Arial,sans-serif;font-size:11px;color:var(--muted);margin-top:6px;">Green = margin of safety exists (value > $105). Red = stock appears overvalued. At 10% WACC and 5% growth, value ($113) offers only 7.6% upside — insufficient margin of safety for most frameworks.</p>
 </div>
 
-<div class="callout">
-<div class="callout-label">Core Principle</div>
-<p>A DCF is not a calculator that outputs truth. It is a framework for making assumptions explicit. The real value is not the number at the bottom; it is the process of deciding what you believe about growth, margins, reinvestment, and risk, then testing how wrong you can be before losing money.</p>
+<div class="callout"><div class="callout-label">Core Principle</div><p>"A DCF is not a calculator that outputs truth. It is a framework for making your assumptions explicit." The value of building a DCF is not the number at the bottom — it's the process of deciding what you believe about growth, margins, reinvestment, and risk, and testing how wrong you can be before losing money. The output is a range, and your job is to determine whether current price offers sufficient margin of safety across that range.</p></div>
+
+<div class="callout callout-blue"><div class="callout-label">Beat Lynch Connection</div><p>Mean Magic's Growth Quality, Moat Strength, and Financial Durability scores are precisely the qualitative inputs a professional would use to set DCF assumptions. A Mean Magic 9+ company gets higher growth assumptions, longer duration, and lower discount rates because its quality justifies it. The scoring system is a structured way to do what DCF demands: make explicit judgments about quality and translate them into valuation.</p></div>
 </div>
 
-<div class="callout callout-blue">
-<div class="callout-label">Beat Lynch Connection</div>
-<p>Mean Magic's Growth Quality, Moat Strength, and Financial Durability scores are precisely the qualitative inputs a professional uses to set DCF assumptions. A higher-quality business justifies higher growth duration and lower discount-rate skepticism. The scoring system exists to translate qualitative judgment into valuation discipline.</p>
-</div>
-</div>
-
+<!-- ===== LESSON 16 ===== -->
 <div class="lesson-card" onclick="toggleLesson(5)">
 <div class="lesson-num">16</div>
-<div><div class="lesson-title">Comparable Analysis and Relative Valuation</div><div class="lesson-desc">Multiples, peer selection, the bubble danger, and when "cheap" means nothing.</div></div>
+<div><div class="lesson-title">Comparable Analysis and Relative Valuation</div>
+<div class="lesson-desc">Multiples, peer selection, the bubble danger, and when "cheap" means nothing.</div></div>
 <div class="lesson-mp">25 MP</div>
 </div>
 <div class="lesson-detail" id="ld-5">
 <div class="tag-row"><span class="ctag">P/E</span><span class="ctag">EV/EBITDA</span><span class="ctag">P/S</span><span class="ctag">PEG Ratio</span><span class="ctag">Peer Selection</span></div>
 
-<h3>The Logic And The Limitation Of Multiples</h3>
-<p>Comparable analysis values a company by comparing it to similar businesses using standardized ratios. If one company trades at 20x earnings and a similar one trades at 15x, the market is telling you something about expectations, quality, or risk. Multiples are useful because they are fast, intuitive, and grounded in market context. Their limitation is equally important: they tell you what the market pays for similar businesses, not what those businesses are intrinsically worth.</p>
+<h3>The Logic and the Limitation of Multiples</h3>
+<p>Comparable analysis — "comps" — values a company by comparing it to similar businesses using standardized ratios. If Company A trades at 20× earnings and similar Company B trades at 15×, is B cheap or is A expensive? Comps are faster than DCF, widely used on Wall Street, and essential for understanding market context. But they carry a critical flaw: comparable analysis tells you what the <strong class="hl">market</strong> pays for similar businesses, not what they're <strong class="hl">worth</strong>. In a bubble, the entire peer set can be overvalued, and "cheap relative to peers" is meaningless.</p>
 
-<h3>Key Multiples - When And Why To Use Each</h3>
+<h3>Key Multiples — When and Why to Use Each</h3>
+
 <div class="exhibit">
 <div class="exhibit-label">Multiple Selection Framework</div>
-<div class="table-wrap">
 <table class="fw-table">
-<thead>
-<tr><th>Multiple</th><th>Formula</th><th>Best Used When</th><th>Pitfalls</th></tr>
-</thead>
+<thead><tr><th>Multiple</th><th>Formula</th><th>Best Used When</th><th>Pitfalls</th></tr></thead>
 <tbody>
-<tr><td>P/E</td><td>Price / EPS</td><td>Mature, profitable companies with stable earnings</td><td>Meaningless for loss-makers; earnings easily manipulated</td></tr>
-<tr><td>EV/EBITDA</td><td>Enterprise Value / EBITDA</td><td>Comparing firms with different leverage; M&amp;A valuation</td><td>Ignores capex differences and tax structures</td></tr>
-<tr><td>P/S</td><td>Price / Revenue per Share</td><td>Pre-profit growth companies; early-stage SaaS</td><td>Ignores profitability entirely; can justify absurd valuations</td></tr>
-<tr><td>P/FCF</td><td>Price / Free Cash Flow per Share</td><td>Cash-generative businesses; testing earnings quality</td><td>Lumpy capex or temporary working-capital swings can distort</td></tr>
-<tr><td>PEG</td><td>P/E / EPS Growth Rate</td><td>Growth companies; Peter Lynch's preferred quick ratio</td><td>Assumes linear growth; unreliable if estimates are weak</td></tr>
+<tr><td><strong class="hl">P/E</strong></td><td>Price / EPS</td><td>Mature, profitable companies with stable earnings</td><td>Meaningless for loss-making firms; earnings easily manipulated</td></tr>
+<tr><td><strong class="hl">EV/EBITDA</strong></td><td>Enterprise Value / EBITDA</td><td>Comparing firms with different leverage; M&A valuation</td><td>Ignores capex differences, tax structures</td></tr>
+<tr><td><strong class="hl">P/S</strong></td><td>Price / Revenue per Share</td><td>Pre-profit growth companies; early-stage SaaS</td><td>Ignores profitability entirely; used to justify unlimited valuations</td></tr>
+<tr><td><strong class="hl">P/FCF</strong></td><td>Price / Free Cash Flow per Share</td><td>Cash-generative businesses; testing earnings quality</td><td>Lumpy capex can distort; one-time working capital swings</td></tr>
+<tr><td><strong class="hl">PEG</strong></td><td>P/E / EPS Growth Rate</td><td>Growth companies; Peter Lynch's preferred ratio</td><td>Assumes linear growth; garbage-in from unreliable estimates</td></tr>
 </tbody>
 </table>
 </div>
-</div>
 
-<h3>Selecting The Right Comparable Set</h3>
-<p>The most common mistake in comps is choosing the wrong peers. "Same industry" is necessary but not sufficient. Proper peer selection requires alignment on growth rate, margin profile, business model, geography, and market-cap tier. The tighter the comparable set, the more informative the analysis.</p>
+<h3>Selecting the Right Comparable Set</h3>
+<p>The most common mistake in comparable analysis is choosing the wrong peers. "Same industry" is necessary but not sufficient. Proper peer selection requires alignment on: growth rate (±5 percentage points), margin profile (gross and operating), business model (subscription vs. transactional), geographic mix, and market cap tier. Comparing Shopify (40%+ growth SaaS) to IBM (flat growth enterprise) because both are "tech" produces meaningless conclusions. The tighter the comparable set, the more informative the analysis.</p>
 
-<h3>Worked Comparable Analysis - Enterprise SaaS</h3>
+<h3>Worked Comparable Analysis — Enterprise SaaS</h3>
+
 <div class="exhibit">
 <div class="exhibit-label">SaaS Peer Comparable Table</div>
-<div class="table-wrap">
 <table class="fw-table">
-<thead>
-<tr><th>Company</th><th>EV/Revenue</th><th>EV/EBITDA</th><th>Rev. Growth</th><th>Gross Margin</th><th>Rule of 40</th></tr>
-</thead>
+<thead><tr><th>Company</th><th>EV/Revenue</th><th>EV/EBITDA</th><th>Rev. Growth</th><th>Gross Margin</th><th>Rule of 40</th></tr></thead>
 <tbody>
-<tr><td>ServiceNow</td><td>16.5x</td><td>48x</td><td>24%</td><td>80%</td><td>52</td></tr>
-<tr><td>CrowdStrike</td><td>18.2x</td><td>55x</td><td>33%</td><td>75%</td><td>55</td></tr>
-<tr><td>Datadog</td><td>17.0x</td><td>62x</td><td>26%</td><td>79%</td><td>46</td></tr>
-<tr><td>Workday</td><td>9.8x</td><td>32x</td><td>17%</td><td>75%</td><td>38</td></tr>
-<tr><td class="tier-3">Target Co.</td><td class="tier-3">11.0x</td><td class="tier-3">38x</td><td class="tier-3">21%</td><td class="tier-3">77%</td><td class="tier-3">43</td></tr>
+<tr><td>ServiceNow</td><td>16.5×</td><td>48×</td><td>24%</td><td>80%</td><td>52</td></tr>
+<tr><td>CrowdStrike</td><td>18.2×</td><td>55×</td><td>33%</td><td>75%</td><td>55</td></tr>
+<tr><td>Datadog</td><td>17.0×</td><td>62×</td><td>26%</td><td>79%</td><td>46</td></tr>
+<tr><td>Workday</td><td>9.8×</td><td>32×</td><td>17%</td><td>75%</td><td>38</td></tr>
+<tr><td><strong class="hl" style="color:var(--gold)">Target Co.</strong></td><td style="color:var(--gold)"><strong>11.0×</strong></td><td style="color:var(--gold)"><strong>38×</strong></td><td><strong>21%</strong></td><td><strong>77%</strong></td><td><strong>43</strong></td></tr>
 </tbody>
 </table>
-</div>
-<p class="fine-print">Target Co. trades at a discount to ServiceNow and CrowdStrike on EV/Revenue, but its slower growth rate partly explains that discount. Relative valuation becomes useful only when the peer set is genuinely comparable.</p>
+<p style="font-family:Arial,sans-serif;font-size:11px;color:var(--muted);">Target Co. trades at a discount to ServiceNow and CrowdStrike on EV/Revenue, but its lower growth rate (21% vs. 24–33%) partly justifies the discount. Is the discount too large given Target's quality metrics? That's where comparable analysis becomes a judgment exercise.</p>
 </div>
 
 <div class="two-col">
-<div class="detail-card detail-card-green">
-<div class="detail-card-title">Strengths Of Relative Valuation</div>
-<ul>
-<li>Reflects what investors are actually paying right now.</li>
-<li>Quick to compute and helpful for screening large universes.</li>
-<li>Useful as a sanity check on DCF outputs.</li>
-<li>Standard for sell-side equity research and M&amp;A discussion.</li>
-</ul>
+<div class="exhibit" style="margin:0;">
+<div class="exhibit-label" style="color:var(--green);">Strengths of Relative Valuation</div>
+<p style="font-size:13px;font-family:Arial,sans-serif;">Market-based reality check — reflects what investors actually pay. Quick to compute; good for screening large universes. Forces comparison thinking: "why is A cheaper than B?" Useful sanity check on DCF outputs. Industry standard for equity research and M&A.</p>
 </div>
-<div class="detail-card detail-card-red">
-<div class="detail-card-title">Dangers Of Relative Valuation</div>
-<ul>
-<li>If the entire sector is overvalued, "cheap" inside that bubble is still dangerous.</li>
-<li>Backward-looking or consensus-based estimates may be wrong.</li>
-<li>Multiples compress in bear markets regardless of quality.</li>
-<li>Poor peer selection can produce false confidence.</li>
-</ul>
+<div class="exhibit" style="margin:0;">
+<div class="exhibit-label" style="color:var(--red);">Dangers of Relative Valuation</div>
+<p style="font-size:13px;font-family:Arial,sans-serif;">Bubble blindness — if entire sector overvalued, "cheap" is meaningless. Ignores absolute value; can justify any price in the right peer set. Peer selection is subjective — easy to cherry-pick. Backward-looking: trailing or consensus estimates may be wrong. Multiples compress in bear markets regardless of quality.</p>
 </div>
 </div>
 
-<div class="callout callout-red">
-<div class="callout-label">The Bubble Trap</div>
-<p>In 1999, many dot-com stocks looked "cheap relative to peers" even though the entire peer group was absurdly overvalued. Relative valuation is a useful input, but never a complete decision framework. It must always be anchored to some view of absolute value.</p>
+<div class="callout callout-red"><div class="callout-label">The Bubble Trap</div><p>"In 1999, every dot-com was 'cheap relative to peers.' The entire sector was 50–100× revenue." Relative cheapness in a bubble is meaningless. In 2021, SaaS companies traded at 30–60× revenue because the peer set normalized those valuations. By 2022, the same companies fell 60–80% as rate increases (Pillar I Lesson 3) repriced the entire sector. Relative valuation is a useful input but never a sufficient decision framework. You must anchor to absolute intrinsic value.</p></div>
+
+<div class="callout callout-blue"><div class="callout-label">Beat Lynch Connection</div><p>Stock Analyzer provides relative valuation context — where a stock trades vs. its peers. But Mean Magic goes beyond relative: it assesses absolute quality. In NIL, buying a stock because "it's cheaper than its peers" without understanding whether the entire peer set is overvalued is a common PATR-destroying error.</p></div>
 </div>
 
-<div class="callout callout-blue">
-<div class="callout-label">Beat Lynch Connection</div>
-<p>Stock Analyzer provides relative valuation context — where a stock trades versus peers. But Mean Magic goes beyond relative pricing into business quality and durability. In NIL competition, buying a stock just because it is "cheaper than peers" without testing whether the whole peer set is overvalued is a common unforced error.</p>
-</div>
-</div>
-
+<!-- ===== LESSON 17 ===== -->
 <div class="lesson-card" onclick="toggleLesson(6)">
 <div class="lesson-num">17</div>
-<div><div class="lesson-title">Sum-of-Parts and Special Situations Valuation</div><div class="lesson-desc">Conglomerates, hidden assets, SOTP analysis, and catalyst identification.</div></div>
+<div><div class="lesson-title">Sum-of-Parts and Special Situations Valuation</div>
+<div class="lesson-desc">Conglomerates, hidden assets, SOTP analysis, and catalyst identification.</div></div>
 <div class="lesson-mp">25 MP</div>
 </div>
 <div class="lesson-detail" id="ld-6">
-<div class="tag-row"><span class="ctag">SOTP</span><span class="ctag">Hidden Assets</span><span class="ctag">Catalysts</span></div>
-<div class="callout callout-purple"><div class="callout-label">Content Pending</div><p>The page structure for Lesson 17 is ready; the case studies and valuation content remain to be filled in.</p></div>
+<div class="tag-row"><span class="ctag">Sum-of-Parts</span><span class="ctag">Conglomerate Discount</span><span class="ctag">Hidden Assets</span><span class="ctag">Catalyst</span><span class="ctag">Spinoffs</span></div>
+
+<h3>When the Whole Trades Below the Sum</h3>
+<p>Some companies contain multiple distinct businesses valued as a single entity — often incorrectly. Sum-of-Parts (SOTP) valuation breaks the company into components, values each using the most appropriate methodology (DCF, comparables, or asset value), and compares the sum to the market price. When the sum exceeds the market price, you've found a potential opportunity — but only if a catalyst exists to close the gap.</p>
+<p>The conglomerate discount — typically 10–25% — exists for rational reasons: management complexity, capital allocation opacity, and the inability for investors to own just the attractive segments. But when the discount becomes extreme, or when catalysts emerge to unlock value, SOTP analysis identifies some of the most asymmetric opportunities in investing.</p>
+
+<h3>Worked SOTP Example — Hypothetical Conglomerate "DiversaCorp"</h3>
+
+<div class="exhibit">
+<div class="exhibit-label">DiversaCorp Sum-of-Parts Analysis</div>
+<table class="fw-table">
+<thead><tr><th>Segment</th><th>Revenue</th><th>EBITDA</th><th>Comparable Multiple</th><th>Segment Value</th></tr></thead>
+<tbody>
+<tr><td><strong class="hl">Cloud Software Division</strong></td><td>$4.2B</td><td>$1.3B</td><td>25× EV/EBITDA (ServiceNow)</td><td>$32.5B</td></tr>
+<tr><td><strong class="hl">Industrial Equipment</strong></td><td>$6.8B</td><td>$1.1B</td><td>12× EV/EBITDA (Honeywell)</td><td>$13.2B</td></tr>
+<tr><td><strong class="hl">Financial Services</strong></td><td>$2.1B</td><td>$0.6B</td><td>10× EV/EBITDA (sector avg)</td><td>$6.0B</td></tr>
+<tr><td style="color:var(--muted)">Corporate overhead</td><td>—</td><td>($0.4B)</td><td>10× (capitalized drag)</td><td>($4.0B)</td></tr>
+<tr><td colspan="4" style="border-top:2px solid var(--gold);color:var(--gold);font-weight:700;">SOTP Enterprise Value</td><td style="border-top:2px solid var(--gold);color:var(--gold);font-weight:700;">$47.7B</td></tr>
+<tr><td colspan="4">Less: Net Debt</td><td>($8.0B)</td></tr>
+<tr><td colspan="4" style="color:var(--green);font-weight:700;">Equity SOTP Value</td><td style="color:var(--green);font-weight:700;">$39.7B</td></tr>
+<tr><td colspan="4" style="color:var(--red);">Current Market Cap</td><td style="color:var(--red);">$28.0B</td></tr>
+<tr><td colspan="4" style="color:var(--gold);font-weight:700;">Discount to SOTP</td><td style="color:var(--gold);font-weight:700;">29.5%</td></tr>
+</tbody>
+</table>
+<p style="font-family:Arial,sans-serif;font-size:11px;color:var(--muted);">The cloud division alone ($32.5B) exceeds DiversaCorp's entire market cap ($28.0B) — meaning you're getting the industrial and financial divisions essentially for free. This is exactly the type of setup Peter Lynch described as an "asset play."</p>
 </div>
 
+<h3>Hidden Value Types</h3>
+
+<table class="fw-table">
+<thead><tr><th>Hidden Asset Type</th><th>Where to Find It</th><th>Real-World Example</th></tr></thead>
+<tbody>
+<tr><td><strong class="hl">Excess Cash</strong></td><td>Balance sheet; cash > operating needs</td><td>Apple's $160B+ cash pile (pre-buyback program)</td></tr>
+<tr><td><strong class="hl">Real Estate at Historical Cost</strong></td><td>PP&E footnotes; original purchase dates</td><td>McDonald's land portfolio worth multiples of book</td></tr>
+<tr><td><strong class="hl">Fully Depreciated Assets</strong></td><td>D&A footnotes; $0 book, still generating revenue</td><td>Railroad rolling stock, telecom fiber</td></tr>
+<tr><td><strong class="hl">Minority Stakes</strong></td><td>Equity method investments; footnotes</td><td>SoftBank's Alibaba stake ($150B+ at peak)</td></tr>
+<tr><td><strong class="hl">Tax Assets (NOLs)</strong></td><td>Deferred tax asset footnotes</td><td>Carvana's $6B+ in NOLs (no taxes for years)</td></tr>
+<tr><td><strong class="hl">IP / Brand Not on Balance Sheet</strong></td><td>Not explicitly on B/S; analyze earning power</td><td>Coca-Cola brand worth estimated $80B+</td></tr>
+</tbody>
+</table>
+
+<h3>The Catalyst Requirement</h3>
+<p>SOTP identifies the discount. The catalyst closes it. Without a catalyst, a conglomerate can trade at a discount indefinitely. Key catalysts include: announced spinoffs (GE's planned breakup into GE Aerospace, GE Vernova, and GE HealthCare generated $100B+ in combined market cap vs. $80B before announcement), activist investor involvement (Elliott Management, Icahn Enterprises), management-initiated divestitures, and strategic alternatives processes. The IAC/Match Group separation in 2020, Honeywell's spinoffs, and the Dow/DuPont/Corteva three-way split are all examples of catalysts unlocking trapped SOTP value.</p>
+
+<div class="callout callout-green"><div class="callout-label">The Value Investor's X-Ray</div><p>"SOTP is the value investor's x-ray." A company trading below the sum of its visible parts plus a near-term catalyst equals Lynch's "asset play" and Greenblatt's "special situation." The key word is catalyst. Cheap without catalyst = patient; cheap with catalyst = actionable. In NIL competition, where tournament timelines are finite, the catalyst distinction is the difference between a thesis that scores well and capital trapped in a discount that never closes.</p></div>
+
+<div class="callout callout-blue"><div class="callout-label">Beat Lynch Connection</div><p>Catalyst Vector identifies value-unlocking events: spinoffs, activist filings, management changes, strategic reviews. In NIL, SOTP-with-catalyst setups are high-probability alpha sources because the valuation gap is quantifiable and the event timeline is definable — exactly the characteristics that produce high PATR scores.</p></div>
+</div>
+
+<!-- ===== LESSON 18 ===== -->
 <div class="lesson-card" onclick="toggleLesson(7)">
 <div class="lesson-num">18</div>
-<div><div class="lesson-title">Valuation in Practice — Margin of Safety and the Range</div><div class="lesson-desc">Three-scenario framework, expected value, and professional valuation synthesis.</div></div>
+<div><div class="lesson-title">Valuation in Practice — Margin of Safety and the Range</div>
+<div class="lesson-desc">Three-scenario framework, expected value, and professional valuation synthesis.</div></div>
 <div class="lesson-mp">25 MP</div>
 </div>
 <div class="lesson-detail" id="ld-7">
-<div class="tag-row"><span class="ctag">Scenario Ranges</span><span class="ctag">Expected Value</span><span class="ctag">Margin of Safety</span></div>
-<div class="callout callout-purple"><div class="callout-label">Content Pending</div><p>This lesson detail area is intentionally staged for the scenario framework and synthesis content you send next.</p></div>
+<div class="tag-row"><span class="ctag">Margin of Safety</span><span class="ctag">Scenario Analysis</span><span class="ctag">Expected Value</span><span class="ctag">Triangulation</span><span class="ctag">Graham</span></div>
+
+<h3>From Theory to Practice: The Professional Valuation Process</h3>
+<p>Lessons 15–17 gave you three valuation tools: DCF (intrinsic), Comparables (relative), and SOTP (structural). A professional doesn't pick one — they <strong class="hl">triangulate</strong>. Each method has strengths and blind spots, and when all three point to a similar value range, your confidence increases. When they diverge, the divergence itself is information: it tells you which assumptions are driving the disagreement and forces you to take a position on which are most likely correct.</p>
+
+<h3>The Three-Scenario Framework</h3>
+<p>Professional valuation begins with three explicit scenarios — bull, base, and bear — each with distinct and internally consistent assumptions. The expected value is the probability-weighted average. This is not hedging or equivocation. It is honest confrontation with uncertainty.</p>
+
+<div class="exhibit">
+<div class="exhibit-label">Three-Scenario Worked Example</div>
+<table class="fw-table">
+<thead><tr><th>Assumption</th><th style="color:var(--green)">Bull (25% prob)</th><th style="color:var(--gold)">Base (50% prob)</th><th style="color:var(--red)">Bear (30% prob)</th></tr></thead>
+<tbody>
+<tr><td>Revenue CAGR (5yr)</td><td>18%</td><td>12%</td><td>5%</td></tr>
+<tr><td>Operating Margin (Yr 5)</td><td>28%</td><td>22%</td><td>15%</td></tr>
+<tr><td>Terminal Multiple</td><td>22× EBITDA</td><td>16× EBITDA</td><td>11× EBITDA</td></tr>
+<tr><td>WACC Applied</td><td>9%</td><td>10%</td><td>11%</td></tr>
+<tr><td style="font-weight:700;color:var(--gold)">Implied Share Price</td><td style="color:var(--green);font-weight:700">$185</td><td style="color:var(--gold);font-weight:700">$120</td><td style="color:var(--red);font-weight:700">$65</td></tr>
+</tbody>
+</table>
 </div>
 
+<div class="formula-box">
+<div class="formula-main">EV = (0.25 × $185) + (0.50 × $120) + (0.30 × $65) = $125.75</div>
+<div class="formula-sub">If stock trades at $95 → 32.4% expected upside. Base case alone offers 26.3%. Even bear case ($65) = only 31.6% downside. Risk-reward is asymmetric.</div>
+</div>
+
+<h3>Margin of Safety — Sizing Protection to Uncertainty</h3>
+<p>Benjamin Graham's margin of safety principle, which you first encountered in Tier 1, is not a fixed number. It scales with uncertainty. A high-quality compounder with predictable cash flows requires less margin because your DCF assumptions are more reliable. A cyclical turnaround with uncertain recovery requires much more margin because every assumption carries wider error bars.</p>
+
+<div class="exhibit">
+<div class="exhibit-label">Required Margin of Safety by Business Type</div>
+<table class="fw-table">
+<thead><tr><th>Business Type</th><th>Required Margin</th><th>Reasoning</th><th>Example</th></tr></thead>
+<tbody>
+<tr><td><strong class="hl" style="color:var(--green)">Elite Compounder</strong></td><td>15–20%</td><td>Predictable cash flows, wide moat, ROIC >25%</td><td>Visa, Microsoft, Costco</td></tr>
+<tr><td><strong class="hl" style="color:var(--gold)">Stable Value</strong></td><td>25–30%</td><td>Good business, moderate cyclicality, steady dividends</td><td>J&J, P&G, PepsiCo</td></tr>
+<tr><td><strong class="hl" style="color:var(--orange)">Cyclical</strong></td><td>30–40%</td><td>Earnings volatile, normalize carefully, timing risk</td><td>Caterpillar, Freeport-McMoRan</td></tr>
+<tr><td><strong class="hl" style="color:var(--red)">Turnaround / Distressed</strong></td><td>40–50%+</td><td>Maximum uncertainty, binary outcomes possible</td><td>Carvana (2022), early Tesla</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>When NOT to Buy Despite Apparent Cheapness</h3>
+<p>Margin of safety protects against analysis error — it doesn't overcome structural deterioration. A company trading at 50% discount to your SOTP value is not cheap if the business is in secular decline (Lesson 19's value trap). Reasons NOT to buy despite apparent cheapness: moat is narrowing (ROIC declining from 20% to 10% over 5 years), the industry faces secular headwinds (print media, coal), management is destroying value through poor capital allocation, or accounting quality is deteriorating (Lesson 14 red flags present).</p>
+
+<h3>Professional Valuation Synthesis Flow</h3>
+
+<div class="exhibit">
+<div class="exhibit-label">The Valuation Process — From Screen to Decision</div>
+<div class="svg-wrap">
+<svg viewBox="0 0 800 90" xmlns="http://www.w3.org/2000/svg" style="max-width:780px;">
+<rect x="5" y="20" width="80" height="50" rx="6" fill="rgba(201,168,76,.1)" stroke="var(--gold)" stroke-width="1.2"/>
+<text x="45" y="42" text-anchor="middle" font-family="Arial" font-size="9" font-weight="700" fill="var(--gold)">SCREEN</text>
+<text x="45" y="56" text-anchor="middle" font-family="Arial" font-size="7" fill="#7A8099">Quality filter</text>
+<text x="95" y="47" font-family="Arial" font-size="12" fill="var(--gold)">→</text>
+<rect x="108" y="20" width="80" height="50" rx="6" fill="rgba(59,130,246,.06)" stroke="var(--border)" stroke-width="1"/>
+<text x="148" y="42" text-anchor="middle" font-family="Arial" font-size="9" font-weight="700" fill="#fff">ANALYZE</text>
+<text x="148" y="56" text-anchor="middle" font-family="Arial" font-size="7" fill="#7A8099">L11–14</text>
+<text x="198" y="47" font-family="Arial" font-size="12" fill="var(--gold)">→</text>
+<rect x="211" y="20" width="65" height="50" rx="6" fill="rgba(59,130,246,.06)" stroke="var(--border)" stroke-width="1"/>
+<text x="243" y="42" text-anchor="middle" font-family="Arial" font-size="9" font-weight="700" fill="#fff">DCF</text>
+<text x="243" y="56" text-anchor="middle" font-family="Arial" font-size="7" fill="#7A8099">L15</text>
+<text x="286" y="47" font-family="Arial" font-size="12" fill="var(--gold)">→</text>
+<rect x="299" y="20" width="65" height="50" rx="6" fill="rgba(59,130,246,.06)" stroke="var(--border)" stroke-width="1"/>
+<text x="331" y="42" text-anchor="middle" font-family="Arial" font-size="9" font-weight="700" fill="#fff">COMPS</text>
+<text x="331" y="56" text-anchor="middle" font-family="Arial" font-size="7" fill="#7A8099">L16</text>
+<text x="374" y="47" font-family="Arial" font-size="12" fill="var(--gold)">→</text>
+<rect x="387" y="20" width="65" height="50" rx="6" fill="rgba(59,130,246,.06)" stroke="var(--border)" stroke-width="1"/>
+<text x="419" y="42" text-anchor="middle" font-family="Arial" font-size="9" font-weight="700" fill="#fff">SOTP</text>
+<text x="419" y="56" text-anchor="middle" font-family="Arial" font-size="7" fill="#7A8099">L17</text>
+<text x="462" y="47" font-family="Arial" font-size="12" fill="var(--gold)">→</text>
+<rect x="475" y="20" width="85" height="50" rx="6" fill="rgba(59,130,246,.06)" stroke="var(--border)" stroke-width="1"/>
+<text x="517" y="42" text-anchor="middle" font-family="Arial" font-size="9" font-weight="700" fill="#fff">SCENARIOS</text>
+<text x="517" y="56" text-anchor="middle" font-family="Arial" font-size="7" fill="#7A8099">Bull/Base/Bear</text>
+<text x="570" y="47" font-family="Arial" font-size="12" fill="var(--gold)">→</text>
+<rect x="583" y="20" width="85" height="50" rx="6" fill="rgba(59,130,246,.06)" stroke="var(--border)" stroke-width="1"/>
+<text x="625" y="42" text-anchor="middle" font-family="Arial" font-size="9" font-weight="700" fill="#fff">MARGIN</text>
+<text x="625" y="56" text-anchor="middle" font-family="Arial" font-size="7" fill="#7A8099">Safety sizing</text>
+<text x="678" y="47" font-family="Arial" font-size="12" fill="var(--gold)">→</text>
+<rect x="691" y="15" width="95" height="60" rx="6" fill="rgba(201,168,76,.1)" stroke="var(--gold)" stroke-width="1.5"/>
+<text x="738" y="40" text-anchor="middle" font-family="Arial" font-size="10" font-weight="900" fill="var(--gold)">DECISION</text>
+<text x="738" y="56" text-anchor="middle" font-family="Arial" font-size="7" fill="#7A8099">Buy / Pass / Watch</text>
+</svg>
+</div>
+</div>
+
+<div class="callout"><div class="callout-label">Graham's Margin of Safety — Operationalized</div><p>"The margin of safety is always dependent on the price paid." What Graham articulated as philosophy, this lesson quantifies as process. The margin protects against three things: errors in your analysis, unpredictable changes in the business, and the fundamentally unknowable future. Size it proportionally to your uncertainty — and never confuse cheapness with safety.</p></div>
+
+<div class="callout callout-blue"><div class="callout-label">Beat Lynch Connection</div><p>Mean Magic = quality assessment. This lesson = price assessment. The intersection is where NIL alpha lives. In NIL competition, explicit expected value calculations with probability-weighted scenarios beat "buy because the score is high" every time. The best NIL portfolios combine high Mean Magic scores with quantified margin of safety.</p></div>
+</div>
+
+<!-- ===== LESSON 19 ===== -->
 <div class="lesson-card" onclick="toggleLesson(8)">
 <div class="lesson-num">19</div>
-<div><div class="lesson-title">Valuation Mistakes and Traps</div><div class="lesson-desc">Value traps, growth traps, peak earnings, anchoring, and the five costliest errors.</div></div>
+<div><div class="lesson-title">Valuation Mistakes and Traps</div>
+<div class="lesson-desc">Value traps, growth traps, peak earnings, anchoring, and the five costliest errors.</div></div>
 <div class="lesson-mp">25 MP</div>
 </div>
 <div class="lesson-detail" id="ld-8">
-<div class="tag-row"><span class="ctag">Value Traps</span><span class="ctag">Peak Earnings</span><span class="ctag">Anchoring</span></div>
-<div class="callout callout-purple"><div class="callout-label">Content Pending</div><p>Lesson 19 is scaffolded and interactive. The actual trap framework and examples will be restored separately.</p></div>
+<div class="tag-row"><span class="ctag">Value Trap</span><span class="ctag">Growth Trap</span><span class="ctag">Peak Earnings</span><span class="ctag">Anchoring</span><span class="ctag">TAM Fantasy</span></div>
+
+<h3>Why Valuation Judgment Errors Are So Expensive</h3>
+<p>The most expensive investing lessons don't come from unpredictable events — they come from predictable errors in valuation framework selection and assumption quality. A value trap looks like a bargain. A growth trap looks like a quality investment. A peak-earnings purchase looks "reasonable." In each case, the investor is right about the numbers and wrong about the interpretation. This lesson catalogs the five most costly valuation mistakes and provides diagnostic frameworks to detect them before they destroy capital.</p>
+
+<h3>The Value Trap vs. Genuine Value</h3>
+<p>A value trap is a stock that is cheap — and stays cheap — because the business is in structural decline. The low multiple isn't a market error; it's the market correctly pricing deteriorating fundamentals.</p>
+
+<div class="two-col">
+<div class="exhibit" style="margin:0;">
+<div class="exhibit-label" style="color:var(--green);">Genuine Value — Temporarily Cheap</div>
+<p style="font-size:13px;font-family:Arial,sans-serif;"><strong class="hl">ROIC stable or improving</strong> — business economics intact. <strong class="hl">Industry growing or stable</strong> — secular tailwinds present. <strong class="hl">Specific, fixable problem</strong> — new product, temporary cost, one-time event. <strong class="hl">Management investing in growth</strong> — R&D, capacity, innovation. <strong class="hl">Cash flow confirms earnings</strong> — quality checks pass. <strong class="hl">Insider buying</strong> — people who know are buying.</p>
+</div>
+<div class="exhibit" style="margin:0;">
+<div class="exhibit-label" style="color:var(--red);">Value Trap — Cheap for a Reason</div>
+<p style="font-size:13px;font-family:Arial,sans-serif;"><strong class="hl">ROIC declining 3+ years</strong> — competitive position eroding. <strong class="hl">Industry shrinking</strong> — secular headwinds (print, retail, coal). <strong class="hl">Multiple issues, none resolving</strong> — "too many things to fix." <strong class="hl">Management buying back stock + cutting costs</strong> — no organic growth. <strong class="hl">Earnings growing, cash flow flat</strong> — quality declining. <strong class="hl">Insider selling</strong> — people who know are exiting.</p>
+</div>
 </div>
 
+<h3>The Five Most Costly Valuation Mistakes</h3>
+
+<div class="exhibit">
+<div class="exhibit-label">Five Costliest Valuation Errors — With Real Examples</div>
+<table class="fw-table">
+<thead><tr><th>Mistake</th><th>The Error</th><th>Real Example</th><th>The Lesson</th></tr></thead>
+<tbody>
+<tr><td><strong class="hl" style="color:var(--red)">Value Trap</strong></td><td>Buying declining business at "cheap" multiple</td><td>IBM at 10× (2014–2020) — revenue declined 7 straight years</td><td>Low P/E + declining ROIC = trap</td></tr>
+<tr><td><strong class="hl" style="color:var(--red)">Growth Trap</strong></td><td>Buying wonderful business at price requiring decades of perfection</td><td>Peloton at $170 (Dec 2020) — priced for $10B+ revenue</td><td>Quality without price discipline = overpayment</td></tr>
+<tr><td><strong class="hl" style="color:var(--red)">Peak Earnings</strong></td><td>Applying "reasonable" P/E to cyclically peak earnings</td><td>Oil stocks at 8× earnings (2022 peak)</td><td>Double compression when cycle turns</td></tr>
+<tr><td><strong class="hl" style="color:var(--red)">Price Anchoring</strong></td><td>"Was $200, now $100" — using prior price as value</td><td>Zoom from $559 to $70 (2020–2023)</td><td>Price history ≠ value</td></tr>
+<tr><td><strong class="hl" style="color:var(--red)">TAM Fantasy</strong></td><td>Confusing massive market with actual economics</td><td>WeWork: "$3T market" with no path to profit</td><td>Optionality without economics = speculation</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>Worked Example: The Peak Earnings Trap</h3>
+<p>Consider "CycliCorp," a commodity producer. At the cycle peak: Revenue $8B, EBITDA $2.5B, EPS $6.00, stock price $72, P/E = 12× ("reasonable"). But <strong class="hl">normalized through-cycle earnings</strong> (Pillar I Lesson 4 — business cycle): Revenue $5B, EBITDA $1.2B, EPS $2.40. On normalized earnings, the stock trades at 30× — extraordinarily expensive for a cyclical. When the cycle turns, earnings fall to $2.40 AND the multiple compresses from 12× to 8×. Result: stock goes from $72 to $19.20 — a 73% decline from a "12× P/E" entry point. This is <strong class="hl">double compression</strong>: earnings decline × multiple decline = devastating losses.</p>
+
+<div class="callout callout-red"><div class="callout-label">The Multiple Means Nothing Without Quality</div><p>"'It's at 12× earnings so it's cheap.' Twelve times WHAT?" Peak-cycle earnings? Inflated by accounting choices? From a narrowing moat with declining ROIC? Boosted by one-time gains? The multiple means nothing without rigorous earnings quality analysis. P/E is a ratio, not a verdict — and the denominator matters more than the numerator. Every lesson in Pillar II builds toward this point.</p></div>
+
+<div class="callout callout-blue"><div class="callout-label">Beat Lynch Connection</div><p>Mean Magic 7+ requires high earnings quality, not just high earnings. Moat Strength Score detects narrowing competitive advantages. Growth Quality distinguishes sustainable growth from cyclical peaks. The scoring engine prevents single-dimension errors by requiring quality across multiple independent dimensions — exactly the defense against the traps cataloged in this lesson.</p></div>
+</div>
+
+<!-- ===== LESSON 20 ===== -->
 <div class="lesson-card" onclick="toggleLesson(9)">
 <div class="lesson-num">20</div>
-<div><div class="lesson-title">The Accountant's Eye — Building a Professional Analytical Process</div><div class="lesson-desc">Repeatable workflow, investment summaries, converging evidence, and the bridge to Pillar III.</div></div>
+<div><div class="lesson-title">The Accountant's Eye — Building a Professional Analytical Process</div>
+<div class="lesson-desc">Repeatable workflow, investment summaries, converging evidence, and the bridge to Pillar III.</div></div>
 <div class="lesson-mp">25 MP</div>
 </div>
 <div class="lesson-detail" id="ld-9">
-<div class="tag-row"><span class="ctag">Workflow</span><span class="ctag">Investment Summary</span><span class="ctag">Bridge to Pillar III</span></div>
-<div class="callout callout-purple"><div class="callout-label">Content Pending</div><p>The process framework shell is ready here; the full lesson content will be added after you send the source notes.</p></div>
+<div class="tag-row"><span class="ctag">Professional Process</span><span class="ctag">Investment Summary</span><span class="ctag">Evidence Convergence</span><span class="ctag">Pre-Mortem</span><span class="ctag">Workflow</span></div>
+
+<h3>Process Turns Knowledge Into Results</h3>
+<p>Pillar II has given you ten lessons of analytical and valuation depth. But knowledge without process is just reading — and process without knowledge is just bureaucracy. The professional has both. This lesson integrates Lessons 11–19 into a repeatable workflow that you follow every time you evaluate a potential investment. It's the same workflow Beat Lynch's Stock Analyzer follows, the same structure professional equity research uses, and the framework you'll deploy in NIL competition.</p>
+
+<h3>The Professional Analysis Workflow</h3>
+
+<div class="exhibit">
+<div class="exhibit-label">Ten-Step Professional Analysis Workflow</div>
+<div class="svg-wrap">
+<svg viewBox="0 0 700 220" xmlns="http://www.w3.org/2000/svg" style="max-width:680px;">
+<rect x="10" y="10" width="150" height="45" rx="6" fill="rgba(201,168,76,.1)" stroke="var(--gold)" stroke-width="1.2"/>
+<text x="85" y="28" text-anchor="middle" font-family="Arial" font-size="9" font-weight="700" fill="var(--gold)">1. STATEMENT QUALITY</text>
+<text x="85" y="42" text-anchor="middle" font-family="Arial" font-size="7" fill="#7A8099">Revenue quality, margins (L11)</text>
+<text x="170" y="32" font-family="Arial" font-size="10" fill="var(--gold)">→</text>
+<rect x="183" y="10" width="150" height="45" rx="6" fill="rgba(59,130,246,.06)" stroke="var(--border)" stroke-width="1"/>
+<text x="258" y="28" text-anchor="middle" font-family="Arial" font-size="9" font-weight="700" fill="#fff">2. BALANCE SHEET</text>
+<text x="258" y="42" text-anchor="middle" font-family="Arial" font-size="7" fill="#7A8099">Debt, ROIC, working capital (L12)</text>
+<text x="343" y="32" font-family="Arial" font-size="10" fill="var(--gold)">→</text>
+<rect x="356" y="10" width="150" height="45" rx="6" fill="rgba(59,130,246,.06)" stroke="var(--border)" stroke-width="1"/>
+<text x="431" y="28" text-anchor="middle" font-family="Arial" font-size="9" font-weight="700" fill="#fff">3. CASH VERIFICATION</text>
+<text x="431" y="42" text-anchor="middle" font-family="Arial" font-size="7" fill="#7A8099">FCF, conversion (L13)</text>
+<text x="516" y="32" font-family="Arial" font-size="10" fill="var(--gold)">→</text>
+<rect x="529" y="10" width="150" height="45" rx="6" fill="rgba(59,130,246,.06)" stroke="var(--border)" stroke-width="1"/>
+<text x="604" y="28" text-anchor="middle" font-family="Arial" font-size="9" font-weight="700" fill="#fff">4. FORENSIC CHECK</text>
+<text x="604" y="42" text-anchor="middle" font-family="Arial" font-size="7" fill="#7A8099">M-Score, red flags (L14)</text>
+
+<text x="604" y="65" font-family="Arial" font-size="10" fill="var(--gold)">↓</text>
+<rect x="529" y="75" width="150" height="45" rx="6" fill="rgba(59,130,246,.06)" stroke="var(--border)" stroke-width="1"/>
+<text x="604" y="93" text-anchor="middle" font-family="Arial" font-size="9" font-weight="700" fill="#fff">5. DCF VALUATION</text>
+<text x="604" y="107" text-anchor="middle" font-family="Arial" font-size="7" fill="#7A8099">Intrinsic value range (L15)</text>
+<text x="519" y="97" font-family="Arial" font-size="10" fill="var(--gold)">←</text>
+<rect x="356" y="75" width="150" height="45" rx="6" fill="rgba(59,130,246,.06)" stroke="var(--border)" stroke-width="1"/>
+<text x="431" y="93" text-anchor="middle" font-family="Arial" font-size="9" font-weight="700" fill="#fff">6. COMPS CHECK</text>
+<text x="431" y="107" text-anchor="middle" font-family="Arial" font-size="7" fill="#7A8099">Relative context (L16)</text>
+<text x="346" y="97" font-family="Arial" font-size="10" fill="var(--gold)">←</text>
+<rect x="183" y="75" width="150" height="45" rx="6" fill="rgba(59,130,246,.06)" stroke="var(--border)" stroke-width="1"/>
+<text x="258" y="93" text-anchor="middle" font-family="Arial" font-size="9" font-weight="700" fill="#fff">7. SOTP (IF APPLICABLE)</text>
+<text x="258" y="107" text-anchor="middle" font-family="Arial" font-size="7" fill="#7A8099">Hidden value, catalyst (L17)</text>
+<text x="173" y="97" font-family="Arial" font-size="10" fill="var(--gold)">←</text>
+<rect x="10" y="75" width="150" height="45" rx="6" fill="rgba(59,130,246,.06)" stroke="var(--border)" stroke-width="1"/>
+<text x="85" y="93" text-anchor="middle" font-family="Arial" font-size="9" font-weight="700" fill="#fff">8. SCENARIO ANALYSIS</text>
+<text x="85" y="107" text-anchor="middle" font-family="Arial" font-size="7" fill="#7A8099">Bull/Base/Bear + EV (L18)</text>
+
+<text x="85" y="130" font-family="Arial" font-size="10" fill="var(--gold)">↓</text>
+<rect x="10" y="140" width="150" height="45" rx="6" fill="rgba(59,130,246,.06)" stroke="var(--border)" stroke-width="1"/>
+<text x="85" y="158" text-anchor="middle" font-family="Arial" font-size="9" font-weight="700" fill="#fff">9. TRAP CHECK</text>
+<text x="85" y="172" text-anchor="middle" font-family="Arial" font-size="7" fill="#7A8099">Value/growth/peak trap? (L19)</text>
+<text x="170" y="162" font-family="Arial" font-size="10" fill="var(--gold)">→</text>
+<rect x="183" y="135" width="190" height="55" rx="6" fill="rgba(201,168,76,.1)" stroke="var(--gold)" stroke-width="1.5"/>
+<text x="278" y="157" text-anchor="middle" font-family="Arial" font-size="11" font-weight="900" fill="var(--gold)">10. DECISION</text>
+<text x="278" y="175" text-anchor="middle" font-family="Arial" font-size="8" fill="#7A8099">Buy / Watch / Pass + sizing → Pillar IV</text>
+</svg>
+</div>
 </div>
 
+<h3>The One-Page Investment Summary</h3>
+<p>Before committing capital, force your analysis into a single page. If you can't explain the investment in one page, you don't understand it well enough. This discipline — used at every major fund from Bridgewater to Pershing Square — prevents the "death by analysis" problem and forces clarity.</p>
+
+<div class="exhibit">
+<div class="exhibit-label">One-Page Investment Summary Template</div>
+<table class="fw-table">
+<thead><tr><th>Section</th><th>Content Required</th><th>Purpose</th></tr></thead>
+<tbody>
+<tr><td><strong class="hl">Core Thesis</strong></td><td>1–2 sentences: what's the variant view?</td><td>Forces clarity on why this is mispriced</td></tr>
+<tr><td><strong class="hl">Quality Assessment</strong></td><td>ROIC, moat, revenue quality, cash conversion</td><td>L11–14 synthesis; are fundamentals strong?</td></tr>
+<tr><td><strong class="hl">Valuation Range</strong></td><td>DCF range, comps context, SOTP if applicable</td><td>L15–17 triangulated; what is it worth?</td></tr>
+<tr><td><strong class="hl">Scenarios + EV</strong></td><td>Bull/Base/Bear with probabilities and expected value</td><td>L18 framework; explicit risk-reward</td></tr>
+<tr><td><strong class="hl">Margin of Safety</strong></td><td>Current price vs. expected value; discount %</td><td>Is the gap wide enough?</td></tr>
+<tr><td><strong class="hl">Catalyst</strong></td><td>What closes the gap? When?</td><td>No catalyst = no timeline = dead money risk</td></tr>
+<tr><td><strong class="hl">Bear Case / Kill Thesis</strong></td><td>3 things that would make you sell immediately</td><td>Pre-mortem discipline (expanded in Pillar V)</td></tr>
+<tr><td><strong class="hl">Position Size</strong></td><td>% of portfolio, sizing rationale</td><td>Bridges to Pillar IV risk management</td></tr>
+</tbody>
+</table>
 </div>
+
+<h3>Investment-Grade Evidence Convergence</h3>
+<p>A single data point is an observation. Two aligned data points are suggestive. Three or more independent data points pointing to the same conclusion — that's <strong class="hl">investment-grade evidence</strong>. The convergence principle: don't commit capital until you have converging evidence from at least three independent analytical dimensions.</p>
+
+<table class="fw-table">
+<thead><tr><th>Evidence Dimension</th><th>Confirming Signal</th><th>Source Lesson</th></tr></thead>
+<tbody>
+<tr><td>Income Statement Quality</td><td>Recurring revenue, expanding margins, clean GAAP</td><td>Lesson 11</td></tr>
+<tr><td>Balance Sheet Strength</td><td>Low leverage, high ROIC, healthy working capital</td><td>Lesson 12</td></tr>
+<tr><td>Cash Flow Confirmation</td><td>FCF/NI > 80%, stable conversion, growing OCF</td><td>Lesson 13</td></tr>
+<tr><td>Forensic Clean</td><td>No M-Score flags, no red flags, credible management</td><td>Lesson 14</td></tr>
+<tr><td>Intrinsic Value Margin</td><td>Price ≤ 75% of DCF base case value</td><td>Lesson 15</td></tr>
+<tr><td>Relative Context</td><td>Not at premium to peers without quality justification</td><td>Lesson 16</td></tr>
+<tr><td>Catalyst Identified</td><td>Specific, time-bound event to close value gap</td><td>Lesson 17</td></tr>
+<tr><td>Macro Regime Compatible</td><td>Current regime supports thesis (Pillar I L10)</td><td>Pillar I Cross-ref</td></tr>
+</tbody>
+</table>
+
+<h3>The Pre-Mortem: What Would Destroy This Investment?</h3>
+<p>Before buying, assume the stock is down 30% in 18 months. Write down the three most likely reasons. This exercise — which Pillar V Lesson 47 expands into a full professional discipline — forces you to confront the bear case honestly before optimism bias takes hold. If you can't articulate three plausible reasons for failure, you haven't analyzed the position thoroughly enough.</p>
+
+<h3>Connecting Forward: From Pillar II to the System</h3>
+<p>Pillar II gave you the "what is it worth?" toolkit. But knowing what a stock is worth is not enough. You need to understand how market structure creates patterns and anomalies (Pillar III), how to size positions and manage portfolio risk (Pillar IV), and how to construct professional-grade theses and build a lifetime process (Pillar V). The analytical engine you've built here is the foundation — not the complete architecture.</p>
+
+<div class="callout"><div class="callout-label">The Pillar II Conclusion</div><p>"Analysis without process is just reading. Process without analysis is just bureaucracy. The professional has both." Pillar II built the analytical depth. This lesson built the process. Together, they form the evaluative core that feeds every downstream decision: sizing (Pillar IV), thesis construction (Pillar V), and Beat Lynch scoring (Mean Magic synthesis). The student who masters this workflow doesn't just know more — they know what to do with what they know.</p></div>
+
+<div class="callout callout-blue"><div class="callout-label">Beat Lynch Connection</div><p>Stock Analyzer follows this same ten-step workflow: screen → analyze → value → decide. Mean Magic is the synthesis of multiple analytical dimensions evaluated systematically — exactly what this lesson teaches. The tool accelerates the process; it doesn't substitute for it. In NIL, the students who understand why a Mean Magic 8 is better than a Mean Magic 5 — who can trace the scoring back to Lessons 11–19 — will always outperform those who treat the score as a black box.</p></div>
+</div>
+
+</div><!-- end lesson-grid -->
 </div>
 
 <div class="section">
 <div class="section-title">Pillar II Master Framework Summary</div>
-<div class="table-wrap">
 <table class="fw-table">
-<thead>
-<tr><th>Framework</th><th>Core Principle</th><th>Beat Lynch / NIL Application</th></tr>
-</thead>
+<thead><tr><th>Framework</th><th>Core Principle</th><th>Beat Lynch / NIL Application</th></tr></thead>
 <tbody>
-<tr><td>Income Statement Analysis</td><td>Revenue quality and margin trajectory reveal competitive dynamics</td><td>Growth Quality Score, revenue quality classification</td></tr>
-<tr><td>Balance Sheet Analysis</td><td>ROIC is the most important profitability metric; debt structure = fragility</td><td>Financial Durability Score, ROIC-based screening</td></tr>
-<tr><td>Cash Flow Truth</td><td>FCF is the honest earnings number; earnings-cash divergence = red flag</td><td>Financial Durability Score, cash conversion quality</td></tr>
-<tr><td>Forensic Accounting</td><td>Red flags precede blowups; detect manipulation before it's obvious</td><td>Earnings quality filter in scoring engine</td></tr>
-<tr><td>DCF Valuation</td><td>Intrinsic value = PV of all future cash flows, discounted appropriately</td><td>Foundation for Mean Magic's quality-valuation interaction</td></tr>
-<tr><td>Comparable Analysis</td><td>Market-based reality check; dangerous in bubbles</td><td>Relative valuation context in Stock Analyzer</td></tr>
-<tr><td>Sum-of-Parts</td><td>Hidden value in complex companies; requires catalyst to unlock</td><td>Catalyst Vector for value-unlocking events</td></tr>
-<tr><td>Margin of Safety</td><td>Gap between value and price; size proportional to uncertainty</td><td>Risk Vector, position sizing in NIL</td></tr>
-<tr><td>Valuation Traps</td><td>Value traps, growth traps, peak-cycle traps — framework errors</td><td>Mean Magic multi-dimensional filter prevents single-dimension errors</td></tr>
-<tr><td>Professional Process</td><td>Repeatable workflow converging multiple evidence sources</td><td>Stock Analyzer workflow, investment summary template</td></tr>
+<tr><td><strong class="hl">Income Statement Analysis</strong></td><td>Revenue quality and margin trajectory reveal competitive dynamics</td><td>Growth Quality Score, revenue quality classification</td></tr>
+<tr><td><strong class="hl">Balance Sheet Analysis</strong></td><td>ROIC is the most important profitability metric; debt structure = fragility</td><td>Financial Durability Score, ROIC-based screening</td></tr>
+<tr><td><strong class="hl">Cash Flow Truth</strong></td><td>FCF is the honest earnings number; earnings-cash divergence = red flag</td><td>Financial Durability Score, cash conversion quality</td></tr>
+<tr><td><strong class="hl">Forensic Accounting</strong></td><td>Red flags precede blowups; detect manipulation before it's obvious</td><td>Earnings quality filter in scoring engine</td></tr>
+<tr><td><strong class="hl">DCF Valuation</strong></td><td>Intrinsic value = PV of all future cash flows, discounted appropriately</td><td>Foundation for Mean Magic's quality-valuation interaction</td></tr>
+<tr><td><strong class="hl">Comparable Analysis</strong></td><td>Market-based reality check; dangerous in bubbles</td><td>Relative valuation context in Stock Analyzer</td></tr>
+<tr><td><strong class="hl">Sum-of-Parts</strong></td><td>Hidden value in complex companies; requires catalyst to unlock</td><td>Catalyst Vector for value-unlocking events</td></tr>
+<tr><td><strong class="hl">Margin of Safety</strong></td><td>Gap between value and price; size proportional to uncertainty</td><td>Risk Vector, position sizing in NIL</td></tr>
+<tr><td><strong class="hl">Valuation Traps</strong></td><td>Value traps, growth traps, peak-cycle traps — framework errors</td><td>Mean Magic multi-dimensional filter prevents single-dimension errors</td></tr>
+<tr><td><strong class="hl">Professional Process</strong></td><td>Repeatable workflow converging multiple evidence sources</td><td>Stock Analyzer workflow, investment summary template</td></tr>
 </tbody>
 </table>
 </div>
-</div>
 
 </div>
 </div>
 
+<!-- ===== EXAM TAB ===== -->
 <div class="tab-content" id="tab-exam">
 <div class="container">
-<div class="exam-wrap">
-<div class="start-exam-wrap">
-<h2>Final Exam Restoration In Progress</h2>
-<p>The Pillar II curriculum shell is now restored, but the full 30-question exam body has not been rebuilt yet. Once the remaining lesson source content is recovered, the final exam will be added back into this page.</p>
+<div class="exam-wrap" id="exam-area">
+
+<div class="start-exam-wrap" id="exam-start">
+<h2>Pillar II Final Exam</h2>
+<p>30 questions covering all 10 lessons — 3 questions per lesson. Requires genuine understanding of the material. 75% required to pass.</p>
+<div class="anti-game-notice">⚠ Answer positions and lengths are randomized each attempt. The longest answer is frequently wrong. Read each question carefully.</div>
 <div class="exam-rules">
 <div class="rule-card"><div class="r-num">30</div><div class="r-label">Questions</div></div>
-<div class="rule-card"><div class="r-num">75%</div><div class="r-label">Pass Threshold</div></div>
-<div class="rule-card"><div class="r-num">250</div><div class="r-label">Mastery Points</div></div>
-<div class="rule-card"><div class="r-num">Soon</div><div class="r-label">Exam Body</div></div>
+<div class="rule-card"><div class="r-num">23</div><div class="r-label">To Pass</div></div>
+<div class="rule-card"><div class="r-num">250</div><div class="r-label">MP Reward</div></div>
+<div class="rule-card"><div class="r-num">∞</div><div class="r-label">Retakes</div></div>
 </div>
-<div class="callout callout-purple">
-<div class="callout-label">Next Pass</div>
-<p>Send the lesson and exam source material when ready and this tab can be upgraded from placeholder state to the full interactive assessment.</p>
+<button class="exam-btn" onclick="startExam()">BEGIN EXAM</button>
+</div>
+
+<div id="exam-live" style="display:none;">
+<div class="score-bar-wrap">
+<div><div class="score-big" id="score-display">0</div><div class="score-sub">Correct</div></div>
+<div style="flex:1;">
+<div style="display:flex;justify-content:space-between;font-family:Arial,sans-serif;font-size:11px;color:var(--muted);margin-bottom:6px;">
+<span>Progress</span><span id="progress-label">0 / 30</span>
+</div>
+<div class="progress-track"><div class="progress-fill" id="progress-bar" style="width:0%"></div></div>
 </div>
 </div>
+<div id="questions-container"></div>
+<div class="exam-result" id="exam-result">
+<div class="result-score" id="result-pct"></div>
+<div id="result-status" style="font-family:Arial,sans-serif;font-size:18px;font-weight:700;margin-bottom:8px;"></div>
+<div class="result-msg" id="result-msg"></div>
+<button class="exam-btn" onclick="retakeExam()">RETAKE EXAM</button>
 </div>
 </div>
-</div>
+
+</div></div></div>
 
 <script>
-function showTab(t){
-document.querySelectorAll('.tab-content').forEach(function(el){el.classList.remove('active');});
-document.querySelectorAll('.tab-btn').forEach(function(el){el.classList.remove('active');});
-document.getElementById('tab-'+t).classList.add('active');
-document.querySelectorAll('.tab-btn').forEach(function(b){
-if((t==='curriculum'&&b.textContent.trim()==='CURRICULUM')||(t==='exam'&&b.textContent.trim()==='FINAL EXAM')){
-b.classList.add('active');
-}
-});
-}
+function showTab(t){document.querySelectorAll('.tab-content').forEach(el=>el.classList.remove('active'));document.querySelectorAll('.tab-btn').forEach(el=>el.classList.remove('active'));document.getElementById('tab-'+t).classList.add('active');document.querySelectorAll('.tab-btn').forEach(b=>{if((t==='curriculum'&&b.textContent.trim()==='CURRICULUM')||(t==='exam'&&b.textContent.trim()==='FINAL EXAM'))b.classList.add('active');});}
+function toggleLesson(i){var d=document.getElementById('ld-'+i);var c=d.previousElementSibling;var open=d.classList.contains('open');document.querySelectorAll('.lesson-detail').forEach(el=>el.classList.remove('open'));document.querySelectorAll('.lesson-card').forEach(el=>el.classList.remove('active-card'));if(!open){d.classList.add('open');c.classList.add('active-card');}}
 
-function toggleLesson(i){
-var d=document.getElementById('ld-'+i);
-var c=d.previousElementSibling;
-var open=d.classList.contains('open');
-document.querySelectorAll('.lesson-detail').forEach(function(el){el.classList.remove('open');});
-document.querySelectorAll('.lesson-card').forEach(function(el){el.classList.remove('active-card');});
-if(!open){
-d.classList.add('open');
-c.classList.add('active-card');
-}
-}
+var Q_BANK=[
+// ===== L11: INCOME STATEMENT (Q1-3) =====
+{q:"A software company reports 30% revenue growth, but 60% of new revenue comes from multi-year contracts where services haven't been fully delivered. Which revenue recognition concern is most relevant?",
+opts:[
+"The company may be pulling forward revenue from future periods by recognizing contracted but undelivered services, inflating current-period growth",
+"Multi-year contracts always indicate higher revenue quality because they guarantee future cash flows",
+"Revenue from long-term contracts should be excluded from growth calculations entirely",
+"This is standard SaaS accounting and raises no concerns"
+],ans:0,exp:"Revenue recognition requires that revenue be recorded when performance obligations are satisfied — not when contracts are signed. Recognizing revenue before delivering services is aggressive recognition that inflates current growth at the expense of future periods. This was a key issue in several restatement cases including Luckin Coffee's fabricated transactions."},
+
+{q:"Company A has 78% gross margins (stable 5 years) and Company B has 78% gross margins (declined from 85% three years ago). Which analysis is correct?",
+opts:[
+"Both companies have identical competitive positioning since their current margins match",
+"Company A's stable margins suggest intact pricing power, while Company B's declining trajectory signals competitive pressure eroding its moat — direction matters more than level",
+"Company B is the better investment because margins are likely to mean-revert back to 85%",
+"Gross margins above 70% always indicate a wide moat regardless of trend"
+],ans:1,exp:"Lesson 11 establishes that gross margin direction is the key competitive signal. Company B's compression from 85% to 78% over three years indicates competitive pressure — new entrants, commoditization, or loss of pricing power. Company A's stability suggests its moat is intact. Assuming mean reversion without analyzing the cause of decline is the 'value trap' error from Lesson 19."},
+
+{q:"A tech company excludes $3 billion in annual stock-based compensation from its 'adjusted earnings,' claiming it's non-cash. Why is this adjustment problematic?",
+opts:[
+"SBC, while non-cash, represents real economic cost through dilution — excluding it systematically overstates the earnings available to existing shareholders and makes profitability appear higher than economic reality",
+"It isn't problematic — SBC is non-cash by definition and should always be excluded from earnings analysis",
+"The issue is that $3 billion is too large; SBC below $500 million can be safely excluded",
+"SBC is only problematic for companies with declining revenue"
+],ans:0,exp:"Stock-based compensation creates real dilution for existing shareholders — new shares are issued, reducing each share's claim on future earnings. Excluding $3B annually (as major tech companies do) inflates 'adjusted' earnings. Lesson 11's GAAP vs. Non-GAAP framework identifies SBC as the most common illegitimate adjustment, particularly when it recurs annually at material levels."},
+
+// ===== L12: BALANCE SHEET (Q4-6) =====
+{q:"A company has $8 billion in debt: $6 billion at floating rates, with $3 billion maturing in the next 12 months. The Fed has raised rates 400 basis points over two years. Which risk is most critical?",
+opts:[
+"The company faces compounding refinancing and rate risk — $3 billion must be refinanced at much higher rates while 75% of existing debt already reprices with rates, creating a potential debt service crisis",
+"$8 billion in total debt is manageable for any company generating positive EBITDA",
+"Floating rate debt is preferable because it keeps the company aligned with market conditions",
+"The near-term maturity is fine because companies can always refinance"
+],ans:0,exp:"Lesson 12's debt structure analysis emphasizes maturity schedule, fixed vs. floating mix, and refinancing risk. With 75% floating rate exposure, interest costs have already increased significantly. The $3B wall forces refinancing at 400bps higher rates — this connects directly to Pillar I Lesson 3's rate transmission. The 2022–2023 rate cycle created exactly these conditions for over-levered companies."},
+
+{q:"Which interpretation of ROIC is most accurate for comparing a software company (32% ROIC) with a utility (7% ROIC)?",
+opts:[
+"The software company is clearly a better investment since its ROIC is nearly 5× higher",
+"The comparison is invalid because software companies are always more profitable than utilities",
+"Both ROICs should be evaluated against their respective industry cost of capital — a 32% ROIC in software and 7% in utilities may both indicate competitive advantage if they exceed their industry's WACC by similar margins",
+"ROIC differences are only meaningful within the same industry and cannot be compared cross-sector"
+],ans:2,exp:"Lesson 12's ROIC analysis shows structural differences across industries (software 30%+, utilities 6–8%). The key question is whether ROIC exceeds the company's cost of capital — the spread matters more than the absolute level. A utility earning 7% on a 5% WACC has genuine economic value creation, just as a software company earning 32% on a 12% WACC does."},
+
+{q:"A company's goodwill has grown from 15% to 48% of total assets over four years through acquisitions, while organic revenue growth has slowed from 12% to 3%. What does this pattern suggest?",
+opts:[
+"The company may be masking organic growth deterioration with acquisitions, paying premiums that inflate goodwill while the core business weakens — a pattern consistent with Valeant-style roll-up risk",
+"Goodwill growth through acquisitions is a standard growth strategy and indicates strong management",
+"Goodwill above 40% is only concerning if the company has negative earnings",
+"This indicates the company is undervalued since its assets have grown substantially"
+],ans:0,exp:"Lesson 12 warns that goodwill exceeding 40% of total assets after acquisition sprees signals overpayment risk. Combined with decelerating organic growth (12% → 3%), the pattern suggests management is 'buying growth' rather than generating it — exactly the Valeant/WeWork playbook. Impairment charges become a ticking clock when acquisitions don't deliver expected returns."},
+
+// ===== L13: CASH FLOW (Q7-9) =====
+{q:"A company reports EPS growth of 15% for three consecutive years, but operating cash flow has been flat over the same period. What is the most likely explanation?",
+opts:[
+"The company is likely inflating earnings through accounting choices — aggressive revenue recognition, capitalized expenses, or working capital manipulation — that boost reported income without generating cash",
+"This is normal for growth companies that reinvest heavily in operations",
+"Cash flow always lags earnings by 2–3 years in growing businesses",
+"EPS growth is more important than cash flow because earnings drive stock prices"
+],ans:0,exp:"Lesson 13's central principle: when earnings and cash flow diverge persistently, trust cash flow. Three years of 15% EPS growth with flat OCF means the 'growth' is coming from accounting, not operations. This was the exact pattern at WorldCom (capitalizing expenses) and GE (financial engineering). Cash conversion below 60% for this period would be a clear red flag."},
+
+{q:"Visa's cash conversion ratio (FCF/Net Income) consistently exceeds 110%. What does this indicate about the business model?",
+opts:[
+"Visa may be underreporting its true earnings potential",
+"Visa's capital-light network model requires minimal reinvestment — depreciation exceeds maintenance capex, and the payment network scales with negligible marginal cost, generating more cash than reported earnings",
+"Cash conversion above 100% is mathematically impossible and suggests accounting irregularities",
+"This simply means Visa has high profit margins"
+],ans:1,exp:"Lesson 13's Cash Conversion Quality table shows >100% conversion as the 'Excellent' grade. This occurs in capital-light models where depreciation (non-cash charge added back to OCF) exceeds maintenance capex. Visa's payment network is a digital toll road with near-zero marginal cost — the textbook example of a business that converts earnings to cash at over 100%."},
+
+{q:"Buffett's 'Owner Earnings' formula subtracts maintenance capex rather than total capex. Why is this distinction critical for valuation?",
+opts:[
+"Owner earnings uses maintenance capex because growth capex is discretionary investment that expands the business, not a cost of maintaining current operations — subtracting total capex understates the business's true earning power for owners",
+"Maintenance capex is always lower, so this makes the company look more profitable than it really is",
+"There is no practical difference between maintenance and growth capex",
+"Buffett's formula is outdated and not used in modern analysis"
+],ans:0,exp:"Lesson 13 formalizes Owner Earnings = Net Income + D&A − Maintenance Capex. Growth capex is optional — it's investment the company chooses to make, not cost required to maintain current operations. The worked example shows Owner Earnings of $550M vs. FCF of $400M — the $150M difference is growth capex that a new owner could theoretically eliminate while maintaining the business."},
+
+// ===== L14: FORENSIC ACCOUNTING (Q10-12) =====
+{q:"The Beneish M-Score uses eight financial ratios to detect manipulation. Which component measures whether a company may be capitalizing expenses to inflate earnings?",
+opts:[
+"The DSRI (Days Sales in Receivables Index)",
+"The GMI (Gross Margin Index)",
+"The AQI (Asset Quality Index), which measures changes in non-current assets relative to total assets — increasing AQI suggests capitalizing costs that should be expensed",
+"The TATA (Total Accruals to Total Assets)"
+],ans:2,exp:"The AQI component of the Beneish M-Score specifically measures the proportion of non-current assets other than PP&E — when this increases, it suggests the company may be capitalizing operating expenses as assets. This is exactly what WorldCom did with $3.8 billion in line costs. DSRI measures receivables, GMI measures margin pressure, and TATA measures total accrual levels."},
+
+{q:"A company has reported 'one-time restructuring charges' in each of the past four years, totaling $2.8 billion. Management excludes these from adjusted earnings each time. Why is this a red flag?",
+opts:[
+"Restructuring charges that recur annually are not 'one-time' — they represent ongoing operational costs that management is systematically excluding to inflate adjusted earnings, making the business appear more profitable than it actually is",
+"Four years of restructuring shows strong management discipline in cutting costs",
+"Restructuring charges should always be excluded from earnings analysis regardless of frequency",
+"This is only a concern if the charges exceed 50% of net income"
+],ans:0,exp:"Lesson 14's Red Flag #4: recurring 'one-time' charges. If a company needs to restructure every year for four consecutive years, these are operating costs, not one-time events. IBM reported restructuring charges in nearly every year from 2014–2019 while presenting non-GAAP earnings that excluded them. The $2.8B cumulative total represents real economic cost to shareholders."},
+
+{q:"An analyst notices that a company's CFO resigned unexpectedly during a 'routine leadership transition,' the external auditor was changed the following quarter, and DSO has risen 25% over two years without a business model change. What action is most appropriate?",
+opts:[
+"Wait for the next earnings report to see if trends continue before making any judgment",
+"These are three independent red flags — CFO departure, auditor change, and deteriorating receivables — that collectively create sufficient concern to avoid the position entirely, as the risk-reward no longer justifies exposure",
+"Focus on the auditor change since that is the only serious concern",
+"CFO transitions and auditor rotations are routine corporate events unrelated to accounting risk"
+],ans:1,exp:"Lesson 14 teaches that forensic accounting uses pattern recognition across multiple signals. Three simultaneous red flags — abrupt CFO exit (#9 on the checklist), auditor change (#5), and rising DSO without business model change (#2) — collectively indicate significant accounting risk. The lesson's principle: 'You don't need to prove fraud — you need to recognize that the risk-reward has changed.'"},
+
+// ===== L15: DCF (Q13-15) =====
+{q:"A growth stock's DCF valuation shows terminal value comprising 78% of total enterprise value. Which conclusion is most appropriate?",
+opts:[
+"The DCF model is broken and should be discarded since terminal value shouldn't exceed 50%",
+"This is expected — most of a growth company's value lies in cash flows beyond the explicit forecast period, which is why DCF sensitivity analysis across different terminal assumptions is essential for understanding the valuation range",
+"Terminal value should be ignored in growth stock valuation since it's too speculative",
+"The high terminal value means the stock is overvalued"
+],ans:1,exp:"Lesson 15 explicitly states that terminal value comprising 60–80% of total DCF value is 'a feature, not a bug.' It honestly reflects that most value lies in the distant, uncertain future. The correct response is not to reject the model but to stress-test terminal assumptions rigorously — which is why the 5×5 sensitivity grid exists."},
+
+{q:"Between late 2021 and October 2023, the 10-year Treasury yield rose from approximately 1.5% to 4.8%. How did this change affect DCF-based intrinsic value estimates for growth stocks?",
+opts:[
+"It had minimal impact since growth stocks are valued primarily on revenue multiples",
+"The WACC increase of 200–300 basis points reduced intrinsic value estimates by 25–40% before any change in growth assumptions — explaining much of the growth stock decline and connecting Pillar I's rate mechanics to valuation math",
+"Higher rates increased intrinsic values by reducing the discount applied to future cash flows",
+"The rate change only affected bond valuations, not equity DCF models"
+],ans:1,exp:"Lesson 15 directly connects Pillar I Lesson 3 (rate sensitivity) to DCF mechanics: rising WACC reduces the present value of all future cash flows. The sensitivity grid demonstrates how small WACC changes create large value changes — a 300bps WACC increase on a 10-year projection with 70% terminal value weight can reduce estimated intrinsic value by 25–40%."},
+
+{q:"What is the primary value of building a DCF model, according to Pillar II's framework?",
+opts:[
+"To calculate a precise fair value that determines the exact buy and sell price",
+"To compare with Wall Street consensus price targets",
+"To force explicit assumptions about growth, margins, and risk — making beliefs testable and identifying which assumptions matter most through sensitivity analysis",
+"To prove that a stock is undervalued before purchasing it"
+],ans:2,exp:"Lesson 15's gold callout: 'A DCF is not a calculator that outputs truth. It is a framework for making your assumptions explicit.' The value is in the process — identifying which assumptions drive the most value, testing how wrong you can be, and producing a range rather than a point estimate. The sensitivity grid is more important than the 'answer.'"},
+
+// ===== L16: COMPS (Q16-18) =====
+{q:"An analyst values a SaaS company at 15× EV/Revenue and concludes it's 'cheap' because the peer median is 18×. The entire SaaS sector has doubled in valuation multiples over the past two years. What error is the analyst making?",
+opts:[
+"The analyst has selected the wrong multiple — P/E should be used instead of EV/Revenue",
+"The analyst is ignoring absolute valuation entirely, using only relative cheapness within a peer set that may itself be overvalued — exactly the bubble-era error where 'cheap relative to peers' proved meaningless",
+"A 3× discount to peer median is always meaningful regardless of absolute levels",
+"The analyst should use a larger peer set to get a more representative median"
+],ans:1,exp:"Lesson 16's central warning: 'In 1999, every dot-com was cheap relative to peers. The entire sector was 50–100× revenue.' Relative valuation tells you what the market pays — not what businesses are worth. When an entire sector's multiples have doubled, 'below median' still means historically expensive. This error was repeated in 2021 SaaS valuations."},
+
+{q:"When valuing a capital-intensive industrial company with significant debt, which multiple is most appropriate for peer comparison and why?",
+opts:[
+"P/E, because it's the most commonly used multiple across all industries",
+"P/S, because it normalizes for differences in profitability across peers",
+"EV/EBITDA, because enterprise value accounts for different capital structures (debt levels) and EBITDA removes depreciation differences from varying asset ages — enabling cleaner comparison across peers with different leverage",
+"P/FCF, because free cash flow is always the most relevant metric"
+],ans:2,exp:"Lesson 16's multiple selection framework shows EV/EBITDA is preferred for leverage comparison and M&A valuation. Enterprise Value (equity + net debt) normalizes for capital structure differences, while EBITDA removes depreciation variations. For capital-intensive industrials with varying debt loads, this produces the cleanest peer comparison."},
+
+{q:"Peter Lynch's PEG ratio (P/E divided by EPS growth rate) for a company is 0.8×. Which limitation should an analyst consider before concluding the stock is undervalued?",
+opts:[
+"PEG ratios below 1.0 always indicate undervaluation by definition",
+"PEG assumes linear growth continuation — if the growth rate used is from an unsustainable period (pandemic, cyclical peak, one-time events), the ratio produces false signals of cheapness",
+"PEG is outdated and no longer used in professional analysis",
+"The only limitation is that PEG doesn't account for dividends"
+],ans:1,exp:"Lesson 16 identifies PEG's key pitfall: 'garbage-in from unreliable growth estimates.' A PEG of 0.8× using pandemic-era 40% growth rates that normalize to 15% would actually imply a PEG of 2.1× on sustainable growth — dramatically overvalued, not cheap. The ratio is only as good as the growth estimate in the denominator."},
+
+// ===== L17: SOTP (Q19-21) =====
+{q:"In a sum-of-parts analysis, a conglomerate's cloud software division alone is valued at $33 billion while the entire company's market cap is $28 billion. What additional information is most critical before acting on this apparent discount?",
+opts:[
+"The SOTP discount makes the stock an immediate buy since the cloud division exceeds total market cap",
+"You need the company's debt level to compute equity value, and you need to identify a specific catalyst that will close the gap — without a catalyst, the conglomerate discount can persist indefinitely",
+"The SOTP analysis must be wrong because a division can't be worth more than the whole company",
+"Only the cloud division's revenue growth rate matters"
+],ans:1,exp:"Lesson 17 emphasizes two critical requirements: net debt must be subtracted from SOTP value to get equity value (the worked DiversaCorp example shows $47.7B SOTP minus $8B net debt = $39.7B equity value), and a catalyst must exist. The lesson's principle: 'Cheap without catalyst = patient; cheap with catalyst = actionable.'"},
+
+{q:"GE announced its breakup into three independent companies (GE Aerospace, GE Vernova, GE HealthCare). Which valuation principle does this illustrate?",
+opts:[
+"Breakups destroy value by eliminating synergies between divisions",
+"The separation served as a catalyst to close the conglomerate discount — each focused company could attract specialized investors and be valued against pure-play peers at appropriate multiples, unlocking trapped SOTP value",
+"Breakups are purely financial engineering with no real economic impact",
+"GE's breakup only benefited because the industrial division was unprofitable"
+],ans:1,exp:"Lesson 17 uses GE as a key example: the breakup generated $100B+ in combined market cap vs. $80B before announcement. Separation removes the conglomerate discount by allowing each entity to be valued as a pure-play against appropriate peers, attract specialized investors, and allocate capital to its own needs. The announcement itself was the catalyst."},
+
+{q:"A company carries $800 million in Net Operating Losses (NOLs) on its balance sheet. How should this affect a SOTP or DCF analysis?",
+opts:[
+"NOLs should be ignored since they're just accounting entries",
+"NOLs have value as a tax shield — the company will pay reduced or zero income taxes on future profits until the NOLs are exhausted, and this tax benefit should be valued as a hidden asset in SOTP analysis",
+"NOLs always indicate the company has been poorly managed",
+"NOLs are only relevant if the company pays dividends"
+],ans:1,exp:"Lesson 17's Hidden Value Types table lists tax assets (NOLs) as a hidden value source, citing Carvana's $6B+ in NOLs. At a 25% tax rate, $800M in NOLs represents $200M in future tax savings — a meaningful hidden asset not reflected in market price if the company returns to profitability."},
+
+// ===== L18: MARGIN OF SAFETY (Q22-24) =====
+{q:"An analyst produces three scenarios: Bull ($185, 25% probability), Base ($120, 50%), Bear ($65, 30%). The stock trades at $95. What is the expected value and upside?",
+opts:[
+"Expected value is $125.75, offering 32.4% upside — with asymmetric risk-reward since even the bear case represents only 31.6% downside while the bull case offers 94.7% upside",
+"Expected value is $123.33 (simple average), offering 29.8% upside",
+"The bear case probability of 30% is too high, making this uninvestable",
+"Expected value calculations are theoretical and cannot guide real investment decisions"
+],ans:0,exp:"Lesson 18's formula: EV = (0.25 × $185) + (0.50 × $120) + (0.30 × $65) = $46.25 + $60.00 + $19.50 = $125.75. Upside = ($125.75 − $95) / $95 = 32.4%. The risk-reward is asymmetric: $30 downside vs. $25–90 upside, and even the base case alone offers 26.3% upside."},
+
+{q:"A high-quality compounder (ROIC >25%, wide moat, predictable cash flows) trades at a 12% discount to your base-case intrinsic value estimate. Should you buy?",
+opts:[
+"Yes — any discount to intrinsic value is sufficient margin of safety",
+"The 12% discount falls below the 15–20% margin of safety required even for elite compounders — the position should go on a watchlist at current price, awaiting a wider margin before committing capital",
+"No — compounders require 40%+ margin of safety due to their high valuations",
+"Buy immediately and add on any further decline"
+],ans:1,exp:"Lesson 18's Required Margin of Safety table specifies 15–20% for elite compounders. A 12% discount is below the minimum threshold — the position is close but not actionable. Discipline here protects against the possibility that your 'base case' is slightly optimistic. The stock goes on the watchlist until price drops to a 15%+ discount."},
+
+{q:"Your DCF says $140, comps suggest $115, and SOTP analysis produces $155. What is the most professional interpretation of this divergence?",
+opts:[
+"Take the average ($136.67) as the best estimate",
+"Use the lowest estimate ($115) since it's most conservative",
+"The divergence reveals that comparables may undervalue the business (perhaps sector-wide compression), while SOTP reveals hidden value — the range $115–155 represents the uncertainty band, and understanding why each method differs informs which assumptions to stress-test",
+"Discard the outlier SOTP number and average DCF and comps"
+],ans:2,exp:"Lesson 18's triangulation principle: when methods diverge, the divergence itself is information. Comps at $115 vs. SOTP at $155 may indicate a conglomerate discount or sector-wide compression. The professional investigates why they diverge — which assumptions differ — rather than mechanically averaging."},
+
+// ===== L19: VALUATION TRAPS (Q25-27) =====
+{q:"An oil producer trades at 8× current earnings after crude prices doubled. An analyst calls it 'cheap.' What valuation trap is the analyst likely falling into?",
+opts:[
+"The analyst is likely making the peak earnings error — applying a 'reasonable' 8× P/E to cyclically peak earnings that may be 2–3× normalized levels, meaning the stock actually trades at 16–24× normalized earnings",
+"Oil companies always trade at low P/E ratios, so 8× is normal and not a trap",
+"The analyst should use P/S instead of P/E for commodity companies",
+"The analyst is correct — commodity stocks at single-digit P/E always represent value"
+],ans:0,exp:"Lesson 19's peak earnings trap: 'CycliCorp' at 12× peak earnings is actually 30× normalized earnings. Oil companies after a commodity price doubling face the same risk — current earnings reflect peak pricing that may not persist. Double compression (earnings decline × multiple decline) can produce 50–70% drawdowns from 'cheap' entry points."},
+
+{q:"A stock has fallen from $200 to $100 over 12 months. An investor says: 'It's half price — that's a great deal.' Which behavioral error is this?",
+opts:[
+"Loss aversion — the investor is afraid of further losses",
+"Price anchoring — using the prior stock price as a reference for value, when previous price is irrelevant to current intrinsic value; the stock may be worth $60 and still be overvalued at $100",
+"Herding — the investor is following other bargain hunters",
+"This is rational analysis since a 50% decline implies significant margin of safety"
+],ans:1,exp:"Lesson 19 identifies price anchoring as one of the five costliest valuation mistakes, citing Zoom's decline from $559 to $70 where 'each level looked cheap relative to prior.' A stock's previous price tells you nothing about its current value — the business may have fundamentally deteriorated, the prior price may have been a bubble, or both."},
+
+{q:"A company has a $50 billion Total Addressable Market but has never generated positive free cash flow in its 8-year history. Management projects profitability 'at scale.' Which valuation trap best describes investing based on this narrative?",
+opts:[
+"Growth trap — the stock is priced for perfection that may not arrive",
+"Value trap — the stock is cheap because the business model doesn't work",
+"TAM fantasy — confusing massive market opportunity with actual business economics; without demonstrated unit economics and a path to positive FCF, the TAM is a story, not a valuation input",
+"This is not a trap — large TAM companies need time to reach profitable scale"
+],ans:2,exp:"Lesson 19's TAM Fantasy trap (citing WeWork's '$3T global real estate market'): a massive TAM without proven unit economics is speculation, not investing. Eight years of negative FCF suggests the business model may fundamentally not work at any scale. Optionality without economics is not value — it's hope."},
+
+// ===== L20: SYNTHESIS / CROSS-PILLAR (Q28-30) =====
+{q:"Credit spreads have tightened to historic lows (Pillar I, Lesson 5) while a company you're analyzing shows rising DSO and declining cash conversion (Pillar II, Lessons 13–14). How should these signals interact in your analysis?",
+opts:[
+"Tight credit spreads indicate a healthy economy, so the company's deteriorating metrics are temporary and can be ignored",
+"Focus only on the company-specific signals since macro conditions are irrelevant to individual stock analysis",
+"The combination is dangerous — tight spreads signal credit market complacency (Pillar I's 'paradox of tight spreads'), while declining cash conversion signals idiosyncratic weakness; if credit tightens, this company faces both macro headwinds and fundamental deterioration — increase the required margin of safety significantly",
+"Sell immediately since any company with declining cash conversion will face bankruptcy"
+],ans:2,exp:"This integrates Pillar I Lesson 5 (credit spread paradox: tightest spreads often precede widening) with Pillar II Lessons 13–14 (cash conversion and forensic signals). A company with deteriorating fundamentals in a complacent credit environment faces amplified risk when conditions normalize. The professional response: increase required margin of safety."},
+
+{q:"You're building a one-page investment summary for a stock with Mean Magic 8, strong ROIC, and 25% discount to your DCF base case. However, the current macro regime is late-cycle with rising rates (Pillar I). Which element of your summary requires the most adjustment?",
+opts:[
+"The quality assessment, since Mean Magic 8 may be overstated in late-cycle environments",
+"The DCF valuation range — rising rates (Pillar I, Lesson 3) directly increase WACC, which may have already reduced your intrinsic value estimate, and late-cycle regime (Pillar I, Lesson 4) suggests using more conservative growth assumptions and terminal multiples",
+"The catalyst timeline, since macro regime is irrelevant to company-specific catalysts",
+"No adjustment needed — a 25% margin of safety is sufficient in any regime"
+],ans:1,exp:"Lesson 20's professional workflow integrates macro context with company analysis. Rising rates directly increase WACC (Pillar I L3 → Pillar II L15 connection), reducing DCF values. Late-cycle regimes warrant conservative growth assumptions. The 25% discount may shrink or disappear once you update your DCF for current rate conditions."},
+
+{q:"[SYNTHESIS] A NIL competitor identifies a stock with: ROIC 22%, cash conversion 95%, no forensic red flags, DCF value $85 (base case), comps suggest $78, current price $65, and an announced spinoff catalyst in 6 months. Using Pillar II's complete analytical framework, which assessment is most accurate?",
+opts:[
+"The stock is a strong candidate — it passes quality checks (ROIC, cash conversion, forensic), shows margin of safety on both DCF (23.5%) and comps (16.7%), has a specific time-bound catalyst, and multiple evidence dimensions converge; size the position per Pillar IV and construct a thesis per Pillar V",
+"More analysis is needed — the comps value of $78 is concerning and the margin of safety may not be sufficient",
+"The stock should be avoided because a 23.5% discount isn't enough for a company undergoing a spinoff",
+"Buy the maximum allowed position since all signals are positive"
+],ans:0,exp:"This capstone question requires applying the full Pillar II toolkit: Lessons 11–13 quality checks (ROIC, cash conversion), Lesson 14 forensic clear, Lesson 15 DCF with 23.5% margin, Lesson 16 comps providing supporting context, Lesson 17 spinoff catalyst, and Lesson 18's convergence framework. Multiple independent evidence dimensions align. The correct next steps connect to Pillar IV (sizing) and Pillar V (thesis writing)."}
+];
+
+function shuffleArray(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+var Q=[];
+function prepareQuestions(){
+Q=[];
+for(var i=0;i<Q_BANK.length;i++){
+var qb=Q_BANK[i];
+var indexed=qb.opts.map(function(o,idx){return{text:o,origIdx:idx};});
+shuffleArray(indexed);
+var newAns=-1;
+for(var j=0;j<indexed.length;j++){if(indexed[j].origIdx===qb.ans){newAns=j;break;}}
+Q.push({q:qb.q,opts:indexed.map(function(x){return x.text;}),ans:newAns,exp:qb.exp});
+}}
+var answered=0,correct=0,TOTAL=30;
+function startExam(){prepareQuestions();document.getElementById('exam-start').style.display='none';document.getElementById('exam-live').style.display='block';renderQuestions();}
+function renderQuestions(){var c=document.getElementById('questions-container');c.innerHTML='';Q.forEach(function(q,i){var h='<div class="q-block" id="qb-'+i+'"><div class="q-num">Question '+(i+1)+' of '+TOTAL+(i>=27?' · CROSS-PILLAR SYNTHESIS':'')+'</div><div class="q-text">'+q.q+'</div><div class="q-options">';var L=['A','B','C','D'];q.opts.forEach(function(o,j){h+='<button class="q-opt" id="qo-'+i+'-'+j+'" onclick="answer('+i+','+j+')"><span class="opt-letter">'+L[j]+'</span><span>'+o+'</span></button>';});h+='</div><div class="q-feedback" id="qf-'+i+'"></div></div>';c.innerHTML+=h;});}
+function answer(qi,oi){var q=Q[qi],bl=document.getElementById('qb-'+qi),fb=document.getElementById('qf-'+qi);if(bl.classList.contains('answered-correct')||bl.classList.contains('answered-wrong'))return;var btns=bl.querySelectorAll('.q-opt');btns.forEach(function(b){b.disabled=true;});answered++;if(oi===q.ans){correct++;btns[oi].classList.add('correct');bl.classList.add('answered-correct');fb.className='q-feedback correct';fb.innerHTML='<strong>Correct.</strong> '+q.exp;}else{btns[oi].classList.add('wrong');btns[q.ans].classList.add('reveal-correct');bl.classList.add('answered-wrong');fb.className='q-feedback wrong';fb.innerHTML='<strong>Incorrect.</strong> '+q.exp;}fb.style.display='block';document.getElementById('score-display').textContent=correct;document.getElementById('progress-label').textContent=answered+' / '+TOTAL;document.getElementById('progress-bar').style.width=(answered/TOTAL*100)+'%';if(answered===TOTAL)showResult();}
+function showResult(){var r=document.getElementById('exam-result');r.style.display='block';var pct=Math.round(correct/TOTAL*100);document.getElementById('result-pct').textContent=pct+'%';var s=document.getElementById('result-status');var m=document.getElementById('result-msg');if(correct>=23){s.innerHTML='<span class="result-pass">PASSED — '+correct+'/'+TOTAL+'</span>';m.textContent='Congratulations. You\'ve earned 250 Mastery Points and completed Pillar II: Accounting & Valuation. Proceed to Pillar III: Market Structure & Return Mechanics.';}else{s.innerHTML='<span class="result-fail">NOT YET — '+correct+'/'+TOTAL+'</span>';m.textContent='You need 23/30 (75%) to pass. Review the lessons where you struggled and retake when ready. Understanding valuation rewards study, not guessing.';}r.scrollIntoView({behavior:'smooth'});}
+function retakeExam(){answered=0;correct=0;document.getElementById('score-display').textContent='0';document.getElementById('progress-label').textContent='0 / '+TOTAL;document.getElementById('progress-bar').style.width='0%';document.getElementById('exam-result').style.display='none';prepareQuestions();renderQuestions();document.getElementById('exam-live').scrollIntoView({behavior:'smooth'});}
 </script>
-
 <link rel="stylesheet" href="../../feedback-drawer.css">
 <script src="../../feedback-drawer.js" defer></script>
 </body>
