@@ -8,7 +8,7 @@
 :root{--gold:#C9A84C;--dark:#0D0F14;--panel:#13161E;--border:#1E2330;--text:#E8EAF0;--muted:#7A8099;--accent:#3B82F6;--green:#22C55E;--red:#EF4444;--purple:#a855f7;--orange:#f59e0b;--cyan:#06b6d4;}
 *{box-sizing:border-box;margin:0;padding:0;}
 body{background:var(--dark);color:var(--text);font-family:'Georgia',serif;font-size:16px;line-height:1.75;}
-.top-bar{background:var(--panel);border-bottom:1px solid var(--border);padding:12px 32px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:100;flex-wrap:wrap;}
+.top-bar{background:var(--panel);border-top:2px solid rgba(201,168,76,.45);border-bottom:1px solid var(--border);padding:12px 32px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:100;flex-wrap:wrap;}
 .logo{font-family:Arial,sans-serif;font-weight:900;font-size:18px;color:var(--gold);letter-spacing:2px;}
 .pill{background:var(--gold);color:var(--dark);font-family:Arial,sans-serif;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:1px;}
 .pill-tier{background:var(--accent);color:#fff;}
@@ -17,11 +17,16 @@ body{background:var(--dark);color:var(--text);font-family:'Georgia',serif;font-s
 .tab-btn{background:none;border:1px solid var(--border);color:var(--muted);font-family:Arial,sans-serif;font-size:12px;font-weight:700;padding:6px 16px;border-radius:6px;cursor:pointer;transition:all .2s;letter-spacing:.5px;}
 .tab-btn.active{background:var(--gold);color:var(--dark);border-color:var(--gold);}
 .tab-btn:hover:not(.active){border-color:var(--gold);color:var(--gold);}
-.hero{background:linear-gradient(135deg,#0D0F14,#13161E,#0a0c10);border-bottom:1px solid var(--border);padding:56px 32px 40px;text-align:center;position:relative;overflow:hidden;}
-.hero::before{content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:500px;height:500px;background:radial-gradient(circle,rgba(201,168,76,.06) 0%,transparent 70%);pointer-events:none;}
+.hero{background:
+linear-gradient(180deg,rgba(8,12,20,.9),rgba(8,11,18,.92)),
+repeating-linear-gradient(90deg,transparent 0 44px,rgba(59,130,246,.025) 44px 88px,transparent 88px 132px),
+linear-gradient(135deg,#0D0F14,#13161E,#0a0c10);
+border-bottom:1px solid var(--border);padding:56px 32px 40px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:540px;height:540px;background:radial-gradient(circle,rgba(201,168,76,.08) 0%,rgba(59,130,246,.03) 38%,transparent 72%);pointer-events:none;}
+.hero>*{position:relative;z-index:1;}
 .course-label{font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:12px;}
 .hero h1{font-size:clamp(26px,4vw,44px);font-weight:400;color:#fff;margin-bottom:12px;line-height:1.2;}
-.hero-sub{font-size:17px;color:var(--muted);max-width:720px;margin:0 auto 28px;}
+.hero-sub{font-size:17px;color:var(--muted);max-width:760px;margin:0 auto 28px;}
 .meta-row{display:flex;justify-content:center;gap:28px;flex-wrap:wrap;}
 .meta-item{text-align:center;}
 .meta-num{font-family:Arial,sans-serif;font-size:26px;font-weight:700;color:var(--gold);}
@@ -30,12 +35,11 @@ body{background:var(--dark);color:var(--text);font-family:'Georgia',serif;font-s
 .section{margin-bottom:52px;}
 .section-title{font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:20px;padding-bottom:10px;border-bottom:1px solid var(--border);}
 h2{font-size:22px;color:#fff;font-weight:400;margin-bottom:10px;}
-h3{font-family:Arial,sans-serif;font-size:12px;font-weight:700;color:var(--gold);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;margin-top:22px;}
 p{color:#BEC3D4;margin-bottom:14px;}
 strong.hl{color:#fff;}
-.tab-content{display:none;}.tab-content.active{display:block;}
+.tab-content{display:none;}
+.tab-content.active{display:block;}
 .principle-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0 32px;}
-@media(max-width:640px){.principle-grid{grid-template-columns:1fr;}}
 .principle-card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:20px;border-top:3px solid var(--gold);}
 .principle-num{font-family:Arial,sans-serif;font-size:11px;font-weight:700;color:var(--gold);letter-spacing:2px;margin-bottom:6px;}
 .principle-title{font-size:16px;color:#fff;margin-bottom:6px;}
@@ -43,75 +47,587 @@ strong.hl{color:#fff;}
 .lesson-grid{display:flex;flex-direction:column;border:1px solid var(--border);border-radius:12px;overflow:hidden;}
 .lesson-card{background:var(--panel);border-bottom:1px solid var(--border);padding:18px 22px;display:grid;grid-template-columns:46px 1fr auto;gap:14px;align-items:start;cursor:pointer;transition:background .2s;}
 .lesson-card:last-child{border-bottom:none;}
-.lesson-card:hover,.lesson-card.active-card{background:#1a1e2a;}
+.lesson-card:hover,.lesson-card.active-card{background:#171b26;}
 .lesson-card.active-card{border-left:3px solid var(--gold);}
 .lesson-num{font-family:Arial,sans-serif;font-size:20px;font-weight:700;color:var(--gold);line-height:1;}
 .lesson-title{font-size:16px;color:#fff;margin-bottom:3px;}
 .lesson-desc{font-family:Arial,sans-serif;font-size:12px;color:var(--muted);line-height:1.5;}
 .lesson-mp{font-family:Arial,sans-serif;font-size:12px;font-weight:700;color:var(--gold);background:rgba(201,168,76,.1);padding:3px 10px;border-radius:20px;white-space:nowrap;align-self:center;}
-.lesson-detail{background:#0e1018;border-top:1px solid var(--border);padding:28px;display:none;}
+.lesson-detail{background:#0e1018;border-top:1px solid var(--border);padding:24px 28px;display:none;}
 .lesson-detail.open{display:block;}
-.fw-table{width:100%;border-collapse:collapse;margin:12px 0 20px;}
-.fw-table th{background:rgba(201,168,76,.08);font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);padding:10px 14px;text-align:left;border-bottom:1px solid var(--border);}
-.fw-table td{padding:12px 14px;border-bottom:1px solid var(--border);font-family:Arial,sans-serif;font-size:13px;color:#BEC3D4;vertical-align:top;}
-.fw-table tr:last-child td{border-bottom:none;}
-.fw-table tr:hover td{background:rgba(255,255,255,.02);}
+.lesson-detail h3{font-family:Arial,sans-serif;font-size:12px;font-weight:700;color:var(--gold);letter-spacing:1px;text-transform:uppercase;margin:18px 0 10px;}
+.tag-row{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px;}
+.ctag{font-family:Arial,sans-serif;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;letter-spacing:.5px;background:rgba(201,168,76,.15);color:var(--gold);border:1px solid rgba(201,168,76,.3);}
 .callout{background:rgba(201,168,76,.05);border-left:3px solid var(--gold);padding:16px 20px;border-radius:0 8px 8px 0;margin:18px 0;}
 .callout-label{font-family:Arial,sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;}
 .callout p{color:var(--text);margin:0;font-size:14px;}
 .callout p+p{margin-top:8px;}
-.callout-blue{border-left-color:var(--accent);background:rgba(59,130,246,.05);}.callout-blue .callout-label{color:var(--accent);}
-.callout-red{border-left-color:var(--red);background:rgba(239,68,68,.05);}.callout-red .callout-label{color:var(--red);}
-.callout-green{border-left-color:var(--green);background:rgba(34,197,94,.05);}.callout-green .callout-label{color:var(--green);}
-.callout-purple{border-left-color:var(--purple);background:rgba(168,85,247,.05);}.callout-purple .callout-label{color:var(--purple);}
-.callout-cyan{border-left-color:var(--cyan);background:rgba(6,182,212,.05);}.callout-cyan .callout-label{color:var(--cyan);}
-.callout-orange{border-left-color:var(--orange);background:rgba(245,158,11,.05);}.callout-orange .callout-label{color:var(--orange);}
+.callout-blue{border-left-color:var(--accent);background:rgba(59,130,246,.06);}
+.callout-blue .callout-label{color:var(--accent);}
+.callout-red{border-left-color:var(--red);background:rgba(239,68,68,.06);}
+.callout-red .callout-label{color:#f87171;}
+.callout-purple{border-left-color:var(--purple);background:rgba(168,85,247,.06);}
+.callout-purple .callout-label{color:var(--purple);}
 .exhibit{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:22px;margin:18px 0;}
 .exhibit-label{font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:14px;}
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0;}
-.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:16px 0;}
-@media(max-width:640px){.two-col,.three-col{grid-template-columns:1fr;}}
-.stat-card{background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.2);border-radius:10px;padding:18px;text-align:center;}
-.stat-num{font-family:Arial,sans-serif;font-size:28px;font-weight:900;color:var(--gold);line-height:1;margin-bottom:4px;}
-.stat-label{font-family:Arial,sans-serif;font-size:11px;color:var(--muted);line-height:1.4;}
-.tag-row{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 14px;}
-.ctag{font-family:Arial,sans-serif;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;letter-spacing:.5px;background:rgba(201,168,76,.15);color:var(--gold);border:1px solid rgba(201,168,76,.3);}
-.divider{border:none;border-top:1px solid var(--border);margin:36px 0;}
-.formula-box{background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.25);border-radius:10px;padding:20px 24px;text-align:center;margin:16px 0;font-family:Arial,sans-serif;}
-.formula-main{font-size:20px;font-weight:900;color:var(--gold);letter-spacing:1px;margin-bottom:6px;}
-.formula-sub{font-size:12px;color:var(--muted);letter-spacing:.5px;}
-.bar-chart-row{display:flex;align-items:center;gap:10px;margin:6px 0;}
-.bar-chart-label{font-family:Arial,sans-serif;font-size:12px;color:var(--muted);width:140px;text-align:right;flex-shrink:0;}
-.bar-chart-track{flex:1;background:rgba(255,255,255,.04);border-radius:4px;height:22px;position:relative;overflow:hidden;}
-.bar-chart-fill{height:100%;border-radius:4px;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;font-family:Arial,sans-serif;font-size:11px;font-weight:700;color:#fff;min-width:30px;}
-.sensitivity-grid{display:grid;grid-template-columns:auto repeat(5,1fr);gap:1px;background:var(--border);border-radius:8px;overflow:hidden;margin:12px 0;}
-.sensitivity-grid div{background:var(--panel);padding:8px 6px;font-family:Arial,sans-serif;font-size:11px;text-align:center;color:#BEC3D4;}
-.sensitivity-grid .sg-header{background:rgba(201,168,76,.08);color:var(--gold);font-weight:700;font-size:10px;letter-spacing:.5px;}
-.sensitivity-grid .sg-row-header{background:rgba(59,130,246,.06);color:var(--accent);font-weight:700;text-align:right;padding-right:10px;}
-.sensitivity-grid .sg-highlight{background:rgba(34,197,94,.08);color:var(--green);font-weight:700;}
-.sensitivity-grid .sg-danger{background:rgba(239,68,68,.06);color:var(--red);}
+.detail-card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:18px;}
+.detail-card-title{font-family:Arial,sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;}
+.detail-card-green{border-color:rgba(34,197,94,.18);}
+.detail-card-green .detail-card-title{color:var(--green);}
+.detail-card-red{border-color:rgba(239,68,68,.18);}
+.detail-card-red .detail-card-title{color:#f87171;}
+.detail-card ul{margin:0;padding-left:16px;}
+.detail-card li{color:#BEC3D4;font-family:Arial,sans-serif;font-size:13px;line-height:1.7;margin:0 0 6px;}
+.formula-box{background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.25);border-radius:10px;padding:18px 24px;text-align:center;margin:14px 0;}
+.formula-main{font-family:Arial,sans-serif;font-size:16px;font-weight:900;color:var(--gold);letter-spacing:.8px;}
+.formula-sub{font-family:Arial,sans-serif;font-size:11px;color:var(--muted);letter-spacing:.4px;margin-top:6px;}
+.fine-print{font-family:Arial,sans-serif;font-size:11px;color:var(--muted);line-height:1.6;margin-top:10px;}
+.text-green{color:var(--green);font-weight:700;}
+.text-red{color:#f87171;font-weight:700;}
+.bar-chart-wrap{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:18px;margin:14px 0;}
+.bar-chart-label{font-family:Arial,sans-serif;font-size:11px;color:var(--muted);width:148px;flex-shrink:0;}
+.bar-chart-row{display:flex;align-items:center;gap:10px;margin:8px 0;}
+.bar-chart-track{flex:1;height:20px;background:rgba(255,255,255,.05);border-radius:4px;overflow:hidden;}
+.bar-chart-fill{height:100%;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;font-family:Arial,sans-serif;font-size:10px;font-weight:700;color:#fff;border-radius:4px;}
+.fill-green{background:linear-gradient(90deg,#22C55E,#4ade80);}
+.fill-lime{background:linear-gradient(90deg,#16a34a,#22c55e);}
+.fill-gold{background:linear-gradient(90deg,#b48a19,#C9A84C);}
+.fill-orange{background:linear-gradient(90deg,#d97706,#f59e0b);}
+.fill-red{background:linear-gradient(90deg,#dc2626,#ef4444);}
+.table-wrap{overflow-x:auto;}
+.fw-table{width:100%;border-collapse:collapse;margin:12px 0 0;min-width:760px;}
+.fw-table th{background:rgba(201,168,76,.08);font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);padding:12px 14px;text-align:left;border-bottom:1px solid var(--border);}
+.fw-table td{padding:14px;border-bottom:1px solid var(--border);font-family:Arial,sans-serif;font-size:13px;color:#BEC3D4;vertical-align:top;}
+.fw-table td:first-child{color:#fff;font-weight:700;}
+.fw-table td.tier-1{color:var(--green);}
+.fw-table td.tier-2{color:#68d391;}
+.fw-table td.tier-3{color:var(--gold);}
+.fw-table td.tier-4{color:#fbbf24;}
+.fw-table td.tier-5{color:#f87171;}
+.fw-table tr:last-child td{border-bottom:none;}
 .svg-wrap{display:flex;justify-content:center;margin:18px 0;}
 .svg-wrap svg{max-width:100%;height:auto;}
 .exam-wrap{max-width:800px;margin:0 auto;}
 .start-exam-wrap{text-align:center;padding:40px 20px;}
 .start-exam-wrap h2{color:#fff;margin-bottom:12px;}
-.start-exam-wrap p{color:var(--muted);max-width:500px;margin:0 auto 24px;}
+.start-exam-wrap p{color:var(--muted);max-width:560px;margin:0 auto 24px;}
 .exam-rules{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin:24px 0;text-align:left;}
 .rule-card{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:14px;}
 .rule-card .r-num{font-family:Arial,sans-serif;font-size:22px;font-weight:900;color:var(--gold);}
 .rule-card .r-label{font-family:Arial,sans-serif;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;}
-.score-bar-wrap{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:20px 28px;margin-bottom:28px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;}
-.score-big{font-size:42px;font-weight:900;color:var(--gold);line-height:1;}
-.score-sub{font-size:12px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;}
-.progress-track{flex:1;min-width:200px;background:rgba(255,255,255,.06);border-radius:8px;height:12px;overflow:hidden;}
-.progress-fill{height:100%;background:linear-gradient(90deg,rgba(201,168,76,.5),var(--gold));border-radius:8px;transition:width .5s ease;}
-.q-block{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:22px;margin-bottom:14px;transition:border-color .3s;}
-.q-block.answered-correct{border-color:var(--green);}
-.q-block.answered-wrong{border-color:var(--red);}
-.q-num{font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:8px;}
-.q-text{font-size:15px;color:#fff;margin-bottom:16px;line-height:1.6;}
-.q-options{display:flex;flex-direction:column;gap:8px;}
-.q-opt{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:8px;padding:11px 15px;font-family:Arial,sans-serif;font-size:14px;color:#BEC3D4;cursor:pointer;transition:all .2s;text-align:left;display:flex;gap:12px;align-items:flex-start;}
-.q-opt:hover:not(:disabled){background:rgba(201,168,76,.06);border-color:rgba(201,168,76,.4);color:#fff;}
-.q-opt:disabled{cursor:default;}
-.q-opt.correct
+@media(max-width:640px){
+.top-bar{padding:12px 16px;}
+.hero{padding:48px 16px 34px;}
+.container{padding:32px 16px;}
+.principle-grid{grid-template-columns:1fr;}
+.two-col{grid-template-columns:1fr;}
+.lesson-card{grid-template-columns:42px 1fr;grid-template-areas:"num title" "num meta";align-items:center;}
+.lesson-mp{grid-column:2;justify-self:start;}
+.lesson-detail{padding:20px 18px;}
+}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+<div class="logo">BEAT LYNCH</div>
+<span class="pill">INFINITE ALPHA</span>
+<span class="pill pill-tier">TIER 3</span>
+<span class="pill pill-pillar">PILLAR II OF V</span>
+<div class="tab-nav">
+<a href="../../index.html" class="tab-btn" style="text-decoration:none;">HOME</a>
+<button class="tab-btn active" onclick="showTab('curriculum')">CURRICULUM</button>
+<button class="tab-btn" onclick="showTab('exam')">FINAL EXAM</button>
+</div>
+</div>
+
+<div class="hero">
+<div class="course-label">Infinite Alpha · Pillar II of V</div>
+<h1>Accounting &amp; Valuation</h1>
+<p class="hero-sub">The language of business and the math of value — professional-grade financial analysis and the valuation frameworks that determine what any business is actually worth.</p>
+<div class="meta-row">
+<div class="meta-item"><div class="meta-num">10</div><div class="meta-label">Lessons</div></div>
+<div class="meta-item"><div class="meta-num">250</div><div class="meta-label">Mastery Points</div></div>
+<div class="meta-item"><div class="meta-num">75%</div><div class="meta-label">Pass Threshold</div></div>
+<div class="meta-item"><div class="meta-num">30</div><div class="meta-label">Exam Questions</div></div>
+<div class="meta-item"><div class="meta-num">~9</div><div class="meta-label">Hours Study</div></div>
+</div>
+</div>
+
+<div class="tab-content active" id="tab-curriculum">
+<div class="container">
+
+<div class="section">
+<div class="section-title">Pillar Overview</div>
+<p>Pillar II is the <strong class="hl">"what is it worth?"</strong> pillar. In Tier 1 you learned financial statement literacy (Course 1.4) and in Tier 2 you learned applied company analysis (Course 2.1). Now we go to professional depth: forensic accounting, earnings quality analysis, multi-method valuation, and the judgment calls that separate correct valuations from dangerous ones. Where Pillar I taught you how the machine works, Pillar II teaches you how to determine value within that machine — and how to recognize when the numbers are lying.</p>
+
+<div class="exhibit">
+<div class="exhibit-label">System Integration — Pillar II in the Infinite Alpha Architecture</div>
+<div class="svg-wrap">
+<svg viewBox="0 0 720 220" xmlns="http://www.w3.org/2000/svg" style="max-width:720px;">
+<rect x="12" y="20" width="696" height="42" rx="6" fill="none" stroke="rgba(201,168,76,.15)" stroke-width="1" stroke-dasharray="4,4"/>
+<text x="360" y="42" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">Pillar II provides the valuation engine that determines what any business is actually worth</text>
+
+<rect x="12" y="78" width="120" height="60" rx="8" fill="rgba(59,130,246,.08)" stroke="#3B82F6" stroke-width="1"/>
+<text x="72" y="103" text-anchor="middle" font-family="Arial" font-size="10" font-weight="700" fill="#3B82F6">PILLAR I</text>
+<text x="72" y="118" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">Market Machine</text>
+
+<line x1="132" y1="108" x2="157" y2="108" stroke="#C9A84C" stroke-width="1.2" marker-end="url(#ag)"/>
+
+<rect x="157" y="78" width="120" height="60" rx="8" fill="rgba(201,168,76,.1)" stroke="#C9A84C" stroke-width="1.5"/>
+<text x="217" y="103" text-anchor="middle" font-family="Arial" font-size="11" font-weight="700" fill="#C9A84C">PILLAR II</text>
+<text x="217" y="118" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">Valuation</text>
+
+<line x1="277" y1="108" x2="302" y2="108" stroke="#C9A84C" stroke-width="1.2" marker-end="url(#ag)"/>
+
+<rect x="302" y="78" width="100" height="60" rx="8" fill="rgba(168,85,247,.08)" stroke="#a855f7" stroke-width="1"/>
+<text x="352" y="103" text-anchor="middle" font-family="Arial" font-size="10" font-weight="700" fill="#a855f7">PILLAR III</text>
+<text x="352" y="118" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">Structure</text>
+
+<line x1="402" y1="108" x2="427" y2="108" stroke="#C9A84C" stroke-width="1.2" marker-end="url(#ag)"/>
+
+<rect x="427" y="78" width="100" height="60" rx="8" fill="rgba(239,68,68,.08)" stroke="#EF4444" stroke-width="1"/>
+<text x="477" y="103" text-anchor="middle" font-family="Arial" font-size="10" font-weight="700" fill="#EF4444">PILLAR IV</text>
+<text x="477" y="118" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">Risk</text>
+
+<line x1="527" y1="108" x2="552" y2="108" stroke="#C9A84C" stroke-width="1.2" marker-end="url(#ag)"/>
+
+<rect x="552" y="78" width="100" height="60" rx="8" fill="rgba(34,197,94,.08)" stroke="#22C55E" stroke-width="1"/>
+<text x="602" y="103" text-anchor="middle" font-family="Arial" font-size="10" font-weight="700" fill="#22C55E">PILLAR V</text>
+<text x="602" y="118" text-anchor="middle" font-family="Arial" font-size="9" fill="#7A8099">Craft</text>
+
+<line x1="652" y1="108" x2="662" y2="108" stroke="#C9A84C" stroke-width="1.2" marker-end="url(#ag)"/>
+
+<rect x="662" y="78" width="46" height="60" rx="8" fill="rgba(201,168,76,.15)" stroke="#C9A84C" stroke-width="1.5"/>
+<text x="685" y="99" text-anchor="middle" font-family="Arial" font-size="9" font-weight="700" fill="#C9A84C">BEAT</text>
+<text x="685" y="111" text-anchor="middle" font-family="Arial" font-size="9" font-weight="700" fill="#C9A84C">LYNCH</text>
+<text x="685" y="125" text-anchor="middle" font-family="Arial" font-size="8" fill="#7A8099">+ NIL</text>
+
+<rect x="94" y="164" width="532" height="34" rx="6" fill="rgba(201,168,76,.06)" stroke="rgba(201,168,76,.3)" stroke-width="1"/>
+<text x="360" y="185" text-anchor="middle" font-family="Arial" font-size="10" font-weight="700" fill="#C9A84C">Mean Magic · Growth Quality · Financial Durability · Moat Strength · Catalyst Vector</text>
+
+<line x1="217" y1="138" x2="217" y2="164" stroke="#C9A84C" stroke-width="1.2" stroke-dasharray="4,3"/>
+
+<defs>
+<marker id="ag" markerWidth="8" markerHeight="6" refX="4" refY="3" orient="auto">
+<path d="M0,6 L4,0 L8,6" fill="none" stroke="#C9A84C" stroke-width="1"/>
+</marker>
+</defs>
+</svg>
+</div>
+</div>
+</div>
+
+<div class="section">
+<div class="section-title">Core Principles</div>
+<div class="principle-grid">
+<div class="principle-card">
+<div class="principle-num">PRINCIPLE I</div>
+<div class="principle-title">Accounting Is the Language</div>
+<div class="principle-desc">Financial statements translate business reality into numbers. Fluent reading means understanding what management communicates — and what they hide.</div>
+</div>
+<div class="principle-card">
+<div class="principle-num">PRINCIPLE II</div>
+<div class="principle-title">Earnings Quality &gt; Earnings Level</div>
+<div class="principle-desc">$5/share in high-quality, recurring, cash-backed earnings is worth far more than $5/share from accounting choices and one-time events.</div>
+</div>
+<div class="principle-card">
+<div class="principle-num">PRINCIPLE III</div>
+<div class="principle-title">Valuation Is a Range</div>
+<div class="principle-desc">Professional valuation produces probability-weighted expected values across scenarios, not a single "target price."</div>
+</div>
+<div class="principle-card">
+<div class="principle-num">PRINCIPLE IV</div>
+<div class="principle-title">Margin of Safety Is the Bridge</div>
+<div class="principle-desc">The gap between estimated value and current price defends against errors in analysis, assumptions, and the unknowable future.</div>
+</div>
+</div>
+</div>
+
+<div class="section">
+<div class="section-title">Pillar II Lessons</div>
+<div class="lesson-grid">
+
+<div class="lesson-card" onclick="toggleLesson(0)">
+<div class="lesson-num">11</div>
+<div><div class="lesson-title">Advanced Income Statement Analysis</div><div class="lesson-desc">Revenue quality, margin sustainability, and the gap between reported and economic earnings.</div></div>
+<div class="lesson-mp">25 MP</div>
+</div>
+<div class="lesson-detail" id="ld-0">
+<div class="tag-row"><span class="ctag">Revenue Quality</span><span class="ctag">Gross Margin</span><span class="ctag">Operating Leverage</span><span class="ctag">GAAP vs. Non-GAAP</span><span class="ctag">SBC</span></div>
+
+<h3>Revenue Quality - When Revenue Is "Real"</h3>
+<p>In Tier 1 you learned to read the income statement's top line. Now we go deeper. Revenue is not created equal. A dollar of recurring subscription revenue is fundamentally more valuable than a dollar of one-time project revenue, and professional analysts price this difference into valuation multiples.</p>
+<p>Revenue recognition determines when revenue appears on the income statement, and aggressive recognition is the most common form of earnings manipulation. Channel stuffing, bill-and-hold recognition, and pulling forward future demand can all flatter results while the underlying business deteriorates. The professional reads reported growth alongside the underlying durability of that revenue stream.</p>
+<p>The quality spectrum runs from highest to lowest: recurring subscription revenue, long-term contracted revenue, repeat-product revenue, transactional product revenue, and one-time project revenue. The market assigns higher multiples to higher-quality revenue because predictability reduces uncertainty.</p>
+
+<div class="exhibit">
+<div class="exhibit-label">Revenue Quality Spectrum</div>
+<div class="table-wrap">
+<table class="fw-table">
+<thead>
+<tr><th>Quality Tier</th><th>Example Company</th><th>Characteristics</th><th>Typical EV/Revenue</th></tr>
+</thead>
+<tbody>
+<tr><td class="tier-1">Tier 1: Recurring Subscription</td><td>Salesforce, Adobe, Microsoft 365</td><td>Auto-renewing, high retention, predictable</td><td>8-15x</td></tr>
+<tr><td class="tier-2">Tier 2: Long-Term Contract</td><td>Lockheed Martin, Waste Mgmt</td><td>Multi-year commitments, high visibility</td><td>3-6x</td></tr>
+<tr><td class="tier-3">Tier 3: Repeat Product</td><td>Apple, Coca-Cola, P&amp;G</td><td>Strong repurchase cycles, brand loyalty</td><td>4-8x</td></tr>
+<tr><td class="tier-4">Tier 4: Transactional Product</td><td>Nike (wholesale), Best Buy</td><td>No contractual obligation, cyclical demand</td><td>1-3x</td></tr>
+<tr><td class="tier-5">Tier 5: One-Time Project</td><td>Accenture, Fluor Corp</td><td>Must re-win each engagement, lumpy</td><td>0.5-2x</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<h3>Gross Margin - The Structural Competitive Indicator</h3>
+<p>Gross margin is the single best indicator of competitive positioning. A company with structurally high gross margins can survive pricing pressure, invest in innovation, and absorb cyclical shocks better than a low-margin operator. More important than the absolute level is the <strong class="hl">direction</strong> of gross margins over time: expansion often signals strengthening competitive position, while compression signals intensifying competition or cost pressure.</p>
+<p>Watch for companies that maintain high gross margins but show declining operating margins. That usually means SG&amp;A or R&amp;D is growing faster than revenue, which may be strategic investment or it may be the early sign of deteriorating operating leverage.</p>
+
+<h3>Operating Leverage - The Double-Edged Sword</h3>
+<p>Operating leverage describes how a company's cost structure amplifies revenue changes into larger earnings changes. High fixed costs plus low variable costs create powerful earnings expansion on the way up and painful compression on the way down.</p>
+
+<div class="formula-box">
+<div class="formula-main">DOL = % Change in EBIT / % Change in Revenue</div>
+<div class="formula-sub">Degree of operating leverage measures earnings amplification from revenue changes.</div>
+</div>
+
+<p class="fine-print"><strong class="hl">Worked Example - Software Company:</strong> Revenue grows 10% from $1B to $1.1B. COGS grows 10% from $200M to $220M. Fixed costs stay at $600M. EBIT rises from $200M to $280M, a 40% increase. DOL = 40% / 10% = 4.0x. In reverse, if revenue drops 10%, EBIT can contract roughly 40%.</p>
+
+<h3>Non-GAAP vs. GAAP - When Adjustments Clarify and When They Obscure</h3>
+<p>Companies increasingly report "adjusted" or non-GAAP metrics alongside GAAP results. Some adjustments are legitimate: excluding one-time restructuring charges, legal settlements not expected to recur, or natural disaster impacts. But stock-based compensation is the most abused recurring adjustment because the dilution is economically real even when management wants investors to ignore it.</p>
+<p>The professional question is simple: does the adjustment remove a genuinely non-recurring distortion, or is it stripping out a normal cost of doing business? Any adjustment that appears every quarter is not really an adjustment. It is part of the economics of the business.</p>
+
+<div class="two-col">
+<div class="detail-card detail-card-green">
+<div class="detail-card-title">Legitimate Adjustments</div>
+<ul>
+<li>One-time restructuring charges tied to a discrete event.</li>
+<li>Legal settlements not expected to repeat.</li>
+<li>Acquisition-related integration fees.</li>
+<li>Natural disaster or pandemic impacts.</li>
+<li>Discontinued operations.</li>
+</ul>
+</div>
+<div class="detail-card detail-card-red">
+<div class="detail-card-title">Suspicious Adjustments</div>
+<ul>
+<li>Stock-based compensation that recurs every quarter.</li>
+<li>"Restructuring" charges appearing year after year.</li>
+<li>Excluding amortization of acquired intangibles while keeping acquired revenue.</li>
+<li>Adjusting for investments in growth to hide cash burn.</li>
+<li>Any adjustment recurring three or more consecutive years.</li>
+</ul>
+</div>
+</div>
+
+<div class="callout">
+<div class="callout-label">Core Principle</div>
+<p>"Revenue is vanity, profit is sanity, cash is reality." This lesson reveals the vanity. Lesson 13's cash flow analysis reveals the reality. Between reported revenue and actual cash sits the full landscape of accounting judgment, and the professional investor must navigate every layer.</p>
+</div>
+
+<div class="callout callout-blue">
+<div class="callout-label">Beat Lynch Connection</div>
+<p>Growth Quality Score in Beat Lynch weights recurring revenue and margin trajectory. SaaS-type revenue earns higher quality scores than project-based revenue, directly reflecting the quality spectrum above. The scoring engine separates "growing revenue" from "growing high-quality revenue" and values the latter far more in Mean Magic calculations.</p>
+</div>
+</div>
+
+<div class="lesson-card" onclick="toggleLesson(1)">
+<div class="lesson-num">12</div>
+<div><div class="lesson-title">Advanced Balance Sheet Analysis</div><div class="lesson-desc">Debt structure, working capital, ROIC, and what the income statement hides.</div></div>
+<div class="lesson-mp">25 MP</div>
+</div>
+<div class="lesson-detail" id="ld-1">
+<div class="tag-row"><span class="ctag">Debt Structure</span><span class="ctag">Working Capital</span><span class="ctag">ROIC</span><span class="ctag">Goodwill</span><span class="ctag">Off-Balance-Sheet</span></div>
+
+<h3>The Balance Sheet Reveals What The Income Statement Hides</h3>
+<p>Income statements are forward-looking projections of profitability. Balance sheets are snapshots of cumulative reality. When a company's income statement tells one story but its balance sheet tells another, the balance sheet almost always reveals more truth. A business can report growing profits while debt rises, receivables stretch, inventory builds, and equity quality deteriorates.</p>
+
+<h3>Debt Structure Analysis - The Architecture Of Fragility</h3>
+<p>Total debt is less important than <strong class="hl">debt structure</strong>. A company with $5 billion in debt maturing over 15 years at fixed rates faces a different risk profile than one with $5 billion due inside 18 months at floating rates. The professional breaks debt down by maturity schedule, fixed versus floating exposure, covenant risk, and refinancing dependency.</p>
+<p>Off-balance-sheet obligations matter just as much. Lease obligations, pensions, supplier financing, and special purpose vehicles can all hide real leverage from a casual reader. The filing often reveals what management's adjusted EBITDA narrative is trying to conceal.</p>
+
+<h3>Working Capital Dynamics - The Operational Pulse</h3>
+<p>Changes in working capital reveal operational health or deterioration faster than earnings. Rising Days Sales Outstanding (DSO) can signal aggressive revenue recognition or weakening collections. Rising inventory days can indicate demand weakness or channel stuffing. Falling Days Payable Outstanding (DPO) often means suppliers are tightening terms before equity investors notice the stress.</p>
+
+<div class="exhibit">
+<div class="exhibit-label">Balance Sheet Health Checklist</div>
+<div class="table-wrap">
+<table class="fw-table">
+<thead>
+<tr><th>Item</th><th><span class="text-green">Green Flag</span></th><th><span class="text-red">Red Flag</span></th></tr>
+</thead>
+<tbody>
+<tr><td>Net Debt / EBITDA</td><td>&lt; 2.0x</td><td>&gt; 4.0x or rising rapidly</td></tr>
+<tr><td>Interest Coverage (EBIT / Interest)</td><td>&gt; 6.0x</td><td>&lt; 3.0x or declining</td></tr>
+<tr><td>Debt Maturity Profile</td><td>Well-laddered, no wall within 2 years</td><td>&gt; 30% maturing within 12 months</td></tr>
+<tr><td>Fixed vs. Floating Rate Mix</td><td>&gt; 70% fixed-rate</td><td>&gt; 50% floating with rates rising</td></tr>
+<tr><td>DSO Trend (YoY)</td><td>Stable or declining</td><td>Rising 10%+ faster than revenue</td></tr>
+<tr><td>Inventory / Revenue Trend</td><td>Stable or declining</td><td>Rising without corresponding sales growth</td></tr>
+<tr><td>Goodwill / Total Assets</td><td>&lt; 20%</td><td>&gt; 40%, especially post-acquisitions</td></tr>
+<tr><td>Current Ratio</td><td>&gt; 1.5x</td><td>&lt; 1.0x (potential liquidity crisis)</td></tr>
+<tr><td>Tangible Book Value Trend</td><td>Growing steadily</td><td>Declining while earnings grow</td></tr>
+<tr><td>Off-Balance-Sheet Obligations</td><td>Minimal, well-disclosed</td><td>Large operating leases, pensions underfunded, material hidden obligations</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<h3>ROIC - The Single Most Important Profitability Metric</h3>
+<p>In Tier 1's Masters 101, you learned that Joel Greenblatt built his "Magic Formula" around Return on Invested Capital. Now we formalize it. ROIC measures how efficiently a company converts capital into profit: the connection between the income statement's returns and the balance sheet's deployed capital.</p>
+
+<div class="formula-box">
+<div class="formula-main">ROIC = NOPAT ÷ Invested Capital</div>
+<div class="formula-sub">NOPAT = Operating Income × (1 - Tax Rate) | Invested Capital = Total Equity + Total Debt - Excess Cash</div>
+</div>
+
+<p class="fine-print">A company earning 25% ROIC doubles its invested capital every ~3 years through reinvestment alone. At 8% ROIC, that same doubling takes closer to 9 years. This is why ROIC is the engine behind compounding and why Pillar V's "Supercompounder" designation requires sustained ROIC well above average.</p>
+
+<div class="bar-chart-wrap">
+<div class="exhibit-label">ROIC by Industry - Structural Differences</div>
+<div class="bar-chart-row"><div class="bar-chart-label">Software (Visa, MSFT)</div><div class="bar-chart-track"><div class="bar-chart-fill fill-green" style="width:84%;">35%+</div></div></div>
+<div class="bar-chart-row"><div class="bar-chart-label">Consumer Brands (NKE)</div><div class="bar-chart-track"><div class="bar-chart-fill fill-lime" style="width:53%;">22-30%</div></div></div>
+<div class="bar-chart-row"><div class="bar-chart-label">Industrials (CAT, HON)</div><div class="bar-chart-track"><div class="bar-chart-fill fill-gold" style="width:36%;">12-18%</div></div></div>
+<div class="bar-chart-row"><div class="bar-chart-label">Utilities (NEE, DUK)</div><div class="bar-chart-track"><div class="bar-chart-fill fill-orange" style="width:20%;">6-8%</div></div></div>
+<div class="bar-chart-row"><div class="bar-chart-label">Airlines (DAL, UAL)</div><div class="bar-chart-track"><div class="bar-chart-fill fill-red" style="width:11%;">2-5%</div></div></div>
+</div>
+
+<div class="callout callout-red">
+<div class="callout-label">Goodwill Warning - The Acquisition Trap</div>
+<p>When a company acquires another at a premium to book value, the excess becomes goodwill on the balance sheet. Large goodwill balances are not automatically fatal, but when goodwill exceeds a large share of assets, the company may be carrying acquisition prices that the underlying economics cannot justify. That is how impairment charges become a delayed admission that management overpaid.</p>
+</div>
+
+<div class="callout callout-blue">
+<div class="callout-label">Beat Lynch Connection</div>
+<p>Financial Durability Score incorporates balance sheet strength across debt ratios, working capital health, and ROIC consistency. ROIC is the core profitability metric behind Supercompounder classification — a stock cannot earn Beat Lynch's highest designation without sustained high returns on invested capital.</p>
+</div>
+</div>
+
+<div class="lesson-card" onclick="toggleLesson(2)">
+<div class="lesson-num">13</div>
+<div><div class="lesson-title">Cash Flow — The Truth Detector</div><div class="lesson-desc">Free cash flow, owner earnings, and why cash flow exposes what earnings conceal.</div></div>
+<div class="lesson-mp">25 MP</div>
+</div>
+<div class="lesson-detail" id="ld-2">
+<div class="tag-row"><span class="ctag">Operating Cash Flow</span><span class="ctag">Free Cash Flow</span><span class="ctag">Cash Conversion</span><span class="ctag">Owner Earnings</span><span class="ctag">Maintenance Capex</span></div>
+
+<h3>Cash Flow Is The Hardest Statement To Manipulate</h3>
+<p>The income statement involves dozens of accounting judgments: revenue timing, expense capitalization, depreciation schedules, and one-time adjustments. The cash flow statement tracks actual cash movement. When reported earnings and cash flow diverge for extended periods, the analyst should assume the accrual earnings are the less trustworthy number until proven otherwise.</p>
+<p>The core question in this lesson is simple: <strong class="hl">are earnings converting to cash?</strong> If a company reports profits but generates little operating cash flow, the difference almost always lives in working capital swings, capitalized costs, or accounting choices. That gap matters enormously for valuation and durability.</p>
+
+<h3>Free Cash Flow - What The Business Actually Generates</h3>
+<p>Free Cash Flow (FCF) = Operating Cash Flow - Capital Expenditures. This is the cash available after maintaining and growing the business: the cash that can fund dividends, buybacks, acquisitions, or debt reduction. FCF is what you are actually buying when you buy a stock.</p>
+
+<div class="two-col">
+<div class="detail-card">
+<div class="detail-card-title">Net Income -> Cash Flow Divergence Drivers</div>
+<ul>
+<li><strong class="hl">Depreciation &amp; Amortization:</strong> non-cash charge added back to OCF.</li>
+<li><strong class="hl">Stock-Based Compensation:</strong> non-cash expense, but real dilution.</li>
+<li><strong class="hl">Working Capital Changes:</strong> rising receivables can trap cash while earnings look fine.</li>
+<li><strong class="hl">Capitalized Expenses:</strong> cash spent but not immediately run through the income statement.</li>
+<li><strong class="hl">Restructuring Charges:</strong> often labeled one-time, sometimes recurring in practice.</li>
+</ul>
+</div>
+<div class="detail-card detail-card-red">
+<div class="detail-card-title">Warning Signs: Persistent Divergence</div>
+<ul>
+<li>Three or more years of net income materially above operating cash flow.</li>
+<li>FCF negative while EPS grows.</li>
+<li>Growth funded by balance sheet expansion rather than operations.</li>
+<li>Rising capex as a percent of OCF without clear return evidence.</li>
+<li>Large "other" adjustments that management struggles to explain cleanly.</li>
+</ul>
+</div>
+</div>
+
+<h3>Cash Conversion Quality</h3>
+<p>The Cash Conversion Ratio (FCF ÷ Net Income) measures how efficiently reported earnings convert into actual cash. Ratios above 100% usually indicate exceptionally high-quality businesses or favorable working-capital dynamics. Ratios in the 60-80% range demand investigation, and persistently low conversion is often the market's first forensic clue that the income statement is overstating reality.</p>
+
+<div class="exhibit">
+<div class="exhibit-label">Cash Conversion Quality Grades</div>
+<div class="table-wrap">
+<table class="fw-table">
+<thead>
+<tr><th>Grade</th><th>FCF / Net Income</th><th>Signal</th><th>Example Companies</th></tr>
+</thead>
+<tbody>
+<tr><td class="tier-1">Excellent</td><td>&gt; 100%</td><td>Cash exceeds earnings; often negative working capital or capital-light model</td><td>Visa, Apple, Mastercard</td></tr>
+<tr><td class="tier-2">Good</td><td>80-100%</td><td>Healthy conversion; modest capex needs</td><td>Microsoft, J&amp;J, P&amp;G</td></tr>
+<tr><td class="tier-4">Concerning</td><td>60-80%</td><td>Meaningful gap; investigate working capital and capex trends</td><td>Amazon in heavy-capex years, select cyclical hardware names</td></tr>
+<tr><td class="tier-5">Red Flag</td><td>&lt; 60%</td><td>Earnings not backed by cash; investigate immediately</td><td>GE pre-restructure, Luckin Coffee pre-fraud</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<h3>Buffett's Owner Earnings - The True Measure</h3>
+<p>In Tier 1's Masters 101, you learned that Warren Buffett thinks in terms of "owner earnings" — what the business generates for its owners after maintaining its competitive position. Now we formalize the calculation by separating maintenance capex from growth capex.</p>
+
+<div class="formula-box">
+<div class="formula-main">Owner Earnings = Net Income + D&amp;A + Non-Cash - Maintenance Capex</div>
+<div class="formula-sub">The cash available to owners after maintaining — but not growing — the business.</div>
+</div>
+
+<p class="fine-print"><strong class="hl">Worked Example (Hypothetical Industrial):</strong> Net Income = $500M. D&amp;A = $200M. Other non-cash charges = $50M. Total Capex = $350M, of which $200M is maintenance and $150M is growth investment. Owner Earnings = $500M + $200M + $50M - $200M = $550M. Compare that to reported FCF of $400M if total capex were deducted with no distinction between maintenance and growth.</p>
+
+<div class="callout callout-red">
+<div class="callout-label">The Cash Flow Truth</div>
+<p>"When earnings tell a different story than cash flow, cash flow is telling the truth." This is one of the most important forensic principles in financial analysis. Earnings are shaped by accounting choices. Cash flow is shaped by bank statements. The largest frauds of the last 30 years all showed persistent cash-flow divergence before the market fully recognized the problem.</p>
+</div>
+
+<div class="callout callout-blue">
+<div class="callout-label">Beat Lynch Connection</div>
+<p>Financial Durability Score requires earnings backed by cash. Cash conversion quality is a primary input — a company reporting strong EPS growth while declining cash conversion will see its Durability Score fall even as headline numbers look strong. That protects NIL portfolios from earnings-quality traps.</p>
+</div>
+</div>
+
+<div class="lesson-card" onclick="toggleLesson(3)">
+<div class="lesson-num">14</div>
+<div><div class="lesson-title">Forensic Accounting — Detecting Manipulation</div><div class="lesson-desc">The Beneish M-Score, red flag detection, and seeing fraud before it's obvious.</div></div>
+<div class="lesson-mp">25 MP</div>
+</div>
+<div class="lesson-detail" id="ld-3">
+<div class="tag-row"><span class="ctag">Beneish M-Score</span><span class="ctag">Red Flags</span><span class="ctag">Fraud Detection</span></div>
+<div class="callout callout-purple"><div class="callout-label">Content Pending</div><p>This lesson is ready for its full forensic accounting content and examples once you send them over.</p></div>
+</div>
+
+<div class="lesson-card" onclick="toggleLesson(4)">
+<div class="lesson-num">15</div>
+<div><div class="lesson-title">Discounted Cash Flow — The Foundation of Intrinsic Value</div><div class="lesson-desc">DCF modeling, terminal value, WACC, and making assumptions explicit.</div></div>
+<div class="lesson-mp">25 MP</div>
+</div>
+<div class="lesson-detail" id="ld-4">
+<div class="tag-row"><span class="ctag">DCF</span><span class="ctag">Terminal Value</span><span class="ctag">WACC</span></div>
+<div class="callout callout-purple"><div class="callout-label">Content Pending</div><p>The valuation mechanics and worked example for Lesson 15 are still pending restoration.</p></div>
+</div>
+
+<div class="lesson-card" onclick="toggleLesson(5)">
+<div class="lesson-num">16</div>
+<div><div class="lesson-title">Comparable Analysis and Relative Valuation</div><div class="lesson-desc">Multiples, peer selection, the bubble danger, and when "cheap" means nothing.</div></div>
+<div class="lesson-mp">25 MP</div>
+</div>
+<div class="lesson-detail" id="ld-5">
+<div class="tag-row"><span class="ctag">Multiples</span><span class="ctag">Peer Sets</span><span class="ctag">Bubble Risk</span></div>
+<div class="callout callout-purple"><div class="callout-label">Content Pending</div><p>Lesson 16 has its restored card and interaction shell; the full instructional copy will be dropped in when available.</p></div>
+</div>
+
+<div class="lesson-card" onclick="toggleLesson(6)">
+<div class="lesson-num">17</div>
+<div><div class="lesson-title">Sum-of-Parts and Special Situations Valuation</div><div class="lesson-desc">Conglomerates, hidden assets, SOTP analysis, and catalyst identification.</div></div>
+<div class="lesson-mp">25 MP</div>
+</div>
+<div class="lesson-detail" id="ld-6">
+<div class="tag-row"><span class="ctag">SOTP</span><span class="ctag">Hidden Assets</span><span class="ctag">Catalysts</span></div>
+<div class="callout callout-purple"><div class="callout-label">Content Pending</div><p>The page structure for Lesson 17 is ready; the case studies and valuation content remain to be filled in.</p></div>
+</div>
+
+<div class="lesson-card" onclick="toggleLesson(7)">
+<div class="lesson-num">18</div>
+<div><div class="lesson-title">Valuation in Practice — Margin of Safety and the Range</div><div class="lesson-desc">Three-scenario framework, expected value, and professional valuation synthesis.</div></div>
+<div class="lesson-mp">25 MP</div>
+</div>
+<div class="lesson-detail" id="ld-7">
+<div class="tag-row"><span class="ctag">Scenario Ranges</span><span class="ctag">Expected Value</span><span class="ctag">Margin of Safety</span></div>
+<div class="callout callout-purple"><div class="callout-label">Content Pending</div><p>This lesson detail area is intentionally staged for the scenario framework and synthesis content you send next.</p></div>
+</div>
+
+<div class="lesson-card" onclick="toggleLesson(8)">
+<div class="lesson-num">19</div>
+<div><div class="lesson-title">Valuation Mistakes and Traps</div><div class="lesson-desc">Value traps, growth traps, peak earnings, anchoring, and the five costliest errors.</div></div>
+<div class="lesson-mp">25 MP</div>
+</div>
+<div class="lesson-detail" id="ld-8">
+<div class="tag-row"><span class="ctag">Value Traps</span><span class="ctag">Peak Earnings</span><span class="ctag">Anchoring</span></div>
+<div class="callout callout-purple"><div class="callout-label">Content Pending</div><p>Lesson 19 is scaffolded and interactive. The actual trap framework and examples will be restored separately.</p></div>
+</div>
+
+<div class="lesson-card" onclick="toggleLesson(9)">
+<div class="lesson-num">20</div>
+<div><div class="lesson-title">The Accountant's Eye — Building a Professional Analytical Process</div><div class="lesson-desc">Repeatable workflow, investment summaries, converging evidence, and the bridge to Pillar III.</div></div>
+<div class="lesson-mp">25 MP</div>
+</div>
+<div class="lesson-detail" id="ld-9">
+<div class="tag-row"><span class="ctag">Workflow</span><span class="ctag">Investment Summary</span><span class="ctag">Bridge to Pillar III</span></div>
+<div class="callout callout-purple"><div class="callout-label">Content Pending</div><p>The process framework shell is ready here; the full lesson content will be added after you send the source notes.</p></div>
+</div>
+
+</div>
+</div>
+
+<div class="section">
+<div class="section-title">Pillar II Master Framework Summary</div>
+<div class="table-wrap">
+<table class="fw-table">
+<thead>
+<tr><th>Framework</th><th>Core Principle</th><th>Beat Lynch / NIL Application</th></tr>
+</thead>
+<tbody>
+<tr><td>Income Statement Analysis</td><td>Revenue quality and margin trajectory reveal competitive dynamics</td><td>Growth Quality Score, revenue quality classification</td></tr>
+<tr><td>Balance Sheet Analysis</td><td>ROIC is the most important profitability metric; debt structure = fragility</td><td>Financial Durability Score, ROIC-based screening</td></tr>
+<tr><td>Cash Flow Truth</td><td>FCF is the honest earnings number; earnings-cash divergence = red flag</td><td>Financial Durability Score, cash conversion quality</td></tr>
+<tr><td>Forensic Accounting</td><td>Red flags precede blowups; detect manipulation before it's obvious</td><td>Earnings quality filter in scoring engine</td></tr>
+<tr><td>DCF Valuation</td><td>Intrinsic value = PV of all future cash flows, discounted appropriately</td><td>Foundation for Mean Magic's quality-valuation interaction</td></tr>
+<tr><td>Comparable Analysis</td><td>Market-based reality check; dangerous in bubbles</td><td>Relative valuation context in Stock Analyzer</td></tr>
+<tr><td>Sum-of-Parts</td><td>Hidden value in complex companies; requires catalyst to unlock</td><td>Catalyst Vector for value-unlocking events</td></tr>
+<tr><td>Margin of Safety</td><td>Gap between value and price; size proportional to uncertainty</td><td>Risk Vector, position sizing in NIL</td></tr>
+<tr><td>Valuation Traps</td><td>Value traps, growth traps, peak-cycle traps — framework errors</td><td>Mean Magic multi-dimensional filter prevents single-dimension errors</td></tr>
+<tr><td>Professional Process</td><td>Repeatable workflow converging multiple evidence sources</td><td>Stock Analyzer workflow, investment summary template</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="tab-content" id="tab-exam">
+<div class="container">
+<div class="exam-wrap">
+<div class="start-exam-wrap">
+<h2>Final Exam Restoration In Progress</h2>
+<p>The Pillar II curriculum shell is now restored, but the full 30-question exam body has not been rebuilt yet. Once the remaining lesson source content is recovered, the final exam will be added back into this page.</p>
+<div class="exam-rules">
+<div class="rule-card"><div class="r-num">30</div><div class="r-label">Questions</div></div>
+<div class="rule-card"><div class="r-num">75%</div><div class="r-label">Pass Threshold</div></div>
+<div class="rule-card"><div class="r-num">250</div><div class="r-label">Mastery Points</div></div>
+<div class="rule-card"><div class="r-num">Soon</div><div class="r-label">Exam Body</div></div>
+</div>
+<div class="callout callout-purple">
+<div class="callout-label">Next Pass</div>
+<p>Send the lesson and exam source material when ready and this tab can be upgraded from placeholder state to the full interactive assessment.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<script>
+function showTab(t){
+document.querySelectorAll('.tab-content').forEach(function(el){el.classList.remove('active');});
+document.querySelectorAll('.tab-btn').forEach(function(el){el.classList.remove('active');});
+document.getElementById('tab-'+t).classList.add('active');
+document.querySelectorAll('.tab-btn').forEach(function(b){
+if((t==='curriculum'&&b.textContent.trim()==='CURRICULUM')||(t==='exam'&&b.textContent.trim()==='FINAL EXAM')){
+b.classList.add('active');
+}
+});
+}
+
+function toggleLesson(i){
+var d=document.getElementById('ld-'+i);
+var c=d.previousElementSibling;
+var open=d.classList.contains('open');
+document.querySelectorAll('.lesson-detail').forEach(function(el){el.classList.remove('open');});
+document.querySelectorAll('.lesson-card').forEach(function(el){el.classList.remove('active-card');});
+if(!open){
+d.classList.add('open');
+c.classList.add('active-card');
+}
+}
+</script>
+
+<link rel="stylesheet" href="../../feedback-drawer.css">
+<script src="../../feedback-drawer.js" defer></script>
+</body>
+</html>
