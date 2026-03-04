@@ -13,7 +13,10 @@ a{text-decoration:none;color:inherit;}
 .top-bar{background:var(--panel);border-bottom:1px solid var(--border);padding:12px 32px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:100;flex-wrap:wrap;}
 .logo{font-family:Arial,sans-serif;font-weight:900;font-size:18px;color:var(--gold);letter-spacing:2px;}
 .pill{background:var(--gold);color:var(--dark);font-family:Arial,sans-serif;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:1px;}
-.top-note{margin-left:auto;font-family:Arial,sans-serif;font-size:11px;font-weight:700;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;}
+.top-note{margin-left:auto;display:flex;align-items:center;gap:12px;}
+.top-note-mark{display:flex;align-items:center;justify-content:center;width:42px;height:42px;filter:drop-shadow(0 0 14px rgba(201,168,76,.35));}
+.top-note-mark svg{display:block;width:100%;height:100%;}
+.top-note-badge{font-family:Arial,sans-serif;font-size:11px;font-weight:700;color:var(--gold);letter-spacing:1.8px;text-transform:uppercase;border:1px solid rgba(201,168,76,.28);border-radius:999px;padding:7px 12px;background:rgba(201,168,76,.06);}
 .hero{background:linear-gradient(135deg,#0D0F14,#13161E,#0a0c10);border-bottom:1px solid var(--border);padding:56px 32px 40px;text-align:center;position:relative;overflow:hidden;}
 .hero::before{content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:500px;height:500px;background:radial-gradient(circle,rgba(201,168,76,.08) 0%,transparent 70%);pointer-events:none;}
 .course-label{font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:12px;position:relative;z-index:1;}
@@ -39,10 +42,12 @@ a{text-decoration:none;color:inherit;}
 .callout{background:rgba(201,168,76,.05);border-left:3px solid var(--gold);padding:16px 20px;border-radius:0 8px 8px 0;margin:18px 0;}
 .callout-label{font-family:Arial,sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;}
 .callout p{color:var(--text);margin:0;font-size:14px;}
+.callout p + p{margin-top:8px;}
 @media(max-width:900px){.course-grid{grid-template-columns:1fr;}}
 @media(max-width:640px){
   .top-bar{padding:12px 18px;gap:10px;}
-  .top-note{margin-left:0;width:100%;}
+  .top-note{margin-left:0;width:100%;justify-content:space-between;}
+  .top-note-mark{width:36px;height:36px;}
   .hero{padding:48px 20px 32px;}
   .hero-sub{font-size:16px;}
   .stats-row{gap:10px;}
@@ -60,7 +65,34 @@ a{text-decoration:none;color:inherit;}
 <div class="top-bar">
   <div class="logo">BEAT LYNCH</div>
   <span class="pill">INFINITE ALPHA</span>
-  <div class="top-note">Feedback Preview</div>
+  <div class="top-note">
+    <div class="top-note-mark" aria-hidden="true">
+      <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" role="img">
+        <defs>
+          <radialGradient id="starGlow" cx="50%" cy="50%" r="60%">
+            <stop offset="0%" stop-color="#FFF4A3" stop-opacity="0.98"/>
+            <stop offset="48%" stop-color="#F5D84E" stop-opacity="0.82"/>
+            <stop offset="100%" stop-color="#F5D84E" stop-opacity="0"/>
+          </radialGradient>
+          <linearGradient id="starFill" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#FFF7B8"/>
+            <stop offset="45%" stop-color="#F8DE48"/>
+            <stop offset="100%" stop-color="#D89D00"/>
+          </linearGradient>
+        </defs>
+        <circle cx="60" cy="60" r="44" fill="url(#starGlow)"/>
+        <polygon fill="url(#starFill)" points="60,6 67,48 60,60 53,48"/>
+        <polygon fill="url(#starFill)" points="114,60 72,67 60,60 72,53"/>
+        <polygon fill="url(#starFill)" points="60,114 67,72 60,60 53,72"/>
+        <polygon fill="url(#starFill)" points="6,60 48,67 60,60 48,53"/>
+        <polygon fill="url(#starFill)" points="97,23 77,54 60,60 66,43"/>
+        <polygon fill="url(#starFill)" points="97,97 66,77 60,60 77,66"/>
+        <polygon fill="url(#starFill)" points="23,97 54,77 60,60 43,66"/>
+        <polygon fill="url(#starFill)" points="23,23 54,54 60,60 43,43"/>
+      </svg>
+    </div>
+    <div class="top-note-badge">Pre-Alpha</div>
+  </div>
 </div>
 
 <div class="hero">
@@ -75,6 +107,12 @@ a{text-decoration:none;color:inherit;}
 </div>
 
 <div class="container">
+  <div class="callout">
+    <div class="callout-label">Preview Notice</div>
+    <p>This curriculum preview reflects an early pre-alpha build. Visual inconsistencies, layout edge cases, and minor interaction issues may still be present while the content review is underway.</p>
+    <p>Please prioritize feedback on instructional clarity, factual accuracy, completeness, and overall learning quality rather than temporary UI polish.</p>
+  </div>
+
   <section class="section" aria-labelledby="tier-0">
     <div class="section-title" id="tier-0">TIER 0: WELCOME</div>
     <div class="course-grid">
