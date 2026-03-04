@@ -106,6 +106,10 @@ strong.hl{color:#fff;}
 .fw-table td.tier-4{color:#fbbf24;}
 .fw-table td.tier-5{color:#f87171;}
 .fw-table tr:last-child td{border-bottom:none;}
+.value-good{background:rgba(34,197,94,.08);color:var(--green);font-weight:700;}
+.value-warn{background:rgba(201,168,76,.08);color:var(--gold);font-weight:700;}
+.value-bad{background:rgba(239,68,68,.08);color:#f87171;font-weight:700;}
+.value-neutral{background:rgba(255,255,255,.02);color:#E8EAF0;}
 .svg-wrap{display:flex;justify-content:center;margin:18px 0;}
 .svg-wrap svg{max-width:100%;height:auto;}
 .exam-wrap{max-width:800px;margin:0 auto;}
@@ -488,8 +492,74 @@ strong.hl{color:#fff;}
 <div class="lesson-mp">25 MP</div>
 </div>
 <div class="lesson-detail" id="ld-3">
-<div class="tag-row"><span class="ctag">Beneish M-Score</span><span class="ctag">Red Flags</span><span class="ctag">Fraud Detection</span></div>
-<div class="callout callout-purple"><div class="callout-label">Content Pending</div><p>This lesson is ready for its full forensic accounting content and examples once you send them over.</p></div>
+<div class="tag-row"><span class="ctag">Beneish M-Score</span><span class="ctag">Forensic Signals</span><span class="ctag">Earnings Manipulation</span><span class="ctag">Red Flags</span><span class="ctag">Management Credibility</span></div>
+
+<h3>Why Forensic Accounting Matters</h3>
+<p>You will never catch every fraud. The goal of forensic accounting is not omniscience — it is probability reduction. By systematically screening for quantitative red flags, you can avoid the majority of accounting disasters before the market fully prices them in. The objective is not to prove fraud in court. It is to recognize when the risk-reward has changed enough that avoidance becomes the rational decision.</p>
+<p>Enron, WorldCom, Tyco, Luckin Coffee, and Wirecard all had visible warning signs in public filings before collapse. Forensic analysis is what turns those signals into a disciplined screen rather than a hindsight story.</p>
+
+<h3>The Beneish M-Score - Statistical Fraud Detection</h3>
+<p>Professor Messod Beneish developed the M-score using eight financial ratios that statistically distinguish manipulators from non-manipulators. An M-score above roughly <strong class="hl">-1.78</strong> suggests elevated probability of earnings manipulation. It is not a verdict, but it is an effective triage tool for deciding which companies deserve much deeper skepticism.</p>
+
+<div class="exhibit">
+<div class="exhibit-label">Beneish M-Score — Eight Components</div>
+<div class="table-wrap">
+<table class="fw-table">
+<thead>
+<tr><th>Component</th><th>What It Measures</th><th>Manipulation Signal</th><th>Threshold</th></tr>
+</thead>
+<tbody>
+<tr><td class="tier-2">DSRI</td><td>Days Sales in Receivables Index</td><td>Revenue recognized but not collected</td><td>&gt; 1.465</td></tr>
+<tr><td class="tier-2">GMI</td><td>Gross Margin Index</td><td>Deteriorating margins increase pressure to manipulate</td><td>&gt; 1.193</td></tr>
+<tr><td class="tier-2">AQI</td><td>Asset Quality Index</td><td>Increasing capitalization of expenses</td><td>&gt; 1.254</td></tr>
+<tr><td class="tier-2">SGI</td><td>Sales Growth Index</td><td>High growth companies face more pressure</td><td>&gt; 1.607</td></tr>
+<tr><td class="tier-2">DEPI</td><td>Depreciation Index</td><td>Slowing depreciation to inflate earnings</td><td>&gt; 1.077</td></tr>
+<tr><td class="tier-2">SGAI</td><td>SG&amp;A Expense Index</td><td>SG&amp;A rising disproportionately</td><td>&gt; 1.041</td></tr>
+<tr><td class="tier-2">TATA</td><td>Total Accruals to Total Assets</td><td>High accruals indicate more room for manipulation</td><td>&gt; 0.018</td></tr>
+<tr><td class="tier-2">LVGI</td><td>Leverage Index</td><td>Rising leverage increases manipulation incentive</td><td>&gt; 1.111</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<h3>The Ten Quantitative Red Flags</h3>
+<p>Beyond the M-score, analysts monitor a checklist of specific signals that often precede restatements and blowups. No single flag is definitive. Context matters. But when three or more appear together, the stock should often move from "potential investment" to "avoid until clarified."</p>
+
+<div class="exhibit">
+<div class="exhibit-label">Forensic Accounting Red Flag Checklist</div>
+<div class="table-wrap">
+<table class="fw-table">
+<thead>
+<tr><th>#</th><th>Red Flag</th><th>What To Look For</th><th>Historical Example</th></tr>
+</thead>
+<tbody>
+<tr><td>1</td><td>Revenue growth outpacing cash flow growth</td><td>OCF growth lagging revenue by 15%+ for several quarters</td><td>Luckin Coffee (2019)</td></tr>
+<tr><td>2</td><td>DSO rising faster than revenue</td><td>10%+ YoY DSO increase without model change</td><td>Sunbeam (1997)</td></tr>
+<tr><td>3</td><td>Inventory growing faster than sales</td><td>Inventory/revenue ratio expanding across multiple quarters</td><td>Cisco (2000), Peloton (2021)</td></tr>
+<tr><td>4</td><td>Recurring "one-time" charges</td><td>Restructuring or special charges in 3+ consecutive years</td><td>IBM (2014-2019)</td></tr>
+<tr><td>5</td><td>Auditor changes or qualified opinions</td><td>Switching firms, late filings, or going-concern language</td><td>Wirecard (2020)</td></tr>
+<tr><td>6</td><td>Complex related-party transactions</td><td>Material revenue from entities controlled by insiders</td><td>Enron SPEs</td></tr>
+<tr><td>7</td><td>SBC exceeding 15% of revenue</td><td>Massive recurring dilution hidden in "non-GAAP"</td><td>Palantir (2021-2022)</td></tr>
+<tr><td>8</td><td>Capitalizing operating expenses</td><td>Capex/revenue suddenly increasing without assets to match</td><td>WorldCom</td></tr>
+<tr><td>9</td><td>CFO or CEO departures labeled routine</td><td>Abrupt C-suite exits, especially finance leadership</td><td>Under Armour (2017)</td></tr>
+<tr><td>10</td><td>Margin expansion from expense timing</td><td>Delaying or capitalizing costs to future periods</td><td>Valeant (2015)</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<h3>Management Credibility Assessment</h3>
+<p>Numbers do not exist in a vacuum — they are produced by people. Management credibility signals include consistency between public statements and reported results, willingness to discuss negative developments honestly, stable auditor relationships, compensation aligned with long-term value creation, and insider behavior that matches the narrative. When management language turns evasive, credibility degrades and the probability of accounting problems rises.</p>
+
+<div class="callout callout-red">
+<div class="callout-label">The Forensic Principle</div>
+<p>"You will never catch every fraud. But you can avoid most by asking: is cash flow confirming what earnings claim?" When the answer is repeatedly no, the burden of proof shifts from the skeptic to management. In investing, avoidance can be as powerful as selection.</p>
+</div>
+
+<div class="callout callout-blue">
+<div class="callout-label">Beat Lynch Connection</div>
+<p>Financial Durability Score includes earnings-quality analysis derived from these forensic signals. In NIL competition, accounting blowups are catastrophic PATR events. A single position that restates earnings or faces SEC investigation can destroy months of portfolio progress, so the forensic filter exists to reduce that tail risk.</p>
+</div>
 </div>
 
 <div class="lesson-card" onclick="toggleLesson(4)">
@@ -498,8 +568,58 @@ strong.hl{color:#fff;}
 <div class="lesson-mp">25 MP</div>
 </div>
 <div class="lesson-detail" id="ld-4">
-<div class="tag-row"><span class="ctag">DCF</span><span class="ctag">Terminal Value</span><span class="ctag">WACC</span></div>
-<div class="callout callout-purple"><div class="callout-label">Content Pending</div><p>The valuation mechanics and worked example for Lesson 15 are still pending restoration.</p></div>
+<div class="tag-row"><span class="ctag">DCF</span><span class="ctag">Terminal Value</span><span class="ctag">WACC</span><span class="ctag">Sensitivity Analysis</span><span class="ctag">Intrinsic Value</span></div>
+
+<h3>The Core Insight: All Value Is Present Value</h3>
+<p>Discounted Cash Flow is the foundational valuation method because a business is worth the present value of all future cash it will generate for its owners. Multiples are shortcuts for this same logic. DCF simply forces the assumptions into the open: growth, margins, reinvestment, risk, and time.</p>
+
+<div class="formula-box">
+<div class="formula-main">EV = Σ (FCF<tspan style="font-size:12px;vertical-align:super;">t</tspan> / (1 + WACC)<tspan style="font-size:12px;vertical-align:super;">t</tspan>) + TV / (1 + WACC)<tspan style="font-size:12px;vertical-align:super;">n</tspan></div>
+<div class="formula-sub">Years 1-5 (or 1-10): explicit FCF forecast, discounted. Terminal value captures all cash flows beyond the forecast period.</div>
+</div>
+
+<p class="fine-print">Terminal value often comprises 60-80% of total DCF value. That is a humbling but important fact: most of a business's value sits in the distant future, which is why assumption discipline matters so much.</p>
+
+<h3>Building The Projection - Where Judgment Lives</h3>
+<p>The math is simple. The judgment is in the assumptions: what revenue will grow at, whether margins expand or compress, how much capital reinvestment is required, and what discount rate is appropriate. The DCF is not weak because it is assumption-sensitive. That sensitivity is the point. It forces you to make your beliefs explicit and testable.</p>
+
+<h3>WACC - The Discount Rate That Changes Everything</h3>
+<p>The Weighted Average Cost of Capital blends the cost of equity and cost of debt based on the company's capital structure. When rates rise, WACC rises, and long-duration assets become less valuable. That is why growth stocks can collapse in price even when near-term earnings remain healthy: the discount rate applied to distant cash flows changed.</p>
+
+<h3>Terminal Value - The Honest Uncertainty</h3>
+<p>Terminal value captures all cash flows beyond the explicit forecast period. Two common approaches dominate: the perpetuity growth model and the exit multiple model. Both require judgment. The key is to remember that terminal value is not a bug in DCF. It is an honest admission that long-term value matters more than the next few quarters.</p>
+
+<h3>Sensitivity Analysis - Value Is A Range</h3>
+<p>The most important output of a DCF is rarely a single answer. It is the sensitivity table. That table shows how valuation changes under different growth and discount-rate assumptions and gives you a disciplined range instead of false precision.</p>
+
+<div class="exhibit">
+<div class="exhibit-label">DCF Sensitivity Grid — Implied Share Price (Stock Trading At $105)</div>
+<div class="table-wrap">
+<table class="fw-table">
+<thead>
+<tr><th>Growth / WACC</th><th>8%</th><th>9%</th><th>10%</th><th>11%</th><th>12%</th></tr>
+</thead>
+<tbody>
+<tr><td>3%</td><td class="value-good">$142</td><td class="value-good">$118</td><td class="value-neutral">$99</td><td class="value-bad">$84</td><td class="value-bad">$72</td></tr>
+<tr><td>5%</td><td class="value-good">$168</td><td class="value-good">$137</td><td class="value-good">$113</td><td class="value-neutral">$95</td><td class="value-bad">$80</td></tr>
+<tr><td>7%</td><td class="value-good">$203</td><td class="value-good">$161</td><td class="value-good">$130</td><td class="value-neutral">$107</td><td class="value-neutral">$89</td></tr>
+<tr><td>10%</td><td class="value-good">$278</td><td class="value-good">$209</td><td class="value-good">$163</td><td class="value-good">$130</td><td class="value-neutral">$106</td></tr>
+<tr><td>12%</td><td class="value-good">$352</td><td class="value-good">$254</td><td class="value-good">$192</td><td class="value-good">$149</td><td class="value-good">$119</td></tr>
+</tbody>
+</table>
+</div>
+<p class="fine-print">Green values imply upside versus the current $105 price. At 10% WACC and 5% growth, intrinsic value is about $113, which is not enough margin of safety for most professional frameworks.</p>
+</div>
+
+<div class="callout">
+<div class="callout-label">Core Principle</div>
+<p>A DCF is not a calculator that outputs truth. It is a framework for making assumptions explicit. The real value is not the number at the bottom; it is the process of deciding what you believe about growth, margins, reinvestment, and risk, then testing how wrong you can be before losing money.</p>
+</div>
+
+<div class="callout callout-blue">
+<div class="callout-label">Beat Lynch Connection</div>
+<p>Mean Magic's Growth Quality, Moat Strength, and Financial Durability scores are precisely the qualitative inputs a professional uses to set DCF assumptions. A higher-quality business justifies higher growth duration and lower discount-rate skepticism. The scoring system exists to translate qualitative judgment into valuation discipline.</p>
+</div>
 </div>
 
 <div class="lesson-card" onclick="toggleLesson(5)">
@@ -508,8 +628,83 @@ strong.hl{color:#fff;}
 <div class="lesson-mp">25 MP</div>
 </div>
 <div class="lesson-detail" id="ld-5">
-<div class="tag-row"><span class="ctag">Multiples</span><span class="ctag">Peer Sets</span><span class="ctag">Bubble Risk</span></div>
-<div class="callout callout-purple"><div class="callout-label">Content Pending</div><p>Lesson 16 has its restored card and interaction shell; the full instructional copy will be dropped in when available.</p></div>
+<div class="tag-row"><span class="ctag">P/E</span><span class="ctag">EV/EBITDA</span><span class="ctag">P/S</span><span class="ctag">PEG Ratio</span><span class="ctag">Peer Selection</span></div>
+
+<h3>The Logic And The Limitation Of Multiples</h3>
+<p>Comparable analysis values a company by comparing it to similar businesses using standardized ratios. If one company trades at 20x earnings and a similar one trades at 15x, the market is telling you something about expectations, quality, or risk. Multiples are useful because they are fast, intuitive, and grounded in market context. Their limitation is equally important: they tell you what the market pays for similar businesses, not what those businesses are intrinsically worth.</p>
+
+<h3>Key Multiples - When And Why To Use Each</h3>
+<div class="exhibit">
+<div class="exhibit-label">Multiple Selection Framework</div>
+<div class="table-wrap">
+<table class="fw-table">
+<thead>
+<tr><th>Multiple</th><th>Formula</th><th>Best Used When</th><th>Pitfalls</th></tr>
+</thead>
+<tbody>
+<tr><td>P/E</td><td>Price / EPS</td><td>Mature, profitable companies with stable earnings</td><td>Meaningless for loss-makers; earnings easily manipulated</td></tr>
+<tr><td>EV/EBITDA</td><td>Enterprise Value / EBITDA</td><td>Comparing firms with different leverage; M&amp;A valuation</td><td>Ignores capex differences and tax structures</td></tr>
+<tr><td>P/S</td><td>Price / Revenue per Share</td><td>Pre-profit growth companies; early-stage SaaS</td><td>Ignores profitability entirely; can justify absurd valuations</td></tr>
+<tr><td>P/FCF</td><td>Price / Free Cash Flow per Share</td><td>Cash-generative businesses; testing earnings quality</td><td>Lumpy capex or temporary working-capital swings can distort</td></tr>
+<tr><td>PEG</td><td>P/E / EPS Growth Rate</td><td>Growth companies; Peter Lynch's preferred quick ratio</td><td>Assumes linear growth; unreliable if estimates are weak</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<h3>Selecting The Right Comparable Set</h3>
+<p>The most common mistake in comps is choosing the wrong peers. "Same industry" is necessary but not sufficient. Proper peer selection requires alignment on growth rate, margin profile, business model, geography, and market-cap tier. The tighter the comparable set, the more informative the analysis.</p>
+
+<h3>Worked Comparable Analysis - Enterprise SaaS</h3>
+<div class="exhibit">
+<div class="exhibit-label">SaaS Peer Comparable Table</div>
+<div class="table-wrap">
+<table class="fw-table">
+<thead>
+<tr><th>Company</th><th>EV/Revenue</th><th>EV/EBITDA</th><th>Rev. Growth</th><th>Gross Margin</th><th>Rule of 40</th></tr>
+</thead>
+<tbody>
+<tr><td>ServiceNow</td><td>16.5x</td><td>48x</td><td>24%</td><td>80%</td><td>52</td></tr>
+<tr><td>CrowdStrike</td><td>18.2x</td><td>55x</td><td>33%</td><td>75%</td><td>55</td></tr>
+<tr><td>Datadog</td><td>17.0x</td><td>62x</td><td>26%</td><td>79%</td><td>46</td></tr>
+<tr><td>Workday</td><td>9.8x</td><td>32x</td><td>17%</td><td>75%</td><td>38</td></tr>
+<tr><td class="tier-3">Target Co.</td><td class="tier-3">11.0x</td><td class="tier-3">38x</td><td class="tier-3">21%</td><td class="tier-3">77%</td><td class="tier-3">43</td></tr>
+</tbody>
+</table>
+</div>
+<p class="fine-print">Target Co. trades at a discount to ServiceNow and CrowdStrike on EV/Revenue, but its slower growth rate partly explains that discount. Relative valuation becomes useful only when the peer set is genuinely comparable.</p>
+</div>
+
+<div class="two-col">
+<div class="detail-card detail-card-green">
+<div class="detail-card-title">Strengths Of Relative Valuation</div>
+<ul>
+<li>Reflects what investors are actually paying right now.</li>
+<li>Quick to compute and helpful for screening large universes.</li>
+<li>Useful as a sanity check on DCF outputs.</li>
+<li>Standard for sell-side equity research and M&amp;A discussion.</li>
+</ul>
+</div>
+<div class="detail-card detail-card-red">
+<div class="detail-card-title">Dangers Of Relative Valuation</div>
+<ul>
+<li>If the entire sector is overvalued, "cheap" inside that bubble is still dangerous.</li>
+<li>Backward-looking or consensus-based estimates may be wrong.</li>
+<li>Multiples compress in bear markets regardless of quality.</li>
+<li>Poor peer selection can produce false confidence.</li>
+</ul>
+</div>
+</div>
+
+<div class="callout callout-red">
+<div class="callout-label">The Bubble Trap</div>
+<p>In 1999, many dot-com stocks looked "cheap relative to peers" even though the entire peer group was absurdly overvalued. Relative valuation is a useful input, but never a complete decision framework. It must always be anchored to some view of absolute value.</p>
+</div>
+
+<div class="callout callout-blue">
+<div class="callout-label">Beat Lynch Connection</div>
+<p>Stock Analyzer provides relative valuation context — where a stock trades versus peers. But Mean Magic goes beyond relative pricing into business quality and durability. In NIL competition, buying a stock just because it is "cheaper than peers" without testing whether the whole peer set is overvalued is a common unforced error.</p>
+</div>
 </div>
 
 <div class="lesson-card" onclick="toggleLesson(6)">
