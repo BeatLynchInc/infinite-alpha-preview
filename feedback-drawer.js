@@ -1,72 +1,71 @@
 (function () {
   var FORM_BASE_URL = "https://forms.clickup.com/9017585237/f/8cquvjn-1937/6Y7VJRORF82NXFX6EP";
-  var PREFILL_FIELD_NAMES = [
-    "Course / Module",
-    "Course/Module",
-    "course_module",
-    "course-module",
-  ];
+  var PREFILL_FIELD_NAME = "Course / Module";
 
   var COURSE_ALIASES = [
     {
       aliases: ["0-1-intro", "course-0-1", "course-0-1-enhanced"],
-      value: "0.1 Introduction to Investing & Beat Lynch",
+      value: "0.1: Introduction to Investing & Beat Lynch",
     },
     {
       aliases: ["1-1-masters-101", "masters-101", "masters-101-enhanced-1", "masters-101-enhanced"],
-      value: "1.1 Masters 101",
+      value: "1.1: Masters 101",
     },
     {
       aliases: ["1-2-investors-mindset", "course-1-2"],
-      value: "1.2 The Investor's Mindset",
+      value: "1.2: The Investor's Mindset",
     },
     {
       aliases: ["1-3-how-markets-work", "course-1-3", "course-1-3-enhanced"],
-      value: "1.3 How Markets Work",
+      value: "1.3: How Markets Work",
     },
     {
       aliases: ["1-4-financial-literacy", "course-1-4", "course-1-4-enhanced"],
-      value: "1.4 Financial Literacy for Investors",
+      value: "1.4: Financial Literacy for Investors",
     },
     {
       aliases: ["2-1-company-analysis", "course-2-1", "course-2-1-enhanced"],
-      value: "2.1 Applied Company Analysis",
+      value: "2.1: Applied Company Analysis",
     },
     {
       aliases: ["2-2-sector-dynamics", "course-2-2", "course-2-2-enhanced"],
-      value: "2.2 Sector Dynamics & Macro Context",
+      value: "2.2: Sector Dynamics & Macro Context",
     },
     {
       aliases: ["2-3-portfolio-construction", "course-2-3", "course-2-3-enhanced"],
-      value: "2.3 Portfolio Construction Fundamentals",
+      value: "2.3: Portfolio Construction Fundamentals",
     },
     {
       aliases: ["2-4-nil-competition-primer", "nil-competition-primer"],
-      value: "2.4 NIL Competition Primer",
+      value: "2.4: NIL Competition Primer",
     },
     {
       aliases: ["pillar-1-market-finance", "pillar-1-market-finance-foundations", "pillar-1", "pillar-1-final"],
-      value: "P1 Market & Finance Foundations",
+      value: "P1: Market & Finance Foundations",
     },
     {
       aliases: ["pillar-2-accounting-valuation", "pillar-2"],
-      value: "P2 Accounting & Valuation",
+      value: "P2: Accounting & Valuation",
     },
     {
       aliases: ["pillar-3-market-structure", "pillar-3"],
-      value: "P3 Market Structure & Return Mechanics",
+      value: "P3: Market Structure & Return Mechanics",
     },
     {
       aliases: ["pillar-4-risk-architecture", "pillar-4"],
-      value: "P4 Risk & Portfolio Architecture",
+      value: "P4: Risk & Portfolio Architecture",
     },
     {
       aliases: ["pillar-5-professional-craft", "pillar-v", "pillar-5-professional-craft-system-integration"],
-      value: "P5 Professional Craft & System Integration",
+      value: "P5: Professional Craft & System Integration",
     },
     {
       aliases: ["masters-deep-dive"],
-      value: "Masters Deep Dive",
+      value: "Standalone: Masters Deep Dive",
+    },
+    {
+      aliases: ["index", "infinite-alpha-preview", "infinite-alpha-feedback", ""],
+      value: "Overall Feedback/No section",
     },
   ];
 
@@ -96,8 +95,9 @@
 
   function stripCoursePrefix(value) {
     return value
-      .replace(/^[0-9]+\.[0-9]+\s+/, "")
-      .replace(/^p[0-9]\s+/i, "")
+      .replace(/^[0-9]+\.[0-9]+:\s+/, "")
+      .replace(/^p[0-9]:\s+/i, "")
+      .replace(/^standalone:\s+/i, "")
       .trim();
   }
 
@@ -145,9 +145,7 @@
     var url = new URL(FORM_BASE_URL);
 
     if (courseTitle) {
-      for (var i = 0; i < PREFILL_FIELD_NAMES.length; i += 1) {
-        url.searchParams.set(PREFILL_FIELD_NAMES[i], courseTitle);
-      }
+      url.searchParams.set(PREFILL_FIELD_NAME, courseTitle);
     }
 
     return url.toString();
